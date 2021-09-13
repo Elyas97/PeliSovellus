@@ -3,4 +3,17 @@
   <groupId>OTP</groupId>
   <artifactId>Pelienvuokraussovellus</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  
+  <dependencies>
+  <dependency>
+    <groupId>org.openjfx</groupId>
+    <artifactId>javafx-controls</artifactId>
+    <version>17</version>
+  </dependency>
+  <dependency>
+    <groupId>org.openjfx</groupId>
+    <artifactId>javafx-fxml</artifactId>
+    <version>17</version>
+  </dependency>
+</dependencies>
 </project>
