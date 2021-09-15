@@ -1,75 +1,61 @@
 package model;
 
 public class Käyttäjä {
-	
-	private int id;
+	private int kayttajaID;
+	private String salasana;
 	private String etunimi;
 	private String sukunimi;
-	private String käyttäjätunnus;
+	private int puhelinumero;
 	private String sähköposti;
-	private String salasana;
-	private int puhelinnumero;
-	
-
-	
-	public Käyttäjä(int id, String etunimi, String sukunimi, String käyttäjätunnus, String sähköposti, String salasana, int puhelinnumero) {
-		this.id = id;
-		this.etunimi = etunimi;
-		this.sukunimi = sukunimi;
-		this.käyttäjätunnus = käyttäjätunnus;
-		this.sähköposti = sähköposti;
+	public Käyttäjä(int kayttajaID, String salasana, String etunimi, String sukunimi, int puhelinumero,
+			 String sähköposti) {
+		super();
+		this.kayttajaID = kayttajaID;
 		this.salasana = salasana;
-		this.puhelinnumero = puhelinnumero;
-	}
-	
-	public String getEtunimi() {
-		return etunimi;
-	}
-	
-	public void setEtunimi(String etunimi) {
 		this.etunimi = etunimi;
-	}
-	
-	public String getSukunimi() {
-		return sukunimi;
-	}
-	
-	public void setSukunimi(String sukunimi) {
 		this.sukunimi = sukunimi;
-	}
-	
-	public String getKäyttäjätunnus(String käyttäjätunnus) {
-		return käyttäjätunnus;
-	}
-	
-	public void setKäyttäjätunnus(String käyttäjätunnus) {
-		this.käyttäjätunnus = käyttäjätunnus;
-	}
-	
-	public String getSähköposti(String sähköposti) {
-		return sähköposti;
-	}
-	
-	public void setSähköposti(String sähköposti) {
+		this.puhelinumero = puhelinumero;
 		this.sähköposti = sähköposti;
 	}
-	
-	public String getSalasana(String salasana) {
+	public Käyttäjä() {};
+	public int getKayttajaID() {
+		return kayttajaID;
+	}
+	public void setKayttajaID(int kayttajaID) {
+		this.kayttajaID = kayttajaID;
+	}
+	public String getSalasana() {
 		return salasana;
 	}
-	
 	public void setSalasana(String salasana) {
 		this.salasana = salasana;
 	}
-	
-	public int getPuhelinnumero(int puhelinnumero) {
-		return puhelinnumero;
+	public String getEtunimi() {
+		return etunimi;
 	}
-	
-	public void setPuhelinnumero(int puhelinnumero) {
-		this.puhelinnumero = puhelinnumero;
+	public void setEtunimi(String etunimi) {
+		this.etunimi = etunimi;
 	}
+	public String getSukunimi() {
+		return sukunimi;
+	}
+	public void setSukunimi(String sukunimi) {
+		this.sukunimi = sukunimi;
+	}
+	public int getPuhelinumero() {
+		return puhelinumero;
+	}
+	public void setPuhelinumero(int puhelinumero) {
+		this.puhelinumero = puhelinumero;
+	}
+	public String getSähköposti() {
+		return sähköposti;
+	}
+	public void setSähköposti(String sähköposti) {
+		this.sähköposti = sähköposti;
+	};
 	
 	
 	
+
 }
