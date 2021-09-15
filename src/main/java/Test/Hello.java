@@ -13,11 +13,11 @@ public class Hello {
 			System.out.println("Testi" + " x" +i);
 		}
 		PeliSovellusDAO pelisovellusdao=new PeliSovellusDAO();
-	//	Käyttäjä[] testi=pelisovellusdao.readKäyttäjät();
+Käyttäjä[] testi=pelisovellusdao.readKäyttäjät();
 		
-	//	for(int i=0;i<testi.length;i++) {
-		//	System.out.println(testi[i].getEtunimi()+testi[i].getSähköposti());
-	//	}
+for(int i=0;i<testi.length;i++) {
+System.out.println(testi[i].getEtunimi()+testi[i].getSähköposti());
+}
 	}
 
 }
