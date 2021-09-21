@@ -2,19 +2,33 @@ package model;
 
 public class Pelintiedot {
 	
-	
 	private int tietoId;
-	private String genre;
+	private Kunto kunto;
+	private Pelingenre genre;
 	private int ikäraja;
 	private String kuvaus;
+	
+	public enum Pelingenre {
+		TOIMINTA, JÄNNITYS, RÄISKINTÄ, AJOPELI, SEIKKAILU, STRATEGIA, ROOLIPELI, URHEILUPELI, PULMAPELI, OPPIMISPELI
+	}
+	
+	/*public enum Kunto {
+		VÄLTTÄVÄ, TYYDYTTÄVÄ, HYVÄ, KIITETTÄVÄ, ERINOMAINEN
+	}*/
 
-	public Pelintiedot(int tietoId, String genre, int ikäraja, String kuvaus) {
+	public Pelintiedot(int tietoId, Kunto kunto, Pelingenre genre, int ikäraja, String kuvaus) {
 		this.tietoId = tietoId;
+		this.kunto = kunto;
 		this.genre = genre;
 		this.ikäraja = ikäraja;
 		this.kuvaus = kuvaus;
 	}
 	
+	public Pelintiedot() {
+		
+	}
+
+
 	public int getTietoId() {
 		return tietoId;
 	}
@@ -23,11 +37,19 @@ public class Pelintiedot {
 		this.tietoId = tietoId;
 	}
 	
-	public String getGenre() {
+	public void setKunto(Kunto kunto) {
+		this.kunto = kunto;
+	}
+	
+	public Kunto getKunto() {
+		return kunto;
+	}
+	
+	public Pelingenre getGenre() {
 		return genre;
 	}
 	
-	public void setGenre(String genre) {
+	public void setGenre(Pelingenre genre) {
 		this.genre = genre;
 	}
 	
