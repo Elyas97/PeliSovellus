@@ -14,7 +14,7 @@ class PeliTest {
 
 	@Test
 	v*/
-
+/*
 	@Test
 	void testGetPeliId() {
 		Peli peli = new Peli(1, "Mario Kart", Pelintyyppi.VIDEOPELI, 2);
@@ -66,5 +66,5 @@ class PeliTest {
 		peli.setTietoId(1);
         assertTrue(peli.getTietoId() == 1);
 	}
-
+*/
 }

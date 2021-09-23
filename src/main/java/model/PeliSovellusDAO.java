@@ -101,6 +101,120 @@ Connection conn;
 		// TODO Auto-generated method stub
 		return false;
 	}
+	/*
+	 * Lisää pelin tietokantaan
+	 * 
+	 */
+	public boolean lisaaPeli(Peli peli, int kayttajaID) {
+		boolean temp = false;
+		System.out.println(peli.getPelinNimi() + " "+ kayttajaID);
+		try(PreparedStatement lisaaPeli = conn.prepareStatement("INSERT INTO Peli (Pelinimi, Pelintyyppi, Talletustyyppi, Hinta, Genre, Ikäraja, Pelaajamäärä, Kuvaus, Kaupunki, KäyttäjäID) VALUES (?,?,?,?,?,?,?,?,?,?)")) {
+			lisaaPeli.setString(1, peli.getPelinNimi());
+			lisaaPeli.setString(2, peli.getPelintyyppi());
+			lisaaPeli.setString(3, peli.getTalletusTyyppi());
+			lisaaPeli.setInt(4, peli.getHinta());
+			lisaaPeli.setString(5, peli.getGenre());
+			lisaaPeli.setInt(6, peli.getIkaraja());
+			lisaaPeli.setInt(7, peli.getPelmaara());
+			lisaaPeli.setString(8, peli.getKuvaus());
+			lisaaPeli.setString(9,  peli.getKaupunki());
+			lisaaPeli.setInt(10, kayttajaID);
+			
+			int count = lisaaPeli.executeUpdate();
+			temp = true;
+			System.out.println(count);
+		}catch(SQLException e) {
+			do {
+				System.out.println("Viesti: " + e.getMessage());
+				System.out.println("Virhekoodi: " + e.getErrorCode());
+				System.out.println("Viesti: " + e.getSQLState());
+				}while(e.getNextException()!=null);
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return temp;
+	}
+	/*
+	 * Hakee kaikki pelit tietokannasta
+	 * 
+	 * 
+	 */
+	public Peli[] haePelit() {
+		ArrayList <Peli> peliLista = new ArrayList();
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement();
+			String query = "Select * from Peli";
+			rs=stmt.executeQuery(query);
+			while(rs.next()) {
+				String pelinimi = rs.getString("Pelinimi");
+				int PeliID = rs.getInt("PeliID");
+				String pelityyppi = rs.getString("Pelintyyppi");
+				String talletustyyppi = rs.getString("Talletustyyppi");
+				int hinta = rs.getInt("Hinta");
+				String genre = rs.getString("Genre");
+				int ika = rs.getInt("Ikäraja");
+				int lukumaara = rs.getInt("Pelaajamäärä");
+				String kuvaus = rs.getString("Kuvaus");
+				String kaupunkki = rs.getString("Kaupunki");
+				String teksti = rs.getString("Tekstikenttä");
+				int kayttajaid = rs.getInt("KäyttäjäID");
+				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, ika, lukumaara, kuvaus, kaupunkki ));
+			}
+			
+		}catch(SQLException e) {
+			do {
+				System.out.println("Viesti: " + e.getMessage());
+				System.out.println("Virhekoodi: " + e.getErrorCode());
+				System.out.println("Viesti: " + e.getSQLState());
+	
+			}while(e.getNextException()!=null);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				if(rs!=null) {
+					rs.close();
+				}
+				if(stmt!=null) {
+					stmt.close();
+				}
+			} catch(Exception e) {
+				System.out.println("Resurssien vapautuksessa virhe");
+			}
+		}
+		Peli [] pelit = new Peli[peliLista.size()];
+		for(int i = 0; i < pelit.length; i++) {
+			pelit[i] = peliLista.get(i);
+		}
+		return pelit;
+	}
+	/*
+	 * Poistaa annetun parametrin mukaisen pelin tietokannasta
+	 * 
+	 * 
+	 */
+	public void poistaPeli(int peliID) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			String query = "Delete from Peli where PeliID = ?";
+			PreparedStatement preparedStmt = conn.prepareStatement(query);
+			preparedStmt.setInt(1, peliID);
+			
+			preparedStmt.execute();
+			
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
 	
 
+}
 }

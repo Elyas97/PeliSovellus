@@ -14,13 +14,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainApp">
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Profiili" textFill="#fafafa" />
             <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Tapahtumat" textFill="#fafafa" />
-            <Button layoutX="10.0" layoutY="49.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Uusi peli" textFill="#fafafa" />
+            <Button layoutX="10.0" layoutY="49.0" mnemonicParsing="false" onAction="#lisaaPeliOverview" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Uusi peli" textFill="#fafafa" />
          </children>
       </VBox>
    </left>
@@ -104,5 +104,3 @@
          </children></AnchorPane>
    </center>
 </BorderPane>
-
-

@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -58,6 +59,34 @@ public class MainApp extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public boolean lisaaPeliOverview() {
+    	try {
+    		FXMLLoader loader = new FXMLLoader();
+    		loader.setLocation(MainApp.class.getResource("Uusipeli.fxml"));
+    		BorderPane uusipeli = (BorderPane) loader.load();
+    		
+    		Stage dialogStage = new Stage();
+    		dialogStage.setTitle("Uusi peli");
+    		dialogStage.initModality(Modality.WINDOW_MODAL);
+    		dialogStage.initOwner(primaryStage);
+    		Scene scene = new Scene(uusipeli);
+    		dialogStage.setScene(scene);
+    		
+    		
+    		
+    		LisääPeliController controller = loader.getController();
+    		controller.setDialogStage(dialogStage);
+    		
+    		dialogStage.showAndWait();
+    		
+    		return controller.tallennaClicked();
+    		
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    		return false;
+    	}
     }
     
 	/**

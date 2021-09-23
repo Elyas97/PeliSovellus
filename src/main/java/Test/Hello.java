@@ -1,10 +1,13 @@
 package Test;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 
 import model.Käyttäjä;
+import model.Peli;
 import model.PeliSovellusDAO;
+import model.Pelingenre;
 
 public class Hello {
 	public static void main(String[] args) {
@@ -18,6 +21,25 @@ Käyttäjä[] testi=pelisovellusdao.readKäyttäjät();
 for(int i=0;i<testi.length;i++) {
 System.out.println(testi[i].getEtunimi()+testi[i].getSähköposti());
 }
+
+//Pelingenre peli = null;
+//System.out.println(Arrays.toString(Pelingenre.values()));
+Peli[] pelit = pelisovellusdao.haePelit();
+
+for (int i = 0; i < pelit.length; i++) {
+	System.out.println(pelit[i].getPelinNimi());
+	System.out.println(pelit[i].getPelinNimi()+", "+pelit[i].getHinta());
+}
+/*
+ * 
+ * TESTAILUA
+ * 
+ */
+//pelisovellusdao.poistaPeli(5);
+
+//Peli uusiPeli = new Peli("Nhl", 5, "Video", "Myynti", 32, "Urheilu", 7, 2, "kuvaus", "Helsinki");
+//pelisovellusdao.lisaaPeli(uusiPeli, testi[0].getKayttajaID());
+	
 	}
 
 }

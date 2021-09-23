@@ -32,12 +32,12 @@ public class LisääPeli {
 	    }else {
 	    	pelintyyppi = Pelintyyppi.LAUTAPElI;
 	    }
-	    peli.setPelinTyyppi(pelintyyppi);
+	    //peli.setPelinTyyppi(pelintyyppi);
 	    
 	    System.out.println("Anna pelin tiedoille id:");
 	    int tietoId = scanner.nextInt(); 
-	    peli.setTietoId(tietoId);
+	   // peli.setTietoId(tietoId);
 	    
-	    System.out.println("Peli " + peli.getPeliId()+ ", " + peli.getPelinNimi() + ", " + peli.getPelintyyppi() + ", " + peli.getTietoId());
+	    //System.out.println("Peli " + peli.getPeliId()+ ", " + peli.getPelinNimi() + ", " + peli.getPelintyyppi() + ", " + peli.getTietoId());
 	}	
 }
