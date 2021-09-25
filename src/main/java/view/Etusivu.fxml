@@ -18,7 +18,7 @@
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Profiili" textFill="#fafafa" />
+            <Button mnemonicParsing="false" onAction="#showLogin" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Profiili" textFill="#fafafa" />
             <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Tapahtumat" textFill="#fafafa" />
             <Button layoutX="10.0" layoutY="49.0" mnemonicParsing="false" onAction="#lisaaPeliOverview" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Uusi peli" textFill="#fafafa" />
          </children>

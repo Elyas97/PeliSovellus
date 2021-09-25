@@ -7,20 +7,21 @@ private Käyttäjä[] rekistyröineet;
 private PeliSovellusDAO pelisovellus;
 
 public RegisterSystem() {
-	PeliSovellusDAO pelisovellus= new PeliSovellusDAO();
+	 this.pelisovellus= new PeliSovellusDAO();
 	this.rekistyröineet=pelisovellus.readKäyttäjät();
 }
 
 public boolean register(Käyttäjä käyttäjä) {
+	System.out.println(käyttäjä.getEtunimi());
 	boolean test=true;
 	//ei haluta samaa henkilöä rekistyröimään uudestaan
 	for(int i=0;i<rekistyröineet.length;i++) {
-		if(käyttäjä.getSähköposti()==rekistyröineet[i].getSähköposti()) {
+		if(käyttäjä.getSähköposti().equals(rekistyröineet[i].getSähköposti())) {
 			test=false;
 		}
 	}
 	if(test=true) {
-		pelisovellus.createKäyttäjä(käyttäjä);
+		test=pelisovellus.createKäyttäjä(käyttäjä);
 	}
 	return test;
 }

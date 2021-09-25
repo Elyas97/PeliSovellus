@@ -2,6 +2,7 @@ package view;
 
 import java.io.IOException;
 
+import controller.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,15 +15,15 @@ public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
-
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Pelienvuokraussovellus");
+        
 
         initRootLayout();
 
-        showPersonOverview();
+        showLogin();
     }
     
     /**
@@ -53,7 +54,6 @@ public class MainApp extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("etusivu.fxml"));
             BorderPane personOverview = (BorderPane) loader.load();
-            
             // Set person overview into the center of root layout.
             rootLayout.setCenter(personOverview);
         } catch (IOException e) {
@@ -87,6 +87,44 @@ public class MainApp extends Application {
     		e.printStackTrace();
     		return false;
     	}
+    }
+    
+    public void showLogin() {
+        try {
+            // Load login overview.
+        	
+            FXMLLoader loader = new FXMLLoader();
+            
+            loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
+           
+            BorderPane kirjaudu = (BorderPane) loader.load();
+            
+            
+            
+            // Set login overview into the center of root layout.
+            rootLayout.setCenter(kirjaudu);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void showRegister() {
+        try {
+            // Load login overview.
+        	
+            FXMLLoader loader = new FXMLLoader();
+            
+            loader.setLocation(MainApp.class.getResource("Rekistyröinti.fxml"));
+           
+            BorderPane register = (BorderPane) loader.load();
+            
+            
+            
+            // Set login overview into the center of root layout.
+            rootLayout.setCenter(register);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
 	/**
