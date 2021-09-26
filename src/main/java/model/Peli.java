@@ -14,15 +14,14 @@ public class Peli {
 	private int pelmaara;
 	private String kuvaus;
 	private String kaupunki;
+	private String kunto;
 	
-	
-
-	public enum Pelintyyppi {
-		DEFAULT, LAUTAPElI, VIDEOPELI
-	}
+	/*public enum Pelingenre {
+		TOIMINTA, JÄNNITYS, RÄISKINTÄ, AJOPELI, SEIKKAILU, STRATEGIA, ROOLIPELI, URHEILUPELI, PULMAPELI, OPPIMISPELI
+	}*/
 	
 	public Peli(String pelinNimi, int peliId, String tyyppi, String talletustyyppi,
-			int hinta, String genre, int ikaraja, int pelmaara, String kuvaus, String kaupunki) {
+			int hinta, String genre, int ikaraja, int pelmaara, String kuvaus, String kaupunki, String kunto) {
 		this.peliId = peliId;
 		this.pelinNimi = pelinNimi;
 		this.tyyppi = tyyppi;
@@ -33,6 +32,7 @@ public class Peli {
 		this.pelmaara = pelmaara;
 		this.kuvaus = kuvaus;
 		this.kaupunki = kaupunki;
+		this.kunto = kunto;
 	}
 	
 	public Peli() {
@@ -118,5 +118,13 @@ public class Peli {
 
 	public void setKaupunki(String kaupunki) {
 		this.kaupunki = kaupunki;
+	}
+	
+	public String getKunto() {
+		return kunto;
+	}
+
+	public void setKunto(String kunto) {
+		this.kunto = kunto;
 	}
 }

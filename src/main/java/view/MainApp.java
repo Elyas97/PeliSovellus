@@ -45,17 +45,13 @@ public class MainApp extends Application {
         }
     }
 
-    /**
-     * Shows the person overview inside the root layout.
-     */
-    public void showPersonOverview() {
+    public void showEtusivu() {
         try {
-            // Load person overview.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("etusivu.fxml"));
-            BorderPane personOverview = (BorderPane) loader.load();
-            // Set person overview into the center of root layout.
-            rootLayout.setCenter(personOverview);
+            loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
+            BorderPane etusivu = (BorderPane) loader.load();
+  
+            rootLayout.setCenter(etusivu);
         } catch (IOException e) {
             e.printStackTrace();
         }

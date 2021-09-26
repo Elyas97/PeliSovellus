@@ -64,6 +64,7 @@ public class LisääPeliController {
 		//choiceBox.getItems().clear();
 		//choiceBox.getItems().setAll(Pelingenre.values());
 		//choiceBox.setItems((ObservableList<Pelingenre>) Arrays.asList(Pelingenre.values()));
+		
 	}
 	public void setMainApp(MainApp main) {
 		this.main = main;

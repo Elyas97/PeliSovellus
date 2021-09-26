@@ -4,21 +4,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import model.Peli.Pelintyyppi;
 
 class PeliTest {
 
-	/*@Test
-	void testPeliIntStringPelintyyppiInt() {
-	}
-
-	@Test
-	v*/
-/*
 	@Test
 	void testGetPeliId() {
-		Peli peli = new Peli(1, "Mario Kart", Pelintyyppi.VIDEOPELI, 2);
-		assertEquals(1, peli.getPeliId(), "Pelin id väärin.");
+		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", 8, 2, "Kelpo peli", "Helsinki", "Hyvä");
+		assertEquals(2, peli.getPeliId(), "Pelin id väärin.");
 	}
 
 	@Test
@@ -37,34 +29,73 @@ class PeliTest {
 
 	@Test
 	void testGetPelinNimi() {
-		Peli peli = new Peli(1, "Mario Kart", Pelintyyppi.VIDEOPELI, 2);
+		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", 8, 2, "Kelpo peli", "Helsinki", "Hyvä");
 		assertEquals("Mario Kart", peli.getPelinNimi(), "Pelin nimi väärin.");
 	}
 
 	@Test
 	void testSetPelinTyyppi() {
 		Peli peli = new Peli();
-		peli.setPelinTyyppi(Pelintyyppi.VIDEOPELI);
-        assertTrue(peli.getPelintyyppi() == Pelintyyppi.VIDEOPELI);
+		peli.setPelinTyyppi("Lautapeli");
+        assertTrue(peli.getPelintyyppi() == "Lautapeli");
 	}
 
 	@Test
 	void testGetPelintyyppi() {
-		Peli peli = new Peli(1, "Mario Kart", Pelintyyppi.LAUTAPElI, 2);
-		assertEquals(Pelintyyppi.LAUTAPElI, peli.getPelintyyppi(), "Pelin tyyppi väärin.");
+		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", 8, 2, "Kelpo peli", "Helsinki", "Hyvä");
+		assertEquals("Videopeli", peli.getPelintyyppi(), "Pelin tyyppi väärin.");
 	}
-
-	@Test
-	void testGetTietoId() {
-		Peli peli = new Peli(1, "Mario Kart", Pelintyyppi.VIDEOPELI, 2);
-		assertEquals(2, peli.getTietoId(), "Pelin tietojen id väärin.");
+	
+	void testGetKunto() {
+		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", 8, 2, "Kelpo peli", "Helsinki", "Hyvä");
+		assertEquals("Hyvä", peli.getKunto(), "Pelin kunto väärin.");
 	}
-
+	
 	@Test
-	void testSetTietoId() {
+	void testSetKunto() {
 		Peli peli = new Peli();
-		peli.setTietoId(1);
-        assertTrue(peli.getTietoId() == 1);
+		peli.setKunto("Erinomainen");
+        assertTrue(peli.getKunto() == "Erinomainen");
 	}
-*/
+
+	@Test
+	void testGetGenre() {
+		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", 8, 2, "Kelpo peli", "Helsinki", "Hyvä");
+		assertEquals("Jännitys", peli.getGenre(), "Pelin genre väärin.");
+	}
+
+	@Test
+	void testSetGenre() {
+		Peli peli = new Peli();
+		peli.setGenre("Kauhu");
+        assertTrue(peli.getGenre() == "Kauhu");
+	}
+
+	@Test
+	void testGetIkäraja() {
+		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", 8, 2, "Kelpo peli", "Helsinki", "Hyvä");
+		assertEquals(8, peli.getIkaraja(), "Pelin ikäraja väärin.");
+	}
+
+	@Test
+	void testSetIkäraja() {
+		Peli peli = new Peli();
+		peli.setIkaraja(18);
+        assertTrue(peli.getIkaraja() == 18);
+	}
+
+	@Test
+	void testGetKuvaus() {
+		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", 8, 2, "Kelpo peli", "Helsinki", "Hyvä");
+		assertEquals("Kelpo peli", peli.getKuvaus(), "Pelin kuvaus väärin.");
+	}
+
+	@Test
+	void testSetKuvaus() {
+		Peli peli = new Peli();
+		peli.setKuvaus("Hauska nelinpeli");
+        assertTrue(peli.getKuvaus() == "Hauska nelinpeli");
+	}
+
+
 }

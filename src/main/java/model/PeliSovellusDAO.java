@@ -160,10 +160,12 @@ Connection conn;
 				int ika = rs.getInt("Ikäraja");
 				int lukumaara = rs.getInt("Pelaajamäärä");
 				String kuvaus = rs.getString("Kuvaus");
-				String kaupunkki = rs.getString("Kaupunki");
+				String kaupunki = rs.getString("Kaupunki");
 				String teksti = rs.getString("Tekstikenttä");
 				int kayttajaid = rs.getInt("KäyttäjäID");
-				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, ika, lukumaara, kuvaus, kaupunkki ));
+				String kunto = "Hyvä";
+				//String kunto = rs.getSring("Kunto");
+				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, ika, lukumaara, kuvaus, kaupunki, kunto));
 			}
 			
 		}catch(SQLException e) {
