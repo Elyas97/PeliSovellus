@@ -4,17 +4,27 @@ import java.io.IOException;
 
 import controller.LoginController;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Peli;
+import model.PeliSovellusDAO;
 
 
 public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
+	@FXML
+	private ListView<String> lista;
+	
+
+	PeliSovellusDAO pelitdao = new PeliSovellusDAO();
+    
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -22,8 +32,8 @@ public class MainApp extends Application {
         
 
         initRootLayout();
-
-        showLogin();
+        showEtusivu();
+       // showLogin();
     }
     
     /**
@@ -52,6 +62,11 @@ public class MainApp extends Application {
             BorderPane etusivu = (BorderPane) loader.load();
   
             rootLayout.setCenter(etusivu);
+            
+            
+    		EtusivuController uuscont = loader.getController();
+  
+    		uuscont.setMainApp(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,9 +74,12 @@ public class MainApp extends Application {
     
     public boolean lisaaPeliOverview() {
     	try {
+    		
+    		System.out.println("moi");
     		FXMLLoader loader = new FXMLLoader();
     		loader.setLocation(MainApp.class.getResource("Uusipeli.fxml"));
     		BorderPane uusipeli = (BorderPane) loader.load();
+    		
     		
     		Stage dialogStage = new Stage();
     		dialogStage.setTitle("Uusi peli");
@@ -69,14 +87,18 @@ public class MainApp extends Application {
     		dialogStage.initOwner(primaryStage);
     		Scene scene = new Scene(uusipeli);
     		dialogStage.setScene(scene);
-    		
-    		
+
     		
     		LisääPeliController controller = loader.getController();
+    		
     		controller.setDialogStage(dialogStage);
+    		controller.setMainApp(this);
     		
     		dialogStage.showAndWait();
     		
+    		
+    		
+    		//Tarviiko tätä ??
     		return controller.tallennaClicked();
     		
     	} catch (IOException e) {
@@ -84,6 +106,7 @@ public class MainApp extends Application {
     		return false;
     	}
     }
+
     
     public void showLogin() {
         try {

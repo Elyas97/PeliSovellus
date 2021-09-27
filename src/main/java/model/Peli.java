@@ -127,4 +127,9 @@ public class Peli {
 	public void setKunto(String kunto) {
 		this.kunto = kunto;
 	}
+	
+	// turha jos saa fiksusti toimimaan
+	public String toString() {
+		return getPelinNimi();
+	}
 }

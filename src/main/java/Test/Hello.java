@@ -44,6 +44,9 @@ for (int i = 0; i < pelit.length; i++) {
 
 //Peli uusiPeli = new Peli("Nhl", 5, "Video", "Myynti", 32, "Urheilu", 7, 2, "kuvaus", "Helsinki");
 //pelisovellusdao.lisaaPeli(uusiPeli, testi[0].getKayttajaID());
+
+
+
 	
 	}
 
