@@ -56,7 +56,9 @@ public class LisääPeliController {
 	
 	@FXML
 	private void initialize() {
-		ObservableList<String> options = FXCollections.observableArrayList("Urheilu", "Räiskintä");
+		ObservableList<String> options = FXCollections.observableArrayList("Urheilu", "Räiskintä","Toiminta"
+				,"Ajopeli", "Jännitys", "Seikkailu", "Strategia", "Roolipeli", "Pulma",
+				"Lautapeli");
 		genre.setItems(options);
 
 		// ei toimi
