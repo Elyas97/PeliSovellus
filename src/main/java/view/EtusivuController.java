@@ -42,13 +42,14 @@ public class EtusivuController {
 
 	}
 	
-	private void initialize() {
+	public void initialize() {
 		
 		// ei toimi päivittäminen
-		pelinTiedot(null);
+
+		
 		lista.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> pelinTiedot(newValue));
-		
+	
 	}
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage=dialogStage;
