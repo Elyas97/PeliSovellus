@@ -2,6 +2,8 @@ package model;
 
 import java.sql.*;
 import java.util.ArrayList;
+
+import view.TapahtumatController;
 public class PeliSovellusDAO {
 Connection conn;
 	
@@ -215,8 +217,62 @@ Connection conn;
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		
+	}
 	
-
-}
+	public Peli[] haeOmatPelit() {
+		System.out.println("haeOmatPelit metodi");
+		ArrayList <Peli> peliLista = new ArrayList();
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement();
+			//Käyttäjä id:ksi kirjautuneen käyttäjän id
+			String query = "Select * from Peli where KäyttäjäID = 2";
+			rs=stmt.executeQuery(query);
+			while(rs.next()) {
+				String pelinimi = rs.getString("Pelinimi");
+				int PeliID = rs.getInt("PeliID");
+				String pelityyppi = rs.getString("Pelintyyppi");
+				String talletustyyppi = rs.getString("Talletustyyppi");
+				int hinta = rs.getInt("Hinta");
+				String genre = rs.getString("Genre");
+				int ika = rs.getInt("Ikäraja");
+				int lukumaara = rs.getInt("Pelaajamäärä");
+				String kuvaus = rs.getString("Kuvaus");
+				String kaupunki = rs.getString("Kaupunki");
+				String teksti = rs.getString("Tekstikenttä");
+				int kayttajaid = rs.getInt("KäyttäjäID");
+				String kunto = "Hyvä";
+				//String kunto = rs.getSring("Kunto");
+				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, ika, lukumaara, kuvaus, kaupunki, kunto));
+			}
+			
+		}catch(SQLException e) {
+			do {
+				System.out.println("Viesti: " + e.getMessage());
+				System.out.println("Virhekoodi: " + e.getErrorCode());
+				System.out.println("Viesti: " + e.getSQLState());
+	
+			}while(e.getNextException()!=null);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				if(rs!=null) {
+					rs.close();
+				}
+				if(stmt!=null) {
+					stmt.close();
+				}
+			} catch(Exception e) {
+				System.out.println("Resurssien vapautuksessa virhe");
+			}
+		}
+		Peli [] pelit = new Peli[peliLista.size()];
+		for(int i = 0; i < pelit.length; i++) {
+			pelit[i] = peliLista.get(i);
+		}
+		//System.out.println(pelit[1].toString());
+		return pelit;
+	}
 }

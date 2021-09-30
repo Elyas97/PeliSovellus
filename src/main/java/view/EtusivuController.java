@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.Button;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -30,6 +32,7 @@ public class EtusivuController {
 	private Label pelaajamäärä;
 	@FXML
 	private Label kuvaus;
+
 	
 	private Stage dialogStage;
 
@@ -38,9 +41,9 @@ public class EtusivuController {
 	
 
 	
-	public EtusivuController() {
+	/*public EtusivuController() {
 
-	}
+	}*/
 	
 	public void initialize() {
 		
@@ -54,7 +57,7 @@ public class EtusivuController {
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage=dialogStage;
 	}
-	
+
     @FXML
 	public void listaaPelit() {
 		//pelit.haePelit();
@@ -86,16 +89,22 @@ public class EtusivuController {
     	}
     	
     }
+    
+   
+    
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
 
 	@FXML
-	public void uusiPeli() {
-		
+	public void uusiPeli() {	
 		mainApp.lisaaPeliOverview();
 	}
 	
+	@FXML
+	public void handletapahtumatSivu() {
+		mainApp.tapahtumatSivuOverview();
+	}
 
 	
 }

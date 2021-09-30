@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -32,8 +33,9 @@ public class MainApp extends Application {
         
 
         initRootLayout();
-        showEtusivu();
+        //showEtusivu();
        // showLogin();
+        tapahtumatSivuOverview();
     }
     
     /**
@@ -106,9 +108,33 @@ public class MainApp extends Application {
     		return false;
     	}
     }
-
     
-    public void showLogin() {
+    public void tapahtumatSivuOverview() {
+    	try {
+    		System.out.println("Tapahtumat sivu");
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("Tapahtumat.fxml"));
+            BorderPane tapahtumat = (BorderPane) loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Tapahtumat");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(tapahtumat);
+            dialogStage.setScene(scene);
+
+            TapahtumatController controller = loader.getController();
+    		
+    		controller.setDialogStage(dialogStage);
+    		controller.setMainApp(this);
+    		
+    		dialogStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+	public void showLogin() {
         try {
             // Load login overview.
         	
