@@ -35,6 +35,8 @@ public class LisääPeliController {
 	private TextField kaupunki;
 	@FXML 
 	private TextField kuvaus;
+	@FXML
+	private ChoiceBox<String> kunto;
 	
 	
 	private Stage dialogStage;
@@ -60,6 +62,10 @@ public class LisääPeliController {
 				,"Ajopeli", "Jännitys", "Seikkailu", "Strategia", "Roolipeli", "Pulma",
 				"Lautapeli");
 		genre.setItems(options);
+		
+		ObservableList<String> kuntoOptions = FXCollections.observableArrayList("Erinomainen", "Kiitettävä","Hyvä"
+				,"Kohtalainen", "Välttävä");
+		kunto.setItems(kuntoOptions);
 
 		// ei toimi
 		//genre.getItems().setAll(Pelingenre.values());
@@ -93,6 +99,7 @@ public class LisääPeliController {
 		peli.setPelinTyyppi(pelintyyppiText);
 		peli.setGenre(genre.getValue().toString());
 		System.out.println(genre.getValue().toString());
+		peli.setKunto(kunto.getValue().toString());
 		//System.out.println(peli.getPelinNimi()+" "+ peli.getHinta()+" "+ peli.getIkaraja());
 		pelisovellusdao.lisaaPeli(peli, 2);
 		tallennaClicked = true;

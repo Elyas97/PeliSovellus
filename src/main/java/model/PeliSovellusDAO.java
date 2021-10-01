@@ -203,6 +203,7 @@ Connection conn;
 	 * 
 	 */
 	public void poistaPeli(int peliID) {
+		System.out.println("poista peli metodi pelisovellus daossa ja peli id on: " + peliID);
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
@@ -220,7 +221,7 @@ Connection conn;
 	}
 	
 	public Peli[] haeOmatPelit() {
-		System.out.println("haeOmatPelit metodi");
+		//System.out.println("haeOmatPelit metodi");
 		ArrayList <Peli> peliLista = new ArrayList();
 		Statement stmt = null;
 		ResultSet rs = null;
