@@ -1,14 +1,21 @@
 package view;
 
 import java.awt.Button;
+import java.io.IOException;
 
+import controller.ProfiiliController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.Käyttäjä;
 import model.Peli;
 import model.PeliSovellusDAO;
 
@@ -33,7 +40,7 @@ public class EtusivuController {
 	@FXML
 	private Label kuvaus;
 
-	
+	Käyttäjä käyttäjä=null;
 	private Stage dialogStage;
 
 	PeliSovellusDAO pelitdao = new PeliSovellusDAO();
@@ -105,6 +112,27 @@ public class EtusivuController {
 	public void handletapahtumatSivu() {
 		mainApp.tapahtumatSivuOverview();
 	}
+	
+	@FXML
+    void vieProofiliNäkymään(ActionEvent event) throws IOException {
+		//vaihdetaan näkymää samalla viedään käyttäjän tiedot
+		 FXMLLoader loader = new FXMLLoader();
+         loader.setLocation(MainApp.class.getResource("Profiili.fxml"));
+         BorderPane personOverview = (BorderPane) loader.load();
+         ProfiiliController controller = loader.getController();
+         controller.initData(käyttäjä);
+         Scene etusivulle = new Scene(personOverview);
+         //stage
+         Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
+	    	window.setScene(etusivulle);
+	    	window.show();
+    }
+	//tämä saa kirjautuneen käyttäjän
+	public void initData(Käyttäjä käyttäjä) {
+		this.käyttäjä=käyttäjä;
+		System.out.println("Talennus"+käyttäjä.getEtunimi());
+	}
+	
 
 	
 }

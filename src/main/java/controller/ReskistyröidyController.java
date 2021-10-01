@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +12,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Käyttäjä;
 import model.RegisterSystem;
@@ -35,6 +39,25 @@ public class ReskistyröidyController {
 
     @FXML
     private PasswordField csalasana;
+    @FXML
+    private Text tippi;
+    @FXML
+    private Text emailtip;
+    
+    @FXML
+    void initialize() {
+    	
+       Tooltip toolpwd=new Tooltip();
+       toolpwd.setText("Salasanan pituus vähintään 6");
+       salasana.setTooltip(toolpwd);
+       Tooltip toolpwd2=new Tooltip();
+       toolpwd2.setText("Salasanan pituus vähintään 6");
+       csalasana.setTooltip(toolpwd);
+       Tooltip toolemail=new Tooltip();
+       toolemail.setText("Syötä Sähköposti esimerkiksi JohnDoe@Hotmail.com");
+       email.setTooltip(toolemail);
+
+    }
 
     @FXML
     void Rekistyröidy(ActionEvent event) {
@@ -73,6 +96,13 @@ public class ReskistyröidyController {
     		    	Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
     		    	window.setScene(kirjauduNäkymä);
     		    	window.show();
+    			}else {
+    				Alert alert= new Alert(Alert.AlertType.INFORMATION);
+    				alert.setTitle("Tiedoksi");
+    				alert.setContentText("Sähköpostillasi on jo rekistyröidytty");
+    				alert.show();
+    				 email.setStyle("-fx-border-color:red");
+    				
     			}
     		}catch(NumberFormatException e) {
     			System.out.println(e);
@@ -103,6 +133,15 @@ public class ReskistyröidyController {
     
     boolean validointi() {
     	 boolean test=true;
+    	 etu.setStyle("-fx-border-color:#0589ff");
+    	 suku.setStyle("-fx-border-color:#0589ff");
+    	 salasana.setStyle("-fx-border-color:#0589ff");
+    	 csalasana.setStyle("-fx-border-color:#0589ff");
+    	 email.setStyle("-fx-border-color:#0589ff");
+    	 puhelinnumero.setStyle("-fx-border-color:#0589ff");
+    	 etu.setStyle("-fx-border-color:#0589ff");
+    	 tippi.setText("");
+    	 emailtip.setText("");
     	 if(etu.getText()=="") {
     		 etu.setStyle("-fx-border-color:red");
     		 test=false;
@@ -112,8 +151,17 @@ public class ReskistyröidyController {
     		 test=false;
     		 
     	 }
+    
     	 if(email.getText()=="") {
     		 email.setStyle("-fx-border-color:red");
+    		 test=false;
+    	 }
+    	 Pattern pattern = Pattern.compile("^.+@.+\\..+$");
+    	 Matcher matcher = pattern.matcher(email.getText());
+    	 boolean validEmail=matcher.matches();
+    	 if(validEmail==false) {
+    		 email.setStyle("-fx-border-color:red");
+    		 emailtip.setText("Muoto väärä");
     		 test=false;
     	 }
     	 if(puhelinnumero.getText()=="") {
@@ -125,6 +173,20 @@ public class ReskistyröidyController {
     		 csalasana.setStyle("-fx-border-color:red");
     		 test=false;
     	 }
+    	 boolean compare=salasana.getText().equals(csalasana.getText());
+    	 if(compare!=true) {
+    		 salasana.setStyle("-fx-border-color:red");
+    		 csalasana.setStyle("-fx-border-color:red");
+    		 tippi.setText("Salasanat eivät täsmää");
+    		 test=false;
+    		 }
+    	 if(salasana.getText().length()<6 || csalasana.getText().length()<6) {
+    		 salasana.setStyle("-fx-border-color:red");
+    		 csalasana.setStyle("-fx-border-color:red");
+    		 tippi.setText("Salasanan pituus vähintään 6");
+    		 test=false;
+    	 }
+    	 
     	return test;
     }
 

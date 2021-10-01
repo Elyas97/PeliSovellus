@@ -16,8 +16,10 @@ public boolean register(Käyttäjä käyttäjä) {
 	boolean test=true;
 	//ei haluta samaa henkilöä rekistyröimään uudestaan
 	for(int i=0;i<rekistyröineet.length;i++) {
+		System.out.println("Kierros");
 		if(käyttäjä.getSähköposti().equals(rekistyröineet[i].getSähköposti())) {
 			test=false;
+			return test;
 		}
 	}
 	if(test=true) {

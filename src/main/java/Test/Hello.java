@@ -27,14 +27,17 @@ System.out.println(testi[i].getEtunimi()+testi[i].getSähköposti());
 LoginSystem login=new LoginSystem();
 Käyttäjä testi23=login.login("elyasa@metropolia.fi", "12345678910");
 System.out.println(testi23);
+RegisterSystem register=new RegisterSystem();
+boolean test=register.register(testi23);
+System.out.println(test);
 //Pelingenre peli = null;
 //System.out.println(Arrays.toString(Pelingenre.values()));
-Peli[] pelit = pelisovellusdao.haePelit();
+//Peli[] pelit = pelisovellusdao.haePelit();
 
-for (int i = 0; i < pelit.length; i++) {
-	System.out.println(pelit[i].getPelinNimi());
-	System.out.println(pelit[i].getPelinNimi()+", "+pelit[i].getHinta());
-}
+//for (int i = 0; i < pelit.length; i++) {
+	//System.out.println(pelit[i].getPelinNimi());
+	//System.out.println(pelit[i].getPelinNimi()+", "+pelit[i].getHinta());
+//}
 /*
  * 
  * TESTAILUA

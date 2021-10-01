@@ -34,8 +34,9 @@ public class MainApp extends Application {
 
         initRootLayout();
         //showEtusivu();
-       // showLogin();
-        tapahtumatSivuOverview();
+        showLogin();
+        //tapahtumatSivuOverview();
+        
     }
     
     /**
@@ -167,6 +168,24 @@ public class MainApp extends Application {
             
             // Set login overview into the center of root layout.
             rootLayout.setCenter(register);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void showProfile() {
+        try {
+            // Load login overview.
+        	
+            FXMLLoader loader = new FXMLLoader();
+            
+            loader.setLocation(MainApp.class.getResource("Profiili.fxml"));
+           
+            BorderPane profile = (BorderPane) loader.load();
+            
+            
+            
+            // Set login overview into the center of root layout.
+            rootLayout.setCenter(profile);
         } catch (IOException e) {
             e.printStackTrace();
         }

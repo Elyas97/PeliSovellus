@@ -17,6 +17,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Käyttäjä;
 import model.LoginSystem;
+import view.EtusivuController;
 import view.MainApp;
 
 public class LoginController {
@@ -55,11 +56,15 @@ Käyttäjä kirjautunut=null;
     		      alert.showAndWait();
     		      //siirretään etusivulle ja tallenetaan käyttäjä controlleriin
     		      try {
+    		    	  //annetaan kirjautuneen käyttäjän tiedot 
+    		    	 
     		            // Load person overview.
     		            FXMLLoader loader = new FXMLLoader();
     		            loader.setLocation(MainApp.class.getResource("etusivu.fxml"));
-    		            BorderPane personOverview = (BorderPane) loader.load();
-    		            Scene etusivulle = new Scene(personOverview);
+    		            BorderPane etusivuOverview = (BorderPane) loader.load();
+    		            EtusivuController controller = loader.getController();
+     		    	   controller.initData(kirjautunut);
+    		            Scene etusivulle = new Scene(etusivuOverview);
     		            //stage
     		            Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
         		    	window.setScene(etusivulle);

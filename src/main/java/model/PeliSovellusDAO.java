@@ -100,8 +100,25 @@ Connection conn;
 	}
 
 	public boolean updateKäyttäjä(Käyttäjä käyttäjä) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean temp= false;
+		String query="UPDATE Käyttäjä SET Salasana=?,Sähköposti=?,Sukunimi=?,Etunimi=?,Puhelinnumero=? WHERE KäyttäjäID=?";
+		try(PreparedStatement stmt=conn.prepareStatement(query)){
+			stmt.setInt(6, käyttäjä.getKayttajaID());
+			stmt.setString(1, käyttäjä.getSalasana());
+			stmt.setString(2, käyttäjä.getSähköposti());
+			stmt.setString(3, käyttäjä.getSukunimi());
+			stmt.setString(4, käyttäjä.getEtunimi());
+			stmt.setInt(5, käyttäjä.getPuhelinumero());
+			stmt.executeUpdate();
+			temp=true;
+			
+		}catch(SQLException e) {
+			System.out.println(e);
+			
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		return temp;
 	}
 	/*
 	 * Lisää pelin tietokantaan
