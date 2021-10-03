@@ -40,7 +40,7 @@ public class EtusivuController {
 	@FXML
 	private Label kuvaus;
 
-	Käyttäjä käyttäjä=null;
+	Käyttäjä käyttäjä;
 	private Stage dialogStage;
 
 	PeliSovellusDAO pelitdao = new PeliSovellusDAO();

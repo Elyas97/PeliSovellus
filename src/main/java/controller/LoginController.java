@@ -60,7 +60,7 @@ Käyttäjä kirjautunut=null;
     		    	 
     		            // Load person overview.
     		            FXMLLoader loader = new FXMLLoader();
-    		            loader.setLocation(MainApp.class.getResource("etusivu.fxml"));
+    		            loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
     		            BorderPane etusivuOverview = (BorderPane) loader.load();
     		            EtusivuController controller = loader.getController();
      		    	   controller.initData(kirjautunut);

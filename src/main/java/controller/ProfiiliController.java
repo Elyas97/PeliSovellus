@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Käyttäjä;
 import model.PeliSovellusDAO;
+import view.EtusivuController;
 import view.MainApp;
 
 public class ProfiiliController {
@@ -95,6 +96,8 @@ public class ProfiiliController {
 	        loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
 	       
 	        BorderPane etusivu = (BorderPane) loader.load();
+	        EtusivuController controller = loader.getController();
+	    	controller.initData(käyttäjä);
 	    	Scene etusivuNäkymä = new Scene(etusivu);
 	    	//get stage
 	    	Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
