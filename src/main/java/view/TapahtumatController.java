@@ -38,6 +38,13 @@ public class TapahtumatController {
 
     @FXML
     private ToggleGroup pelintyyppi;
+    
+    @FXML
+    private RadioButton video;
+
+    @FXML
+    private RadioButton lauta;
+
 
     @FXML
     private TextField kaupunki;
@@ -99,7 +106,12 @@ public class TapahtumatController {
 
 	 @FXML
 	 public void muokkaaPelia() {
-
+		 
+	 }
+	 
+	 public void muokkaaPeliaTietokannassa(Peli peli) {
+		 System.out.println("Muokataan peliä: muokattavan pelin id " + peli.getPeliId() + " ja nimi " + peli.getPelinNimi());
+		 pelitdao.paivitaPeli(peli);
 	 }
 
 	 @FXML
@@ -118,6 +130,26 @@ public class TapahtumatController {
 		 if(peli != null) {
 	    		pelinnimi.setText(peli.getPelinNimi());
 	    		hinta.setText(Integer.toString(peli.getHinta()));
+	    		
+	    		String pelintalletusstring = peli.getTalletusTyyppi();
+	    		System.out.println("Pelintalletustyyppi string: " + peli.getTalletusTyyppi());
+	    		if(pelintalletusstring.equals("Myynti")) {
+	    			tyyppi.selectToggle(myynti);
+	    		}else if(pelintalletusstring.equals("Lahjoitus")){
+	    			tyyppi.selectToggle(lahjoitus);
+	    		}else {
+	    			tyyppi.selectToggle(vuokraus);
+	    		}
+	    		
+	    		String pelintyyppistring = peli.getPelintyyppi();
+	    		System.out.println("Pelintyyppi string: " + peli.getPelintyyppi());
+	    		if(pelintyyppistring.equals("lauta")) {
+	    			pelintyyppi.selectToggle(lauta);
+	    		}else {
+	    			pelintyyppi.selectToggle(video);
+	    		}
+
+	    		
 	    		kaupunki.setText(peli.getKaupunki());
 	    		genre.setValue(peli.getGenre());
 	    		ikaraja.setText(Integer.toString(peli.getIkaraja()));
@@ -133,38 +165,40 @@ public class TapahtumatController {
 	    		kuvaus.setText("");
 	    	}
 	 }
-	 
-	/* @FXML
-	 public void tallennaPeli() {
-		 Peli peli = new Peli();
-			peli.setPelinNimi(pelinNimi.getText());
-			int price = Integer.parseInt(pelinHinta.getText());
+
+	    @FXML
+	    void tallennaMuutokset() {
+	    	Peli peli = new Peli();
+	    	Peli peliId = omatPelit.getSelectionModel().getSelectedItem();
+	    	peli.setPeliId(peliId.getPeliId());
+	    	peli.setPelinNimi(pelinnimi.getText());
+			int price = Integer.parseInt(hinta.getText());
 			peli.setHinta(price);
-			int age = Integer.parseInt(ikäraja.getText());
+			int age = Integer.parseInt(ikaraja.getText());
 			peli.setIkaraja(age);
-			peli.setKaupunki(paikkakunta.getText());
+			peli.setKaupunki(kaupunki.getText());
 			String tyyppiText = ((RadioButton)tyyppi.getSelectedToggle()).getText();
+			System.out.println("TALLETUKSEN TYYPPI:" + tyyppiText);
 			peli.setTalletusTyyppi(tyyppiText);
 			peli.setKuvaus(kuvaus.getText());
-			int players = Integer.parseInt(pelaajamäärä.getText());
+			int players = Integer.parseInt(pelaajamaara.getText());
 			peli.setPelmaara(players);
 			String pelintyyppiText = ((RadioButton)pelintyyppi.getSelectedToggle()).getText();
 			peli.setPelinTyyppi(pelintyyppiText);
 			peli.setGenre(genre.getValue().toString());
 			System.out.println(genre.getValue().toString());
-			
+			//peli.setKunto(kunto.getValue().toString());
 			//System.out.println(peli.getPelinNimi()+" "+ peli.getHinta()+" "+ peli.getIkaraja());
-			pelitdao.lisaaPeli(peli, 2);
-			//tallennaClicked = true;
-	 }*/
-
-	    @FXML
-	    void tallennaMuutokset() {
-
+			pelitdao.paivitaPeli(peli);
 	    }
 
-	    @FXML
+	   @FXML
 	    void tyyppiAction() {
+
+	   }
+	   
+	   @FXML
+	    void tyyppi() {
 
 	    }
 

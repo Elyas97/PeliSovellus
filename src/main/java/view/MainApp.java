@@ -34,8 +34,8 @@ public class MainApp extends Application {
 
         initRootLayout();
         //showEtusivu();
-        showLogin();
-        //tapahtumatSivuOverview();
+        //showLogin();
+        tapahtumatSivuOverview();
         
     }
     

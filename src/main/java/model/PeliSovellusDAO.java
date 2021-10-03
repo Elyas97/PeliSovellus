@@ -293,4 +293,35 @@ Connection conn;
 		//System.out.println(pelit[1].toString());
 		return pelit;
 	}
+	
+	//UUTTA
+	public boolean paivitaPeli(Peli peli) {
+		boolean temp= false;
+		System.out.println("Nimi " + peli.getPelinNimi() + " Id " + peli.getPeliId() + " Kaupunki " + peli.getKaupunki());
+		String query="UPDATE Peli SET Pelinimi=?,Pelintyyppi=?,Talletustyyppi=?,Hinta=?,Genre=?,Ikäraja=?,Pelaajamäärä=?,Kuvaus=?,Kaupunki=? WHERE PeliID=?";
+		try(PreparedStatement stmt=conn.prepareStatement(query)){
+			stmt.setString(1, peli.getPelinNimi());
+			stmt.setString(2, peli.getPelintyyppi());
+			stmt.setString(3, peli.getTalletusTyyppi());
+			stmt.setInt(4, peli.getHinta());
+			stmt.setString(5, peli.getGenre());
+			stmt.setInt(6, peli.getIkaraja());
+			stmt.setInt(7, peli.getPelmaara());
+			stmt.setString(8, peli.getKuvaus());
+			stmt.setString(9, peli.getKaupunki());
+			//stmt.setString(10, peli.getKunto());
+			stmt.setInt(10, peli.getPeliId());
+			System.out.println(peli.getPeliId() + ", " + peli.getPelinNimi()+ " ," + peli.getPelintyyppi() + ", "+ peli.getTalletusTyyppi() + ", "+ peli.getHinta() + ", " + peli.getGenre() + ", "+ peli.getIkaraja() + ", "+ peli.getPelmaara()+ ", " + peli.getKuvaus() + ", "+ peli.getKaupunki());
+			stmt.executeUpdate();
+			temp=true;
+			
+		}catch(SQLException e) {
+			System.out.println(e);
+			
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		return temp;
+	}
+	
 }
