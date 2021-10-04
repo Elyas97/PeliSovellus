@@ -33,9 +33,9 @@ public class MainApp extends Application {
         
 
         initRootLayout();
-        //showEtusivu();
+        showEtusivu();
         //showLogin();
-        tapahtumatSivuOverview();
+        //tapahtumatSivuOverview();
         
     }
     
@@ -68,6 +68,7 @@ public class MainApp extends Application {
             
             
     		EtusivuController uuscont = loader.getController();
+    	//	uuscont.listaaPelit();
   
     		uuscont.setMainApp(this);
         } catch (IOException e) {

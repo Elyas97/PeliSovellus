@@ -6,6 +6,9 @@ import java.io.IOException;
 import controller.ProfiiliController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Käyttäjä;
@@ -39,13 +43,16 @@ public class EtusivuController {
 	private Label pelaajamäärä;
 	@FXML
 	private Label kuvaus;
+	@FXML
+	private TextField pelihaku;
 
 	Käyttäjä käyttäjä;
 	private Stage dialogStage;
 
 	PeliSovellusDAO pelitdao = new PeliSovellusDAO();
 	private Peli[] pelit;
-	
+	ObservableList<Peli> pelidata = FXCollections.observableArrayList();
+	FilteredList<Peli> filteredData = new FilteredList<>(pelidata, pelit -> true);
 
 	
 	/*public EtusivuController() {
@@ -53,8 +60,17 @@ public class EtusivuController {
 	}*/
 	
 	public void initialize() {
-		
-		// ei toimi päivittäminen
+
+		listaaPelit();
+		lista.setItems(filteredData);
+		pelihaku.textProperty().addListener((obs, oldValue, newValue) -> {
+			//String filter = pelihaku.getText();
+			if(newValue == null || newValue.length() == 0) {
+				filteredData.setPredicate(pelit -> true);
+			} else {
+				filteredData.setPredicate(pelit -> pelit.getPelinNimi().contains(newValue));
+			}
+		});
 
 		
 		lista.getSelectionModel().selectedItemProperty().addListener(
@@ -68,13 +84,20 @@ public class EtusivuController {
     @FXML
 	public void listaaPelit() {
 		//pelit.haePelit();
-    	lista.getItems().clear();
+    //	lista.getItems().clear();
+    	pelidata.clear();
 		pelit = pelitdao.haePelit();
 		for (int i = 0; i < pelit.length; i++) {
 			//lista.setId(pelit[i].getPelinNimi());
-		lista.getItems().add(pelit[i]);
-		}
+		//lista.getItems().add(pelit[i]);
+		//filteredData.add(pelit[i]);
+		//filteredData.getSource().add(pelit[i]);
+		pelidata.add(pelit[i]);
 		
+		
+		}
+	
+			
 	}
     private void pelinTiedot(Peli peli) {
     	if(peli != null) {
