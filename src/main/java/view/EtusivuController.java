@@ -68,7 +68,8 @@ public class EtusivuController {
 			if(newValue == null || newValue.length() == 0) {
 				filteredData.setPredicate(pelit -> true);
 			} else {
-				filteredData.setPredicate(pelit -> pelit.getPelinNimi().contains(newValue));
+				
+				filteredData.setPredicate(pelit -> pelit.getPelinNimi().toLowerCase().contains(newValue));
 			}
 		});
 
