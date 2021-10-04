@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -11,19 +12,25 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LisääPeliController">
    <left>
-      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="155.0" style="-fx-background-color: #0589ff;" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Profiili" textFill="#fafafa" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" text="Tapahtumat" textFill="#fafafa" />
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" style="-fx-background-color: #0589FF;">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="GAMEPAD" size="30" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#vieProfiiliNäkymä" prefHeight="39.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Profiili" textFill="WHITE" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#vieTapahtumat" prefHeight="39.0" prefWidth="190.0" style="-fx-background-color: transparent;" text="Tapahtumat" textFill="WHITE" />
+            <Button mnemonicParsing="false" onAction="#vieEtusivulle" prefHeight="34.0" prefWidth="155.0" style="-fx-background-color: #0589ff;" text="Selaa pelejä" textFill="WHITE" />
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="181.0" style="-fx-background-color: white;" text="Uusi Peli" />
          </children>
       </VBox>
    </left>
-   <top>
-      <Label prefHeight="30.0" prefWidth="386.0" text="Uusi peli" BorderPane.alignment="CENTER" />
-   </top>
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
@@ -111,6 +118,11 @@
                   </AnchorPane>
               </items>
             </SplitPane>
+            <Text fill="#0589ff" layoutX="48.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lisää uusi peli">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
          </children></AnchorPane>
    </center>
 </BorderPane>
