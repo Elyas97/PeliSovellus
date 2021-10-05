@@ -53,6 +53,7 @@ public class LisääPeliController {
 	private MainApp main;
 	private Pelingenre genret;
 	PeliSovellusDAO pelisovellusdao = new PeliSovellusDAO();
+	EtusivuController etusivu = new EtusivuController();
 	
 	public LisääPeliController() {}
 	@FXML
@@ -111,6 +112,9 @@ public class LisääPeliController {
 		//System.out.println(peli.getPelinNimi()+" "+ peli.getHinta()+" "+ peli.getIkaraja());
 		pelisovellusdao.lisaaPeli(peli, 2);
 		tallennaClicked = true;
+		etusivu.listaaPelit();
+		
+		dialogStage.close();
 	}
 	
 	public boolean tallennaClicked() {
