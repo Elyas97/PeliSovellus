@@ -91,8 +91,6 @@ public class EtusivuController {
 		for (int i = 0; i < pelit.length; i++) {
 			//lista.setId(pelit[i].getPelinNimi());
 		//lista.getItems().add(pelit[i]);
-		//filteredData.add(pelit[i]);
-		//filteredData.getSource().add(pelit[i]);
 		pelidata.add(pelit[i]);
 		
 		
