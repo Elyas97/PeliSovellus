@@ -15,24 +15,28 @@ public class Peli {
 	private String kuvaus;
 	private String kaupunki;
 	private String kunto;
+	private String tekstikenttä;
+	private String konsoli;
 	
 	/*public enum Pelingenre {
 		TOIMINTA, JÄNNITYS, RÄISKINTÄ, AJOPELI, SEIKKAILU, STRATEGIA, ROOLIPELI, URHEILUPELI, PULMAPELI, OPPIMISPELI
 	}*/
 	
 	public Peli(String pelinNimi, int peliId, String tyyppi, String talletustyyppi,
-			int hinta, String genre, int ikaraja, int pelmaara, String kuvaus, String kaupunki, String kunto) {
+			int hinta, String genre, String konsoli, int ikaraja, int pelmaara, String kuvaus, String kaupunki, String kunto, String tekstikenttä) {
 		this.peliId = peliId;
 		this.pelinNimi = pelinNimi;
 		this.tyyppi = tyyppi;
 		this.talletusTyyppi =  talletustyyppi;
 		this.hinta = hinta;
 		this.genre = genre;
+		this.konsoli = konsoli;
 		this.ikaraja = ikaraja;
 		this.pelmaara = pelmaara;
 		this.kuvaus = kuvaus;
 		this.kaupunki = kaupunki;
 		this.kunto = kunto;
+		this.tekstikenttä = tekstikenttä;
 	}
 	
 	public Peli() {
@@ -126,6 +130,22 @@ public class Peli {
 
 	public void setKunto(String kunto) {
 		this.kunto = kunto;
+	}
+	
+	public String getTekstikenttä() {
+		return tekstikenttä;
+	}
+
+	public void setTekstikenttä(String tekstikenttä) {
+		this.tekstikenttä = tekstikenttä;
+	}
+	
+	public String getKonsoli() {
+		return konsoli;
+	}
+
+	public void setKonsoli(String konsoli) {
+		this.konsoli = konsoli;
 	}
 	
 	// turha jos saa fiksusti toimimaan

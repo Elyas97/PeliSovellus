@@ -44,6 +44,10 @@ public class EtusivuController {
 	@FXML
 	private Label kuvaus;
 	@FXML
+	private Label tekstikenttä;
+	@FXML
+	private Label konsoli;
+	@FXML
 	private TextField pelihaku;
 
 	Käyttäjä käyttäjä;
@@ -109,6 +113,8 @@ public class EtusivuController {
     		ikäraja.setText(Integer.toString(peli.getIkaraja()));
     		pelaajamäärä.setText(Integer.toString(peli.getPelmaara()));
     		kuvaus.setText(peli.getKuvaus());
+    		tekstikenttä.setText(peli.getTekstikenttä());
+    		konsoli.setText(peli.getKonsoli());
     	} else {
     		pelinNimi.setText("");
     		pelinHinta.setText("");
@@ -117,6 +123,8 @@ public class EtusivuController {
     		ikäraja.setText("");
     		pelaajamäärä.setText("");
     		kuvaus.setText("");
+    		konsoli.setText("");
+    		tekstikenttä.setText("");
     	}
     	
     }
