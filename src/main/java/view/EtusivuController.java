@@ -126,13 +126,30 @@ public class EtusivuController {
 	}
 
 	@FXML
-	public void uusiPeli() {	
-		mainApp.lisaaPeliOverview();
+	public void uusiPeli(ActionEvent event) throws IOException {	
+		//vaihdetaan näkymää samalla viedään käyttäjän tiedot
+		 FXMLLoader loader = new FXMLLoader();
+       loader.setLocation(MainApp.class.getResource("Uusipeli.fxml"));
+       BorderPane personOverview = (BorderPane) loader.load();
+       Scene etusivulle = new Scene(personOverview);
+       //stage
+       Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+	    	window.setScene(etusivulle);
+	    	window.show();
 	}
 	
 	@FXML
-	public void handletapahtumatSivu() {
-		mainApp.tapahtumatSivuOverview();
+	public void handletapahtumatSivu(ActionEvent event) throws IOException {
+		//vaihdetaan näkymää samalla viedään käyttäjän tiedot
+		 FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource("Tapahtumat.fxml"));
+        BorderPane personOverview = (BorderPane) loader.load();
+        Scene etusivulle = new Scene(personOverview);
+        //stage
+        Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+	    	window.setScene(etusivulle);
+	    	window.show();
+		
 	}
 	
 	@FXML

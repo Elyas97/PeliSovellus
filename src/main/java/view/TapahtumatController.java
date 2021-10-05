@@ -1,17 +1,26 @@
 package view;
 
+import java.io.IOException;
+
+import controller.ProfiiliController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 //import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import model.Käyttäjä;
 import model.Peli;
 import model.PeliSovellusDAO;
 
@@ -64,6 +73,8 @@ public class TapahtumatController {
 	
 	@FXML
 	private ChoiceBox<String> kunto;
+	
+	Käyttäjä käyttäjä;
 
 	private Stage dialogStage;
 	private MainApp main;
@@ -105,11 +116,6 @@ public class TapahtumatController {
 			System.out.println(pelit[i]);
 			omatPelit.getItems().add(pelit[i]);
 		}
-	}
-
-	@FXML
-	public void lisaaUusiPeli() {
-		main.lisaaPeliOverview();
 	}
 
 	@FXML
@@ -199,5 +205,47 @@ public class TapahtumatController {
 
 	@FXML
 	void tyyppi() {}
+	
+
+    @FXML
+    void vieEtusivulle(ActionEvent event) throws IOException {
+    	//vaihdetaan näkymää samalla viedään käyttäjän tiedot
+		 FXMLLoader loader = new FXMLLoader();
+       loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
+       BorderPane personOverview = (BorderPane) loader.load();
+       Scene etusivulle = new Scene(personOverview);
+       //stage
+       Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+	    	window.setScene(etusivulle);
+	    	window.show();
+    }
+    
+    @FXML
+    void lisaaUusiPeliNäkymä(ActionEvent event) throws IOException {
+    	//vaihdetaan näkymää samalla viedään käyttäjän tiedot
+		 FXMLLoader loader = new FXMLLoader();
+       loader.setLocation(MainApp.class.getResource("Uusipeli.fxml"));
+       BorderPane personOverview = (BorderPane) loader.load();
+       Scene etusivulle = new Scene(personOverview);
+       //stage
+       Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+	    	window.setScene(etusivulle);
+	    	window.show();
+    }
+
+    @FXML
+    void vieProfiiliNäkymään(ActionEvent event) throws IOException {
+    	//vaihdetaan näkymää samalla viedään käyttäjän tiedot
+		 FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource("Profiili.fxml"));
+        BorderPane personOverview = (BorderPane) loader.load();
+        ProfiiliController controller = loader.getController();
+        controller.initData(käyttäjä);
+        Scene etusivulle = new Scene(personOverview);
+        //stage
+        Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
+	    	window.setScene(etusivulle);
+	    	window.show();
+    }
 
 }

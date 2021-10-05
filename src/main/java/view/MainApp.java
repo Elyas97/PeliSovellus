@@ -33,8 +33,8 @@ public class MainApp extends Application {
         
 
         initRootLayout();
-        showEtusivu();
-        //showLogin();
+        //showEtusivu();
+        showLogin();
         //tapahtumatSivuOverview();
         
     }
@@ -64,10 +64,14 @@ public class MainApp extends Application {
             loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
             BorderPane etusivu = (BorderPane) loader.load();
   
-            rootLayout.setCenter(etusivu);
+            
+            Scene scene = new Scene(etusivu);
+            primaryStage.setScene(scene);
             
             
     		EtusivuController uuscont = loader.getController();
+    		uuscont.setDialogStage(primaryStage);
+    		
     	//	uuscont.listaaPelit();
   
     		uuscont.setMainApp(this);
@@ -83,22 +87,15 @@ public class MainApp extends Application {
     		FXMLLoader loader = new FXMLLoader();
     		loader.setLocation(MainApp.class.getResource("Uusipeli.fxml"));
     		BorderPane uusipeli = (BorderPane) loader.load();
-    		
-    		
-    		Stage dialogStage = new Stage();
-    		dialogStage.setTitle("Uusi peli");
-    		dialogStage.initModality(Modality.WINDOW_MODAL);
-    		dialogStage.initOwner(primaryStage);
-    		Scene scene = new Scene(uusipeli);
-    		dialogStage.setScene(scene);
+    		 Scene scene = new Scene(uusipeli);
+             primaryStage.setScene(scene);
 
     		
     		LisääPeliController controller = loader.getController();
     		
-    		controller.setDialogStage(dialogStage);
+    		controller.setDialogStage(primaryStage);
     		controller.setMainApp(this);
-    		
-    		dialogStage.showAndWait();
+    	
     		
     		
     		
@@ -117,19 +114,15 @@ public class MainApp extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("Tapahtumat.fxml"));
             BorderPane tapahtumat = (BorderPane) loader.load();
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Tapahtumat");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
+ 
             Scene scene = new Scene(tapahtumat);
-            dialogStage.setScene(scene);
+            primaryStage.setScene(scene);
 
             TapahtumatController controller = loader.getController();
     		
-    		controller.setDialogStage(dialogStage);
+    		controller.setDialogStage(primaryStage);
     		controller.setMainApp(this);
     		
-    		dialogStage.showAndWait();
 
         } catch (IOException e) {
             e.printStackTrace();
