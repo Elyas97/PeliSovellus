@@ -67,12 +67,18 @@ public class TapahtumatController {
 
 	@FXML
 	private TextField kuvaus;
-
+	
+	@FXML 
+	private TextField tekstikenttä;
+	
 	@FXML
 	private ChoiceBox<String> genre;
 	
 	@FXML
 	private ChoiceBox<String> kunto;
+	
+	@FXML
+	private ChoiceBox<String> konsoli;
 	
 	Käyttäjä käyttäjä;
 
@@ -87,12 +93,15 @@ public class TapahtumatController {
 	public void initialize() {
 		ObservableList<String> options = FXCollections.observableArrayList("Urheilu", "Räiskintä","Toiminta"
 				,"Ajopeli", "Jännitys", "Seikkailu", "Strategia", "Roolipeli", "Pulma",
-				"Lautapeli");
+				"Lautapeli", "Juomapeli", "Tappelupeli", "Tasohyppeli");
 		genre.setItems(options);
 		
 		ObservableList<String> kuntoOptions = FXCollections.observableArrayList("Erinomainen", "Kiitettävä","Hyvä"
 				,"Kohtalainen", "Välttävä");
 		kunto.setItems(kuntoOptions);
+		
+		ObservableList<String> konsoliOptions = FXCollections.observableArrayList("Xbox", "Playstation","Wii");
+		konsoli.setItems(konsoliOptions);
 
 		listaaOmatPelit();
 		omatPelit.getSelectionModel().selectedItemProperty().addListener(
@@ -163,6 +172,8 @@ public class TapahtumatController {
 			ikaraja.setText(Integer.toString(peli.getIkaraja()));
 			pelaajamaara.setText(Integer.toString(peli.getPelmaara()));
 			kuvaus.setText(peli.getKuvaus());
+			tekstikenttä.setText(peli.getTekstikenttä());
+			konsoli.setValue(peli.getKonsoli());
 		} else {
 			pelinnimi.setText("");
 			hinta.setText("");
@@ -171,6 +182,8 @@ public class TapahtumatController {
 			ikaraja.setText("");
 			pelaajamaara.setText("");
 			kuvaus.setText("");
+			tekstikenttä.setText("");
+			konsoli.setValue("");
 		}
 	}
 
@@ -197,6 +210,8 @@ public class TapahtumatController {
 		System.out.println(genre.getValue().toString());
 		peli.setKunto(kunto.getValue().toString());
 		System.out.println(peli.getPelinNimi()+" "+ peli.getHinta()+" "+ peli.getIkaraja());
+		peli.setTekstikenttä(tekstikenttä.getText());
+		peli.setKonsoli(konsoli.getValue().toString());
 		pelitdao.paivitaPeli(peli);		
 		
 		omatPelit.getItems().clear();

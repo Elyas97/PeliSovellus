@@ -42,8 +42,12 @@ public class LisääPeliController {
 	private TextField kaupunki;
 	@FXML 
 	private TextField kuvaus;
+	@FXML 
+	private TextField tekstikenttä;
 	@FXML
 	private ChoiceBox<String> kunto;
+	@FXML
+	private ChoiceBox<String> konsoli;
 	Käyttäjä käyttäjä;
 	
 	
@@ -75,7 +79,10 @@ public class LisääPeliController {
 		ObservableList<String> kuntoOptions = FXCollections.observableArrayList("Erinomainen", "Kiitettävä","Hyvä"
 				,"Kohtalainen", "Välttävä");
 		kunto.setItems(kuntoOptions);
-
+		
+		ObservableList<String> konsoliOptions = FXCollections.observableArrayList("Xbox", "Playstation","Wii");
+		konsoli.setItems(konsoliOptions);
+		
 		// ei toimi
 		//genre.getItems().setAll(Pelingenre.values());
 		//choiceBox.getItems().clear();
@@ -109,12 +116,14 @@ public class LisääPeliController {
 		peli.setGenre(genre.getValue().toString());
 		System.out.println(genre.getValue().toString());
 		peli.setKunto(kunto.getValue().toString());
+		peli.setTekstikenttä(tekstikenttä.getText());
+		peli.setKonsoli(konsoli.getValue().toString());
 		//System.out.println(peli.getPelinNimi()+" "+ peli.getHinta()+" "+ peli.getIkaraja());
 		pelisovellusdao.lisaaPeli(peli, 2);
 		tallennaClicked = true;
 		etusivu.listaaPelit();
 		
-		dialogStage.close();
+		//dialogStage.close();
 	}
 	
 	public boolean tallennaClicked() {

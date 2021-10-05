@@ -127,18 +127,20 @@ Connection conn;
 	public boolean lisaaPeli(Peli peli, int kayttajaID) {
 		boolean temp = false;
 		System.out.println(peli.getPelinNimi() + " "+ kayttajaID);
-		try(PreparedStatement lisaaPeli = conn.prepareStatement("INSERT INTO Peli (Pelinimi, Pelintyyppi, Talletustyyppi, Hinta, Genre, Ikäraja, Pelaajamäärä, Kuvaus, Kaupunki, Kunto, KäyttäjäID) VALUES (?,?,?,?,?,?,?,?,?,?,?)")) {
+		try(PreparedStatement lisaaPeli = conn.prepareStatement("INSERT INTO Peli (Pelinimi, Pelintyyppi, Talletustyyppi, Hinta, Genre, Konsoli, Ikäraja, Pelaajamäärä, Kuvaus, Kaupunki, Kunto, Tekstikenttä, KäyttäjäID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
 			lisaaPeli.setString(1, peli.getPelinNimi());
 			lisaaPeli.setString(2, peli.getPelintyyppi());
 			lisaaPeli.setString(3, peli.getTalletusTyyppi());
 			lisaaPeli.setInt(4, peli.getHinta());
 			lisaaPeli.setString(5, peli.getGenre());
-			lisaaPeli.setInt(6, peli.getIkaraja());
-			lisaaPeli.setInt(7, peli.getPelmaara());
-			lisaaPeli.setString(8, peli.getKuvaus());
-			lisaaPeli.setString(9,  peli.getKaupunki());
-			lisaaPeli.setString(10,  peli.getKunto());
-			lisaaPeli.setInt(11, kayttajaID);
+			lisaaPeli.setString(6, peli.getKonsoli());
+			lisaaPeli.setInt(7, peli.getIkaraja());
+			lisaaPeli.setInt(8, peli.getPelmaara());
+			lisaaPeli.setString(9, peli.getKuvaus());
+			lisaaPeli.setString(10,  peli.getKaupunki());
+			lisaaPeli.setString(11,  peli.getKunto());
+			lisaaPeli.setString(12, peli.getTekstikenttä());
+			lisaaPeli.setInt(13, kayttajaID);
 			
 			int count = lisaaPeli.executeUpdate();
 			temp = true;
@@ -183,9 +185,13 @@ Connection conn;
 				String kaupunki = rs.getString("Kaupunki");
 				String teksti = rs.getString("Tekstikenttä");
 				int kayttajaid = rs.getInt("KäyttäjäID");
-				String kunto = "Hyvä";
-				//String kunto = rs.getSring("Kunto");
-				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, ika, lukumaara, kuvaus, kaupunki, kunto));
+				String konsoli = rs.getString("Konsoli");
+				String tekstikenttä = rs.getString("Tekstikenttä");
+				String kunto = rs.getString("Kunto");
+				//String kunto = "Hyvä";
+				//String konsoli = "Playstation";
+				//String tekstikenttä = "Puh: 040 123456";
+				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, konsoli, ika, lukumaara, kuvaus, kaupunki, kunto, tekstikenttä));
 			}
 			
 		}catch(SQLException e) {
@@ -261,9 +267,13 @@ Connection conn;
 				String kaupunki = rs.getString("Kaupunki");
 				String teksti = rs.getString("Tekstikenttä");
 				int kayttajaid = rs.getInt("KäyttäjäID");
-				String kunto = "Hyvä";
-				//String kunto = rs.getSring("Kunto");
-				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, ika, lukumaara, kuvaus, kaupunki, kunto));
+				String konsoli = rs.getString("Konsoli");
+				String tekstikenttä = rs.getString("Tekstikenttä");
+				String kunto = rs.getString("Kunto");
+				//String kunto = "Hyvä";
+				//String konsoli = "Playstation";
+				//String tekstikenttä = "Puh: 040 123456";
+				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, konsoli, ika, lukumaara, kuvaus, kaupunki, kunto, tekstikenttä));
 			}
 			
 		}catch(SQLException e) {
@@ -299,20 +309,22 @@ Connection conn;
 	public boolean paivitaPeli(Peli peli) {
 		boolean temp= false;
 		System.out.println("Nimi " + peli.getPelinNimi() + " Id " + peli.getPeliId() + " Kaupunki " + peli.getKaupunki());
-		String query="UPDATE Peli SET Pelinimi=?,Pelintyyppi=?,Talletustyyppi=?,Hinta=?,Genre=?,Ikäraja=?,Pelaajamäärä=?,Kuvaus=?,Kaupunki=?, Kunto=? WHERE PeliID=?";
+		String query="UPDATE Peli SET Pelinimi=?,Pelintyyppi=?,Talletustyyppi=?,Hinta=?,Genre=?, Konsoli=?, Ikäraja=?,Pelaajamäärä=?,Kuvaus=?,Kaupunki=?, Kunto=?, Tekstikenttä=? WHERE PeliID=?";
 		try(PreparedStatement stmt=conn.prepareStatement(query)){
 			stmt.setString(1, peli.getPelinNimi());
 			stmt.setString(2, peli.getPelintyyppi());
 			stmt.setString(3, peli.getTalletusTyyppi());
 			stmt.setInt(4, peli.getHinta());
 			stmt.setString(5, peli.getGenre());
-			stmt.setInt(6, peli.getIkaraja());
-			stmt.setInt(7, peli.getPelmaara());
-			stmt.setString(8, peli.getKuvaus());
-			stmt.setString(9, peli.getKaupunki());
-			stmt.setString(10, peli.getKunto());
-			stmt.setInt(11, peli.getPeliId());
-			System.out.println(peli.getPeliId() + ", " + peli.getPelinNimi()+ " ," + peli.getPelintyyppi() + ", "+ peli.getTalletusTyyppi() + ", "+ peli.getHinta() + ", " + peli.getGenre() + ", "+ peli.getIkaraja() + ", "+ peli.getPelmaara()+ ", " + peli.getKuvaus() + ", "+ peli.getKaupunki() + ", " + peli.getKunto());
+			stmt.setString(6, peli.getKonsoli());
+			stmt.setInt(7, peli.getIkaraja());
+			stmt.setInt(8, peli.getPelmaara());
+			stmt.setString(9, peli.getKuvaus());
+			stmt.setString(10, peli.getKaupunki());
+			stmt.setString(11, peli.getKunto());
+			stmt.setString(12, peli.getTekstikenttä());
+			stmt.setInt(13, peli.getPeliId());
+			System.out.println(peli.getPeliId() + ", " + peli.getPelinNimi()+ " ," + peli.getPelintyyppi() + ", "+ peli.getTalletusTyyppi() + ", "+ peli.getHinta() + ", " + peli.getGenre() + ", "+ peli.getKonsoli() + ", "+ peli.getIkaraja() + ", "+ peli.getPelmaara()+ ", " + peli.getKuvaus() + ", "+ peli.getKaupunki() + ", " + peli.getKunto() + ", "+ peli.getTekstikenttä());
 			stmt.executeUpdate();
 			temp=true;
 			

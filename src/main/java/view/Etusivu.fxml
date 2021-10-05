@@ -84,28 +84,34 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Label contentDisplay="CENTER" text="Nimi" GridPane.rowIndex="1" />
                   <Label layoutX="11.0" layoutY="25.0" text="Hinta" underline="true" GridPane.rowIndex="2" />
-                  <Label layoutX="11.0" layoutY="72.0" text="Ikäraja" underline="true" GridPane.rowIndex="5" />
+                  <Label layoutX="11.0" layoutY="72.0" text="Ikäraja" underline="true" GridPane.rowIndex="6" />
                   <Label layoutX="11.0" layoutY="25.0" text="Genre" underline="true" GridPane.rowIndex="4" />
                   <Label layoutX="11.0" layoutY="72.0" text="Paikkakunta" underline="true" GridPane.rowIndex="3" />
-                  <Label layoutX="11.0" layoutY="211.0" text="Pelaajamäärä" underline="true" GridPane.rowIndex="6" />
-                  <Label layoutX="11.0" layoutY="211.0" text="Kuvaus" underline="true" GridPane.rowIndex="7" />
+                  <Label layoutX="11.0" layoutY="211.0" text="Pelaajamäärä" underline="true" GridPane.rowIndex="7" />
+                  <Label layoutX="11.0" layoutY="211.0" text="Kuvaus" underline="true" GridPane.rowIndex="8" />
                   <Label contentDisplay="CENTER" layoutX="11.0" layoutY="25.0" text="Nimi" underline="true" GridPane.rowIndex="1" />
                   <Label fx:id="pelinNimi" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label fx:id="pelinHinta" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label fx:id="paikkakunta" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label fx:id="genre" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label fx:id="ikäraja" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <Label fx:id="pelaajamäärä" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <Label fx:id="kuvaus" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <Label fx:id="ikäraja" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label fx:id="pelaajamäärä" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <Label fx:id="kuvaus" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                   <Label text="Pelin tiedot:">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
+                  <Label text="Tekstikenttä" GridPane.rowIndex="9" />
+                  <Label text="Konsoli" GridPane.rowIndex="5" />
+                  <Label fx:id="konsoli" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label fx:id="tekstikenttä" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                </children>
             </GridPane>
             <Text fill="#0589ff" layoutX="14.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selaa Pelejä">
