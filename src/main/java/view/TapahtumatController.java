@@ -197,7 +197,10 @@ public class TapahtumatController {
 		System.out.println(genre.getValue().toString());
 		peli.setKunto(kunto.getValue().toString());
 		System.out.println(peli.getPelinNimi()+" "+ peli.getHinta()+" "+ peli.getIkaraja());
-		pelitdao.paivitaPeli(peli);					 	 	
+		pelitdao.paivitaPeli(peli);		
+		
+		omatPelit.getItems().clear();
+		listaaOmatPelit();
 	}
 
 	@FXML
