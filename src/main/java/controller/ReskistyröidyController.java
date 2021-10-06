@@ -131,6 +131,20 @@ public class ReskistyröidyController {
     	window.show();
     }
     
+    @FXML
+    void vieVierasNäkymä(ActionEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader();
+        
+        loader.setLocation(MainApp.class.getResource("Vieras.fxml"));
+       
+        BorderPane register = (BorderPane) loader.load();
+    	Scene rekistyröintiNäkymä = new Scene(register);
+    	//get stage
+    	Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
+    	window.setScene(rekistyröintiNäkymä);
+    	window.show();
+    }
+    
     boolean validointi() {
     	 boolean test=true;
     	 etu.setStyle("-fx-border-color:#0589ff");

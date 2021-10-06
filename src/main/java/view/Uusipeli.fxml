@@ -30,7 +30,10 @@
             <Button mnemonicParsing="false" onAction="#vieProfiiliNäkymä" prefHeight="39.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Profiili" textFill="WHITE" />
             <VBox alignment="BOTTOM_LEFT" prefHeight="300.0" prefWidth="155.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#LogOut" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #1A85B2;" text="Kirjaudu ulos" textFill="WHITE" />
+                  <Button mnemonicParsing="false" onAction="#LogOut" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #1A85B2;" text="Kirjaudu ulos" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="USER" size="22" />
+                     </graphic></Button>
                </children>
             </VBox>
          </children>
