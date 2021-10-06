@@ -58,7 +58,6 @@ public class LisääPeliController {
 	@FXML
 	private RadioButton lauta;
 	Käyttäjä käyttäjä;
-
 	
 	
 	private Stage dialogStage;
@@ -142,8 +141,12 @@ public class LisääPeliController {
 		peli.setKunto(kunto.getValue().toString());
 		peli.setTekstikenttä(tekstikenttä.getText());
 
+		if(peli.getKonsoli() != null) {
+			peli.setKonsoli(konsoli.getValue().toString());
+		}else {
+			peli.setKonsoli("");
+		}
 		
-		peli.setKonsoli(konsoli.getValue().toString());
 
 		//System.out.println(peli.getPelinNimi()+" "+ peli.getHinta()+" "+ peli.getIkaraja());
 		pelisovellusdao.lisaaPeli(peli, 2);
@@ -183,6 +186,7 @@ public class LisääPeliController {
 			 FXMLLoader loader = new FXMLLoader();
 	         loader.setLocation(MainApp.class.getResource("Profiili.fxml"));
 	         BorderPane personOverview = (BorderPane) loader.load();
+
 	         Scene etusivulle = new Scene(personOverview);
 	         //stage
 	         Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -204,6 +208,7 @@ public class LisääPeliController {
 		    	window.show();
 
 	    }
+	    
 	    @FXML
 	    void LogOut(ActionEvent event) throws IOException {
 	    	boolean test=TiedostoKäsittely.poistaTiedosto();
