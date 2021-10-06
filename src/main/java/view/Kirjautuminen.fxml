@@ -34,9 +34,10 @@
                </font>
             </Text>
             <FontAwesomeIconView fill="#0598ff" glyphName="USERS" layoutX="126.0" layoutY="105.0" size="30" />
-            <Button fx:id="buttoni" layoutX="103.0" layoutY="286.0" mnemonicParsing="false" onAction="#kirjaudu" style="-fx-background-color: #0589ff;" text="KIRJAUDU" textFill="WHITE" />
-            <Hyperlink layoutX="99.0" layoutY="347.0" onAction="#vieRekistyröintiNäkymään" text="Luo uusi tili" />
+            <Button fx:id="buttoni" layoutX="155.0" layoutY="285.0" mnemonicParsing="false" onAction="#kirjaudu" prefHeight="32.0" prefWidth="115.0" style="-fx-background-color: #0589ff;" text="KIRJAUDU" textFill="WHITE" />
+            <Hyperlink layoutX="103.0" layoutY="347.0" onAction="#vieRekistyröintiNäkymään" text="Luo uusi tili" />
             <TextField fx:id="tunnus23" layoutX="82.0" layoutY="175.0" promptText="Sähköposti" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <Button layoutX="14.0" layoutY="285.0" mnemonicParsing="false" onAction="#vieVierasNäkymä" prefHeight="32.0" prefWidth="115.0" style="-fx-background-color: #DED5D1; -fx-text-fill: black;" text="Peruuta" textFill="#bfbfbf" />
          </children>
       </AnchorPane>
    </right>

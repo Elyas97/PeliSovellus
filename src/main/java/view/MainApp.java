@@ -12,8 +12,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Käyttäjä;
 import model.Peli;
 import model.PeliSovellusDAO;
+import model.TiedostoKäsittely;
 
 
 public class MainApp extends Application {
@@ -33,8 +35,15 @@ public class MainApp extends Application {
         
 
         initRootLayout();
-        //showEtusivu();
-        showLogin();
+        //käyttäjän ei aina tarvitse kirjautua sisään
+        Käyttäjä alku=TiedostoKäsittely.lueKäyttäjä();
+        if(alku!=null) {
+        	showEtusivu();
+        }else {
+        	showVieras();
+        }
+        
+        
         //tapahtumatSivuOverview();
         
     }
@@ -180,6 +189,24 @@ public class MainApp extends Application {
             
             // Set login overview into the center of root layout.
             rootLayout.setCenter(profile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void showVieras() {
+        try {
+            // Load login overview.
+        	
+            FXMLLoader loader = new FXMLLoader();
+            
+            loader.setLocation(MainApp.class.getResource("Vieras.fxml"));
+           
+            BorderPane kirjaudu = (BorderPane) loader.load();
+            
+            
+            
+            // Set login overview into the center of root layout.
+            rootLayout.setCenter(kirjaudu);
         } catch (IOException e) {
             e.printStackTrace();
         }

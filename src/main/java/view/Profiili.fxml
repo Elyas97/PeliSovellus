@@ -25,7 +25,10 @@
             <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="169.0" style="-fx-background-color: white; -fx-text-fill: #0589ff;" text="Profiili" />
             <VBox alignment="BOTTOM_LEFT" prefHeight="241.0" prefWidth="155.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#LogOut" prefHeight="37.0" prefWidth="155.0" style="-fx-background-color: #1A85B2;" text="Kirjaudu ulos" textFill="WHITE" />
+                  <Button mnemonicParsing="false" onAction="#LogOut" prefHeight="37.0" prefWidth="155.0" style="-fx-background-color: #1A85B2;" text="Kirjaudu ulos" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="USER" size="22" />
+                     </graphic></Button>
                </children>
             </VBox>
          </children>
