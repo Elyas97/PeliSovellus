@@ -150,6 +150,7 @@ public class Peli {
 	
 	// turha jos saa fiksusti toimimaan
 	public String toString() {
-		return getPelinNimi() + ", "+getKaupunki();
+		//getGenre();
+		return getPelinNimi();
 	}
 }

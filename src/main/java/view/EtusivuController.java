@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -44,11 +45,9 @@ public class EtusivuController {
 	@FXML
 	private Label kuvaus;
 	@FXML
-	private Label tekstikenttä;
-	@FXML
-	private Label konsoli;
-	@FXML
 	private TextField pelihaku;
+	@FXML
+	private ChoiceBox<String> hakurajaus;
 
 	Käyttäjä käyttäjä;
 	private Stage dialogStage;
@@ -64,18 +63,39 @@ public class EtusivuController {
 	}*/
 	
 	public void initialize() {
-
+		ObservableList<String> rajaus = FXCollections.observableArrayList("Nimi", "Kaupunki","Genre");
+		hakurajaus.setItems(rajaus);
 		listaaPelit();
 		lista.setItems(filteredData);
 		pelihaku.textProperty().addListener((obs, oldValue, newValue) -> {
 			//String filter = pelihaku.getText();
-			if(newValue == null || newValue.length() == 0) {
+			switch (hakurajaus.getValue()) {
+			case "Nimi":
+				filteredData.setPredicate(pelit -> pelit.getPelinNimi().toLowerCase().contains(newValue));
+				break;
+			case "Kaupunki":
+				filteredData.setPredicate(pelit -> pelit.getKaupunki().toLowerCase().contains(newValue));
+				break;
+			case "Genre":
+				filteredData.setPredicate(pelit -> pelit.getGenre().toLowerCase().contains(newValue));
+				break;
+			default:
+				filteredData.setPredicate(pelit -> true);
+					
+			}
+			
+			/*
+			 * 
+			 * VANHA HAKU;
+			 * EI TOIMI CHOICEBOXIN KANSSA
+			 */
+			/*if(newValue == null || newValue.length() == 0) {
 				filteredData.setPredicate(pelit -> true);
 			} else {
 				
-				filteredData.setPredicate(pelit -> pelit.toString().toLowerCase().contains(newValue));
+				filteredData.setPredicate(pelit -> pelit.getGenre().toLowerCase().contains(newValue));
 				
-			}
+			}*/
 		});
 
 		
@@ -85,7 +105,7 @@ public class EtusivuController {
 	}
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage=dialogStage;
-	}
+	} 
 
     @FXML
 	public void listaaPelit() {
@@ -112,8 +132,6 @@ public class EtusivuController {
     		ikäraja.setText(Integer.toString(peli.getIkaraja()));
     		pelaajamäärä.setText(Integer.toString(peli.getPelmaara()));
     		kuvaus.setText(peli.getKuvaus());
-    		tekstikenttä.setText(peli.getTekstikenttä());
-    		konsoli.setText(peli.getKonsoli());
     	} else {
     		pelinNimi.setText("");
     		pelinHinta.setText("");
@@ -122,8 +140,6 @@ public class EtusivuController {
     		ikäraja.setText("");
     		pelaajamäärä.setText("");
     		kuvaus.setText("");
-    		konsoli.setText("");
-    		tekstikenttä.setText("");
     	}
     	
     }
