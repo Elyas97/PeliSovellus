@@ -117,6 +117,21 @@ public class TapahtumatController {
 		omatPelit.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> pelinTiedot(newValue));	
 	}
+	
+	@FXML
+	public String tyyppi(ActionEvent Action) {
+		
+		String text = ((RadioButton)pelintyyppi.getSelectedToggle()).getText();
+		System.out.println(text);
+		
+		if(text.equals("lauta")) {
+			konsoliPane.setVisible(false);
+		}else {
+			konsoliPane.setVisible(true);
+		}
+		
+		return text;
+	}
 
 	public void setMainApp(MainApp main) {
 		this.main = main;
@@ -223,7 +238,12 @@ public class TapahtumatController {
 		peli.setKunto(kunto.getValue().toString());
 		System.out.println(peli.getPelinNimi()+" "+ peli.getHinta()+" "+ peli.getIkaraja());
 		peli.setTekstikenttä(tekstikenttä.getText());
-		peli.setKonsoli(konsoli.getValue().toString());
+		
+		if(peli.getKonsoli() != null) {
+			peli.setKonsoli(konsoli.getValue().toString());
+		}else {
+			peli.setKonsoli("");
+		}
 		pelitdao.paivitaPeli(peli);	
 		
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
