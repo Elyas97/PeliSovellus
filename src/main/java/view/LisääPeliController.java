@@ -169,15 +169,17 @@ public class LisääPeliController {
 	    alert.showAndWait();
 	    
 		etusivu.listaaPelit();
-		laskeKirjaimet();
+		kirjaimet();
 		
 		//dialogStage.close();
 	}
 	
 	//Testailua
-	public int laskeKirjaimet() {
+	@FXML
+	public int kirjaimet() {
 		String kirjaimetstring = tekstikenttä.getText();
-		int pituus = kirjaimetstring.length();
+		int pituus = 1;
+		pituus = kirjaimetstring.length();
 		kirjaimet.setText(Integer.toString(pituus));
 		return pituus;
 	}
