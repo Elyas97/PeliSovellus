@@ -11,12 +11,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Käyttäjä;
 import model.Peli;
@@ -48,6 +50,12 @@ public class LisääPeliController {
 	private ChoiceBox<String> kunto;
 	@FXML
 	private ChoiceBox<String> konsoli;
+	@FXML
+	private Pane konsoliPane;
+	@FXML
+	private RadioButton video;
+	@FXML
+	private RadioButton lauta;
 	Käyttäjä käyttäjä;
 	
 	
@@ -65,6 +73,20 @@ public class LisääPeliController {
 		
 		String text = ((RadioButton)tyyppi.getSelectedToggle()).getText();
 		System.out.println(text);
+		return text;
+	}
+	
+	@FXML
+	public String tyyppi(ActionEvent Action) {
+		
+		String text = ((RadioButton)pelintyyppi.getSelectedToggle()).getText();
+		System.out.println(text);
+		
+		if(text.equals("lauta")) {
+			konsoliPane.setVisible(false);
+		}else {
+			konsoliPane.setVisible(true);
+		}
 		
 		return text;
 	}
@@ -117,10 +139,19 @@ public class LisääPeliController {
 		System.out.println(genre.getValue().toString());
 		peli.setKunto(kunto.getValue().toString());
 		peli.setTekstikenttä(tekstikenttä.getText());
+
+		
 		peli.setKonsoli(konsoli.getValue().toString());
+
 		//System.out.println(peli.getPelinNimi()+" "+ peli.getHinta()+" "+ peli.getIkaraja());
 		pelisovellusdao.lisaaPeli(peli, 2);
 		tallennaClicked = true;
+		
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+	    alert.setTitle("Alert");
+	    alert.setContentText("Uusi peli lisätty onnistuneesti!");
+	    alert.showAndWait();
+	    
 		etusivu.listaaPelit();
 		
 		//dialogStage.close();
