@@ -15,8 +15,10 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 //import javafx.scene.control.ListView;
 import javafx.stage.Stage;
@@ -80,10 +82,13 @@ public class TapahtumatController {
 	
 	@FXML
 	private ChoiceBox<String> konsoli;
-	
 	private Käyttäjä käyttäjä;
+	@FXML
+	private Pane konsoliPane;
+
 	
 	
+
 
 	private Stage dialogStage;
 	private MainApp main;
@@ -167,8 +172,10 @@ public class TapahtumatController {
 			System.out.println("Pelintyyppi string: " + peli.getPelintyyppi());
 			if(pelintyyppistring.equals("lauta")) {
 				pelintyyppi.selectToggle(lauta);
+				konsoliPane.setVisible(false);
 			}else {
 				pelintyyppi.selectToggle(video);
+				konsoliPane.setVisible(true);
 			}
 
 			kaupunki.setText(peli.getKaupunki());
@@ -217,7 +224,12 @@ public class TapahtumatController {
 		System.out.println(peli.getPelinNimi()+" "+ peli.getHinta()+" "+ peli.getIkaraja());
 		peli.setTekstikenttä(tekstikenttä.getText());
 		peli.setKonsoli(konsoli.getValue().toString());
-		pelitdao.paivitaPeli(peli);		
+		pelitdao.paivitaPeli(peli);	
+		
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+	    alert.setTitle("Alert");
+	    alert.setContentText("Muutokset tallennettu onnistuneesti!");
+	    alert.showAndWait();
 		
 		omatPelit.getItems().clear();
 		listaaOmatPelit();
