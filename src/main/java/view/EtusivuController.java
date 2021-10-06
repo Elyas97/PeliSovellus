@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -48,7 +49,7 @@ public class EtusivuController {
 	@FXML
 	private TextField pelihaku;
 	@FXML
-	private ChoiceBox<String> hakurajaus;
+	private ComboBox<String> hakurajaus;
 
 	
 	private Stage dialogStage;
@@ -66,10 +67,12 @@ public class EtusivuController {
 	public void initialize() {
 		ObservableList<String> rajaus = FXCollections.observableArrayList("Nimi", "Kaupunki","Genre");
 		hakurajaus.setItems(rajaus);
-		listaaPelit();
 		lista.setItems(filteredData);
+		hakurajaus.setPromptText("Rajaa hakua");
+		listaaPelit();
 		pelihaku.textProperty().addListener((obs, oldValue, newValue) -> {
 			//String filter = pelihaku.getText();
+			if(hakurajaus.getValue() != null) {
 			switch (hakurajaus.getValue()) {
 			case "Nimi":
 				filteredData.setPredicate(pelit -> pelit.getPelinNimi().toLowerCase().contains(newValue));
@@ -81,8 +84,10 @@ public class EtusivuController {
 				filteredData.setPredicate(pelit -> pelit.getGenre().toLowerCase().contains(newValue));
 				break;
 			default:
+			
 				filteredData.setPredicate(pelit -> true);
-					
+				
+			}
 			}
 			
 			/*
