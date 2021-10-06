@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import model.Käyttäjä;
 import model.Peli;
 import model.PeliSovellusDAO;
+import model.TiedostoKäsittely;
 
 public class TapahtumatController {
 
@@ -80,7 +81,9 @@ public class TapahtumatController {
 	@FXML
 	private ChoiceBox<String> konsoli;
 	
-	Käyttäjä käyttäjä;
+	private Käyttäjä käyttäjä;
+	
+	
 
 	private Stage dialogStage;
 	private MainApp main;
@@ -91,6 +94,8 @@ public class TapahtumatController {
 
 	@FXML
 	public void initialize() {
+		//kirjautunut käyttäjä haku
+		this.käyttäjä=TiedostoKäsittely.lueKäyttäjä();
 		ObservableList<String> options = FXCollections.observableArrayList("Urheilu", "Räiskintä","Toiminta"
 				,"Ajopeli", "Jännitys", "Seikkailu", "Strategia", "Roolipeli", "Pulma",
 				"Lautapeli", "Juomapeli", "Tappelupeli", "Tasohyppeli");
@@ -257,13 +262,30 @@ public class TapahtumatController {
 		 FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("Profiili.fxml"));
         BorderPane personOverview = (BorderPane) loader.load();
-        ProfiiliController controller = loader.getController();
-        controller.initData(käyttäjä);
         Scene etusivulle = new Scene(personOverview);
         //stage
         Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
 	    	window.setScene(etusivulle);
 	    	window.show();
+    }
+    @FXML
+    void LogOut(ActionEvent event) throws IOException {
+    	boolean test=TiedostoKäsittely.poistaTiedosto();
+    	if(test==true) {
+    		//ajetaan kirjautumis sivulle
+    		FXMLLoader loader = new FXMLLoader();
+	        
+	        loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
+	       
+	        BorderPane etusivu = (BorderPane) loader.load();
+	    	Scene kirjautumisNäkymä = new Scene(etusivu);
+	    	//get stage
+	    	Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
+	    	window.setScene(kirjautumisNäkymä);
+	    	window.show();
+    		
+    	}
+    	
     }
 
 }

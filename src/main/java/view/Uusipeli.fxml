@@ -24,10 +24,15 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="GAMEPAD" size="30" />
                </graphic>
             </Button>
+            <Button mnemonicParsing="false" onAction="#vieEtusivulle" prefHeight="34.0" prefWidth="155.0" style="-fx-background-color: #0589ff;" text="Selaa Pelejä" textFill="WHITE" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#vieTapahtumat" prefHeight="39.0" prefWidth="190.0" style="-fx-background-color: transparent;" text="Lisätyt Pelit" textFill="WHITE" />
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="163.0" style="-fx-background-color: white;" text="Lisää Peli" textFill="#0589ff" />
             <Button mnemonicParsing="false" onAction="#vieProfiiliNäkymä" prefHeight="39.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Profiili" textFill="WHITE" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#vieTapahtumat" prefHeight="39.0" prefWidth="190.0" style="-fx-background-color: transparent;" text="Tapahtumat" textFill="WHITE" />
-            <Button mnemonicParsing="false" onAction="#vieEtusivulle" prefHeight="34.0" prefWidth="155.0" style="-fx-background-color: #0589ff;" text="Selaa pelejä" textFill="WHITE" />
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="181.0" style="-fx-background-color: white;" text="Uusi Peli" />
+            <VBox alignment="BOTTOM_LEFT" prefHeight="300.0" prefWidth="155.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#LogOut" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #1A85B2;" text="Kirjaudu ulos" textFill="WHITE" />
+               </children>
+            </VBox>
          </children>
       </VBox>
    </left>
@@ -130,7 +135,7 @@
                   </AnchorPane>
               </items>
             </SplitPane>
-            <Text fill="#0589ff" layoutX="48.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lisää uusi peli">
+            <Text fill="#0589ff" layoutX="43.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lisää uusi peli">
                <font>
                   <Font size="18.0" />
                </font>

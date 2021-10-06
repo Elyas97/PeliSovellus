@@ -27,14 +27,19 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="GAMEPAD" size="30" text="" />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onAction="#vieProfiiliNäkymään" prefHeight="39.0" prefWidth="158.0" style="-fx-background-color: #0589ff;" text="Profiili" textFill="#fafafa" />
-            <Button layoutX="10.0" layoutY="49.0" mnemonicParsing="false" onAction="#vieEtusivulle" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #0589ff;" text="Selaa pelejä" textFill="#fafafa" />
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" style="-fx-background-color: white;" text="Tapahtumat">
+            <Button layoutX="10.0" layoutY="49.0" mnemonicParsing="false" onAction="#vieEtusivulle" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #0589ff;" text="Selaa Pelejä" textFill="#fafafa" />
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" style="-fx-background-color: white;" text="Lisätyt Pelit" textFill="#0589ff">
                <padding>
                   <Insets top="1.0" />
                </padding>
             </Button>
-            <Button mnemonicParsing="false" onAction="#lisaaUusiPeliNäkymä" prefHeight="26.0" prefWidth="174.0" style="-fx-background-color: #0589ff;" text="Uusi Peli" textFill="WHITE" />
+            <Button mnemonicParsing="false" onAction="#lisaaUusiPeliNäkymä" prefHeight="26.0" prefWidth="174.0" style="-fx-background-color: #0589ff;" text="Lisää Peli" textFill="WHITE" />
+            <Button mnemonicParsing="false" onAction="#vieProfiiliNäkymään" prefHeight="39.0" prefWidth="158.0" style="-fx-background-color: #0589ff;" text="Profiili" textFill="#fafafa" />
+            <VBox alignment="BOTTOM_LEFT" prefHeight="345.0" prefWidth="155.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#LogOut" prefHeight="37.0" prefWidth="155.0" style="-fx-background-color: #1A85B2;" text="Kirjaudu ulos" textFill="WHITE" />
+               </children>
+            </VBox>
          </children>
       </VBox>
    </left>
@@ -59,7 +64,7 @@
                   </HBox>
                   	</children>
             	</VBox>
-            <Text fill="#0589ff" layoutX="14.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tapahtumat" wrappingWidth="178.90902709960938">
+            <Text fill="#0589ff" layoutX="14.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lisätyt Pelit" wrappingWidth="178.90902709960938">
                <font>
                   <Font size="28.0" />
                </font>

@@ -19,17 +19,22 @@
 
 <BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EtusivuController">
    <left>
-      <VBox prefHeight="417.0" prefWidth="155.0" style="-fx-background-color: #0589ff;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="400.0" prefWidth="155.0" style="-fx-background-color: #0589ff;" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="211.0" style="-fx-background-color: #0589FF;">
                <graphic>
                   <FontAwesomeIconView fill="#f8f8f8" glyphName="GAMEPAD" size="30" />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onAction="#vieProofiliNäkymään" prefHeight="39.0" prefWidth="180.0" style="-fx-background-color: transparent;" text="Profiili" textFill="#fafafa" />
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: white;" text="Selaa Pelejä" textFill="#0589ff" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handletapahtumatSivu" prefHeight="38.0" prefWidth="155.0" style="-fx-background-color: #0589ff;" text="Tapahtumat" textFill="#fafafa" />
-            <Button layoutX="10.0" layoutY="49.0" mnemonicParsing="false" onAction="#uusiPeli" prefHeight="38.0" prefWidth="155.0" style="-fx-background-color: #0589ff;" text="Uusi peli" textFill="#fafafa" />
+            <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: white;" text="Selaa Pelejä" textFill="#0589ff" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handletapahtumatSivu" prefHeight="32.0" prefWidth="188.0" style="-fx-background-color: #0589ff;" text="Lisätyt Pelit" textFill="#fafafa" />
+            <Button layoutX="10.0" layoutY="49.0" mnemonicParsing="false" onAction="#uusiPeli" prefHeight="32.0" prefWidth="209.0" style="-fx-background-color: #0589ff;" text="Lisää Peli" textFill="#fafafa" />
+            <Button mnemonicParsing="false" onAction="#vieProofiliNäkymään" prefHeight="32.0" prefWidth="169.0" style="-fx-background-color: transparent;" text="Profiili" textFill="#fafafa" />
+            <VBox alignment="BOTTOM_LEFT" prefHeight="241.0" prefWidth="155.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#LogOut" prefHeight="37.0" prefWidth="155.0" style="-fx-background-color: #1A85B2;" text="Kirjaudu ulos" textFill="WHITE" />
+               </children>
+            </VBox>
          </children>
       </VBox>
    </left>

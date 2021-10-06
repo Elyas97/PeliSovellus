@@ -22,6 +22,7 @@ import model.Käyttäjä;
 import model.Peli;
 import model.PeliSovellusDAO;
 import model.Pelingenre;
+import model.TiedostoKäsittely;
 
 public class LisääPeliController {
 	@FXML
@@ -48,7 +49,7 @@ public class LisääPeliController {
 	private ChoiceBox<String> kunto;
 	@FXML
 	private ChoiceBox<String> konsoli;
-	Käyttäjä käyttäjä;
+	
 	
 	
 	private Stage dialogStage;
@@ -150,8 +151,6 @@ public class LisääPeliController {
 			 FXMLLoader loader = new FXMLLoader();
 	         loader.setLocation(MainApp.class.getResource("Profiili.fxml"));
 	         BorderPane personOverview = (BorderPane) loader.load();
-	         ProfiiliController controller = loader.getController();
-	         controller.initData(käyttäjä);
 	         Scene etusivulle = new Scene(personOverview);
 	         //stage
 	         Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -172,6 +171,25 @@ public class LisääPeliController {
 		    	window.setScene(etusivulle);
 		    	window.show();
 
+	    }
+	    @FXML
+	    void LogOut(ActionEvent event) throws IOException {
+	    	boolean test=TiedostoKäsittely.poistaTiedosto();
+	    	if(test==true) {
+	    		//ajetaan kirjautumis sivulle
+	    		FXMLLoader loader = new FXMLLoader();
+		        
+		        loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
+		       
+		        BorderPane etusivu = (BorderPane) loader.load();
+		    	Scene kirjautumisNäkymä = new Scene(etusivu);
+		    	//get stage
+		    	Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
+		    	window.setScene(kirjautumisNäkymä);
+		    	window.show();
+	    		
+	    	}
+	    	
 	    }
 
 }

@@ -1,6 +1,9 @@
 package model;
 
-public class Käyttäjä {
+import java.io.Serializable;
+
+public class Käyttäjä implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private int kayttajaID;
 	private String salasana;
 	private String etunimi;

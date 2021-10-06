@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import model.Käyttäjä;
 import model.Peli;
 import model.PeliSovellusDAO;
+import model.TiedostoKäsittely;
 
 public class EtusivuController {
 	
@@ -50,7 +51,7 @@ public class EtusivuController {
 	@FXML
 	private TextField pelihaku;
 
-	Käyttäjä käyttäjä;
+	
 	private Stage dialogStage;
 
 	PeliSovellusDAO pelitdao = new PeliSovellusDAO();
@@ -167,19 +168,33 @@ public class EtusivuController {
 		 FXMLLoader loader = new FXMLLoader();
          loader.setLocation(MainApp.class.getResource("Profiili.fxml"));
          BorderPane personOverview = (BorderPane) loader.load();
-         ProfiiliController controller = loader.getController();
-         controller.initData(käyttäjä);
          Scene etusivulle = new Scene(personOverview);
          //stage
          Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
 	    	window.setScene(etusivulle);
 	    	window.show();
     }
-	//tämä saa kirjautuneen käyttäjän
-	public void initData(Käyttäjä käyttäjä) {
-		this.käyttäjä=käyttäjä;
-		System.out.println("Talennus"+käyttäjä.getEtunimi());
-	}
+	
+	  @FXML
+	    void LogOut(ActionEvent event) throws IOException {
+	    	boolean test=TiedostoKäsittely.poistaTiedosto();
+	    	if(test==true) {
+	    		//ajetaan kirjautumis sivulle
+	    		FXMLLoader loader = new FXMLLoader();
+		        
+		        loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
+		       
+		        BorderPane etusivu = (BorderPane) loader.load();
+		    	Scene kirjautumisNäkymä = new Scene(etusivu);
+		    	//get stage
+		    	Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
+		    	window.setScene(kirjautumisNäkymä);
+		    	window.show();
+	    		
+	    	}
+	    	
+	    }
+	
 	
 
 	

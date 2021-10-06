@@ -35,7 +35,7 @@
             </Text>
             <FontAwesomeIconView fill="#0598ff" glyphName="USERS" layoutX="126.0" layoutY="105.0" size="30" />
             <Button fx:id="buttoni" layoutX="103.0" layoutY="286.0" mnemonicParsing="false" onAction="#kirjaudu" style="-fx-background-color: #0589ff;" text="KIRJAUDU" textFill="WHITE" />
-            <Hyperlink layoutX="99.0" layoutY="347.0" onAction="#vieRekistyröintiNäkymään" text="Ei käyttäjää ? " />
+            <Hyperlink layoutX="99.0" layoutY="347.0" onAction="#vieRekistyröintiNäkymään" text="Luo uusi tili" />
             <TextField fx:id="tunnus23" layoutX="82.0" layoutY="175.0" promptText="Sähköposti" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
          </children>
       </AnchorPane>

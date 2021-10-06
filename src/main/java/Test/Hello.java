@@ -1,5 +1,6 @@
 package Test;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -10,6 +11,7 @@ import model.Peli;
 import model.PeliSovellusDAO;
 import model.Pelingenre;
 import model.RegisterSystem;
+import model.TiedostoKäsittely;
 
 public class Hello {
 	public static void main(String[] args) {
@@ -25,9 +27,15 @@ System.out.println(testi[i].getEtunimi()+testi[i].getSähköposti());
 }
 
 LoginSystem login=new LoginSystem();
-Käyttäjä testi23=login.login("elyasa@metropolia.fi", "12345678910");
-System.out.println(testi23);
+Käyttäjä testi23=login.login("mikko@hotmail.com", "123456");
+System.out.println("Alku"+ testi23.getKayttajaID() +" "+ testi23.getEtunimi());
+TiedostoKäsittely.kirjoitaTiedosto(testi23);
+TiedostoKäsittely.poistaTiedosto();
 
+Käyttäjä testi24=TiedostoKäsittely.lueKäyttäjä();
+
+
+System.out.println("loppu");
 
 //Pelingenre peli = null;
 //System.out.println(Arrays.toString(Pelingenre.values()));

@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Käyttäjä;
 import model.PeliSovellusDAO;
+import model.TiedostoKäsittely;
 import view.EtusivuController;
 import view.MainApp;
 
@@ -59,11 +60,13 @@ public class ProfiiliController {
 	    			PeliSovellusDAO dao2 =new PeliSovellusDAO();
 	    			boolean test=dao2.updateKäyttäjä(käyttäjä);
 	    			if(test==true) {
+	    				//päivitetään tiedosto
+	    				TiedostoKäsittely.kirjoitaTiedosto(käyttäjä);
 	    				//ilmoitetaan
 	    				Alert alert = new Alert(Alert.AlertType.INFORMATION);
 	      		      //Setting the title
+	    			  	
 	      		      alert.setTitle("Alert");
-	      		      
 	      		      //Setting the content of the dialog
 	      		      alert.setContentText("Tietojen tallennus onnistui");
 	      		      alert.showAndWait();
@@ -88,6 +91,26 @@ public class ProfiiliController {
 	    	}
 
 	    }
+	    
+	    @FXML
+	    void LogOut(ActionEvent event) throws IOException {
+	    	boolean test=TiedostoKäsittely.poistaTiedosto();
+	    	if(test==true) {
+	    		//ajetaan kirjautumis sivulle
+	    		FXMLLoader loader = new FXMLLoader();
+		        
+		        loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
+		       
+		        BorderPane etusivu = (BorderPane) loader.load();
+		    	Scene kirjautumisNäkymä = new Scene(etusivu);
+		    	//get stage
+		    	Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
+		    	window.setScene(kirjautumisNäkymä);
+		    	window.show();
+	    		
+	    	}
+	    	
+	    }
 
 	    @FXML
 	    void VieEtusivunNäkymä(ActionEvent event) throws IOException {
@@ -96,8 +119,6 @@ public class ProfiiliController {
 	        loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
 	       
 	        BorderPane etusivu = (BorderPane) loader.load();
-	        EtusivuController controller = loader.getController();
-	    	controller.initData(käyttäjä);
 	    	Scene etusivuNäkymä = new Scene(etusivu);
 	    	//get stage
 	    	Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -136,6 +157,12 @@ public class ProfiiliController {
 
 	    @FXML
 	    void initialize() {
+	    	this.käyttäjä=TiedostoKäsittely.lueKäyttäjä();
+	    	
+	    	etu.setText(käyttäjä.getEtunimi());
+	    	suku.setText(käyttäjä.getSukunimi());
+	    	email.setText(käyttäjä.getSähköposti());
+	    	numero.setText(""+käyttäjä.getPuhelinumero());
 	       
 
 	    }
@@ -194,13 +221,5 @@ public class ProfiiliController {
 	    	return test;
 	    }
 	    
-	    public void initData(Käyttäjä käyttäjä) {
-	    	this.käyttäjä=käyttäjä;
-	    	
-	    	etu.setText(käyttäjä.getEtunimi());
-	    	suku.setText(käyttäjä.getSukunimi());
-	    	email.setText(käyttäjä.getSähköposti());
-	    	numero.setText(""+käyttäjä.getPuhelinumero());
-	    	
-	    }
+	   
 }
