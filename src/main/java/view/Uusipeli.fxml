@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LisaaPeliController">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LisaaPeliController">
    <left>
       <VBox prefHeight="200.0" prefWidth="155.0" style="-fx-background-color: #0589ff;" BorderPane.alignment="CENTER">
          <children>
@@ -68,6 +68,7 @@
                            <children>
                               <Label layoutX="6.0" layoutY="6.0" text="Pelinnimi" />
                               <TextField fx:id="pelinnimi" layoutX="6.0" layoutY="23.0" />
+                              <Text fx:id="nimivaroitus" fill="#ff2222" layoutX="69.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                            </children>
                         </Pane>
                         <Pane layoutY="242.0" prefHeight="60.0" prefWidth="225.0">

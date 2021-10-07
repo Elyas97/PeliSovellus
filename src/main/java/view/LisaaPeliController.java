@@ -25,6 +25,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Kayttaja;
 import model.Peli;
@@ -65,6 +66,8 @@ public class LisaaPeliController {
 	private RadioButton lauta;
 	@FXML
 	private Label kirjaimet;
+	@FXML
+	private Text nimivaroitus;
 	Kayttaja käyttäjä;
 	
 	
@@ -158,7 +161,7 @@ public class LisaaPeliController {
 			peli.setKonsoli("");
 		}
 		
-
+		if(validointi() == true) {
 		//System.out.println(peli.getPelinNimi()+" "+ peli.getHinta()+" "+ peli.getIkaraja());
 		pelisovellusdao.lisaaPeli(peli, 2);
 		tallennaClicked = true;
@@ -170,7 +173,7 @@ public class LisaaPeliController {
 	    
 		etusivu.listaaPelit();
 		//kirjaimet();
-		
+		}
 		//dialogStage.close();
 	}
 	
@@ -203,6 +206,32 @@ public class LisaaPeliController {
 			kirjaimet.setText("Kirjaimia jäljellä: " + jaljella);
 		}
 	}
+    private boolean validointi() {
+    	
+   /* 	
+   	 * 
+   	 * 
+   	 * Keskeneräinen
+   	 */
+   	
+   	StringBuilder virhe = new StringBuilder();
+   	
+   	if(pelinnimi.getText().trim().isEmpty()) {
+   		virhe.append("Syötä pelinnimi");
+   		nimivaroitus.setText("Pakollinen kenttä");
+   	}
+   	
+   	if(virhe.length() > 0) {
+   		Alert varoitus = new Alert(Alert.AlertType.WARNING);
+   		varoitus.setTitle("HÄLYYYYTYS");
+   		varoitus.setHeaderText("Varoitus");
+   		varoitus.setContentText(virhe.toString());
+   		
+   		varoitus.showAndWait();
+   		return false;
+   	}
+   	return true;
+   }
 
 	
 	
