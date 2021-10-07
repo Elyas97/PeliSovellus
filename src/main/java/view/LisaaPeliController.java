@@ -68,6 +68,27 @@ public class LisaaPeliController {
 	private Label kirjaimet;
 	@FXML
 	private Text nimivaroitus;
+	@FXML
+	private Text hintavaroitus;
+	@FXML 
+	private Text tyyppivaroitus;
+	@FXML
+	private Text paikkakuntavaroitus;
+	@FXML
+	private Text genrevaroitus;
+	@FXML 
+	private Text ikarajavaroitus;
+	@FXML 
+	private Text pelaajamaaravaroitus;
+	@FXML 
+	private Text kuntovaroitus;
+	@FXML 
+	private Text kuvausvaroitus;
+	@FXML 
+	private Text tekstikenttavaroitus;
+	@FXML
+	private Text ilmoitustyyppivaroitus;
+	
 	Kayttaja käyttäjä;
 	
 	
@@ -136,6 +157,7 @@ public class LisaaPeliController {
 
 	@FXML
 	public void uusiPeli() {
+		if(validointi() == true) {
 		Peli peli = new Peli();
 		peli.setPelinNimi(pelinnimi.getText());
 		int price = Integer.parseInt(hinta.getText());
@@ -161,7 +183,7 @@ public class LisaaPeliController {
 			peli.setKonsoli("");
 		}
 		
-		if(validointi() == true) {
+		
 		//System.out.println(peli.getPelinNimi()+" "+ peli.getHinta()+" "+ peli.getIkaraja());
 		pelisovellusdao.lisaaPeli(peli, 2);
 		tallennaClicked = true;
@@ -206,25 +228,80 @@ public class LisaaPeliController {
 			kirjaimet.setText("Kirjaimia jäljellä: " + jaljella);
 		}
 	}
-    private boolean validointi() {
+    
+	
+	/*
+     * 
+     * Tarkistaa onko uusipeli.fxml kentät tyhjiä ennen kuin lähettää ne tietokantaan
+     * Jos kentät ovat tyhjiä niin ilmoittaa siitä "pakollinen kenttä" punaisella tekstillä ja TextFieldien reunat muuttuvat punaiseksi
+     * Myös pop up ilmestyy näytölle joka ilmoittaa mitkä kentät ovat tyhjiä
+     * 
+     * Tällä hetkellä tarkistaa kaikki kentät (myös kentät jotka voivat olla NULL)
+     * 
+     */
+	private boolean validointi() {
     	
-   /* 	
-   	 * 
-   	 * 
-   	 * Keskeneräinen
-   	 */
    	
    	StringBuilder virhe = new StringBuilder();
    	
    	if(pelinnimi.getText().trim().isEmpty()) {
-   		virhe.append("Syötä pelinnimi");
+   		virhe.append("Syötä pelinnimi\n");
+   		pelinnimi.setStyle("-fx-border-color:red");
    		nimivaroitus.setText("Pakollinen kenttä");
+   	}
+   	if(hinta.getText().trim().isEmpty()) {
+   		virhe.append("Syötä pelinhinta\n");
+   		hinta.setStyle("-fx-border-color:red");
+   		hintavaroitus.setText("Pakollinen kenttä");
+   	}
+   	if(kaupunki.getText().trim().isEmpty()) {
+   		virhe.append("Syötä kaupunki\n");
+   		kaupunki.setStyle("-fx-border-color:red");
+   		paikkakuntavaroitus.setText("Pakollinen kenttä");
+   	}
+   	if(((RadioButton)pelintyyppi.getSelectedToggle()) == null) {
+   		virhe.append("Syötä pelintyyppi\n");
+   		
+   		tyyppivaroitus.setText("Pakollinen kenttä");
+   	}
+   	if(((RadioButton)tyyppi.getSelectedToggle()) == null) {
+   		virhe.append("Syötä ilmoituksen tyyppi\n");
+   		ilmoitustyyppivaroitus.setText("Pakollinen kenttä");
+   	}
+   	if(genre.getValue() == null) {
+   		virhe.append("Syötä genre\n");
+   		genrevaroitus.setText("Pakollinen kenttä");
+   	}
+   	if(ikaraja.getText().trim().isEmpty()) {
+   		virhe.append("Syötä pelin ikäraja\n");
+   		ikaraja.setStyle("-fx-border-color:red");
+   		ikarajavaroitus.setText("Pakollinen kenttä");
+   	}
+   	if(pelaajamaara.getText().trim().isEmpty()) {
+   		virhe.append("Syötä pelin pelaajamäärä \n");
+   		pelaajamaara.setStyle("-fx-border-color:red");
+   		pelaajamaaravaroitus.setText("Pakollinen kenttä");
+   	}
+   	if(kunto.getValue() == null) {
+   		virhe.append("Syötä pelinkunto \n");
+   		kuntovaroitus.setText("Pakollinen kenttä");
+   	}
+  	if(kuvaus.getText().trim().isEmpty()) {
+   		virhe.append("Syötä kuvaus\n");
+   		kuvaus.setStyle("-fx-border-color:red");
+   		kuvausvaroitus.setText("Pakollinen kenttä");
+   	}
+  	if(tekstikenttä.getText().trim().isEmpty()) {
+   		virhe.append("Syötä tekstikenttään asioita \n");
+   		tekstikenttä.setStyle("-fx-border-color:red");
+   		tekstikenttavaroitus.setText("Pakollinen kenttä");
    	}
    	
    	if(virhe.length() > 0) {
    		Alert varoitus = new Alert(Alert.AlertType.WARNING);
-   		varoitus.setTitle("HÄLYYYYTYS");
+   		varoitus.setTitle("Virhe");
    		varoitus.setHeaderText("Varoitus");
+
    		varoitus.setContentText(virhe.toString());
    		
    		varoitus.showAndWait();
