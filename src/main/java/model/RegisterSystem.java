@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class RegisterSystem {
-private Käyttäjä[] rekistyröineet;
+private Kayttaja[] rekistyröineet;
 private PeliSovellusDAO pelisovellus;
 
 public RegisterSystem() {
@@ -11,7 +11,7 @@ public RegisterSystem() {
 	this.rekistyröineet=pelisovellus.readKäyttäjät();
 }
 
-public boolean register(Käyttäjä käyttäjä) {
+public boolean register(Kayttaja käyttäjä) {
 	System.out.println(käyttäjä.getEtunimi());
 	boolean test=true;
 	//ei haluta samaa henkilöä rekistyröimään uudestaan

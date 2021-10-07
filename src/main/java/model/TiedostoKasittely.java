@@ -8,10 +8,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class TiedostoKäsittely {
+public class TiedostoKasittely {
 	private final static String tiedostonimi="asiakaat.data";
 	
-	public static void kirjoitaTiedosto(Käyttäjä käyttäjä) {
+	public static void kirjoitaTiedosto(Kayttaja käyttäjä) {
 		try(FileOutputStream virta=new FileOutputStream(tiedostonimi);
 				ObjectOutputStream käyttäjät=new ObjectOutputStream(virta);){
 			käyttäjät.writeObject(käyttäjä);
@@ -23,11 +23,11 @@ public class TiedostoKäsittely {
 	}
 	
 	
-	public static Käyttäjä lueKäyttäjä()  {
-		Käyttäjä käyttäjä=null;
+	public static Kayttaja lueKäyttäjä()  {
+		Kayttaja käyttäjä=null;
 		try(FileInputStream virta=new FileInputStream(tiedostonimi);
 				ObjectInputStream käyttäjät=new ObjectInputStream(virta);){
-				käyttäjä=(Käyttäjä) käyttäjät.readObject();
+				käyttäjä=(Kayttaja) käyttäjät.readObject();
 				System.out.println(käyttäjä.getEtunimi());
 			
 			

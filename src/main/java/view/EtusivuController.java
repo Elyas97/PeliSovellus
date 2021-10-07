@@ -21,10 +21,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import model.Käyttäjä;
+import model.Kayttaja;
 import model.Peli;
 import model.PeliSovellusDAO;
-import model.TiedostoKäsittely;
+import model.TiedostoKasittely;
 
 public class EtusivuController {
 	
@@ -198,7 +198,7 @@ public class EtusivuController {
 	
 	  @FXML
 	    void LogOut(ActionEvent event) throws IOException {
-	    	boolean test=TiedostoKäsittely.poistaTiedosto();
+	    	boolean test=TiedostoKasittely.poistaTiedosto();
 	    	if(test==true) {
 	    		//ajetaan kirjautumis sivulle
 	    		FXMLLoader loader = new FXMLLoader();

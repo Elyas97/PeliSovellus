@@ -12,10 +12,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Käyttäjä;
+import model.Kayttaja;
 import model.Peli;
 import model.PeliSovellusDAO;
-import model.TiedostoKäsittely;
+import model.TiedostoKasittely;
 
 
 public class MainApp extends Application {
@@ -36,7 +36,7 @@ public class MainApp extends Application {
 
         initRootLayout();
         //käyttäjän ei aina tarvitse kirjautua sisään
-        Käyttäjä alku=TiedostoKäsittely.lueKäyttäjä();
+        Kayttaja alku=TiedostoKasittely.lueKäyttäjä();
         if(alku!=null) {
         	showEtusivu();
         }else {
@@ -100,7 +100,7 @@ public class MainApp extends Application {
              primaryStage.setScene(scene);
 
     		
-    		LisääPeliController controller = loader.getController();
+    		LisaaPeliController controller = loader.getController();
     		
     		controller.setDialogStage(primaryStage);
     		controller.setMainApp(this);

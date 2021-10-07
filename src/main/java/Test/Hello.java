@@ -5,13 +5,13 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 
-import model.Käyttäjä;
+import model.Kayttaja;
 import model.LoginSystem;
 import model.Peli;
 import model.PeliSovellusDAO;
 import model.Pelingenre;
 import model.RegisterSystem;
-import model.TiedostoKäsittely;
+import model.TiedostoKasittely;
 
 public class Hello {
 	public static void main(String[] args) {
@@ -20,19 +20,19 @@ public class Hello {
 			System.out.println("Testi" + " x" +i);
 		}
 		PeliSovellusDAO pelisovellusdao=new PeliSovellusDAO();
-Käyttäjä[] testi=pelisovellusdao.readKäyttäjät();
+Kayttaja[] testi=pelisovellusdao.readKäyttäjät();
 		
 for(int i=0;i<testi.length;i++) {
 System.out.println(testi[i].getEtunimi()+testi[i].getSähköposti());
 }
 
 LoginSystem login=new LoginSystem();
-Käyttäjä testi23=login.login("mikko@hotmail.com", "123456");
+Kayttaja testi23=login.login("mikko@hotmail.com", "123456");
 System.out.println("Alku"+ testi23.getKayttajaID() +" "+ testi23.getEtunimi());
-TiedostoKäsittely.kirjoitaTiedosto(testi23);
-TiedostoKäsittely.poistaTiedosto();
+TiedostoKasittely.kirjoitaTiedosto(testi23);
+TiedostoKasittely.poistaTiedosto();
 
-Käyttäjä testi24=TiedostoKäsittely.lueKäyttäjä();
+Kayttaja testi24=TiedostoKasittely.lueKäyttäjä();
 
 
 System.out.println("loppu");

@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 
-public class Käyttäjä implements Serializable {
+public class Kayttaja implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int kayttajaID;
 	private String salasana;
@@ -10,7 +10,7 @@ public class Käyttäjä implements Serializable {
 	private String sukunimi;
 	private int puhelinumero;
 	private String sähköposti;
-	public Käyttäjä(int kayttajaID, String salasana, String etunimi, String sukunimi, int puhelinumero,
+	public Kayttaja(int kayttajaID, String salasana, String etunimi, String sukunimi, int puhelinumero,
 			 String sähköposti) {
 		super();
 		this.kayttajaID = kayttajaID;
@@ -20,7 +20,7 @@ public class Käyttäjä implements Serializable {
 		this.puhelinumero = puhelinumero;
 		this.sähköposti = sähköposti;
 	}
-	public Käyttäjä() {};
+	public Kayttaja() {};
 	public int getKayttajaID() {
 		return kayttajaID;
 	}

@@ -26,13 +26,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import model.Käyttäjä;
+import model.Kayttaja;
 import model.Peli;
 import model.PeliSovellusDAO;
 import model.Pelingenre;
-import model.TiedostoKäsittely;
+import model.TiedostoKasittely;
 
-public class LisääPeliController {
+public class LisaaPeliController {
 	@FXML
 	private ToggleGroup tyyppi;
 	@FXML
@@ -65,7 +65,7 @@ public class LisääPeliController {
 	private RadioButton lauta;
 	@FXML
 	private Label kirjaimet;
-	Käyttäjä käyttäjä;
+	Kayttaja käyttäjä;
 	
 	
 	private Stage dialogStage;
@@ -76,7 +76,7 @@ public class LisääPeliController {
 	PeliSovellusDAO pelisovellusdao = new PeliSovellusDAO();
 	EtusivuController etusivu = new EtusivuController();
 	
-	public LisääPeliController() {}
+	public LisaaPeliController() {}
 	@FXML
 	public String tyyppiAction(ActionEvent Action) {
 		
@@ -169,23 +169,42 @@ public class LisääPeliController {
 	    alert.showAndWait();
 	    
 		etusivu.listaaPelit();
-		kirjaimet();
+		//kirjaimet();
 		
 		//dialogStage.close();
 	}
 	
-	//Testailua
+
 	@FXML
-	public int kirjaimet() {
+	public void kirjaimet(KeyEvent key) {
 		String kirjaimetstring = tekstikenttä.getText();
+		int maxpituus = 10;
 		int pituus = 1;
 		pituus = kirjaimetstring.length();
-		kirjaimet.setText(Integer.toString(pituus));
-		return pituus;
+		int jaljella = maxpituus - pituus;
+		
+		if(jaljella <= 0) {
+			jaljella = 0;
+		}
+		
+		if(jaljella == 0) {
+			kirjaimet.setText("Kirjaimia jäljellä: " + jaljella);
+			tekstikenttä.setEditable(false);
+			
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		    alert.setTitle("Alert");
+		    alert.setContentText("Sanamäärä ylittynyt!");
+		    alert.showAndWait();
+		    
+			//Tekstikenttään voi taas kirjoittaa
+		    tekstikenttä.setEditable(true);
+		}else {
+			System.out.println("Jaljella: " + jaljella);
+			kirjaimet.setText("Kirjaimia jäljellä: " + jaljella);
+		}
 	}
-	
-	
 
+	
 	
 	public boolean tallennaClicked() {
 		return tallennaClicked;
@@ -236,7 +255,7 @@ public class LisääPeliController {
 	    
 	    @FXML
 	    void LogOut(ActionEvent event) throws IOException {
-	    	boolean test=TiedostoKäsittely.poistaTiedosto();
+	    	boolean test=TiedostoKasittely.poistaTiedosto();
 	    	if(test==true) {
 	    		//ajetaan kirjautumis sivulle
 	    		FXMLLoader loader = new FXMLLoader();

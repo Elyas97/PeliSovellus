@@ -22,10 +22,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 //import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import model.Käyttäjä;
+import model.Kayttaja;
 import model.Peli;
 import model.PeliSovellusDAO;
-import model.TiedostoKäsittely;
+import model.TiedostoKasittely;
 
 public class TapahtumatController {
 
@@ -82,7 +82,7 @@ public class TapahtumatController {
 	
 	@FXML
 	private ChoiceBox<String> konsoli;
-	private Käyttäjä käyttäjä;
+	private Kayttaja käyttäjä;
 	@FXML
 	private Pane konsoliPane;
 
@@ -100,7 +100,7 @@ public class TapahtumatController {
 	@FXML
 	public void initialize() {
 		//kirjautunut käyttäjä haku
-		this.käyttäjä=TiedostoKäsittely.lueKäyttäjä();
+		this.käyttäjä=TiedostoKasittely.lueKäyttäjä();
 		ObservableList<String> options = FXCollections.observableArrayList("Urheilu", "Räiskintä","Toiminta"
 				,"Ajopeli", "Jännitys", "Seikkailu", "Strategia", "Roolipeli", "Pulma",
 				"Lautapeli", "Juomapeli", "Tappelupeli", "Tasohyppeli");
@@ -302,7 +302,7 @@ public class TapahtumatController {
     }
     @FXML
     void LogOut(ActionEvent event) throws IOException {
-    	boolean test=TiedostoKäsittely.poistaTiedosto();
+    	boolean test=TiedostoKasittely.poistaTiedosto();
     	if(test==true) {
     		//ajetaan kirjautumis sivulle
     		FXMLLoader loader = new FXMLLoader();

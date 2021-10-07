@@ -16,11 +16,11 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.Käyttäjä;
+import model.Kayttaja;
 import model.RegisterSystem;
 import view.MainApp;
 
-public class ReskistyröidyController {
+public class RekisteroidyController {
 
     @FXML
     private TextField etu;
@@ -66,7 +66,7 @@ public class ReskistyröidyController {
     	if(test==true) {
     		
     		try {
-    			Käyttäjä käyttäjä=new Käyttäjä();
+    			Kayttaja käyttäjä=new Kayttaja();
         		käyttäjä.setEtunimi(etu.getText());
         		käyttäjä.setSukunimi(suku.getText());
     			int puh=Integer.parseInt(puhelinnumero.getText());

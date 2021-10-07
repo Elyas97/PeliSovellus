@@ -16,9 +16,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.Käyttäjä;
+import model.Kayttaja;
 import model.PeliSovellusDAO;
-import model.TiedostoKäsittely;
+import model.TiedostoKasittely;
 import view.EtusivuController;
 import view.MainApp;
 
@@ -45,7 +45,7 @@ public class ProfiiliController {
 	    @FXML
 	    private Text tippi;
 	    
-	    Käyttäjä käyttäjä;
+	    Kayttaja käyttäjä;
 
 	    @FXML
 	    void tallennaMuutokset(ActionEvent event) {
@@ -61,7 +61,7 @@ public class ProfiiliController {
 	    			boolean test=dao2.updateKäyttäjä(käyttäjä);
 	    			if(test==true) {
 	    				//päivitetään tiedosto
-	    				TiedostoKäsittely.kirjoitaTiedosto(käyttäjä);
+	    				TiedostoKasittely.kirjoitaTiedosto(käyttäjä);
 	    				//ilmoitetaan
 	    				Alert alert = new Alert(Alert.AlertType.INFORMATION);
 	      		      //Setting the title
@@ -94,7 +94,7 @@ public class ProfiiliController {
 	    
 	    @FXML
 	    void LogOut(ActionEvent event) throws IOException {
-	    	boolean test=TiedostoKäsittely.poistaTiedosto();
+	    	boolean test=TiedostoKasittely.poistaTiedosto();
 	    	if(test==true) {
 	    		//ajetaan kirjautumis sivulle
 	    		FXMLLoader loader = new FXMLLoader();
@@ -157,7 +157,7 @@ public class ProfiiliController {
 
 	    @FXML
 	    void initialize() {
-	    	this.käyttäjä=TiedostoKäsittely.lueKäyttäjä();
+	    	this.käyttäjä=TiedostoKasittely.lueKäyttäjä();
 	    	
 	    	etu.setText(käyttäjä.getEtunimi());
 	    	suku.setText(käyttäjä.getSukunimi());
@@ -211,7 +211,7 @@ public class ProfiiliController {
 	    public boolean validoiEmail() {
 	    	boolean test =true;
 	    	PeliSovellusDAO dao=new PeliSovellusDAO();
-	    	Käyttäjä[] rekistyröineet =dao.readKäyttäjät();
+	    	Kayttaja[] rekistyröineet =dao.readKäyttäjät();
 	    	for(int i=0;i<rekistyröineet.length;i++) {
 	    		if((rekistyröineet[i].getSähköposti().equalsIgnoreCase(email.getText()))&&(rekistyröineet[i].getKayttajaID()!=käyttäjä.getKayttajaID())) {
 	    			test=false;

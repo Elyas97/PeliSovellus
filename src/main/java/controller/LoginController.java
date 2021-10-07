@@ -15,15 +15,15 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import model.Käyttäjä;
+import model.Kayttaja;
 import model.LoginSystem;
-import model.TiedostoKäsittely;
+import model.TiedostoKasittely;
 import view.EtusivuController;
 import view.MainApp;
 
 public class LoginController {
 	
-Käyttäjä kirjautunut=null;
+Kayttaja kirjautunut=null;
     @FXML
     private ResourceBundle resources;
 
@@ -58,7 +58,7 @@ Käyttäjä kirjautunut=null;
     		      //siirretään etusivulle ja tallenetaan käyttäjä controlleriin
     		      try {
     		    	  //annetaan kirjautuneen käyttäjän tiedot 
-    		    	  	TiedostoKäsittely.kirjoitaTiedosto(kirjautunut);
+    		    	  	TiedostoKasittely.kirjoitaTiedosto(kirjautunut);
     		            // Load person overview.
     		            FXMLLoader loader = new FXMLLoader();
     		            loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));

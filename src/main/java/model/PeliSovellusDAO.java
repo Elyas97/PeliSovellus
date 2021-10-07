@@ -24,7 +24,7 @@ Connection conn;
 			System.exit(-1);
 		}
 	}
-	public boolean createKäyttäjä(Käyttäjä käyttäjä) {
+	public boolean createKäyttäjä(Kayttaja käyttäjä) {
 		boolean temp=false;
 		try(PreparedStatement luoKäyttäjä= conn.prepareStatement("INSERT INTO Käyttäjä (Salasana, Sähköposti, Sukunimi, Etunimi, Puhelinnumero) VALUES (?,?,?,?,?)"))
 		{
@@ -49,13 +49,13 @@ Connection conn;
 		return temp;
 	}
 
-	public Käyttäjä readKäyttäjä(String KäyttäjäID) {
+	public Kayttaja readKäyttäjä(String KäyttäjäID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Käyttäjä[] readKäyttäjät() {
-		ArrayList <Käyttäjä> lista=new ArrayList();
+	public Kayttaja[] readKäyttäjät() {
+		ArrayList <Kayttaja> lista=new ArrayList();
 		Statement stmt=null;
 		ResultSet rs=null;
 		try {
@@ -69,7 +69,7 @@ Connection conn;
 				 String sukunimi=rs.getString("Sukunimi");
 				 int puhelinumero=rs.getInt("Puhelinnumero");
 				 String sähköposti=rs.getString("Sähköposti");
-				 lista.add(new Käyttäjä(kayttajaID,salasana,etunimi,sukunimi,puhelinumero,sähköposti));
+				 lista.add(new Kayttaja(kayttajaID,salasana,etunimi,sukunimi,puhelinumero,sähköposti));
 			}
 		}catch(SQLException e) {
 			do {
@@ -92,14 +92,14 @@ Connection conn;
 				System.out.println("Resurssien vapautuksessa virhe");
 			}
 		}
-		Käyttäjä[] users=new Käyttäjä[lista.size()];
+		Kayttaja[] users=new Kayttaja[lista.size()];
 		for(int i=0;i<users.length;i++) {
 			users[i]=lista.get(i);
 		}
 		return users;
 	}
 
-	public boolean updateKäyttäjä(Käyttäjä käyttäjä) {
+	public boolean updateKäyttäjä(Kayttaja käyttäjä) {
 		boolean temp= false;
 		String query="UPDATE Käyttäjä SET Salasana=?,Sähköposti=?,Sukunimi=?,Etunimi=?,Puhelinnumero=? WHERE KäyttäjäID=?";
 		try(PreparedStatement stmt=conn.prepareStatement(query)){
