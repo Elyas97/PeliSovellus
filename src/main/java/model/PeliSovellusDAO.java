@@ -1,6 +1,9 @@
 package model;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import view.TapahtumatController;
@@ -127,7 +130,7 @@ Connection conn;
 	public boolean lisaaPeli(Peli peli, int kayttajaID) {
 		boolean temp = false;
 		System.out.println(peli.getPelinNimi() + " "+ kayttajaID);
-		try(PreparedStatement lisaaPeli = conn.prepareStatement("INSERT INTO Peli (Pelinimi, Pelintyyppi, Talletustyyppi, Hinta, Genre, Konsoli, Ikäraja, Pelaajamäärä, Kuvaus, Kaupunki, Kunto, Tekstikenttä, KäyttäjäID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
+		try(PreparedStatement lisaaPeli = conn.prepareStatement("INSERT INTO Peli (Pelinimi, Pelintyyppi, Talletustyyppi, Hinta, Genre, Konsoli, Ikäraja, Pelaajamäärä, Kuvaus, Kaupunki, Kunto, Tekstikenttä, KäyttäjäID, Päivämäärä) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
 			lisaaPeli.setString(1, peli.getPelinNimi());
 			lisaaPeli.setString(2, peli.getPelintyyppi());
 			lisaaPeli.setString(3, peli.getTalletusTyyppi());
@@ -141,6 +144,7 @@ Connection conn;
 			lisaaPeli.setString(11,  peli.getKunto());
 			lisaaPeli.setString(12, peli.getTekstikenttä());
 			lisaaPeli.setInt(13, kayttajaID);
+			lisaaPeli.setDate(14, peli.getPaiva());
 			
 			int count = lisaaPeli.executeUpdate();
 			temp = true;
@@ -188,10 +192,10 @@ Connection conn;
 				String konsoli = rs.getString("Konsoli");
 				String tekstikenttä = rs.getString("Tekstikenttä");
 				String kunto = rs.getString("Kunto");
-				//String kunto = "Hyvä";
-				//String konsoli = "Playstation";
-				//String tekstikenttä = "Puh: 040 123456";
-				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, konsoli, ika, lukumaara, kuvaus, kaupunki, kunto, tekstikenttä));
+				
+				Date paivamaara = rs.getDate("Päivämäärä");
+				
+				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, konsoli, ika, lukumaara, kuvaus, kaupunki, kunto, tekstikenttä, paivamaara));
 			}
 			
 		}catch(SQLException e) {
@@ -270,10 +274,9 @@ Connection conn;
 				String konsoli = rs.getString("Konsoli");
 				String tekstikenttä = rs.getString("Tekstikenttä");
 				String kunto = rs.getString("Kunto");
-				//String kunto = "Hyvä";
-				//String konsoli = "Playstation";
-				//String tekstikenttä = "Puh: 040 123456";
-				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, konsoli, ika, lukumaara, kuvaus, kaupunki, kunto, tekstikenttä));
+				Date paivamaara = rs.getDate("Päivämäärä");
+				
+				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, konsoli, ika, lukumaara, kuvaus, kaupunki, kunto, tekstikenttä, paivamaara));
 			}
 			
 		}catch(SQLException e) {
@@ -324,7 +327,7 @@ Connection conn;
 			stmt.setString(11, peli.getKunto());
 			stmt.setString(12, peli.getTekstikenttä());
 			stmt.setInt(13, peli.getPeliId());
-			System.out.println(peli.getPeliId() + ", " + peli.getPelinNimi()+ " ," + peli.getPelintyyppi() + ", "+ peli.getTalletusTyyppi() + ", "+ peli.getHinta() + ", " + peli.getGenre() + ", "+ peli.getKonsoli() + ", "+ peli.getIkaraja() + ", "+ peli.getPelmaara()+ ", " + peli.getKuvaus() + ", "+ peli.getKaupunki() + ", " + peli.getKunto() + ", "+ peli.getTekstikenttä());
+			System.out.println(peli.getPeliId() + ", " + peli.getPelinNimi()+ " ," + peli.getPelintyyppi() + ", "+ peli.getTalletusTyyppi() + ", "+ peli.getHinta() + ", " + peli.getGenre() + ", "+ peli.getKonsoli() + ", "+ peli.getIkaraja() + ", "+ peli.getPelmaara()+ ", " + peli.getKuvaus() + ", "+ peli.getKaupunki() + ", " + peli.getKunto() + ", "+ peli.getTekstikenttä() + ", " + peli.getPaiva());
 			stmt.executeUpdate();
 			temp=true;
 			

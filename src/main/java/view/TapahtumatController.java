@@ -14,6 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.Node;
@@ -85,6 +86,8 @@ public class TapahtumatController {
 	private Kayttaja käyttäjä;
 	@FXML
 	private Pane konsoliPane;
+	@FXML
+	private Label kirjaimet;
 
 	
 	
@@ -257,9 +260,35 @@ public class TapahtumatController {
 
 	@FXML
 	void tyyppiAction() {}
-
+	
 	@FXML
-	void tyyppi() {}
+	public void kirjaimet(KeyEvent key) {
+		String kirjaimetstring = tekstikenttä.getText();
+		int maxpituus = 200;
+		int pituus = 1;
+		pituus = kirjaimetstring.length();
+		int jaljella = maxpituus - pituus;
+		
+		if(jaljella <= 0) {
+			jaljella = 0;
+		}
+		
+		if(jaljella == 0) {
+			kirjaimet.setText("Kirjaimia jäljellä: " + jaljella);
+			tekstikenttä.setEditable(false);
+			
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		    alert.setTitle("Alert");
+		    alert.setContentText("Tekstikenttä täynnä!");
+		    alert.showAndWait();
+		    
+			//Tekstikenttään voi taas kirjoittaa
+		    tekstikenttä.setEditable(true);
+		}else {
+			System.out.println("Jaljella: " + jaljella);
+			kirjaimet.setText("Kirjaimia jäljellä: " + jaljella);
+		}
+	}
 	
 
     @FXML

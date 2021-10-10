@@ -84,7 +84,7 @@
                   <ListView fx:id="lista" prefHeight="274.0" prefWidth="336.0" style="-fx-border-color: #0589ff; -fx-background-color: F0F0F0;" />
                </children>
             </VBox>
-            <GridPane layoutX="361.0" layoutY="2.0" prefHeight="392.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: #0589ff; -fx-padding: 5px;">
+            <GridPane layoutX="361.0" layoutY="45.0" prefHeight="349.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: #0589ff; -fx-padding: 5px;">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -133,6 +133,7 @@
                   <Font size="28.0" />
                </font>
             </Text>
+            <Label fx:id="päivämäärä" layoutX="362.0" layoutY="22.0" />
          </children></AnchorPane>
    </center>
 </BorderPane>
