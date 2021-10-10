@@ -122,6 +122,20 @@ public class TapahtumatController {
 	}
 	
 	@FXML
+	public String tyyppiAction(ActionEvent Action) {
+		String text = ((RadioButton)tyyppi.getSelectedToggle()).getText();
+		System.out.println(text);
+		if(text.equals("Lahjoitus")) {
+			hinta.setText(Integer.toString(0));
+			hinta.setEditable(false);
+		}else {
+			hinta.setText("");
+			hinta.setEditable(true);
+		}
+		return text;
+	}
+	
+	@FXML
 	public String tyyppi(ActionEvent Action) {
 		
 		String text = ((RadioButton)pelintyyppi.getSelectedToggle()).getText();
@@ -258,8 +272,6 @@ public class TapahtumatController {
 		listaaOmatPelit();
 	}
 
-	@FXML
-	void tyyppiAction() {}
 	
 	@FXML
 	public void kirjaimet(KeyEvent key) {

@@ -107,9 +107,15 @@ public class LisaaPeliController {
 	public LisaaPeliController() {}
 	@FXML
 	public String tyyppiAction(ActionEvent Action) {
-		
 		String text = ((RadioButton)tyyppi.getSelectedToggle()).getText();
 		System.out.println(text);
+		if(text.equals("Lahjoitus")) {
+			hinta.setText(Integer.toString(0));
+			hinta.setEditable(false);
+		}else {
+			hinta.setText("");
+			hinta.setEditable(true);
+		}
 		return text;
 	}
 	
