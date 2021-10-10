@@ -92,7 +92,7 @@ Kayttaja kirjautunut=null;
     void vieRekistyröintiNäkymään(ActionEvent event) throws IOException {
     	FXMLLoader loader = new FXMLLoader();
         
-        loader.setLocation(MainApp.class.getResource("Rekistyröinti.fxml"));
+        loader.setLocation(MainApp.class.getResource("Rekisterointi.fxml"));
        
         BorderPane register = (BorderPane) loader.load();
     	Scene rekistyröintiNäkymä = new Scene(register);

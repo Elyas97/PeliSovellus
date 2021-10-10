@@ -69,8 +69,7 @@ public class RekisteroidyController {
     			Kayttaja käyttäjä=new Kayttaja();
         		käyttäjä.setEtunimi(etu.getText());
         		käyttäjä.setSukunimi(suku.getText());
-    			int puh=Integer.parseInt(puhelinnumero.getText());
-    			käyttäjä.setPuhelinumero(puh);
+    			käyttäjä.setPuhelinumero(puhelinnumero.getText());
     			käyttäjä.setSähköposti(email.getText());
     			käyttäjä.setSalasana(salasana.getText());
     			RegisterSystem register =new RegisterSystem();

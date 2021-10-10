@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,6 +13,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
@@ -51,12 +55,11 @@ public class ProfiiliController {
 	    void tallennaMuutokset(ActionEvent event) {
 	    	boolean validointi=validointi();
 	    	if(validointi==true) {
-	    		käyttäjä.setEtunimi(etu.getText());
-	    		käyttäjä.setSukunimi(suku.getText());
-	    		käyttäjä.setSähköposti(email.getText());
-	    		try {
-	    			int puh=Integer.parseInt(numero.getText());
-	    			käyttäjä.setPuhelinumero(puh);
+	    			käyttäjä.setEtunimi(etu.getText());
+	    			käyttäjä.setSukunimi(suku.getText());
+	    			käyttäjä.setSähköposti(email.getText());
+	    			
+	    			käyttäjä.setPuhelinumero(numero.getText());
 	    			PeliSovellusDAO dao2 =new PeliSovellusDAO();
 	    			boolean test=dao2.updateKäyttäjä(käyttäjä);
 	    			if(test==true) {
@@ -83,11 +86,51 @@ public class ProfiiliController {
 		      		      alert.setContentText("Tietojen tallennus epäonnistui palvelin ongelma");
 		      		      alert.showAndWait();
 	    			}
-	    		}catch(NumberFormatException e) {
-	    			return;
+	    		
+	    		
+	    		
+	    	}
+
+	    }
+	    
+	    @FXML
+	    void PoistaTili(ActionEvent event) throws IOException {
+	    	ButtonType kyllä = new ButtonType("Kyllä", ButtonData.OK_DONE);
+	    	ButtonType ei = new ButtonType("Peruuta", ButtonData.CANCEL_CLOSE);
+	    	Alert alert = new Alert(AlertType.CONFIRMATION,
+	    	        "Jos poistat tilin menetät kaikki tiedot\n"
+	    	        + "Kuten kaikki lisäämäsi pelit.",
+	    	        kyllä,
+	    	        ei);
+
+	    	alert.setTitle("Vahvistus");
+	    	alert.setHeaderText("Vahvista tilin poisto");
+	    	Optional<ButtonType> result = alert.showAndWait();
+	    	if(result.get() == kyllä) {
+	    		//poistetaan tili
+	    		PeliSovellusDAO poista=new PeliSovellusDAO();
+	    		boolean test=poista.poistaKayttaja(käyttäjä);
+	    		TiedostoKasittely.poistaTiedosto();
+	    		System.out.println(test);
+	    		//viedään vierasNäkymään
+	    		if(test=true) {
+	    			//ilmoitus
+	    			Alert alert2 = new Alert(AlertType.INFORMATION,
+	    	    	        "Tili poistettu");
+
+	    	    	alert2.setTitle("Tili poistettu");
+	    	    	alert2.setHeaderText("Tiedoksi");
+	    	    	alert2.showAndWait();
+	    			FXMLLoader loader = new FXMLLoader();
+	    	        loader.setLocation(MainApp.class.getResource("Vieras.fxml"));
+	    	        BorderPane tapahtuma = (BorderPane) loader.load();
+	    	    	Scene tapahtumaNäkymä = new Scene(tapahtuma);
+	    	    	//get stage
+	    	    	Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
+	    	    	window.setScene(tapahtumaNäkymä);
+	    	    	window.show();
+	    			
 	    		}
-	    		
-	    		
 	    	}
 
 	    }

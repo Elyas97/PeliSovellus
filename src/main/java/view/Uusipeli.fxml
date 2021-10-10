@@ -28,7 +28,7 @@
             <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#vieTapahtumat" prefHeight="39.0" prefWidth="190.0" style="-fx-background-color: transparent;" text="Lisätyt Pelit" textFill="WHITE" />
             <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="163.0" style="-fx-background-color: white;" text="Lisää Peli" textFill="#0589ff" />
             <Button mnemonicParsing="false" onAction="#vieProfiiliNäkymä" prefHeight="39.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Profiili" textFill="WHITE" />
-            <VBox alignment="BOTTOM_LEFT" prefHeight="300.0" prefWidth="155.0">
+            <VBox alignment="BOTTOM_LEFT" prefHeight="336.0" prefWidth="155.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#LogOut" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #1A85B2;" text="Kirjaudu ulos" textFill="WHITE">
                      <graphic>

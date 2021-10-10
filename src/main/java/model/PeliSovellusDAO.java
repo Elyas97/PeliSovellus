@@ -35,7 +35,7 @@ Connection conn;
 			luoKäyttäjä.setString(2, käyttäjä.getSähköposti());
 			luoKäyttäjä.setString(3, käyttäjä.getSukunimi());
 			luoKäyttäjä.setString(4, käyttäjä.getEtunimi());
-			luoKäyttäjä.setInt(5, käyttäjä.getPuhelinumero());
+			luoKäyttäjä.setString(5, käyttäjä.getPuhelinumero());
 			int count=luoKäyttäjä.executeUpdate();
 			temp =true;
 			System.out.println(count);
@@ -70,7 +70,7 @@ Connection conn;
 				 String salasana=rs.getString("Salasana");
 				 String etunimi=rs.getString("Etunimi");
 				 String sukunimi=rs.getString("Sukunimi");
-				 int puhelinumero=rs.getInt("Puhelinnumero");
+				 String puhelinumero=rs.getString("Puhelinnumero");
 				 String sähköposti=rs.getString("Sähköposti");
 				 lista.add(new Kayttaja(kayttajaID,salasana,etunimi,sukunimi,puhelinumero,sähköposti));
 			}
@@ -111,7 +111,7 @@ Connection conn;
 			stmt.setString(2, käyttäjä.getSähköposti());
 			stmt.setString(3, käyttäjä.getSukunimi());
 			stmt.setString(4, käyttäjä.getEtunimi());
-			stmt.setInt(5, käyttäjä.getPuhelinumero());
+			stmt.setString(5, käyttäjä.getPuhelinumero());
 			stmt.executeUpdate();
 			temp=true;
 			
@@ -338,6 +338,22 @@ Connection conn;
 			System.out.println(e);
 		}
 		return temp;
+	}
+	public boolean poistaKayttaja(Kayttaja käyttäjä) {
+		boolean test=false;
+		try(PreparedStatement poista=conn.prepareStatement("DELETE FROM Käyttäjä WHERE KäyttäjäID=?")) {
+			poista.setInt(1, käyttäjä.getKayttajaID());
+			poista.executeUpdate();
+			test=true;
+		}catch(SQLException E) {
+			System.out.println(E);
+			test=false;
+		}catch(Exception e) {
+			System.out.println(e);
+			test=false;
+		}
+		return test;
+		
 	}
 	
 }
