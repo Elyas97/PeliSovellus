@@ -134,6 +134,7 @@
                </font>
             </Text>
             <Label fx:id="päivämäärä" layoutX="362.0" layoutY="22.0" />
+            <Button layoutX="175.0" layoutY="10.0" mnemonicParsing="false" onAction="#jarjesta" text="Button" />
          </children></AnchorPane>
    </center>
 </BorderPane>
