@@ -141,7 +141,7 @@ public class LisaaPeliController {
 	private void initialize() {
 		käyttäjä = TiedostoKasittely.lueKäyttäjä();
 		ObservableList<String> options = FXCollections.observableArrayList("Urheilu", "Räiskintä", "Toiminta",
-				"Ajopeli", "Jännitys", "Seikkailu", "Strategia", "Roolipeli", "Pulma","Seurapeli", "Lautapeli");
+				"Ajopeli", "Jännitys", "Seikkailu", "Strategia", "Roolipeli", "Pulma", "Seurapeli", "Lautapeli");
 		genre.setItems(options);
 
 		ObservableList<String> kuntoOptions = FXCollections.observableArrayList("Erinomainen", "Kiitettävä", "Hyvä",
@@ -151,14 +151,15 @@ public class LisaaPeliController {
 		ObservableList<String> konsoliOptions = FXCollections.observableArrayList("Xbox", "Playstation", "Wii");
 		konsoli.setItems(konsoliOptions);
 
-		//tekstikenttä.setText(käyttäjä.getSähköposti()+ "\n"+ käyttäjä.getPuhelinumero() +" ");
+		// tekstikenttä.setText(käyttäjä.getSähköposti()+ "\n"+
+		// käyttäjä.getPuhelinumero() +" ");
 		tekstikenttä.setText("moivaa");
 		kuvaus.setPromptText("Kuvaile peliä tai kerro kokemuksiasi pelistä");
 		kirjaimet();
 		tekstikenttä.textProperty().addListener((obs, old, newew) -> {
 			kirjaimet();
 		});
-		
+
 		validointiPiiloon();
 
 	}
@@ -272,14 +273,14 @@ public class LisaaPeliController {
 
 	@FXML
 	public void kirjaimet() {
-		//String kirjaimetstring = tekstikenttä.getText();
+		// String kirjaimetstring = tekstikenttä.getText();
 		int maxpituus = 200;
 		int pituus = tekstikenttä.getText().length();
-		
-		//pituus = kirjaimetstring.length();
+
+		// pituus = kirjaimetstring.length();
 		int jaljella = maxpituus - pituus;
 		System.out.println("Jaljella: " + jaljella);
-		//System.out.println(pituus);
+		// System.out.println(pituus);
 
 		if (jaljella <= 0) {
 			kirjaimet.setText("Kirjaimia jäljellä: " + jaljella);
@@ -293,7 +294,7 @@ public class LisaaPeliController {
 			// Tekstikenttään voi taas kirjoittaa
 			tekstikenttä.setEditable(true);
 		} else {
-			 jaljella = maxpituus - pituus;
+			jaljella = maxpituus - pituus;
 			kirjaimet.setText("Kirjaimia jäljellä: " + jaljella);
 		}
 	}
