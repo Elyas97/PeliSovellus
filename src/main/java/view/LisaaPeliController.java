@@ -22,6 +22,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
@@ -51,12 +52,12 @@ public class LisaaPeliController {
 	private TextField ikaraja;
 	@FXML
 	private TextField pelaajamaara;
-	@FXML 
+	@FXML
 	private TextField kaupunki;
-	@FXML 
+	@FXML
 	private TextField kuvaus;
-	@FXML 
-	private TextField tekstikenttä;
+	@FXML
+	private TextArea tekstikenttä;
 	@FXML
 	private ChoiceBox<String> kunto;
 	@FXML
@@ -73,159 +74,168 @@ public class LisaaPeliController {
 	private Text nimivaroitus;
 	@FXML
 	private Text hintavaroitus;
-	@FXML 
+	@FXML
 	private Text tyyppivaroitus;
 	@FXML
 	private Text paikkakuntavaroitus;
 	@FXML
 	private Text genrevaroitus;
-	@FXML 
+	@FXML
 	private Text ikarajavaroitus;
-	@FXML 
+	@FXML
 	private Text pelaajamaaravaroitus;
-	@FXML 
+	@FXML
 	private Text kuntovaroitus;
-	@FXML 
+	@FXML
 	private Text kuvausvaroitus;
-	@FXML 
+	@FXML
 	private Text tekstikenttavaroitus;
 	@FXML
 	private Text ilmoitustyyppivaroitus;
-	
-	
+
 	Kayttaja käyttäjä;
-	
-	
+
 	private Stage dialogStage;
-	//private Peli peli;
+	// private Peli peli;
 	private boolean tallennaClicked = false;
 	private MainApp main;
 	private Pelingenre genret;
 	PeliSovellusDAO pelisovellusdao = new PeliSovellusDAO();
 	EtusivuController etusivu = new EtusivuController();
-	
-	public LisaaPeliController() {}
+
+	public LisaaPeliController() {
+	}
+
 	@FXML
 	public String tyyppiAction(ActionEvent Action) {
-		String text = ((RadioButton)tyyppi.getSelectedToggle()).getText();
+		String text = ((RadioButton) tyyppi.getSelectedToggle()).getText();
 		System.out.println(text);
-		ilmoitustyyppivaroitus.setText(""); // Poistaa "pakollinen valinta" tekstikentän 
-		if(text.equals("Lahjoitus")) {
+		ilmoitustyyppivaroitus.setText(""); // Poistaa "pakollinen valinta" tekstikentän
+		if (text.equals("Lahjoitus")) {
 			hinta.setText(Integer.toString(0));
 			hinta.setEditable(false);
-		}else {
+		} else {
 			hinta.setText("");
 			hinta.setEditable(true);
 		}
 		return text;
 	}
-	
+
 	@FXML
 	public String tyyppi(ActionEvent Action) {
-		
-		String text = ((RadioButton)pelintyyppi.getSelectedToggle()).getText();
+
+		String text = ((RadioButton) pelintyyppi.getSelectedToggle()).getText();
 		System.out.println(text);
 		tyyppivaroitus.setText(""); // poistaa "pakollinen valinta" tekstikentän jos näkyvissä
-		
-		if(text.equals("lauta")) {
+
+		if (text.equals("lauta")) {
 			konsoliPane.setVisible(false);
-		}else {
+		} else {
 			konsoliPane.setVisible(true);
 		}
-		
+
 		return text;
 	}
-	
+
 	@FXML
 	private void initialize() {
-		ObservableList<String> options = FXCollections.observableArrayList("Urheilu", "Räiskintä","Toiminta"
-				,"Ajopeli", "Jännitys", "Seikkailu", "Strategia", "Roolipeli", "Pulma",
-				"Lautapeli");
+		käyttäjä = TiedostoKasittely.lueKäyttäjä();
+		ObservableList<String> options = FXCollections.observableArrayList("Urheilu", "Räiskintä", "Toiminta",
+				"Ajopeli", "Jännitys", "Seikkailu", "Strategia", "Roolipeli", "Pulma", "Seurapeli", "Lautapeli");
 		genre.setItems(options);
-		
-		ObservableList<String> kuntoOptions = FXCollections.observableArrayList("Erinomainen", "Kiitettävä","Hyvä"
-				,"Kohtalainen", "Välttävä");
+
+		ObservableList<String> kuntoOptions = FXCollections.observableArrayList("Erinomainen", "Kiitettävä", "Hyvä",
+				"Kohtalainen", "Välttävä");
 		kunto.setItems(kuntoOptions);
-		
-		ObservableList<String> konsoliOptions = FXCollections.observableArrayList("Xbox", "Playstation","Wii");
+
+		ObservableList<String> konsoliOptions = FXCollections.observableArrayList("Xbox", "Playstation", "Wii");
 		konsoli.setItems(konsoliOptions);
-		
-		tekstikenttä.setPromptText("Yhteystiedot");
+
+		// tekstikenttä.setText(käyttäjä.getSähköposti()+ "\n"+
+		// käyttäjä.getPuhelinumero() +" ");
+		tekstikenttä.setText("moivaa");
 		kuvaus.setPromptText("Kuvaile peliä tai kerro kokemuksiasi pelistä");
-		
+		kirjaimet();
+		tekstikenttä.textProperty().addListener((obs, old, newew) -> {
+			kirjaimet();
+		});
+
 		validointiPiiloon();
 
-	
-		
 	}
+
 	public void setMainApp(MainApp main) {
 		this.main = main;
 	}
+
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
 	}
 
 	/*
-	 * Luo uuden pelin tietokantaan
-	 * Ennen tietojen lähettämistä tarkastaa onko kaikki kentät täytetty.
+	 * Luo uuden pelin tietokantaan Ennen tietojen lähettämistä tarkastaa onko
+	 * kaikki kentät täytetty.
 	 * 
 	 */
 	@FXML
 	public void uusiPeli() {
-		if(validointi() == true) {
-		Peli peli = new Peli();
-		peli.setPelinNimi(pelinnimi.getText());
-		int price = Integer.parseInt(hinta.getText());
-		peli.setHinta(price);
-		int age = Integer.parseInt(ikaraja.getText());
-		peli.setIkaraja(age);
-		peli.setKaupunki(kaupunki.getText());
-		String tyyppiText = ((RadioButton)tyyppi.getSelectedToggle()).getText();
-		peli.setTalletusTyyppi(tyyppiText);
-		peli.setKuvaus(kuvaus.getText());
-		int players = Integer.parseInt(pelaajamaara.getText());
-		peli.setPelmaara(players);
-		String pelintyyppiText = ((RadioButton)pelintyyppi.getSelectedToggle()).getText();
-		peli.setPelinTyyppi(pelintyyppiText);
-		peli.setGenre(genre.getValue().toString());
-		System.out.println(genre.getValue().toString());
-		peli.setKunto(kunto.getValue().toString());
-		peli.setTekstikenttä(tekstikenttä.getText());
+		if (validointi() == true) {
+			Peli peli = new Peli();
+			peli.setPelinNimi(pelinnimi.getText());
+			int price = Integer.parseInt(hinta.getText());
+			peli.setHinta(price);
+			int age = Integer.parseInt(ikaraja.getText());
+			peli.setIkaraja(age);
+			peli.setKaupunki(kaupunki.getText());
+			String tyyppiText = ((RadioButton) tyyppi.getSelectedToggle()).getText();
+			peli.setTalletusTyyppi(tyyppiText);
+			peli.setKuvaus(kuvaus.getText());
+			int players = Integer.parseInt(pelaajamaara.getText());
+			peli.setPelmaara(players);
+			String pelintyyppiText = ((RadioButton) pelintyyppi.getSelectedToggle()).getText();
+			peli.setPelinTyyppi(pelintyyppiText);
+			peli.setGenre(genre.getValue().toString());
+			System.out.println(genre.getValue().toString());
+			peli.setKunto(kunto.getValue().toString());
+			peli.setTekstikenttä(tekstikenttä.getText());
 
-		if(peli.getKonsoli() != null) {
-			peli.setKonsoli(konsoli.getValue().toString());
-		}else {
-			peli.setKonsoli("");
+			if (peli.getKonsoli() != null) {
+				peli.setKonsoli(konsoli.getValue().toString());
+			} else {
+				peli.setKonsoli("");
+			}
+
+			long millis = System.currentTimeMillis();
+			java.sql.Date paiva = new java.sql.Date(millis);
+			System.out.println(paiva);
+			peli.setPaivamaara(paiva);
+			käyttäjä = TiedostoKasittely.lueKäyttäjä();
+
+			// System.out.println(peli.getPelinNimi()+" "+ peli.getHinta()+" "+
+			// peli.getIkaraja());
+			pelisovellusdao.lisaaPeli(peli, käyttäjä.getKayttajaID());
+			tallennaClicked = true;
+
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Alert");
+			alert.setContentText("Uusi peli lisätty onnistuneesti!");
+			alert.showAndWait();
+
+			etusivu.listaaPelit();
 		}
-		
-		long millis=System.currentTimeMillis();  
-	    java.sql.Date paiva =new java.sql.Date(millis);  
-	    System.out.println(paiva);  
-		peli.setPaivamaara(paiva);
-		käyttäjä = TiedostoKasittely.lueKäyttäjä();
-		
-		//System.out.println(peli.getPelinNimi()+" "+ peli.getHinta()+" "+ peli.getIkaraja());
-		pelisovellusdao.lisaaPeli(peli, käyttäjä.getKayttajaID());
-		tallennaClicked = true;
-		
-		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-	    alert.setTitle("Alert");
-	    alert.setContentText("Uusi peli lisätty onnistuneesti!");
-	    alert.showAndWait();
-	    
-		etusivu.listaaPelit();
-		}
-		//dialogStage.close();
+		// dialogStage.close();
 	}
+
 	/*
-	 * Kuuntelee kenttien syöttöä ja asettaa varoitustekstit pois jos kentissä on tekstiä
+	 * Kuuntelee kenttien syöttöä ja asettaa varoitustekstit pois jos kentissä on
+	 * tekstiä
 	 */
 	private void validointiPiiloon() {
 		pelinnimi.textProperty().addListener((obs, oldValue, newValue) -> {
 			nimivaroitus.setText("");
 			pelinnimi.setStyle("-fx-border:none");
 		});
-		
+
 		hinta.textProperty().addListener((obs, oldValue, newValue) -> {
 			hintavaroitus.setText("");
 			hinta.setStyle("-fx-border:none");
@@ -234,7 +244,6 @@ public class LisaaPeliController {
 			paikkakuntavaroitus.setText("");
 			kaupunki.setStyle("-fx-border:none");
 		});
-		
 
 		ikaraja.textProperty().addListener((obs, oldValue, newValue) -> {
 			ikarajavaroitus.setText("");
@@ -253,7 +262,7 @@ public class LisaaPeliController {
 			tekstikenttä.setStyle("-fx-border:none");
 		});
 
-		//setOnAction "kuuntelee" valintaa ja kun valittu asettaa varoitustekstin pois
+		// setOnAction "kuuntelee" valintaa ja kun valittu asettaa varoitustekstin pois
 		genre.setOnAction((event) -> {
 			genrevaroitus.setText("");
 		});
@@ -261,189 +270,184 @@ public class LisaaPeliController {
 			kuntovaroitus.setText("");
 		});
 	}
-	
-	
 
 	@FXML
-	public void kirjaimet(KeyEvent key) {
-		String kirjaimetstring = tekstikenttä.getText();
+	public void kirjaimet() {
+		// String kirjaimetstring = tekstikenttä.getText();
 		int maxpituus = 200;
-		int pituus = 1;
-		pituus = kirjaimetstring.length();
+		int pituus = tekstikenttä.getText().length();
+
+		// pituus = kirjaimetstring.length();
 		int jaljella = maxpituus - pituus;
-		
-		if(jaljella <= 0) {
-			jaljella = 0;
-		}
-		
-		if(jaljella == 0) {
+		System.out.println("Jaljella: " + jaljella);
+		// System.out.println(pituus);
+
+		if (jaljella <= 0) {
 			kirjaimet.setText("Kirjaimia jäljellä: " + jaljella);
 			tekstikenttä.setEditable(false);
-			
+
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		    alert.setTitle("Alert");
-		    alert.setContentText("Tekstikenttä täynnä!");
-		    alert.showAndWait();
-		    
-			//Tekstikenttään voi taas kirjoittaa
-		    tekstikenttä.setEditable(true);
-		}else {
-			System.out.println("Jaljella: " + jaljella);
+			alert.setTitle("Alert");
+			alert.setContentText("Tekstikenttä täynnä!");
+			alert.showAndWait();
+
+			// Tekstikenttään voi taas kirjoittaa
+			tekstikenttä.setEditable(true);
+		} else {
+			jaljella = maxpituus - pituus;
 			kirjaimet.setText("Kirjaimia jäljellä: " + jaljella);
 		}
 	}
-	
-	//Päivämäärä
-	 
+
+	// Päivämäärä
+
 	/*
-     * 
-     * Tarkistaa onko uusipeli.fxml kentät tyhjiä ennen kuin lähettää ne tietokantaan
-     * Jos kentät ovat tyhjiä niin ilmoittaa siitä "pakollinen kenttä" punaisella tekstillä ja TextFieldien reunat muuttuvat punaiseksi
-     * Myös pop up ilmestyy näytölle joka ilmoittaa mitkä kentät ovat tyhjiä
-     * 
-     * Tällä hetkellä tarkistaa kaikki kentät (myös kentät jotka voivat olla NULL)
-     * 
-     */
+	 * 
+	 * Tarkistaa onko uusipeli.fxml kentät tyhjiä ennen kuin lähettää ne
+	 * tietokantaan Jos kentät ovat tyhjiä niin ilmoittaa siitä "pakollinen kenttä"
+	 * punaisella tekstillä ja TextFieldien reunat muuttuvat punaiseksi Myös pop up
+	 * ilmestyy näytölle joka ilmoittaa mitkä kentät ovat tyhjiä
+	 * 
+	 * Tällä hetkellä tarkistaa kaikki kentät (myös kentät jotka voivat olla NULL)
+	 * 
+	 */
 	private boolean validointi() {
-    	
-   	
-   	StringBuilder virhe = new StringBuilder();
-   	
-   	if(pelinnimi.getText().trim().isEmpty()) {
-   		virhe.append("Syötä pelinnimi\n");
-   		pelinnimi.setStyle("-fx-border-color:red");
-   		nimivaroitus.setText("Pakollinen kenttä");
 
-   	}
+		StringBuilder virhe = new StringBuilder();
 
-   	if(hinta.getText().trim().isEmpty()) {
-   		virhe.append("Syötä pelinhinta\n");
-   		hinta.setStyle("-fx-border-color:red");
-   		hintavaroitus.setText("Pakollinen kenttä");
-   	}
-   	if(kaupunki.getText().trim().isEmpty()) {
-   		virhe.append("Syötä kaupunki\n");
-   		kaupunki.setStyle("-fx-border-color:red");
-   		paikkakuntavaroitus.setText("Pakollinen kenttä");
-   	}
-   	if(((RadioButton)pelintyyppi.getSelectedToggle()) == null) {
-   		virhe.append("Syötä pelintyyppi\n");
-   		
-   		tyyppivaroitus.setText("Pakollinen kenttä");
-   	}
-   	if(((RadioButton)tyyppi.getSelectedToggle()) == null) {
-   		virhe.append("Syötä ilmoituksen tyyppi\n");
-   		ilmoitustyyppivaroitus.setText("Pakollinen kenttä");
-   	}
-   	if(genre.getValue() == null) {
-   		virhe.append("Syötä genre\n");
-   		genrevaroitus.setText("Pakollinen kenttä");
-   	}
-   	if(ikaraja.getText().trim().isEmpty()) {
-   		virhe.append("Syötä pelin ikäraja\n");
-   		ikaraja.setStyle("-fx-border-color:red");
-   		ikarajavaroitus.setText("Pakollinen kenttä");
-   	}
-   	if(pelaajamaara.getText().trim().isEmpty()) {
-   		virhe.append("Syötä pelin pelaajamäärä \n");
-   		pelaajamaara.setStyle("-fx-border-color:red");
-   		pelaajamaaravaroitus.setText("Pakollinen kenttä");
-   	}
-   	if(kunto.getValue() == null) {
-   		virhe.append("Syötä pelinkunto \n");
-   		kuntovaroitus.setText("Pakollinen kenttä");
-   	}
-  	if(kuvaus.getText().trim().isEmpty()) {
-   		virhe.append("Syötä kuvaus\n");
-   		kuvaus.setStyle("-fx-border-color:red");
-   		kuvausvaroitus.setText("Pakollinen kenttä");
-   	}
-  	if(tekstikenttä.getText().trim().isEmpty()) {
-   		virhe.append("Syötä tekstikenttään asioita \n");
-   		tekstikenttä.setStyle("-fx-border-color:red");
-   		tekstikenttavaroitus.setText("Pakollinen kenttä");
-   	}
-   	
-   	if(virhe.length() > 0) {
-   		Alert varoitus = new Alert(Alert.AlertType.WARNING);
-   		varoitus.setTitle("Virhe");
-   		varoitus.setHeaderText("Varoitus");
+		if (pelinnimi.getText().trim().isEmpty()) {
+			virhe.append("Syötä pelinnimi\n");
+			pelinnimi.setStyle("-fx-border-color:red");
+			nimivaroitus.setText("Pakollinen kenttä");
 
-   		varoitus.setContentText(virhe.toString());
-   		
-   		varoitus.showAndWait();
-   		return false;
-   	}
-   	return true;
-   }
+		}
 
-	
-	
+		if (hinta.getText().trim().isEmpty()) {
+			virhe.append("Syötä pelinhinta\n");
+			hinta.setStyle("-fx-border-color:red");
+			hintavaroitus.setText("Pakollinen kenttä");
+		}
+		if (kaupunki.getText().trim().isEmpty()) {
+			virhe.append("Syötä kaupunki\n");
+			kaupunki.setStyle("-fx-border-color:red");
+			paikkakuntavaroitus.setText("Pakollinen kenttä");
+		}
+		if (((RadioButton) pelintyyppi.getSelectedToggle()) == null) {
+			virhe.append("Syötä pelintyyppi\n");
+
+			tyyppivaroitus.setText("Pakollinen kenttä");
+		}
+		if (((RadioButton) tyyppi.getSelectedToggle()) == null) {
+			virhe.append("Syötä ilmoituksen tyyppi\n");
+			ilmoitustyyppivaroitus.setText("Pakollinen kenttä");
+		}
+		if (genre.getValue() == null) {
+			virhe.append("Syötä genre\n");
+			genrevaroitus.setText("Pakollinen kenttä");
+		}
+		if (ikaraja.getText().trim().isEmpty()) {
+			virhe.append("Syötä pelin ikäraja\n");
+			ikaraja.setStyle("-fx-border-color:red");
+			ikarajavaroitus.setText("Pakollinen kenttä");
+		}
+		if (pelaajamaara.getText().trim().isEmpty()) {
+			virhe.append("Syötä pelin pelaajamäärä \n");
+			pelaajamaara.setStyle("-fx-border-color:red");
+			pelaajamaaravaroitus.setText("Pakollinen kenttä");
+		}
+		if (kunto.getValue() == null) {
+			virhe.append("Syötä pelinkunto \n");
+			kuntovaroitus.setText("Pakollinen kenttä");
+		}
+		if (kuvaus.getText().trim().isEmpty()) {
+			virhe.append("Syötä kuvaus\n");
+			kuvaus.setStyle("-fx-border-color:red");
+			kuvausvaroitus.setText("Pakollinen kenttä");
+		}
+		if (tekstikenttä.getText().trim().isEmpty()) {
+			virhe.append("Syötä tekstikenttään asioita \n");
+			tekstikenttä.setStyle("-fx-border-color:red");
+			tekstikenttavaroitus.setText("Pakollinen kenttä");
+		}
+
+		if (virhe.length() > 0) {
+			Alert varoitus = new Alert(Alert.AlertType.WARNING);
+			varoitus.setTitle("Virhe");
+			varoitus.setHeaderText("Varoitus");
+
+			varoitus.setContentText(virhe.toString());
+
+			varoitus.showAndWait();
+			return false;
+		}
+		return true;
+	}
+
 	public boolean tallennaClicked() {
 		return tallennaClicked;
 	}
-	
-	 @FXML
-	    void vieEtusivulle(ActionEvent event) throws IOException {
-		//vaihdetaan näkymää samalla viedään käyttäjän tiedot
-		 FXMLLoader loader = new FXMLLoader();
-         loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
-         BorderPane personOverview = (BorderPane) loader.load();
-         Scene etusivulle = new Scene(personOverview);
-         //stage
-         Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
-	    	window.setScene(etusivulle);
-	    	window.show();
 
-	    }
+	@FXML
+	void vieEtusivulle(ActionEvent event) throws IOException {
+		// vaihdetaan näkymää samalla viedään käyttäjän tiedot
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
+		BorderPane personOverview = (BorderPane) loader.load();
+		Scene etusivulle = new Scene(personOverview);
+		// stage
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(etusivulle);
+		window.show();
 
-	    @FXML
-	    void vieProfiiliNäkymä(ActionEvent event) throws IOException {
-	    	//vaihdetaan näkymää samalla viedään käyttäjän tiedot
-			 FXMLLoader loader = new FXMLLoader();
-	         loader.setLocation(MainApp.class.getResource("Profiili.fxml"));
-	         BorderPane personOverview = (BorderPane) loader.load();
+	}
 
-	         Scene etusivulle = new Scene(personOverview);
-	         //stage
-	         Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
-		    	window.setScene(etusivulle);
-		    	window.show();
+	@FXML
+	void vieProfiiliNäkymä(ActionEvent event) throws IOException {
+		// vaihdetaan näkymää samalla viedään käyttäjän tiedot
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("Profiili.fxml"));
+		BorderPane personOverview = (BorderPane) loader.load();
 
-	    }
+		Scene etusivulle = new Scene(personOverview);
+		// stage
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(etusivulle);
+		window.show();
 
-	    @FXML
-	    void vieTapahtumat(ActionEvent event) throws IOException {
-	    	//vaihdetaan näkymää samalla viedään käyttäjän tiedot
-			 FXMLLoader loader = new FXMLLoader();
-	         loader.setLocation(MainApp.class.getResource("Tapahtumat.fxml"));
-	         BorderPane personOverview = (BorderPane) loader.load();
-	         Scene etusivulle = new Scene(personOverview);
-	         //stage
-	         Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
-		    	window.setScene(etusivulle);
-		    	window.show();
+	}
 
-	    }
-	    
-	    @FXML
-	    void LogOut(ActionEvent event) throws IOException {
-	    	boolean test=TiedostoKasittely.poistaTiedosto();
-	    	if(test==true) {
-	    		//ajetaan kirjautumis sivulle
-	    		FXMLLoader loader = new FXMLLoader();
-		        
-		        loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
-		       
-		        BorderPane etusivu = (BorderPane) loader.load();
-		    	Scene kirjautumisNäkymä = new Scene(etusivu);
-		    	//get stage
-		    	Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
-		    	window.setScene(kirjautumisNäkymä);
-		    	window.show();
-	    		
-	    	}
-	    	
-	    }
+	@FXML
+	void vieTapahtumat(ActionEvent event) throws IOException {
+		// vaihdetaan näkymää samalla viedään käyttäjän tiedot
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("Tapahtumat.fxml"));
+		BorderPane personOverview = (BorderPane) loader.load();
+		Scene etusivulle = new Scene(personOverview);
+		// stage
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(etusivulle);
+		window.show();
+
+	}
+
+	@FXML
+	void LogOut(ActionEvent event) throws IOException {
+		boolean test = TiedostoKasittely.poistaTiedosto();
+		if (test == true) {
+			// ajetaan kirjautumis sivulle
+			FXMLLoader loader = new FXMLLoader();
+
+			loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
+
+			BorderPane etusivu = (BorderPane) loader.load();
+			Scene kirjautumisNäkymä = new Scene(etusivu);
+			// get stage
+			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			window.setScene(kirjautumisNäkymä);
+			window.show();
+
+		}
+
+	}
 
 }

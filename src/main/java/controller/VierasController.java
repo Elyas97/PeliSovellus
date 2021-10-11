@@ -21,92 +21,87 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 public class VierasController {
-	
-	 @FXML
-	    private TextField pelihaku;
 
-	    @FXML
-	    private ChoiceBox<?> hakurajaus;
+	@FXML
+	private TextField pelihaku;
 
-	    @FXML
-	    private ListView<?> lista;
+	@FXML
+	private ChoiceBox<?> hakurajaus;
 
-	    @FXML
-	    private Label pelinNimi;
+	@FXML
+	private ListView<?> lista;
 
-	    @FXML
-	    private Label pelinHinta;
+	@FXML
+	private Label pelinNimi;
 
-	    @FXML
-	    private Label paikkakunta;
+	@FXML
+	private Label pelinHinta;
 
-	    @FXML
-	    private Label genre;
+	@FXML
+	private Label paikkakunta;
 
-	    @FXML
-	    private Label ikäraja;
+	@FXML
+	private Label genre;
 
-	    @FXML
-	    private Label pelaajamäärä;
+	@FXML
+	private Label ikäraja;
 
-	    @FXML
-	    private Label kuvaus;
+	@FXML
+	private Label pelaajamäärä;
 
-	    @FXML
-	    private Label konsoli;
+	@FXML
+	private Label kuvaus;
 
-	    @FXML
-	    private Label tekstikenttä;
+	@FXML
+	private Label konsoli;
 
-	    @FXML
-	    void accessDenied(ActionEvent event) throws IOException {
-	    	Alert alert = new Alert(AlertType.CONFIRMATION);
-	    	alert.setTitle("Confirmation Dialog");
-	    	alert.setHeaderText("Tiedoksi");
-	    	alert.setContentText("Peli ilmoituksen tekeminen vaatii tilin. "
-	    			+ ""
-	    			+ ""
-	    			+ ""
-	    			+ ""
-	    			+ "Haluatko kirjautua sisään?");
+	@FXML
+	private Label tekstikenttä;
 
+	@FXML
+	void accessDenied(ActionEvent event) throws IOException {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmation Dialog");
+		alert.setHeaderText("Tiedoksi");
+		alert.setContentText(
+				"Peli ilmoituksen tekeminen vaatii tilin. " + "" + "" + "" + "" + "Haluatko kirjautua sisään?");
 
-	    	Optional<ButtonType> result = alert.showAndWait();
-	    	if (result.get() == ButtonType.OK){
-	    		//ajetaan kirjautumis sivulle
-	    		FXMLLoader loader = new FXMLLoader();
-		        
-		        loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
-		       
-		        BorderPane etusivu = (BorderPane) loader.load();
-		    	Scene kirjautumisNäkymä = new Scene(etusivu);
-		    	//get stage
-		    	Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
-		    	window.setScene(kirjautumisNäkymä);
-		    	window.show();
-	    	}
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK) {
+			// ajetaan kirjautumis sivulle
+			FXMLLoader loader = new FXMLLoader();
 
-	    }
+			loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
 
-	    @FXML
-	    void listaaPelit(ActionEvent event) {
+			BorderPane etusivu = (BorderPane) loader.load();
+			Scene kirjautumisNäkymä = new Scene(etusivu);
+			// get stage
+			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			window.setScene(kirjautumisNäkymä);
+			window.show();
+		}
 
-	    }
+	}
 
-	    @FXML
-	    void vieKirjautumisNäkymään(ActionEvent event) throws IOException {
-	    	//ajetaan kirjautumis sivulle
-    		FXMLLoader loader = new FXMLLoader();
-	        
-	        loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
-	       
-	        BorderPane etusivu = (BorderPane) loader.load();
-	    	Scene kirjautumisNäkymä = new Scene(etusivu);
-	    	//get stage
-	    	Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
-	    	window.setScene(kirjautumisNäkymä);
-	    	window.show();
+	@FXML
+	void listaaPelit(ActionEvent event) {
 
-	    }
+	}
+
+	@FXML
+	void vieKirjautumisNäkymään(ActionEvent event) throws IOException {
+		// ajetaan kirjautumis sivulle
+		FXMLLoader loader = new FXMLLoader();
+
+		loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
+
+		BorderPane etusivu = (BorderPane) loader.load();
+		Scene kirjautumisNäkymä = new Scene(etusivu);
+		// get stage
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(kirjautumisNäkymä);
+		window.show();
+
+	}
 
 }

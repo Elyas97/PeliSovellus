@@ -7,48 +7,50 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import view.TapahtumatController;
+
 public class PeliSovellusDAO {
-Connection conn;
-	
+	Connection conn;
+
 	final String URL = "jdbc:mariadb://10.114.32.16/PELIKESKUS";
-	final String USERNAME="ryhma";
-	final String PWD="ryhma";
-	
+	final String USERNAME = "ryhma";
+	final String PWD = "ryhma";
+
 	public PeliSovellusDAO() {
-		try{
-			conn=DriverManager.getConnection(URL +"?user=" + USERNAME + "&password="+PWD);
+		try {
+			conn = DriverManager.getConnection(URL + "?user=" + USERNAME + "&password=" + PWD);
 			System.out.println("Yhdistetty tietokantaan");
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			do {
 				System.out.println("Viesti: " + e.getMessage());
 				System.out.println("Virhekoodi: " + e.getErrorCode());
 				System.out.println("Viesti: " + e.getSQLState());
-			}while(e.getNextException()!=null);
+			} while (e.getNextException() != null);
 			System.exit(-1);
 		}
 	}
+
 	public boolean createKäyttäjä(Kayttaja käyttäjä) {
-		boolean temp=false;
-		try(PreparedStatement luoKäyttäjä= conn.prepareStatement("INSERT INTO Käyttäjä (Salasana, Sähköposti, Sukunimi, Etunimi, Puhelinnumero) VALUES (?,?,?,?,?)"))
-		{
+		boolean temp = false;
+		try (PreparedStatement luoKäyttäjä = conn.prepareStatement(
+				"INSERT INTO Käyttäjä (Salasana, Sähköposti, Sukunimi, Etunimi, Puhelinnumero) VALUES (?,?,?,?,?)")) {
 			luoKäyttäjä.setString(1, käyttäjä.getSalasana());
 			luoKäyttäjä.setString(2, käyttäjä.getSähköposti());
 			luoKäyttäjä.setString(3, käyttäjä.getSukunimi());
 			luoKäyttäjä.setString(4, käyttäjä.getEtunimi());
 			luoKäyttäjä.setString(5, käyttäjä.getPuhelinumero());
-			int count=luoKäyttäjä.executeUpdate();
-			temp =true;
+			int count = luoKäyttäjä.executeUpdate();
+			temp = true;
 			System.out.println(count);
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			do {
 				System.out.println("Viesti: " + e.getMessage());
 				System.out.println("Virhekoodi: " + e.getErrorCode());
 				System.out.println("Viesti: " + e.getSQLState());
-				}while(e.getNextException()!=null);
-		}catch(Exception e) {
+			} while (e.getNextException() != null);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return temp;
 	}
 
@@ -58,54 +60,54 @@ Connection conn;
 	}
 
 	public Kayttaja[] readKäyttäjät() {
-		ArrayList <Kayttaja> lista=new ArrayList();
-		Statement stmt=null;
-		ResultSet rs=null;
+		ArrayList<Kayttaja> lista = new ArrayList();
+		Statement stmt = null;
+		ResultSet rs = null;
 		try {
-			stmt=conn.createStatement();
-			String query="SELECT * FROM Käyttäjä";
-			rs=stmt.executeQuery(query);
-			while(rs.next()) {
-				 int kayttajaID=rs.getInt("KäyttäjäID");
-				 String salasana=rs.getString("Salasana");
-				 String etunimi=rs.getString("Etunimi");
-				 String sukunimi=rs.getString("Sukunimi");
-				 String puhelinumero=rs.getString("Puhelinnumero");
-				 String sähköposti=rs.getString("Sähköposti");
-				 lista.add(new Kayttaja(kayttajaID,salasana,etunimi,sukunimi,puhelinumero,sähköposti));
+			stmt = conn.createStatement();
+			String query = "SELECT * FROM Käyttäjä";
+			rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				int kayttajaID = rs.getInt("KäyttäjäID");
+				String salasana = rs.getString("Salasana");
+				String etunimi = rs.getString("Etunimi");
+				String sukunimi = rs.getString("Sukunimi");
+				String puhelinumero = rs.getString("Puhelinnumero");
+				String sähköposti = rs.getString("Sähköposti");
+				lista.add(new Kayttaja(kayttajaID, salasana, etunimi, sukunimi, puhelinumero, sähköposti));
 			}
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			do {
 				System.out.println("Viesti: " + e.getMessage());
 				System.out.println("Virhekoodi: " + e.getErrorCode());
 				System.out.println("Viesti: " + e.getSQLState());
-	
-			}while(e.getNextException()!=null);
-		}catch(Exception e) {
+
+			} while (e.getNextException() != null);
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			try {
-				if(rs!=null) {
+				if (rs != null) {
 					rs.close();
 				}
-				if(stmt!=null) {
+				if (stmt != null) {
 					stmt.close();
 				}
-			} catch(Exception e) {
+			} catch (Exception e) {
 				System.out.println("Resurssien vapautuksessa virhe");
 			}
 		}
-		Kayttaja[] users=new Kayttaja[lista.size()];
-		for(int i=0;i<users.length;i++) {
-			users[i]=lista.get(i);
+		Kayttaja[] users = new Kayttaja[lista.size()];
+		for (int i = 0; i < users.length; i++) {
+			users[i] = lista.get(i);
 		}
 		return users;
 	}
 
 	public boolean updateKäyttäjä(Kayttaja käyttäjä) {
-		boolean temp= false;
-		String query="UPDATE Käyttäjä SET Salasana=?,Sähköposti=?,Sukunimi=?,Etunimi=?,Puhelinnumero=? WHERE KäyttäjäID=?";
-		try(PreparedStatement stmt=conn.prepareStatement(query)){
+		boolean temp = false;
+		String query = "UPDATE Käyttäjä SET Salasana=?,Sähköposti=?,Sukunimi=?,Etunimi=?,Puhelinnumero=? WHERE KäyttäjäID=?";
+		try (PreparedStatement stmt = conn.prepareStatement(query)) {
 			stmt.setInt(6, käyttäjä.getKayttajaID());
 			stmt.setString(1, käyttäjä.getSalasana());
 			stmt.setString(2, käyttäjä.getSähköposti());
@@ -113,24 +115,26 @@ Connection conn;
 			stmt.setString(4, käyttäjä.getEtunimi());
 			stmt.setString(5, käyttäjä.getPuhelinumero());
 			stmt.executeUpdate();
-			temp=true;
-			
-		}catch(SQLException e) {
+			temp = true;
+
+		} catch (SQLException e) {
 			System.out.println(e);
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			System.out.println(e);
 		}
 		return temp;
 	}
+
 	/*
 	 * Lisää pelin tietokantaan
 	 * 
 	 */
 	public boolean lisaaPeli(Peli peli, int kayttajaID) {
 		boolean temp = false;
-		System.out.println(peli.getPelinNimi() + " "+ kayttajaID);
-		try(PreparedStatement lisaaPeli = conn.prepareStatement("INSERT INTO Peli (Pelinimi, Pelintyyppi, Talletustyyppi, Hinta, Genre, Konsoli, Ikäraja, Pelaajamäärä, Kuvaus, Kaupunki, Kunto, Tekstikenttä, KäyttäjäID, Päivämäärä) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
+		System.out.println(peli.getPelinNimi() + " " + kayttajaID);
+		try (PreparedStatement lisaaPeli = conn.prepareStatement(
+				"INSERT INTO Peli (Pelinimi, Pelintyyppi, Talletustyyppi, Hinta, Genre, Konsoli, Ikäraja, Pelaajamäärä, Kuvaus, Kaupunki, Kunto, Tekstikenttä, KäyttäjäID, Päivämäärä) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
 			lisaaPeli.setString(1, peli.getPelinNimi());
 			lisaaPeli.setString(2, peli.getPelintyyppi());
 			lisaaPeli.setString(3, peli.getTalletusTyyppi());
@@ -140,45 +144,43 @@ Connection conn;
 			lisaaPeli.setInt(7, peli.getIkaraja());
 			lisaaPeli.setInt(8, peli.getPelmaara());
 			lisaaPeli.setString(9, peli.getKuvaus());
-			lisaaPeli.setString(10,  peli.getKaupunki());
-			lisaaPeli.setString(11,  peli.getKunto());
+			lisaaPeli.setString(10, peli.getKaupunki());
+			lisaaPeli.setString(11, peli.getKunto());
 			lisaaPeli.setString(12, peli.getTekstikenttä());
 			lisaaPeli.setInt(13, kayttajaID);
 			lisaaPeli.setDate(14, peli.getPaiva());
-			
+
 			int count = lisaaPeli.executeUpdate();
 			temp = true;
 			System.out.println(count);
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			do {
 				System.out.println("Viesti: " + e.getMessage());
 				System.out.println("Virhekoodi: " + e.getErrorCode());
 				System.out.println("Viesti: " + e.getSQLState());
-				}while(e.getNextException()!=null);
-			
-			
-		}catch(Exception e) {
+			} while (e.getNextException() != null);
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return temp;
 	}
-	
-	
+
 	/*
 	 * Hakee kaikki pelit tietokannasta
 	 * 
 	 * 
 	 */
 	public Peli[] haePelit() {
-		ArrayList <Peli> peliLista = new ArrayList();
+		ArrayList<Peli> peliLista = new ArrayList();
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
 			stmt = conn.createStatement();
 			String query = "Select * from Peli";
-			rs=stmt.executeQuery(query);
-			while(rs.next()) {
+			rs = stmt.executeQuery(query);
+			while (rs.next()) {
 				String pelinimi = rs.getString("Pelinimi");
 				int PeliID = rs.getInt("PeliID");
 				String pelityyppi = rs.getString("Pelintyyppi");
@@ -194,39 +196,41 @@ Connection conn;
 				String konsoli = rs.getString("Konsoli");
 				String tekstikenttä = rs.getString("Tekstikenttä");
 				String kunto = rs.getString("Kunto");
-				
+
 				Date paivamaara = rs.getDate("Päivämäärä");
-				
-				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, konsoli, ika, lukumaara, kuvaus, kaupunki, kunto, tekstikenttä, paivamaara));
+
+				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, konsoli, ika,
+						lukumaara, kuvaus, kaupunki, kunto, tekstikenttä, paivamaara));
 			}
-			
-		}catch(SQLException e) {
+
+		} catch (SQLException e) {
 			do {
 				System.out.println("Viesti: " + e.getMessage());
 				System.out.println("Virhekoodi: " + e.getErrorCode());
 				System.out.println("Viesti: " + e.getSQLState());
-	
-			}while(e.getNextException()!=null);
-		}catch(Exception e) {
+
+			} while (e.getNextException() != null);
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			try {
-				if(rs!=null) {
+				if (rs != null) {
 					rs.close();
 				}
-				if(stmt!=null) {
+				if (stmt != null) {
 					stmt.close();
 				}
-			} catch(Exception e) {
+			} catch (Exception e) {
 				System.out.println("Resurssien vapautuksessa virhe");
 			}
 		}
-		Peli [] pelit = new Peli[peliLista.size()];
-		for(int i = 0; i < pelit.length; i++) {
+		Peli[] pelit = new Peli[peliLista.size()];
+		for (int i = 0; i < pelit.length; i++) {
 			pelit[i] = peliLista.get(i);
 		}
 		return pelit;
 	}
+
 	/*
 	 * Poistaa annetun parametrin mukaisen pelin tietokannasta
 	 * 
@@ -240,29 +244,27 @@ Connection conn;
 			String query = "Delete from Peli where PeliID = ?";
 			PreparedStatement preparedStmt = conn.prepareStatement(query);
 			preparedStmt.setInt(1, peliID);
-			
+
 			preparedStmt.execute();
-			
-			
-			
-		}catch(SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public Peli[] haeOmatPelit(int kayttajaID) {
-		//System.out.println("haeOmatPelit metodi");
-		ArrayList <Peli> peliLista = new ArrayList();
+		// System.out.println("haeOmatPelit metodi");
+		ArrayList<Peli> peliLista = new ArrayList();
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
 			stmt = conn.createStatement();
-			//Käyttäjä id:ksi kirjautuneen käyttäjän id
+			// Käyttäjä id:ksi kirjautuneen käyttäjän id
 			String query = "Select * from Peli where KäyttäjäID = ?";
 			PreparedStatement preppi = conn.prepareStatement(query);
 			preppi.setInt(1, kayttajaID);
-			rs=preppi.executeQuery();
-			while(rs.next()) {
+			rs = preppi.executeQuery();
+			while (rs.next()) {
 				String pelinimi = rs.getString("Pelinimi");
 				int PeliID = rs.getInt("PeliID");
 				String pelityyppi = rs.getString("Pelintyyppi");
@@ -279,45 +281,47 @@ Connection conn;
 				String tekstikenttä = rs.getString("Tekstikenttä");
 				String kunto = rs.getString("Kunto");
 				Date paivamaara = rs.getDate("Päivämäärä");
-				
-				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, konsoli, ika, lukumaara, kuvaus, kaupunki, kunto, tekstikenttä, paivamaara));
+
+				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, konsoli, ika,
+						lukumaara, kuvaus, kaupunki, kunto, tekstikenttä, paivamaara));
 			}
-			
-		}catch(SQLException e) {
+
+		} catch (SQLException e) {
 			do {
 				System.out.println("Viesti: " + e.getMessage());
 				System.out.println("Virhekoodi: " + e.getErrorCode());
 				System.out.println("Viesti: " + e.getSQLState());
-	
-			}while(e.getNextException()!=null);
-		}catch(Exception e) {
+
+			} while (e.getNextException() != null);
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			try {
-				if(rs!=null) {
+				if (rs != null) {
 					rs.close();
 				}
-				if(stmt!=null) {
+				if (stmt != null) {
 					stmt.close();
 				}
-			} catch(Exception e) {
+			} catch (Exception e) {
 				System.out.println("Resurssien vapautuksessa virhe");
 			}
 		}
-		Peli [] pelit = new Peli[peliLista.size()];
-		for(int i = 0; i < pelit.length; i++) {
+		Peli[] pelit = new Peli[peliLista.size()];
+		for (int i = 0; i < pelit.length; i++) {
 			pelit[i] = peliLista.get(i);
 		}
-		//System.out.println(pelit[1].toString());
+		// System.out.println(pelit[1].toString());
 		return pelit;
 	}
-	
-	//UUTTA
+
+	// UUTTA
 	public boolean paivitaPeli(Peli peli) {
-		boolean temp= false;
-		System.out.println("Nimi " + peli.getPelinNimi() + " Id " + peli.getPeliId() + " Kaupunki " + peli.getKaupunki());
-		String query="UPDATE Peli SET Pelinimi=?,Pelintyyppi=?,Talletustyyppi=?,Hinta=?,Genre=?, Konsoli=?, Ikäraja=?,Pelaajamäärä=?,Kuvaus=?,Kaupunki=?, Kunto=?, Tekstikenttä=? WHERE PeliID=?";
-		try(PreparedStatement stmt=conn.prepareStatement(query)){
+		boolean temp = false;
+		System.out
+				.println("Nimi " + peli.getPelinNimi() + " Id " + peli.getPeliId() + " Kaupunki " + peli.getKaupunki());
+		String query = "UPDATE Peli SET Pelinimi=?,Pelintyyppi=?,Talletustyyppi=?,Hinta=?,Genre=?, Konsoli=?, Ikäraja=?,Pelaajamäärä=?,Kuvaus=?,Kaupunki=?, Kunto=?, Tekstikenttä=? WHERE PeliID=?";
+		try (PreparedStatement stmt = conn.prepareStatement(query)) {
 			stmt.setString(1, peli.getPelinNimi());
 			stmt.setString(2, peli.getPelintyyppi());
 			stmt.setString(3, peli.getTalletusTyyppi());
@@ -331,33 +335,38 @@ Connection conn;
 			stmt.setString(11, peli.getKunto());
 			stmt.setString(12, peli.getTekstikenttä());
 			stmt.setInt(13, peli.getPeliId());
-			System.out.println(peli.getPeliId() + ", " + peli.getPelinNimi()+ " ," + peli.getPelintyyppi() + ", "+ peli.getTalletusTyyppi() + ", "+ peli.getHinta() + ", " + peli.getGenre() + ", "+ peli.getKonsoli() + ", "+ peli.getIkaraja() + ", "+ peli.getPelmaara()+ ", " + peli.getKuvaus() + ", "+ peli.getKaupunki() + ", " + peli.getKunto() + ", "+ peli.getTekstikenttä() + ", " + peli.getPaiva());
+			System.out.println(peli.getPeliId() + ", " + peli.getPelinNimi() + " ," + peli.getPelintyyppi() + ", "
+					+ peli.getTalletusTyyppi() + ", " + peli.getHinta() + ", " + peli.getGenre() + ", "
+					+ peli.getKonsoli() + ", " + peli.getIkaraja() + ", " + peli.getPelmaara() + ", " + peli.getKuvaus()
+					+ ", " + peli.getKaupunki() + ", " + peli.getKunto() + ", " + peli.getTekstikenttä() + ", "
+					+ peli.getPaiva());
 			stmt.executeUpdate();
-			temp=true;
-			
-		}catch(SQLException e) {
+			temp = true;
+
+		} catch (SQLException e) {
 			System.out.println(e);
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			System.out.println(e);
 		}
 		return temp;
 	}
+
 	public boolean poistaKayttaja(Kayttaja käyttäjä) {
-		boolean test=false;
-		try(PreparedStatement poista=conn.prepareStatement("DELETE FROM Käyttäjä WHERE KäyttäjäID=?")) {
+		boolean test = false;
+		try (PreparedStatement poista = conn.prepareStatement("DELETE FROM Käyttäjä WHERE KäyttäjäID=?")) {
 			poista.setInt(1, käyttäjä.getKayttajaID());
 			poista.executeUpdate();
-			test=true;
-		}catch(SQLException E) {
+			test = true;
+		} catch (SQLException E) {
 			System.out.println(E);
-			test=false;
-		}catch(Exception e) {
+			test = false;
+		} catch (Exception e) {
 			System.out.println(e);
-			test=false;
+			test = false;
 		}
 		return test;
-		
+
 	}
-	
+
 }
