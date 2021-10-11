@@ -2,6 +2,10 @@ package view;
 
 import java.awt.Button;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import controller.ProfiiliController;
 import javafx.beans.value.ChangeListener;
@@ -9,6 +13,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -113,6 +118,18 @@ public class EtusivuController {
 				(observable, oldValue, newValue) -> pelinTiedot(newValue));
 	
 	}
+	
+	//Hinnan mukaan lista
+	@FXML
+	public void jarjesta() {
+		pelidata.clear();
+		pelit = pelitdao.haePelit();
+		System.out.println(pelit.toString());
+		for (int i = 0; i < pelit.length; i++) {
+			pelidata.add(pelit[i]);
+		}	
+	}
+	
 	
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage=dialogStage;

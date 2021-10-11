@@ -1,6 +1,7 @@
 package view;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import controller.ProfiiliController;
 import javafx.collections.FXCollections;
@@ -14,12 +15,15 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 //import javafx.scene.control.ListView;
 import javafx.stage.Stage;
@@ -72,8 +76,44 @@ public class TapahtumatController {
 	@FXML
 	private TextField kuvaus;
 	
-	@FXML 
-	private TextField tekstikenttä;
+	@FXML
+    private TextField tekstikenttä;
+	
+	@FXML
+    private Text nimivaroitus;
+	
+	@FXML
+    private Text hintavaroitus;
+	
+	@FXML
+    private Text tyyppivaroitus;
+	
+	@FXML
+    private Text paikkakuntavaroitus;
+	
+	@FXML
+    private Text pelintyyppivaroitus;
+	
+	@FXML
+    private Text konsolivaroitus;
+	
+	@FXML
+    private Text genrevaroitus;
+	
+	@FXML
+    private Text ikärajavaroitus;
+	
+	@FXML
+    private Text pelaajamäärävaroitus;
+	
+	@FXML
+    private Text kuntovaroitus;
+	
+	@FXML
+    private Text kuvausvaroitus;
+	
+	@FXML
+    private Text tekstikenttävaroitus;
 	
 	@FXML
 	private ChoiceBox<String> genre;
@@ -119,6 +159,7 @@ public class TapahtumatController {
 		listaaOmatPelit();
 		omatPelit.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> pelinTiedot(newValue));	
+		
 	}
 	
 	@FXML
@@ -171,8 +212,23 @@ public class TapahtumatController {
 
 	@FXML
 	public void poistaPeli() { 
-		Peli peli = omatPelit.getSelectionModel().getSelectedItem();
-		poistaPeliTietokannasta(peli);	 
+
+		ButtonType ok = new ButtonType("Ok", ButtonData.OK_DONE);
+		ButtonType peruuta = new ButtonType("Peruuta", ButtonData.CANCEL_CLOSE);
+		
+		Alert varmistus = new Alert(Alert.AlertType.CONFIRMATION, "Haluatko varmasti poistaa pelin? Poistamista ei voi peruuttaa.", ok, peruuta);
+	    varmistus.setTitle("Alert");
+	    Optional<ButtonType> vastaus = varmistus.showAndWait();
+	    
+    	if(vastaus.get() == ok) {
+    		Peli peli = omatPelit.getSelectionModel().getSelectedItem();
+    		poistaPeliTietokannasta(peli);
+   
+    		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        	alert.setTitle("Alert");
+        	alert.setContentText("Pelin poistaminen onnistui!");
+        	alert.showAndWait();
+    	}
 	}
 
 	public void poistaPeliTietokannasta(Peli peli) {
@@ -184,8 +240,36 @@ public class TapahtumatController {
 		omatPelit.getItems().clear();
 		listaaOmatPelit();
 	}
+	
+	private void varoituksetPiiloon() {
+		nimivaroitus.setText("");
+		hintavaroitus.setText("");
+		tyyppivaroitus.setText("");
+		pelintyyppivaroitus.setText("");
+		genrevaroitus.setText("");
+		konsolivaroitus.setText("");
+		paikkakuntavaroitus.setText("");
+		ikärajavaroitus.setText("");
+		kuvausvaroitus.setText("");
+		tekstikenttävaroitus.setText("");
+		pelaajamäärävaroitus.setText("");
+		kuntovaroitus.setText("");
+		
+		pelinnimi.setStyle("-fx-border-color:none");
+		hinta.setStyle("-fx-border-color:none");
+		kaupunki.setStyle("-fx-border-color:none");
+		kunto.setStyle("-fx-border-color:none");
+		genre.setStyle("-fx-border-color:none");
+		pelaajamaara.setStyle("-fx-border-color:none");
+		ikaraja.setStyle("-fx-border-color:none");
+		kuvaus.setStyle("-fx-border-color:none");
+		tekstikenttä.setStyle("-fx-border-color:none");
+		konsolivaroitus.setStyle("-fx-border-color:none");
+	}
 
 	private void pelinTiedot(Peli peli) {
+		
+		varoituksetPiiloon();
 		if(peli != null) {
 			pelinnimi.setText(peli.getPelinNimi());
 			hinta.setText(Integer.toString(peli.getHinta()));
@@ -233,6 +317,7 @@ public class TapahtumatController {
 
 	@FXML
 	public void tallennaMuutokset() {
+		if(taytaTyhjatKentat() == true) {
 		Peli peli = new Peli();
 		Peli peliId = omatPelit.getSelectionModel().getSelectedItem();
 		peli.setPeliId(peliId.getPeliId());
@@ -270,6 +355,82 @@ public class TapahtumatController {
 		
 		omatPelit.getItems().clear();
 		listaaOmatPelit();
+		}
+	}
+	
+	public boolean taytaTyhjatKentat() {
+		
+		boolean kehotus = false;
+
+		if(pelinnimi.getText().trim().isEmpty()) {
+			pelinnimi.setStyle("-fx-border-color:red");
+			nimivaroitus.setText("Pakollinen kenttä");
+			kehotus = true;
+		}
+	
+		if(hinta.getText().trim().isEmpty()) {
+			hinta.setStyle("-fx-border-color:red");
+			hintavaroitus.setText("Pakollinen kenttä");
+			kehotus = true;
+		}
+
+		if(kaupunki.getText().trim().isEmpty()) {
+			kaupunki.setStyle("-fx-border-color:red");
+			kaupunki.setPromptText("Pakollinen kenttä!");
+			paikkakuntavaroitus.setText("Pakollinen kenttä");
+			kehotus = true;
+		}
+		
+		if(ikaraja.getText().trim().isEmpty()) {
+			ikaraja.setStyle("-fx-border-color:red");
+			ikaraja.setPromptText("Pakollinen kenttä!");
+			ikaraja.setText("Pakollinen kenttä");
+			kehotus = true;
+		}
+		
+		if(kuvaus.getText().trim().isEmpty()) {
+			kuvaus.setStyle("-fx-border-color:red");
+			kuvausvaroitus.setText("Pakollinen kenttä");
+			kehotus = true;
+		}
+		
+		if(tekstikenttä.getText().trim().isEmpty()) {
+			tekstikenttä.setStyle("-fx-border-color:red");
+			tekstikenttävaroitus.setText("Pakollinen kenttä");
+			kehotus = true;
+		}
+		
+		if(kunto.getValue()== null) {
+			kunto.setStyle("-fx-border-color:red");
+			kuntovaroitus.setText("Pakollinen kenttä");
+			kehotus = true;
+		}
+		
+		if(genre.getValue()==null) {
+			genre.setStyle("-fx-border-color:red");
+			genrevaroitus.setText("Pakollinen kenttä");
+			kehotus = true;
+		}
+			
+		if(tyyppi.getSelectedToggle() == null) {	
+			tyyppivaroitus.setText("Pakollinen kenttä");
+			kehotus = true;
+		}
+		
+		if(pelintyyppi.getSelectedToggle() == null) {
+			pelintyyppivaroitus.setText("Pakollinen kenttä");
+			kehotus = true;
+		}
+		
+		if(kehotus == true) {
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		    alert.setTitle("Alert");
+		    alert.setContentText("Täytä pakolliset kentät!");
+		    alert.showAndWait();
+		    return false;
+		}
+		
+		return true;
 	}
 
 	
