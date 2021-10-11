@@ -118,7 +118,10 @@ public class TapahtumatController {
 
 		listaaOmatPelit();
 		omatPelit.getSelectionModel().selectedItemProperty().addListener(
-				(observable, oldValue, newValue) -> pelinTiedot(newValue));	
+				(observable, oldValue, newValue) ->  {
+					
+				pelinTiedot(newValue);
+				});	
 	}
 	
 	@FXML

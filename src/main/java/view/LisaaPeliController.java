@@ -156,11 +156,6 @@ public class LisaaPeliController {
 		validointiPiiloon();
 
 	
-		// ei toimi
-		//genre.getItems().setAll(Pelingenre.values());
-		//choiceBox.getItems().clear();
-		//choiceBox.getItems().setAll(Pelingenre.values());
-		//choiceBox.setItems((ObservableList<Pelingenre>) Arrays.asList(Pelingenre.values()));
 		
 	}
 	public void setMainApp(MainApp main) {
@@ -207,10 +202,10 @@ public class LisaaPeliController {
 	    java.sql.Date paiva =new java.sql.Date(millis);  
 	    System.out.println(paiva);  
 		peli.setPaivamaara(paiva);
-		
+		käyttäjä = TiedostoKasittely.lueKäyttäjä();
 		
 		//System.out.println(peli.getPelinNimi()+" "+ peli.getHinta()+" "+ peli.getIkaraja());
-		pelisovellusdao.lisaaPeli(peli, 2);
+		pelisovellusdao.lisaaPeli(peli, käyttäjä.getKayttajaID());
 		tallennaClicked = true;
 		
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
