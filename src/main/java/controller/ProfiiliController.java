@@ -69,7 +69,7 @@ public class ProfiiliController {
 	    				Alert alert = new Alert(Alert.AlertType.INFORMATION);
 	      		      //Setting the title
 	    			  	
-	      		      alert.setTitle("Alert");
+	      		      alert.setTitle("Ilmoitus");
 	      		      //Setting the content of the dialog
 	      		      alert.setContentText("Tietojen tallennus onnistui");
 	      		      alert.showAndWait();
@@ -80,7 +80,7 @@ public class ProfiiliController {
 	    			}else {
 	    				Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		      		      //Setting the title
-		      		      alert.setTitle("Alert");
+		      		      alert.setTitle("Ilmoitus");
 		      		      
 		      		      //Setting the content of the dialog
 		      		      alert.setContentText("Tietojen tallennus epäonnistui palvelin ongelma");

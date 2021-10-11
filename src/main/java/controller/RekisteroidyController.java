@@ -79,10 +79,10 @@ public class RekisteroidyController {
 					// ilmoitetaan
 					Alert alert = new Alert(Alert.AlertType.INFORMATION);
 					// Setting the title
-					alert.setTitle("Alert");
+					alert.setTitle("Imoitus");
 
 					// Setting the content of the dialog
-					alert.setContentText("Register has been successfull");
+					alert.setContentText("Rekisteröityminen onnistui!");
 					alert.showAndWait();
 					// viedään kirjautumissivulle
 					FXMLLoader loader = new FXMLLoader();

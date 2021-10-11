@@ -50,10 +50,10 @@ Kayttaja kirjautunut=null;
     			
     			Alert alert = new Alert(Alert.AlertType.INFORMATION);
     		      //Setting the title
-    		      alert.setTitle("Alert");
+    		      alert.setTitle("Ilmoitus");
     		      
     		      //Setting the content of the dialog
-    		      alert.setContentText("Login has been successfull");
+    		      alert.setContentText("Kirjautuminen onnistui!");
     		      alert.showAndWait();
     		      //siirretään etusivulle ja tallenetaan käyttäjä controlleriin
     		      try {
@@ -77,7 +77,7 @@ Kayttaja kirjautunut=null;
     		}else {
     			Alert alert = new Alert(Alert.AlertType.INFORMATION);
   		      //Setting the title
-  		      alert.setTitle("Alert");
+  		      alert.setTitle("Ilmoitus");
   		      
   		      //Setting the content of the dialog
   		      alert.setContentText("Salasana tai Sähköposti väärä");
