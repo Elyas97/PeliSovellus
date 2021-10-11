@@ -22,6 +22,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
@@ -56,7 +57,7 @@ public class LisaaPeliController {
 	@FXML
 	private TextField kuvaus;
 	@FXML
-	private TextField tekstikenttä;
+	private TextArea tekstikenttä;
 	@FXML
 	private ChoiceBox<String> kunto;
 	@FXML
@@ -138,6 +139,7 @@ public class LisaaPeliController {
 
 	@FXML
 	private void initialize() {
+		käyttäjä = TiedostoKasittely.lueKäyttäjä();
 		ObservableList<String> options = FXCollections.observableArrayList("Urheilu", "Räiskintä", "Toiminta",
 				"Ajopeli", "Jännitys", "Seikkailu", "Strategia", "Roolipeli", "Pulma","Seurapeli", "Lautapeli");
 		genre.setItems(options);
@@ -149,9 +151,14 @@ public class LisaaPeliController {
 		ObservableList<String> konsoliOptions = FXCollections.observableArrayList("Xbox", "Playstation", "Wii");
 		konsoli.setItems(konsoliOptions);
 
-		tekstikenttä.setPromptText("Yhteystiedot");
+		//tekstikenttä.setText(käyttäjä.getSähköposti()+ "\n"+ käyttäjä.getPuhelinumero() +" ");
+		tekstikenttä.setText("moivaa");
 		kuvaus.setPromptText("Kuvaile peliä tai kerro kokemuksiasi pelistä");
-
+		kirjaimet();
+		tekstikenttä.textProperty().addListener((obs, old, newew) -> {
+			kirjaimet();
+		});
+		
 		validointiPiiloon();
 
 	}
@@ -264,18 +271,17 @@ public class LisaaPeliController {
 	}
 
 	@FXML
-	public void kirjaimet(KeyEvent key) {
-		String kirjaimetstring = tekstikenttä.getText();
+	public void kirjaimet() {
+		//String kirjaimetstring = tekstikenttä.getText();
 		int maxpituus = 200;
-		int pituus = 1;
-		pituus = kirjaimetstring.length();
+		int pituus = tekstikenttä.getText().length();
+		
+		//pituus = kirjaimetstring.length();
 		int jaljella = maxpituus - pituus;
+		System.out.println("Jaljella: " + jaljella);
+		//System.out.println(pituus);
 
 		if (jaljella <= 0) {
-			jaljella = 0;
-		}
-
-		if (jaljella == 0) {
 			kirjaimet.setText("Kirjaimia jäljellä: " + jaljella);
 			tekstikenttä.setEditable(false);
 
@@ -287,7 +293,7 @@ public class LisaaPeliController {
 			// Tekstikenttään voi taas kirjoittaa
 			tekstikenttä.setEditable(true);
 		} else {
-			System.out.println("Jaljella: " + jaljella);
+			 jaljella = maxpituus - pituus;
 			kirjaimet.setText("Kirjaimia jäljellä: " + jaljella);
 		}
 	}
