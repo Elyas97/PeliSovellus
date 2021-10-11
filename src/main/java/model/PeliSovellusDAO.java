@@ -163,6 +163,8 @@ Connection conn;
 		
 		return temp;
 	}
+	
+	
 	/*
 	 * Hakee kaikki pelit tietokannasta
 	 * 
@@ -248,7 +250,7 @@ Connection conn;
 		}
 	}
 	
-	public Peli[] haeOmatPelit() {
+	public Peli[] haeOmatPelit(int kayttajaID) {
 		//System.out.println("haeOmatPelit metodi");
 		ArrayList <Peli> peliLista = new ArrayList();
 		Statement stmt = null;
@@ -256,8 +258,10 @@ Connection conn;
 		try {
 			stmt = conn.createStatement();
 			//Käyttäjä id:ksi kirjautuneen käyttäjän id
-			String query = "Select * from Peli where KäyttäjäID = 2";
-			rs=stmt.executeQuery(query);
+			String query = "Select * from Peli where KäyttäjäID = ?";
+			PreparedStatement preppi = conn.prepareStatement(query);
+			preppi.setInt(1, kayttajaID);
+			rs=preppi.executeQuery();
 			while(rs.next()) {
 				String pelinimi = rs.getString("Pelinimi");
 				int PeliID = rs.getInt("PeliID");

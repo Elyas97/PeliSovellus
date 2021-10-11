@@ -200,8 +200,9 @@ public class TapahtumatController {
 	}
 
 	public void listaaOmatPelit() {
+		käyttäjä = TiedostoKasittely.lueKäyttäjä();
 		System.out.println("listaa omat pelit");
-		pelit = pelitdao.haeOmatPelit();
+		pelit = pelitdao.haeOmatPelit(käyttäjä.getKayttajaID());
 		System.out.println(pelit.toString());
 		System.out.println(pelit.length);
 		for (int i = 0; i < pelit.length; i++) {
