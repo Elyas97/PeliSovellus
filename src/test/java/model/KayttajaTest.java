@@ -4,18 +4,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-
 class KayttajaTest {
 
-	/*@Test
-	void testKäyttäjäIntStringStringStringIntString() {
-	}
-
-	@Test
-	void testKäyttäjä() {
-		Käyttäjä käyttäjä = new Käyttäjä(1, "salasana", "Niko", "Nieminen", 408322313, "moivaan@gmail.com");
-		assertEquals(1, käyttäjä.getKayttajaID(), "Käyttäjän id on väärin.");
-	}*/
+	/*
+	 * @Test void testKäyttäjäIntStringStringStringIntString() { }
+	 * 
+	 * @Test void testKäyttäjä() { Käyttäjä käyttäjä = new Käyttäjä(1, "salasana",
+	 * "Niko", "Nieminen", 408322313, "moivaan@gmail.com"); assertEquals(1,
+	 * käyttäjä.getKayttajaID(), "Käyttäjän id on väärin."); }
+	 */
 
 	@Test
 	void testGetKayttajaID() {
@@ -27,7 +24,7 @@ class KayttajaTest {
 	void testSetKayttajaID() {
 		Kayttaja käyttäjä = new Kayttaja();
 		käyttäjä.setKayttajaID(1);
-        assertTrue(käyttäjä.getKayttajaID() == 1);
+		assertTrue(käyttäjä.getKayttajaID() == 1);
 	}
 
 	@Test
@@ -40,7 +37,7 @@ class KayttajaTest {
 	void testSetSalasana() {
 		Kayttaja käyttäjä = new Kayttaja();
 		käyttäjä.setSalasana("1234");
-        assertTrue(käyttäjä.getSalasana() == "1234");
+		assertTrue(käyttäjä.getSalasana() == "1234");
 	}
 
 	@Test
@@ -53,7 +50,7 @@ class KayttajaTest {
 	void testSetEtunimi() {
 		Kayttaja käyttäjä = new Kayttaja();
 		käyttäjä.setEtunimi("Niko");
-        assertTrue(käyttäjä.getEtunimi() == "Niko");
+		assertTrue(käyttäjä.getEtunimi() == "Niko");
 	}
 
 	@Test
@@ -66,7 +63,7 @@ class KayttajaTest {
 	void testSetSukunimi() {
 		Kayttaja käyttäjä = new Kayttaja();
 		käyttäjä.setSukunimi("Nieminen");
-        assertTrue(käyttäjä.getSukunimi() == "Nieminen");
+		assertTrue(käyttäjä.getSukunimi() == "Nieminen");
 	}
 
 	@Test
@@ -79,7 +76,7 @@ class KayttajaTest {
 	void testSetPuhelinumero() {
 		Kayttaja käyttäjä = new Kayttaja();
 		käyttäjä.setPuhelinumero("045321454");
-        assertTrue(käyttäjä.getPuhelinumero() == "045321454");
+		assertTrue(käyttäjä.getPuhelinumero() == "045321454");
 	}
 
 	@Test
@@ -92,6 +89,6 @@ class KayttajaTest {
 	void testSetSähköposti() {
 		Kayttaja käyttäjä = new Kayttaja();
 		käyttäjä.setSähköposti("nikke@hotmail.com");
-        assertTrue(käyttäjä.getSähköposti() == "nikke@hotmail.com");
+		assertTrue(käyttäjä.getSähköposti() == "nikke@hotmail.com");
 	}
 }

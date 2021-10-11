@@ -22,185 +22,184 @@ import view.MainApp;
 
 public class RekisteroidyController {
 
-    @FXML
-    private TextField etu;
+	@FXML
+	private TextField etu;
 
-    @FXML
-    private TextField suku;
+	@FXML
+	private TextField suku;
 
-    @FXML
-    private TextField email;
+	@FXML
+	private TextField email;
 
-    @FXML
-    private TextField puhelinnumero;
+	@FXML
+	private TextField puhelinnumero;
 
-    @FXML
-    private PasswordField salasana;
+	@FXML
+	private PasswordField salasana;
 
-    @FXML
-    private PasswordField csalasana;
-    @FXML
-    private Text tippi;
-    @FXML
-    private Text emailtip;
-    
-    @FXML
-    void initialize() {
-    	
-       Tooltip toolpwd=new Tooltip();
-       toolpwd.setText("Salasanan pituus vähintään 6");
-       salasana.setTooltip(toolpwd);
-       Tooltip toolpwd2=new Tooltip();
-       toolpwd2.setText("Salasanan pituus vähintään 6");
-       csalasana.setTooltip(toolpwd);
-       Tooltip toolemail=new Tooltip();
-       toolemail.setText("Syötä Sähköposti esimerkiksi JohnDoe@Hotmail.com");
-       email.setTooltip(toolemail);
+	@FXML
+	private PasswordField csalasana;
+	@FXML
+	private Text tippi;
+	@FXML
+	private Text emailtip;
 
-    }
+	@FXML
+	void initialize() {
 
-    @FXML
-    void Rekistyröidy(ActionEvent event) {
-    	boolean test=validointi();
-    	
-    	if(test==true) {
-    		
-    		try {
-    			Kayttaja käyttäjä=new Kayttaja();
-        		käyttäjä.setEtunimi(etu.getText());
-        		käyttäjä.setSukunimi(suku.getText());
-    			käyttäjä.setPuhelinumero(puhelinnumero.getText());
-    			käyttäjä.setSähköposti(email.getText());
-    			käyttäjä.setSalasana(salasana.getText());
-    			RegisterSystem register =new RegisterSystem();
-    			boolean tulos=register.register(käyttäjä);
-    			if(tulos==true) {
-    				
-    				//ilmoitetaan
-    				Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      		      //Setting the title
-      		      alert.setTitle("Alert");
-      		      
-      		      //Setting the content of the dialog
-      		      alert.setContentText("Register has been successfull");
-      		      alert.showAndWait();
-    				//viedään kirjautumissivulle
-    				FXMLLoader loader = new FXMLLoader();
-    		        
-    		        loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
-    		       
-    		        BorderPane kirjaudu = (BorderPane) loader.load();
-    		    	Scene kirjauduNäkymä = new Scene(kirjaudu);
-    		    	//get stage
-    		    	Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
-    		    	window.setScene(kirjauduNäkymä);
-    		    	window.show();
-    			}else {
-    				Alert alert= new Alert(Alert.AlertType.INFORMATION);
-    				alert.setTitle("Tiedoksi");
-    				alert.setContentText("Sähköpostillasi on jo rekistyröidytty");
-    				alert.show();
-    				 email.setStyle("-fx-border-color:red");
-    				
-    			}
-    		}catch(NumberFormatException e) {
-    			System.out.println(e);
-    			return;
-    				
-    		}catch(Exception e) {
-    			System.out.println(e);
-    			return;
-    		}
-    		
-    		
-    	}
-    }
+		Tooltip toolpwd = new Tooltip();
+		toolpwd.setText("Salasanan pituus vähintään 6");
+		salasana.setTooltip(toolpwd);
+		Tooltip toolpwd2 = new Tooltip();
+		toolpwd2.setText("Salasanan pituus vähintään 6");
+		csalasana.setTooltip(toolpwd);
+		Tooltip toolemail = new Tooltip();
+		toolemail.setText("Syötä Sähköposti esimerkiksi JohnDoe@Hotmail.com");
+		email.setTooltip(toolemail);
 
-    @FXML
-    void ViewNäkymäLogin(ActionEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader();
-        
-        loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
-       
-        BorderPane kirjaudu = (BorderPane) loader.load();
-    	Scene kirjauduNäkymä = new Scene(kirjaudu);
-    	//get stage
-    	Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
-    	window.setScene(kirjauduNäkymä);
-    	window.show();
-    }
-    
-    @FXML
-    void vieVierasNäkymä(ActionEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader();
-        
-        loader.setLocation(MainApp.class.getResource("Vieras.fxml"));
-       
-        BorderPane register = (BorderPane) loader.load();
-    	Scene rekistyröintiNäkymä = new Scene(register);
-    	//get stage
-    	Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
-    	window.setScene(rekistyröintiNäkymä);
-    	window.show();
-    }
-    
-    boolean validointi() {
-    	 boolean test=true;
-    	 etu.setStyle("-fx-border-color:#0589ff");
-    	 suku.setStyle("-fx-border-color:#0589ff");
-    	 salasana.setStyle("-fx-border-color:#0589ff");
-    	 csalasana.setStyle("-fx-border-color:#0589ff");
-    	 email.setStyle("-fx-border-color:#0589ff");
-    	 puhelinnumero.setStyle("-fx-border-color:#0589ff");
-    	 etu.setStyle("-fx-border-color:#0589ff");
-    	 tippi.setText("");
-    	 emailtip.setText("");
-    	 if(etu.getText()=="") {
-    		 etu.setStyle("-fx-border-color:red");
-    		 test=false;
-    	 }
-    	 if(suku.getText()=="") {
-    		 suku.setStyle("-fx-border-color:red");
-    		 test=false;
-    		 
-    	 }
-    
-    	 if(email.getText()=="") {
-    		 email.setStyle("-fx-border-color:red");
-    		 test=false;
-    	 }
-    	 Pattern pattern = Pattern.compile("^.+@.+\\..+$");
-    	 Matcher matcher = pattern.matcher(email.getText());
-    	 boolean validEmail=matcher.matches();
-    	 if(validEmail==false) {
-    		 email.setStyle("-fx-border-color:red");
-    		 emailtip.setText("Muoto väärä");
-    		 test=false;
-    	 }
-    	 if(puhelinnumero.getText()=="") {
-    		 puhelinnumero.setStyle("-fx-border-color:red");
-    		 test=false;
-    	 }
-    	 if(salasana.getText()==""|| csalasana.getText()=="") {
-    		 salasana.setStyle("-fx-border-color:red");
-    		 csalasana.setStyle("-fx-border-color:red");
-    		 test=false;
-    	 }
-    	 boolean compare=salasana.getText().equals(csalasana.getText());
-    	 if(compare!=true) {
-    		 salasana.setStyle("-fx-border-color:red");
-    		 csalasana.setStyle("-fx-border-color:red");
-    		 tippi.setText("Salasanat eivät täsmää");
-    		 test=false;
-    		 }
-    	 if(salasana.getText().length()<6 || csalasana.getText().length()<6) {
-    		 salasana.setStyle("-fx-border-color:red");
-    		 csalasana.setStyle("-fx-border-color:red");
-    		 tippi.setText("Salasanan pituus vähintään 6");
-    		 test=false;
-    	 }
-    	 
-    	return test;
-    }
+	}
+
+	@FXML
+	void Rekistyröidy(ActionEvent event) {
+		boolean test = validointi();
+
+		if (test == true) {
+
+			try {
+				Kayttaja käyttäjä = new Kayttaja();
+				käyttäjä.setEtunimi(etu.getText());
+				käyttäjä.setSukunimi(suku.getText());
+				käyttäjä.setPuhelinumero(puhelinnumero.getText());
+				käyttäjä.setSähköposti(email.getText());
+				käyttäjä.setSalasana(salasana.getText());
+				RegisterSystem register = new RegisterSystem();
+				boolean tulos = register.register(käyttäjä);
+				if (tulos == true) {
+
+					// ilmoitetaan
+					Alert alert = new Alert(Alert.AlertType.INFORMATION);
+					// Setting the title
+					alert.setTitle("Alert");
+
+					// Setting the content of the dialog
+					alert.setContentText("Register has been successfull");
+					alert.showAndWait();
+					// viedään kirjautumissivulle
+					FXMLLoader loader = new FXMLLoader();
+
+					loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
+
+					BorderPane kirjaudu = (BorderPane) loader.load();
+					Scene kirjauduNäkymä = new Scene(kirjaudu);
+					// get stage
+					Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+					window.setScene(kirjauduNäkymä);
+					window.show();
+				} else {
+					Alert alert = new Alert(Alert.AlertType.INFORMATION);
+					alert.setTitle("Tiedoksi");
+					alert.setContentText("Sähköpostillasi on jo rekistyröidytty");
+					alert.show();
+					email.setStyle("-fx-border-color:red");
+
+				}
+			} catch (NumberFormatException e) {
+				System.out.println(e);
+				return;
+
+			} catch (Exception e) {
+				System.out.println(e);
+				return;
+			}
+
+		}
+	}
+
+	@FXML
+	void ViewNäkymäLogin(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+
+		loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
+
+		BorderPane kirjaudu = (BorderPane) loader.load();
+		Scene kirjauduNäkymä = new Scene(kirjaudu);
+		// get stage
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(kirjauduNäkymä);
+		window.show();
+	}
+
+	@FXML
+	void vieVierasNäkymä(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+
+		loader.setLocation(MainApp.class.getResource("Vieras.fxml"));
+
+		BorderPane register = (BorderPane) loader.load();
+		Scene rekistyröintiNäkymä = new Scene(register);
+		// get stage
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(rekistyröintiNäkymä);
+		window.show();
+	}
+
+	boolean validointi() {
+		boolean test = true;
+		etu.setStyle("-fx-border-color:#0589ff");
+		suku.setStyle("-fx-border-color:#0589ff");
+		salasana.setStyle("-fx-border-color:#0589ff");
+		csalasana.setStyle("-fx-border-color:#0589ff");
+		email.setStyle("-fx-border-color:#0589ff");
+		puhelinnumero.setStyle("-fx-border-color:#0589ff");
+		etu.setStyle("-fx-border-color:#0589ff");
+		tippi.setText("");
+		emailtip.setText("");
+		if (etu.getText() == "") {
+			etu.setStyle("-fx-border-color:red");
+			test = false;
+		}
+		if (suku.getText() == "") {
+			suku.setStyle("-fx-border-color:red");
+			test = false;
+
+		}
+
+		if (email.getText() == "") {
+			email.setStyle("-fx-border-color:red");
+			test = false;
+		}
+		Pattern pattern = Pattern.compile("^.+@.+\\..+$");
+		Matcher matcher = pattern.matcher(email.getText());
+		boolean validEmail = matcher.matches();
+		if (validEmail == false) {
+			email.setStyle("-fx-border-color:red");
+			emailtip.setText("Muoto väärä");
+			test = false;
+		}
+		if (puhelinnumero.getText() == "") {
+			puhelinnumero.setStyle("-fx-border-color:red");
+			test = false;
+		}
+		if (salasana.getText() == "" || csalasana.getText() == "") {
+			salasana.setStyle("-fx-border-color:red");
+			csalasana.setStyle("-fx-border-color:red");
+			test = false;
+		}
+		boolean compare = salasana.getText().equals(csalasana.getText());
+		if (compare != true) {
+			salasana.setStyle("-fx-border-color:red");
+			csalasana.setStyle("-fx-border-color:red");
+			tippi.setText("Salasanat eivät täsmää");
+			test = false;
+		}
+		if (salasana.getText().length() < 6 || csalasana.getText().length() < 6) {
+			salasana.setStyle("-fx-border-color:red");
+			csalasana.setStyle("-fx-border-color:red");
+			tippi.setText("Salasanan pituus vähintään 6");
+			test = false;
+		}
+
+		return test;
+	}
 
 }
