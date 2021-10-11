@@ -155,7 +155,7 @@ public class Peli {
 	// turha jos saa fiksusti toimimaan
 	public String toString() {
 		//getGenre();
-		return getPelinNimi();
+		return getPelinNimi() +" Tyyppi: "+ talletusTyyppi+"\nHinta: "+hinta+"€ \n"+ kaupunki +  "\n " + paivamaara;
 	}
 	
 	public void setPaivamaara(Date paivamaara) {

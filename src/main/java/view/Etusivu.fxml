@@ -7,6 +7,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -79,6 +81,7 @@
                            </HBox.margin>
                         </CheckBox>
                         <CheckBox mnemonicParsing="false" prefHeight="18.0" prefWidth="94.0" text="Lahjoitetaan" />
+                        <Button mnemonicParsing="false" onAction="#avaaRajaus" text="Rajaa haku" />
                      </children>
                   </HBox>
                   <ListView fx:id="lista" prefHeight="274.0" prefWidth="336.0" style="-fx-border-color: #0589ff; -fx-background-color: F0F0F0;" />
@@ -134,6 +137,33 @@
                </font>
             </Text>
             <Label fx:id="päivämäärä" layoutX="362.0" layoutY="22.0" />
+            <AnchorPane fx:id="rajaahakuNäkymä" prefHeight="400.0" prefWidth="558.0" style="-fx-background-color: white; visibility: false;">
+               <children>
+                  <Label layoutX="32.0" layoutY="20.0" text="Rajaa hakua" textFill="#0589ff">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="450.0" layoutY="332.0" mnemonicParsing="false" onAction="#Rajaa" prefHeight="34.0" prefWidth="89.0" style="-fx-background-color: #0589FF;" text="RAJAA" textFill="WHITE" />
+                  <Button layoutX="346.0" layoutY="332.0" mnemonicParsing="false" onAction="#peruuta" prefHeight="34.0" prefWidth="89.0" style="-fx-background-color: #0589FF;" text="PERUUTA" textFill="WHITE" />
+                  <Slider layoutX="51.0" layoutY="141.0" />
+                  <Label layoutX="55.0" layoutY="123.0" text="Hinta (Max)" />
+                  <Label layoutX="51.0" layoutY="54.0" text="Tyyppi" />
+                  <RadioButton layoutX="43.0" layoutY="80.0" mnemonicParsing="false" text="Myynti" />
+                  <RadioButton layoutX="121.0" layoutY="80.0" mnemonicParsing="false" text="Vuokraus" />
+                  <RadioButton layoutX="212.0" layoutY="80.0" mnemonicParsing="false" text="Ilmainen" />
+                  <Label layoutX="41.0" layoutY="192.0" text="Pelaajamäärä" />
+                  <TextField layoutX="42.0" layoutY="210.0" promptText="pelaajamäärä" />
+                  <Label layoutX="51.0" layoutY="254.0" text="Julkaisuaika" />
+                  <Button layoutX="502.0" layoutY="15.0" mnemonicParsing="false" onAction="#suljeRajaus" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <FontAwesomeIconView fill="#0589ff" glyphName="CLOSE" size="32" text="" />
+                     </graphic>
+                  </Button>
+                  <RadioButton layoutX="39.0" layoutY="289.0" mnemonicParsing="false" text="Uusin" />
+                  <RadioButton layoutX="101.0" layoutY="289.0" mnemonicParsing="false" text="Vanhin" />
+               </children>
+            </AnchorPane>
          </children></AnchorPane>
    </center>
 </BorderPane>
