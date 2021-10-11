@@ -119,18 +119,6 @@ public class EtusivuController {
 	
 	}
 	
-	//Hinnan mukaan lista
-	@FXML
-	public void jarjesta() {
-		pelidata.clear();
-		pelit = pelitdao.haePelit();
-		System.out.println(pelit.toString());
-		for (int i = 0; i < pelit.length; i++) {
-			pelidata.add(pelit[i]);
-		}	
-	}
-	
-	
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage=dialogStage;
 	} 
