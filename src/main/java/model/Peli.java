@@ -1,5 +1,7 @@
 package model;
 
+import java.sql.Date;
+import java.time.format.DateTimeFormatter;
 
 public class Peli {
 
@@ -17,13 +19,14 @@ public class Peli {
 	private String kunto;
 	private String tekstikenttä;
 	private String konsoli;
+	private Date paivamaara;
 	
 	/*public enum Pelingenre {
 		TOIMINTA, JÄNNITYS, RÄISKINTÄ, AJOPELI, SEIKKAILU, STRATEGIA, ROOLIPELI, URHEILUPELI, PULMAPELI, OPPIMISPELI
 	}*/
 	
 	public Peli(String pelinNimi, int peliId, String tyyppi, String talletustyyppi,
-			int hinta, String genre, String konsoli, int ikaraja, int pelmaara, String kuvaus, String kaupunki, String kunto, String tekstikenttä) {
+			int hinta, String genre, String konsoli, int ikaraja, int pelmaara, String kuvaus, String kaupunki, String kunto, String tekstikenttä, Date paivamaara) {
 		this.peliId = peliId;
 		this.pelinNimi = pelinNimi;
 		this.tyyppi = tyyppi;
@@ -37,6 +40,7 @@ public class Peli {
 		this.kaupunki = kaupunki;
 		this.kunto = kunto;
 		this.tekstikenttä = tekstikenttä;
+		this.paivamaara = paivamaara;
 	}
 	
 	public Peli() {
@@ -152,5 +156,13 @@ public class Peli {
 	public String toString() {
 		//getGenre();
 		return getPelinNimi();
+	}
+	
+	public void setPaivamaara(Date paivamaara) {
+		this.paivamaara = paivamaara;
+	}
+	
+	public Date getPaiva() {
+		return paivamaara;
 	}
 }

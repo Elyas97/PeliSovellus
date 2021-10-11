@@ -26,16 +26,6 @@ for(int i=0;i<testi.length;i++) {
 System.out.println(testi[i].getEtunimi()+testi[i].getSähköposti());
 }
 
-LoginSystem login=new LoginSystem();
-Kayttaja testi23=login.login("mikko@hotmail.com", "123456");
-System.out.println("Alku"+ testi23.getKayttajaID() +" "+ testi23.getEtunimi());
-TiedostoKasittely.kirjoitaTiedosto(testi23);
-TiedostoKasittely.poistaTiedosto();
-
-Kayttaja testi24=TiedostoKasittely.lueKäyttäjä();
-
-
-System.out.println("loppu");
 
 //Pelingenre peli = null;
 //System.out.println(Arrays.toString(Pelingenre.values()));

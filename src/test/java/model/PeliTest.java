@@ -6,10 +6,13 @@ import org.junit.jupiter.api.Test;
 
 
 class PeliTest {
+	
+	long millis=System.currentTimeMillis();  
+    java.sql.Date paiva =new java.sql.Date(millis);  
 
 	@Test
 	void testGetPeliId() {
-		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", "Playstation", 8, 2, "Kelpo peli", "Helsinki", "Hyvä", "Puh: 040 123456");
+		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", "Playstation", 8, 2, "Kelpo peli", "Helsinki", "Hyvä", "Puh: 040 123456", paiva);
 		assertEquals(2, peli.getPeliId(), "Pelin id väärin.");
 	}
 
@@ -29,7 +32,7 @@ class PeliTest {
 
 	@Test
 	void testGetPelinNimi() {
-		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", "Playstation", 8, 2, "Kelpo peli", "Helsinki", "Hyvä", "Puh: 040 123456");
+		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", "Playstation", 8, 2, "Kelpo peli", "Helsinki", "Hyvä", "Puh: 040 123456", paiva);
 		assertEquals("Mario Kart", peli.getPelinNimi(), "Pelin nimi väärin.");
 	}
 
@@ -42,12 +45,12 @@ class PeliTest {
 
 	@Test
 	void testGetPelintyyppi() {
-		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", "Playstation", 8, 2, "Kelpo peli", "Helsinki", "Hyvä", "Puh: 040 123456");
+		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", "Playstation", 8, 2, "Kelpo peli", "Helsinki", "Hyvä", "Puh: 040 123456", paiva);
 		assertEquals("Videopeli", peli.getPelintyyppi(), "Pelin tyyppi väärin.");
 	}
 	
 	void testGetKunto() {
-		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", "Playstation", 8, 2, "Kelpo peli", "Helsinki", "Hyvä", "Puh: 040 123456");
+		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", "Playstation", 8, 2, "Kelpo peli", "Helsinki", "Hyvä", "Puh: 040 123456", paiva);
 		assertEquals("Hyvä", peli.getKunto(), "Pelin kunto väärin.");
 	}
 	
@@ -60,7 +63,7 @@ class PeliTest {
 
 	@Test
 	void testGetGenre() {
-		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", "Playstation", 8, 2, "Kelpo peli", "Helsinki", "Hyvä", "Puh: 040 123456");
+		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", "Playstation", 8, 2, "Kelpo peli", "Helsinki", "Hyvä", "Puh: 040 123456", paiva);
 		assertEquals("Jännitys", peli.getGenre(), "Pelin genre väärin.");
 	}
 
@@ -73,7 +76,7 @@ class PeliTest {
 
 	@Test
 	void testGetIkäraja() {
-		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", "Playstation", 8, 2, "Kelpo peli", "Helsinki", "Hyvä", "Puh: 040 123456");
+		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", "Playstation", 8, 2, "Kelpo peli", "Helsinki", "Hyvä", "Puh: 040 123456", paiva);
 		assertEquals(8, peli.getIkaraja(), "Pelin ikäraja väärin.");
 	}
 
@@ -86,7 +89,7 @@ class PeliTest {
 
 	@Test
 	void testGetKuvaus() {
-		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", "Playstation", 8, 2, "Kelpo peli", "Helsinki", "Hyvä", "Puh: 040 123456");
+		Peli peli = new Peli("Mario Kart", 2, "Videopeli", "Vuokraus", 2, "Jännitys", "Playstation", 8, 2, "Kelpo peli", "Helsinki", "Hyvä", "Puh: 040 123456", paiva);
 		assertEquals("Kelpo peli", peli.getKuvaus(), "Pelin kuvaus väärin.");
 	}
 

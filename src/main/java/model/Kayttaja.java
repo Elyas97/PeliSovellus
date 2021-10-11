@@ -8,9 +8,9 @@ public class Kayttaja implements Serializable {
 	private String salasana;
 	private String etunimi;
 	private String sukunimi;
-	private int puhelinumero;
+	private String puhelinumero;
 	private String sähköposti;
-	public Kayttaja(int kayttajaID, String salasana, String etunimi, String sukunimi, int puhelinumero,
+	public Kayttaja(int kayttajaID, String salasana, String etunimi, String sukunimi, String puhelinumero,
 			 String sähköposti) {
 		super();
 		this.kayttajaID = kayttajaID;
@@ -45,10 +45,10 @@ public class Kayttaja implements Serializable {
 	public void setSukunimi(String sukunimi) {
 		this.sukunimi = sukunimi;
 	}
-	public int getPuhelinumero() {
+	public String getPuhelinumero() {
 		return puhelinumero;
 	}
-	public void setPuhelinumero(int puhelinumero) {
+	public void setPuhelinumero(String puhelinumero) {
 		this.puhelinumero = puhelinumero;
 	}
 	public String getSähköposti() {

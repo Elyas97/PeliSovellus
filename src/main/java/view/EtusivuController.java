@@ -47,6 +47,10 @@ public class EtusivuController {
 	@FXML
 	private Label kuvaus;
 	@FXML
+	private Label päivämäärä;
+	@FXML
+	private Label tekstikenttä;
+	@FXML
 	private TextField pelihaku;
 	@FXML
 	private ComboBox<String> hakurajaus;
@@ -109,6 +113,7 @@ public class EtusivuController {
 				(observable, oldValue, newValue) -> pelinTiedot(newValue));
 	
 	}
+	
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage=dialogStage;
 	} 
@@ -123,12 +128,9 @@ public class EtusivuController {
 			//lista.setId(pelit[i].getPelinNimi());
 		//lista.getItems().add(pelit[i]);
 		pelidata.add(pelit[i]);
-		
-		
-		}
-	
-			
+		}	
 	}
+    
     private void pelinTiedot(Peli peli) {
     	if(peli != null) {
     		pelinNimi.setText(peli.getPelinNimi());
@@ -138,6 +140,14 @@ public class EtusivuController {
     		ikäraja.setText(Integer.toString(peli.getIkaraja()));
     		pelaajamäärä.setText(Integer.toString(peli.getPelmaara()));
     		kuvaus.setText(peli.getKuvaus());
+    		tekstikenttä.setText(peli.getTekstikenttä());
+    		//Aiemmin lisätyissä peleissä ei päivämääriä
+    		if(peli.getPaiva() == null) {
+    			päivämäärä.setText("Ilmoitus jätetty: päivämäärä");
+    		}else {
+    			päivämäärä.setText("Ilmoitus jätetty: " + peli.getPaiva().toString());
+    		}
+    		
     	} else {
     		pelinNimi.setText("");
     		pelinHinta.setText("");
@@ -146,12 +156,10 @@ public class EtusivuController {
     		ikäraja.setText("");
     		pelaajamäärä.setText("");
     		kuvaus.setText("");
+    		päivämäärä.setText("");
     	}
-    	
     }
-    
-   
-    
+     
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}

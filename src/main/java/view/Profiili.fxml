@@ -58,12 +58,13 @@
             <TextField fx:id="email" layoutX="146.0" layoutY="212.0" style="-fx-border-color: #0589ff; -fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent;" />
             <Label layoutX="30.0" layoutY="261.0" text="Puhelinnumero:" />
             <TextField fx:id="numero" layoutX="146.0" layoutY="257.0" style="-fx-border-color: #0589ff; -fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent;" />
-            <Button layoutX="284.0" layoutY="343.0" mnemonicParsing="false" onAction="#tallennaMuutokset" style="-fx-background-color: #0589ff;" text="Tallenna muutokset" textFill="WHITE" />
+            <Button layoutX="284.0" layoutY="343.0" mnemonicParsing="false" onAction="#tallennaMuutokset" prefHeight="32.0" prefWidth="133.6" style="-fx-background-color: #0589ff;" text="Tallenna muutokset" textFill="WHITE" />
             <Text fx:id="tippi" fill="RED" layoutX="298.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font size="10.0" />
                </font>
             </Text>
+            <Button layoutX="129.0" layoutY="343.0" mnemonicParsing="false" onAction="#PoistaTili" prefHeight="32.0" prefWidth="133.6" style="-fx-background-color: #d11a2a;" text="Poista Tili" textFill="WHITE" />
          </children>
       </AnchorPane>
    </center>

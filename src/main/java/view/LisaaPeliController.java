@@ -1,6 +1,9 @@
 package view;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 import controller.ProfiiliController;
@@ -89,6 +92,7 @@ public class LisaaPeliController {
 	@FXML
 	private Text ilmoitustyyppivaroitus;
 	
+	
 	Kayttaja käyttäjä;
 	
 	
@@ -103,9 +107,15 @@ public class LisaaPeliController {
 	public LisaaPeliController() {}
 	@FXML
 	public String tyyppiAction(ActionEvent Action) {
-		
 		String text = ((RadioButton)tyyppi.getSelectedToggle()).getText();
 		System.out.println(text);
+		if(text.equals("Lahjoitus")) {
+			hinta.setText(Integer.toString(0));
+			hinta.setEditable(false);
+		}else {
+			hinta.setText("");
+			hinta.setEditable(true);
+		}
 		return text;
 	}
 	
@@ -183,6 +193,11 @@ public class LisaaPeliController {
 			peli.setKonsoli("");
 		}
 		
+		long millis=System.currentTimeMillis();  
+	    java.sql.Date paiva =new java.sql.Date(millis);  
+	    System.out.println(paiva);  
+		peli.setPaivamaara(paiva);
+		
 		
 		//System.out.println(peli.getPelinNimi()+" "+ peli.getHinta()+" "+ peli.getIkaraja());
 		pelisovellusdao.lisaaPeli(peli, 2);
@@ -194,7 +209,6 @@ public class LisaaPeliController {
 	    alert.showAndWait();
 	    
 		etusivu.listaaPelit();
-		//kirjaimet();
 		}
 		//dialogStage.close();
 	}
@@ -203,7 +217,7 @@ public class LisaaPeliController {
 	@FXML
 	public void kirjaimet(KeyEvent key) {
 		String kirjaimetstring = tekstikenttä.getText();
-		int maxpituus = 10;
+		int maxpituus = 200;
 		int pituus = 1;
 		pituus = kirjaimetstring.length();
 		int jaljella = maxpituus - pituus;
@@ -218,7 +232,7 @@ public class LisaaPeliController {
 			
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		    alert.setTitle("Alert");
-		    alert.setContentText("Sanamäärä ylittynyt!");
+		    alert.setContentText("Tekstikenttä täynnä!");
 		    alert.showAndWait();
 		    
 			//Tekstikenttään voi taas kirjoittaa
@@ -228,8 +242,9 @@ public class LisaaPeliController {
 			kirjaimet.setText("Kirjaimia jäljellä: " + jaljella);
 		}
 	}
-    
 	
+	//Päivämäärä
+	 
 	/*
      * 
      * Tarkistaa onko uusipeli.fxml kentät tyhjiä ennen kuin lähettää ne tietokantaan
