@@ -109,6 +109,7 @@ public class LisaaPeliController {
 	public String tyyppiAction(ActionEvent Action) {
 		String text = ((RadioButton)tyyppi.getSelectedToggle()).getText();
 		System.out.println(text);
+		ilmoitustyyppivaroitus.setText(""); // Poistaa "pakollinen valinta" tekstikentän 
 		if(text.equals("Lahjoitus")) {
 			hinta.setText(Integer.toString(0));
 			hinta.setEditable(false);
@@ -124,6 +125,7 @@ public class LisaaPeliController {
 		
 		String text = ((RadioButton)pelintyyppi.getSelectedToggle()).getText();
 		System.out.println(text);
+		tyyppivaroitus.setText(""); // poistaa "pakollinen valinta" tekstikentän jos näkyvissä
 		
 		if(text.equals("lauta")) {
 			konsoliPane.setVisible(false);
@@ -151,11 +153,9 @@ public class LisaaPeliController {
 		tekstikenttä.setPromptText("Yhteystiedot");
 		kuvaus.setPromptText("Kuvaile peliä tai kerro kokemuksiasi pelistä");
 		
-		// ei toimi
-		//genre.getItems().setAll(Pelingenre.values());
-		//choiceBox.getItems().clear();
-		//choiceBox.getItems().setAll(Pelingenre.values());
-		//choiceBox.setItems((ObservableList<Pelingenre>) Arrays.asList(Pelingenre.values()));
+		validointiPiiloon();
+
+	
 		
 	}
 	public void setMainApp(MainApp main) {
@@ -165,6 +165,11 @@ public class LisaaPeliController {
 		this.dialogStage = dialogStage;
 	}
 
+	/*
+	 * Luo uuden pelin tietokantaan
+	 * Ennen tietojen lähettämistä tarkastaa onko kaikki kentät täytetty.
+	 * 
+	 */
 	@FXML
 	public void uusiPeli() {
 		if(validointi() == true) {
@@ -197,10 +202,10 @@ public class LisaaPeliController {
 	    java.sql.Date paiva =new java.sql.Date(millis);  
 	    System.out.println(paiva);  
 		peli.setPaivamaara(paiva);
-		
+		käyttäjä = TiedostoKasittely.lueKäyttäjä();
 		
 		//System.out.println(peli.getPelinNimi()+" "+ peli.getHinta()+" "+ peli.getIkaraja());
-		pelisovellusdao.lisaaPeli(peli, 2);
+		pelisovellusdao.lisaaPeli(peli, käyttäjä.getKayttajaID());
 		tallennaClicked = true;
 		
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -212,6 +217,51 @@ public class LisaaPeliController {
 		}
 		//dialogStage.close();
 	}
+	/*
+	 * Kuuntelee kenttien syöttöä ja asettaa varoitustekstit pois jos kentissä on tekstiä
+	 */
+	private void validointiPiiloon() {
+		pelinnimi.textProperty().addListener((obs, oldValue, newValue) -> {
+			nimivaroitus.setText("");
+			pelinnimi.setStyle("-fx-border:none");
+		});
+		
+		hinta.textProperty().addListener((obs, oldValue, newValue) -> {
+			hintavaroitus.setText("");
+			hinta.setStyle("-fx-border:none");
+		});
+		kaupunki.textProperty().addListener((obs, oldValue, newValue) -> {
+			paikkakuntavaroitus.setText("");
+			kaupunki.setStyle("-fx-border:none");
+		});
+		
+
+		ikaraja.textProperty().addListener((obs, oldValue, newValue) -> {
+			ikarajavaroitus.setText("");
+			ikaraja.setStyle("-fx-border:none");
+		});
+		pelaajamaara.textProperty().addListener((obs, oldValue, newValue) -> {
+			pelaajamaaravaroitus.setText("");
+			pelaajamaara.setStyle("-fx-border:none");
+		});
+		kuvaus.textProperty().addListener((obs, oldValue, newValue) -> {
+			kuvausvaroitus.setText("");
+			kuvaus.setStyle("-fx-border:none");
+		});
+		tekstikenttä.textProperty().addListener((obs, oldValue, newValue) -> {
+			tekstikenttavaroitus.setText("");
+			tekstikenttä.setStyle("-fx-border:none");
+		});
+
+		//setOnAction "kuuntelee" valintaa ja kun valittu asettaa varoitustekstin pois
+		genre.setOnAction((event) -> {
+			genrevaroitus.setText("");
+		});
+		kunto.setOnAction((event) -> {
+			kuntovaroitus.setText("");
+		});
+	}
+	
 	
 
 	@FXML
@@ -263,7 +313,9 @@ public class LisaaPeliController {
    		virhe.append("Syötä pelinnimi\n");
    		pelinnimi.setStyle("-fx-border-color:red");
    		nimivaroitus.setText("Pakollinen kenttä");
+
    	}
+
    	if(hinta.getText().trim().isEmpty()) {
    		virhe.append("Syötä pelinhinta\n");
    		hinta.setStyle("-fx-border-color:red");

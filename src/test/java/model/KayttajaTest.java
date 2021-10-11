@@ -19,7 +19,7 @@ class KayttajaTest {
 
 	@Test
 	void testGetKayttajaID() {
-		Kayttaja käyttäjä = new Kayttaja(1, "salasana", "Niko", "Nieminen", 408322313, "moivaan@gmail.com");
+		Kayttaja käyttäjä = new Kayttaja(1, "salasana", "Niko", "Nieminen", "0408322313", "moivaan@gmail.com");
 		assertEquals(1, käyttäjä.getKayttajaID(), "Käyttäjän id väärin.");
 	}
 
@@ -32,7 +32,7 @@ class KayttajaTest {
 
 	@Test
 	void testGetSalasana() {
-		Kayttaja käyttäjä = new Kayttaja(1, "salasana", "Niko", "Nieminen", 408322313, "moivaan@gmail.com");
+		Kayttaja käyttäjä = new Kayttaja(1, "salasana", "Niko", "Nieminen", "0408322313", "moivaan@gmail.com");
 		assertEquals("salasana", käyttäjä.getSalasana(), "Käyttäjän salasana väärin.");
 	}
 
@@ -45,7 +45,7 @@ class KayttajaTest {
 
 	@Test
 	void testGetEtunimi() {
-		Kayttaja käyttäjä = new Kayttaja(1, "salasana", "Niko", "Nieminen", 408322313, "moivaan@gmail.com");
+		Kayttaja käyttäjä = new Kayttaja(1, "salasana", "Niko", "Nieminen", "0408322313", "moivaan@gmail.com");
 		assertEquals("Niko", käyttäjä.getEtunimi(), "Käyttäjän etunimi väärin.");
 	}
 
@@ -58,7 +58,7 @@ class KayttajaTest {
 
 	@Test
 	void testGetSukunimi() {
-		Kayttaja käyttäjä = new Kayttaja(1, "salasana", "Niko", "Nieminen", 408322313, "moivaan@gmail.com");
+		Kayttaja käyttäjä = new Kayttaja(1, "salasana", "Niko", "Nieminen", "0408322313", "moivaan@gmail.com");
 		assertEquals("Nieminen", käyttäjä.getSukunimi(), "Käyttäjän sukunimi väärin.");
 	}
 
@@ -71,20 +71,20 @@ class KayttajaTest {
 
 	@Test
 	void testGetPuhelinumero() {
-		Kayttaja käyttäjä = new Kayttaja(1, "salasana", "Niko", "Nieminen", 408322313, "moivaan@gmail.com");
-		assertEquals(408322313, käyttäjä.getPuhelinumero(), "Käyttäjän puhelinnumero väärin.");
+		Kayttaja käyttäjä = new Kayttaja(1, "salasana", "Niko", "Nieminen", "0408322313", "moivaan@gmail.com");
+		assertEquals("0408322313", käyttäjä.getPuhelinumero(), "Käyttäjän puhelinnumero väärin.");
 	}
 
 	@Test
 	void testSetPuhelinumero() {
 		Kayttaja käyttäjä = new Kayttaja();
-		käyttäjä.setPuhelinumero(045321454);
-        assertTrue(käyttäjä.getPuhelinumero() == 045321454);
+		käyttäjä.setPuhelinumero("045321454");
+        assertTrue(käyttäjä.getPuhelinumero() == "045321454");
 	}
 
 	@Test
 	void testGetSähköposti() {
-		Kayttaja käyttäjä = new Kayttaja(1, "salasana", "Niko", "Nieminen", 408322313, "moivaan@gmail.com");
+		Kayttaja käyttäjä = new Kayttaja(1, "salasana", "Niko", "Nieminen", "0408322313", "moivaan@gmail.com");
 		assertEquals("moivaan@gmail.com", käyttäjä.getSähköposti(), "Käyttäjän sähköposti väärin.");
 	}
 
