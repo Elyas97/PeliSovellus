@@ -19,6 +19,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -28,7 +30,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Kayttaja;
 import model.Peli;
@@ -74,6 +78,42 @@ public class EtusivuController {
 	@FXML
 	private RadioButton lahjoitus;
 
+	private AnchorPane rajaahakuNäkymä;
+	@FXML
+	private ToggleGroup julkaisu;
+	@FXML
+	private RadioButton  sell;
+
+	@FXML
+	private RadioButton rent;
+	
+
+	@FXML
+	private RadioButton  free;
+
+	@FXML
+	private TextField maara;
+
+	@FXML
+	private RadioButton uusin;
+
+	@FXML
+	private RadioButton vanhin;
+
+	@FXML
+	private TextField minimi;
+
+	@FXML
+	private TextField maxnum;
+	@FXML
+	private ChoiceBox<String> valinnat;
+	 @FXML
+	    private Label hintaOtsikko2;
+	 @FXML
+	    private Label hintaOtsikko;
+	 @FXML
+	    private Text hintaLabel;
+	
 	
 	private Stage dialogStage;
 
@@ -81,13 +121,16 @@ public class EtusivuController {
 	private Peli[] pelit;
 	ObservableList<Peli> pelidata = FXCollections.observableArrayList();
 	FilteredList<Peli> filteredData = new FilteredList<>(pelidata, pelit -> true);
-
+	
 	
 	/*public EtusivuController() {
 
 	}*/
 	
 	public void initialize() {
+		ObservableList<String> valinta = FXCollections.observableArrayList("3", "7","12","16","18");
+		valinnat.setItems(valinta);
+		
 		ObservableList<String> rajaus = FXCollections.observableArrayList("Nimi", "Kaupunki","Genre");
 		hakurajaus.setItems(rajaus);
 		lista.setItems(filteredData);
@@ -185,6 +228,36 @@ public class EtusivuController {
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
+	@FXML
+    void tyyppiAction(ActionEvent event) {
+		String text = ((RadioButton)julkaisu.getSelectedToggle()).getText();
+		
+			if(text.equals("Lahjoitus")) {
+		//		hintaOtsikko.setText(Integer.toString(0));
+				hintaOtsikko.setVisible(false);
+			//	hintaOtsikko2.setText(Integer.toString(0));
+				hintaOtsikko2.setVisible(false);
+				minimi.setVisible(false);
+				maxnum.setVisible(false);
+				hintaLabel.setVisible(false);
+			}else if(text.equals("Myynti")) {
+					hintaOtsikko.setVisible(true);
+					hintaLabel.setVisible(true);
+					hintaOtsikko2.setVisible(true);
+					minimi.setVisible(true);
+					maxnum.setVisible(true);
+			}else if(text.equals("Vuokraus")) {
+				hintaOtsikko.setVisible(true);
+				hintaLabel.setVisible(true);
+				hintaOtsikko2.setVisible(true);
+				minimi.setVisible(true);
+				maxnum.setVisible(true);
+			}
+			
+		
+		
+    }
+
 
 	public void hakutyyppi() {
 		kaikki.setSelected(true);
@@ -269,8 +342,83 @@ public class EtusivuController {
 	    	}
 	    	
 	    }
+	  @FXML
+	    void peruuta(ActionEvent event) {
+		  rajaahakuNäkymä.setVisible(false);
+
+	    }
+
+	    @FXML
+	    void suljeRajaus(ActionEvent event) {
+	    	rajaahakuNäkymä.setVisible(false);
+	    }
+	    
+	    @FXML
+	    void avaaRajaus(ActionEvent event) {
+	    	rajaahakuNäkymä.setVisible(true);
+	    }
+	    
+	    @FXML
+	    void Rajaa(ActionEvent event) {
+	    	//ei valmis
+	  //  	String sql="SELECT * FROM PELI WHERE ";
+	    	//rajaustoiminto
+	  //  	boolean test=sell.isSelected();
+	  //  	boolean test1=rent.isSelected();
+	  //  	boolean test2=free.isSelected();
+	  //  	boolean uus=uusin.isSelected();
+	  //  	boolean vanhat=vanhin.isSelected();
+	  //  	String ikä=valinnat.getSelectionModel().getSelectedItem();
+	  //  	if(test==true) {
+	  //  		sql=sql + "Talletustyyppi = " +"\"" + sell.getText() + "\"";
+	  //  		System.out.println(sql);
+	  //  	}
+	  //  	if(test1==true) {
+	  //  		sql=sql +" Talletustyyppi =" +"\"" + rent.getText() + "\"";
+	  //  	}
+	  //  	if(test2==true) {
+	  //  		sql=sql +" Talletustyyppi =" +"\"" + free.getText() + "\"";
+	  //  	}
+	  //  	System.out.println(sql);
+	    	//System.out.println(test +" rent"+test1+" ilmainen"+test2+" uus"+ uus+" vanha "+vanhat +" "+ikä);
+	    	
+	    	//sulje ikkuna
+	    	rajaahakuNäkymä.setVisible(false);
+	    }
 	
-	
+	    private boolean validoiRajaus() {
+	    	boolean test=true;
+	    	try {
+	    	int min=Integer.parseInt(minimi.getText());
+	    	int max=Integer.parseInt(maxnum.getText());
+	    	
+	    	if(min<0 || min > max) {
+	    		test =false;
+	    		minimi.setStyle("-fx-border-color:red");
+	    		minimi.setPromptText("Ei negativiinen/ei isompi kun max numero");
+	    	}
+	    	
+	    	
+	    	}catch(NumberFormatException e) {
+	    		System.out.println(e);
+	    		minimi.setStyle("-fx-border-color:red");
+	    		minimi.setPromptText("numero");
+	    		test=false;
+	    	}
+	    	try {
+	    	int pelaajat=Integer.parseInt(maara.getText());
+	    	if(pelaajat<0) {
+	    		test =false;
+	    		maara.setStyle("-fx-border-color:red");
+	    		maara.setPromptText("Syötä positiivinen");
+	    	}
+	    	}catch(NumberFormatException e) {
+	    		maara.setText("");
+	    		System.out.println(e);
+	    	}
+			return test;
+	    	
+	    }
 
 	
 }

@@ -156,6 +156,11 @@ public class TapahtumatController {
 		listaaOmatPelit();
 		omatPelit.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> pelinTiedot(newValue));
+		
+		kirjaimet();
+		tekstikenttä.textProperty().addListener((observable, oldValue, newValue) -> {
+			kirjaimet();
+		});
 
 	}
 
@@ -433,18 +438,14 @@ public class TapahtumatController {
 	}
 
 	@FXML
-	public void kirjaimet(KeyEvent key) {
+	public void kirjaimet() {
 		String kirjaimetstring = tekstikenttä.getText();
 		int maxpituus = 200;
-		int pituus = 1;
+		int pituus = 0;
 		pituus = kirjaimetstring.length();
 		int jaljella = maxpituus - pituus;
 
 		if (jaljella <= 0) {
-			jaljella = 0;
-		}
-
-		if (jaljella == 0) {
 			kirjaimet.setText("Kirjaimia jäljellä: " + jaljella);
 			tekstikenttä.setEditable(false);
 
