@@ -179,7 +179,7 @@
                         <Pane layoutX="-5.0" layoutY="330.0" prefHeight="110.0" prefWidth="224.0">
                            <children>
                               <Label layoutX="7.0" layoutY="5.0" text="Tekstikenttä" />
-                              <TextField fx:id="tekstikenttä" layoutX="7.0" layoutY="21.0" onKeyPressed="#kirjaimet" prefHeight="69.0" prefWidth="156.0" />
+                              <TextField fx:id="tekstikenttä" layoutX="7.0" layoutY="21.0" prefHeight="69.0" prefWidth="156.0" />
                               <Label fx:id="kirjaimet" layoutX="7.0" layoutY="88.0" text="Max kirjainmäärä 200" />
                               <Text fx:id="tekstikenttävaroitus" fill="#f50202" layoutX="85.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                            </children>
