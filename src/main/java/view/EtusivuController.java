@@ -321,29 +321,30 @@ public class EtusivuController {
 	    
 	    @FXML
 	    void Rajaa(ActionEvent event) {
-	    	String sql="SELECT * FROM PELI WHERE ";
+	    	//ei valmis
+	  //  	String sql="SELECT * FROM PELI WHERE ";
 	    	//rajaustoiminto
-	    	boolean test=sell.isSelected();
-	    	boolean test1=rent.isSelected();
-	    	boolean test2=free.isSelected();
-	    	boolean uus=uusin.isSelected();
-	    	boolean vanhat=vanhin.isSelected();
-	    	String ikä=valinnat.getSelectionModel().getSelectedItem();
-	    	if(test==true) {
-	    		sql=sql + "Talletustyyppi = " +"\"" + sell.getText() + "\"";
-	    		System.out.println(sql);
-	    	}
-	    	if(test1==true) {
-	    		sql=sql +" Talletustyyppi =" +"\"" + rent.getText() + "\"";
-	    	}
-	    	if(test2==true) {
-	    		sql=sql +" Talletustyyppi =" +"\"" + free.getText() + "\"";
-	    	}
-	    	System.out.println(sql);
+	  //  	boolean test=sell.isSelected();
+	  //  	boolean test1=rent.isSelected();
+	  //  	boolean test2=free.isSelected();
+	  //  	boolean uus=uusin.isSelected();
+	  //  	boolean vanhat=vanhin.isSelected();
+	  //  	String ikä=valinnat.getSelectionModel().getSelectedItem();
+	  //  	if(test==true) {
+	  //  		sql=sql + "Talletustyyppi = " +"\"" + sell.getText() + "\"";
+	  //  		System.out.println(sql);
+	  //  	}
+	  //  	if(test1==true) {
+	  //  		sql=sql +" Talletustyyppi =" +"\"" + rent.getText() + "\"";
+	  //  	}
+	  //  	if(test2==true) {
+	  //  		sql=sql +" Talletustyyppi =" +"\"" + free.getText() + "\"";
+	  //  	}
+	  //  	System.out.println(sql);
 	    	//System.out.println(test +" rent"+test1+" ilmainen"+test2+" uus"+ uus+" vanha "+vanhat +" "+ikä);
 	    	
 	    	//sulje ikkuna
-	    //	rajaahakuNäkymä.setVisible(false);
+	    	rajaahakuNäkymä.setVisible(false);
 	    }
 	
 	    private boolean validoiRajaus() {
