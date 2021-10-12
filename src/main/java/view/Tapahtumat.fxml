@@ -8,6 +8,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -173,15 +174,15 @@
                               <Text fx:id="pelaajamäärävaroitus" fill="#f50202" layoutX="87.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                            </children>
                         </Pane>
-                        <Button layoutX="1.0" layoutY="449.0" mnemonicParsing="false" onAction="#tallennaMuutokset" prefHeight="0.0" prefWidth="61.0" text="Tallenna" />
-                        <Pane layoutX="-3.0" layoutY="240.0" prefHeight="91.0" prefWidth="214.0">
+                        <Button layoutX="1.0" layoutY="488.0" mnemonicParsing="false" onAction="#tallennaMuutokset" prefHeight="0.0" prefWidth="61.0" text="Tallenna" />
+                        <Pane layoutX="-3.0" layoutY="240.0" prefHeight="91.0" prefWidth="270.0">
                            <children>
-                              <Label layoutX="6.0" layoutY="6.0" text="Kuvaus" />
-                              <TextField fx:id="kuvaus" layoutX="6.0" layoutY="24.0" prefHeight="46.0" prefWidth="149.0" />
+                              <Label layoutX="6.0" layoutY="-2.0" text="Kuvaus" />
                               <Text fx:id="kuvausvaroitus" fill="#f50202" layoutX="51.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <TextArea fx:id="kuvaus" layoutX="6.0" layoutY="14.0" prefHeight="84.0" prefWidth="244.0" />
                            </children>
                         </Pane>
-                        <Button layoutX="75.0" layoutY="449.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="58.0" text="Peruuta" />
+                        <Button layoutX="75.0" layoutY="488.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="58.0" text="Peruuta" />
                         <Pane layoutX="-2.0" layoutY="179.0" prefHeight="59.0" prefWidth="222.0">
                            <children>
                               <Label layoutX="7.0" text="Kunto" />
@@ -189,12 +190,12 @@
                               <Text fx:id="kuntovaroitus" fill="#f50202" layoutX="46.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                            </children>
                         </Pane>
-                        <Pane layoutX="-5.0" layoutY="330.0" prefHeight="110.0" prefWidth="224.0">
+                        <Pane layoutX="-5.0" layoutY="330.0" prefHeight="134.0" prefWidth="272.0">
                            <children>
-                              <Label layoutX="7.0" layoutY="5.0" text="Tekstikenttä" />
-                              <TextField fx:id="tekstikenttä" layoutX="7.0" layoutY="21.0" prefHeight="69.0" prefWidth="156.0" />
-                              <Label fx:id="kirjaimet" layoutX="7.0" layoutY="88.0" text="Max kirjainmäärä 200" />
+                              <Label layoutX="7.0" layoutY="21.0" text="Tekstikenttä" />
+                              <Label fx:id="kirjaimet" layoutX="7.0" layoutY="126.0" text="Max kirjainmäärä 200" />
                               <Text fx:id="tekstikenttävaroitus" fill="#f50202" layoutX="85.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <TextArea fx:id="tekstikenttä" layoutX="7.0" layoutY="43.0" prefHeight="83.0" prefWidth="248.0" />
                            </children>
                         </Pane>
                      </children>

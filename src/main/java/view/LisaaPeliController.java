@@ -55,7 +55,7 @@ public class LisaaPeliController {
 	@FXML
 	private TextField kaupunki;
 	@FXML
-	private TextField kuvaus;
+	private TextArea kuvaus;
 	@FXML
 	private TextArea tekstikenttä;
 	@FXML

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -16,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LisaaPeliController">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LisaaPeliController">
    <left>
       <VBox prefHeight="200.0" prefWidth="155.0" style="-fx-background-color: #0589ff;" BorderPane.alignment="CENTER">
          <children>
@@ -24,14 +25,29 @@
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="GAMEPAD" size="30" />
                </graphic>
+               <padding>
+                  <Insets bottom="15.0" top="15.0" />
+               </padding>
             </Button>
-            <Button mnemonicParsing="false" onAction="#vieEtusivulle" prefHeight="34.0" prefWidth="155.0" style="-fx-background-color: #0589ff;" text="Selaa Pelejä" textFill="WHITE" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#vieTapahtumat" prefHeight="39.0" prefWidth="190.0" style="-fx-background-color: transparent;" text="Lisätyt Pelit" textFill="WHITE" />
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="163.0" style="-fx-background-color: white;" text="Lisää Peli" textFill="#0589ff" />
-            <Button mnemonicParsing="false" onAction="#vieProfiiliNäkymä" prefHeight="39.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Profiili" textFill="WHITE" />
-            <VBox alignment="BOTTOM_LEFT" prefHeight="336.0" prefWidth="155.0">
+            <Button mnemonicParsing="false" onAction="#vieEtusivulle" prefHeight="34.0" prefWidth="155.0" style="-fx-background-color: #0589ff;" text="Selaa Pelejä" textFill="WHITE">
+               <padding>
+                  <Insets bottom="15.0" top="15.0" />
+               </padding></Button>
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#vieTapahtumat" prefHeight="39.0" prefWidth="190.0" style="-fx-background-color: transparent;" text="Lisätyt Pelit" textFill="WHITE">
+               <padding>
+                  <Insets bottom="15.0" top="15.0" />
+               </padding></Button>
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="163.0" style="-fx-background-color: white;" text="Lisää Peli" textFill="#0589ff">
+               <padding>
+                  <Insets bottom="15.0" top="15.0" />
+               </padding></Button>
+            <Button mnemonicParsing="false" onAction="#vieProfiiliNäkymä" prefHeight="39.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Profiili" textFill="WHITE">
+               <padding>
+                  <Insets bottom="15.0" top="15.0" />
+               </padding></Button>
+            <VBox alignment="BOTTOM_LEFT" prefHeight="586.0" prefWidth="155.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#LogOut" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #1A85B2;" text="Kirjaudu ulos" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#LogOut" prefHeight="47.0" prefWidth="155.0" style="-fx-background-color: #1A85B2;" text="Kirjaudu ulos" textFill="WHITE">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="USER" size="22" />
                      </graphic></Button>
@@ -41,11 +57,11 @@
       </VBox>
    </left>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="786.0" prefWidth="988.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <SplitPane dividerPositions="0.5277777777777778" layoutX="15.0" layoutY="26.0" prefHeight="486.0" prefWidth="470.0">
+            <SplitPane dividerPositions="0.5277777777777778" layoutX="15.0" layoutY="46.0" prefHeight="710.0" prefWidth="965.0">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="509.0" prefWidth="244.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="605.0" prefWidth="244.0">
                      <children>
                         <Pane prefHeight="84.0" prefWidth="244.0">
                            <children>
@@ -124,12 +140,12 @@
                               <Text fx:id="pelaajamaaravaroitus" fill="RED" layoutX="89.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                            </children>
                         </Pane>
-                        <Button layoutX="14.0" layoutY="434.0" mnemonicParsing="false" onAction="#uusiPeli" text="Tallenna" />
-                        <Pane layoutX="-3.0" layoutY="237.0" prefHeight="82.0" prefWidth="224.0">
+                        <Button layoutX="10.0" layoutY="496.0" mnemonicParsing="false" onAction="#uusiPeli" text="Tallenna" />
+                        <Pane layoutX="-3.0" layoutY="237.0" prefHeight="118.0" prefWidth="455.0">
                            <children>
                               <Label layoutX="14.0" layoutY="6.0" text="Kuvaus" />
-                              <TextField fx:id="kuvaus" layoutX="14.0" layoutY="23.0" prefHeight="50.0" prefWidth="149.0" />
                               <Text fx:id="kuvausvaroitus" fill="RED" layoutX="66.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <TextArea fx:id="kuvaus" layoutX="14.0" layoutY="22.0" prefHeight="96.0" prefWidth="317.0" />
                            </children>
                         </Pane>
                         <Pane layoutY="176.0" prefHeight="63.0" prefWidth="200.0">
@@ -139,21 +155,21 @@
                               <Text fx:id="kuntovaroitus" fill="RED" layoutX="60.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                            </children>
                         </Pane>
-                        <Pane layoutY="318.0" prefHeight="78.0" prefWidth="219.0">
+                        <Pane layoutY="354.0" prefHeight="42.0" prefWidth="219.0">
                            <children>
-                              <Label layoutX="14.0" layoutY="5.0" text="Tekstikenttä" />
+                              <Label layoutX="14.0" layoutY="13.0" text="Tekstikenttä" />
                               <Text fx:id="tekstikenttavaroitus" fill="RED" layoutX="86.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                            </children>
                         </Pane>
                         <Label fx:id="kirjaimet" layoutX="14.0" layoutY="403.0" />
-                        <TextArea fx:id="tekstikenttä" layoutX="10.0" layoutY="339.0" prefHeight="63.0" prefWidth="147.0" />
+                        <TextArea fx:id="tekstikenttä" layoutX="10.0" layoutY="389.0" prefHeight="90.0" prefWidth="319.0" />
                      </children>
                   </AnchorPane>
               </items>
             </SplitPane>
-            <Text fill="#0589ff" layoutX="43.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lisää uusi peli">
+            <Text fill="#0589ff" layoutX="15.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lisää uusi peli">
                <font>
-                  <Font size="18.0" />
+                  <Font size="28.0" />
                </font>
             </Text>
          </children></AnchorPane>

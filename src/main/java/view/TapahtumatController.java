@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -74,10 +75,10 @@ public class TapahtumatController {
 	private TextField pelaajamaara;
 
 	@FXML
-	private TextField kuvaus;
+	private TextArea kuvaus;
 
 	@FXML
-	private TextField tekstikenttä;
+	private TextArea tekstikenttä;
 
 	@FXML
 	private Text nimivaroitus;
@@ -284,6 +285,7 @@ public class TapahtumatController {
 				tyyppi.selectToggle(myynti);
 			} else if (pelintalletusstring.equals("Lahjoitus")) {
 				tyyppi.selectToggle(lahjoitus);
+				hinta.setEditable(false);
 			} else {
 				tyyppi.selectToggle(vuokraus);
 			}
