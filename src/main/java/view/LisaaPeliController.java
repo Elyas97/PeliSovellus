@@ -151,9 +151,9 @@ public class LisaaPeliController {
 		ObservableList<String> konsoliOptions = FXCollections.observableArrayList("Xbox", "Playstation", "Wii");
 		konsoli.setItems(konsoliOptions);
 
-		// tekstikenttä.setText(käyttäjä.getSähköposti()+ "\n"+
-		// käyttäjä.getPuhelinumero() +" ");
-		tekstikenttä.setText("moivaa");
+		tekstikenttä.setText(käyttäjä.getSähköposti()+ "\n"+
+		käyttäjä.getPuhelinumero() +" ");
+
 		kuvaus.setPromptText("Kuvaile peliä tai kerro kokemuksiasi pelistä");
 		kirjaimet();
 		tekstikenttä.textProperty().addListener((obs, old, newew) -> {
@@ -199,11 +199,12 @@ public class LisaaPeliController {
 			peli.setKunto(kunto.getValue().toString());
 			peli.setTekstikenttä(tekstikenttä.getText());
 
-			if (peli.getKonsoli() != null) {
+			/*if (peli.getKonsoli() != null) {
 				peli.setKonsoli(konsoli.getValue().toString());
 			} else {
 				peli.setKonsoli("");
-			}
+			}*/
+			peli.setKonsoli(konsoli.getValue().toString());
 
 			long millis = System.currentTimeMillis();
 			java.sql.Date paiva = new java.sql.Date(millis);

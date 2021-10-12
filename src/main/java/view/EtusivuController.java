@@ -66,6 +66,8 @@ public class EtusivuController {
 	@FXML
 	private TextField pelihaku;
 	@FXML
+	private Label konsoli;
+	@FXML
 	private ComboBox<String> hakurajaus;
 	@FXML
 	private ToggleGroup hakutyyppi;
@@ -77,7 +79,7 @@ public class EtusivuController {
 	private RadioButton vuokraus;
 	@FXML
 	private RadioButton lahjoitus;
-
+	@FXML
 	private AnchorPane rajaahakuNäkymä;
 	@FXML
 	private ToggleGroup julkaisu;
@@ -203,6 +205,7 @@ public class EtusivuController {
     		paikkakunta.setText(peli.getKaupunki());
     		genre.setText(peli.getGenre());
     		ikäraja.setText(Integer.toString(peli.getIkaraja()));
+    		konsoli.setText(peli.getKonsoli());
     		pelaajamäärä.setText(Integer.toString(peli.getPelmaara()));
     		kuvaus.setText(peli.getKuvaus());
     		tekstikenttä.setText(peli.getTekstikenttä());
