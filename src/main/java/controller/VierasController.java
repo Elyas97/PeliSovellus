@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import java.util.Optional;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -28,6 +30,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 
 public class VierasController {
@@ -109,6 +112,16 @@ public class VierasController {
 
     @FXML
     private RadioButton free;
+	@FXML
+	private ToggleGroup hakutyyppi;
+	@FXML
+	private RadioButton kaikki;
+	@FXML
+	private RadioButton myynti;
+	@FXML
+	private RadioButton vuokraus;
+	@FXML
+	private RadioButton lahjoitus;
 
     @FXML
     private Label hintaOtsikko;
@@ -126,6 +139,7 @@ public class VierasController {
 		ObservableList<String> rajaus = FXCollections.observableArrayList("Nimi", "Kaupunki","Genre");
 		hakurajaus.setItems(rajaus);
 		lista.setItems(filteredData);
+		hakutyyppi();
 		hakurajaus.setPromptText("Rajaa hakua");
 		listaaPelit();
 		pelihaku.textProperty().addListener((obs, oldValue, newValue) -> {
@@ -232,6 +246,30 @@ public class VierasController {
 			pelidata.add(pelit[i]);
 			}	
 
+	}
+	public void hakutyyppi() {
+		kaikki.setSelected(true);
+		hakutyyppi.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+			public void changed(ObservableValue<? extends Toggle> obs, Toggle oldT, Toggle newT) {
+				
+				
+				switch (((RadioButton) hakutyyppi.getSelectedToggle()).getText()) {
+				case "Myydään":
+					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Myynti"));
+					
+					break;
+				case "Vuokrataan":
+					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Vuokraus"));
+					break;
+				case "Lahjoitetaan":
+					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Lahjoitus"));
+					break;
+				case "Kaikki":
+					filteredData.setPredicate(pelit -> true);
+					break;
+				}
+			}
+		});
 	}
 	 private void pelinTiedot(Peli peli) {
 	    	if(peli != null) {

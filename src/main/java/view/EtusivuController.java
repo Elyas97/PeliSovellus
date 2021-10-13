@@ -159,19 +159,7 @@ public class EtusivuController {
 			}
 			}
 	
-			
-			/*
-			 * 
-			 * VANHA HAKU;
-			 * EI TOIMI CHOICEBOXIN KANSSA
-			 */
-			/*if(newValue == null || newValue.length() == 0) {
-				filteredData.setPredicate(pelit -> true);
-			} else {
-				
-				filteredData.setPredicate(pelit -> pelit.getGenre().toLowerCase().contains(newValue));
-				
-			}*/
+	
 		});
 
 
@@ -276,7 +264,7 @@ public class EtusivuController {
 				case "Vuokrataan":
 					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Vuokraus"));
 					break;
-				case "Lahjoitus":
+				case "Lahjoitetaan":
 					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Lahjoitus"));
 					break;
 				case "Kaikki":

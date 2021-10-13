@@ -3,7 +3,6 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -21,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VierasController">
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VierasController">
    <left>
       <AnchorPane prefHeight="400.0" prefWidth="156.0" BorderPane.alignment="CENTER">
          <children>
@@ -63,32 +62,27 @@
                               <Insets left="20.0" right="2.0" top="20.0" />
                            </HBox.margin>
                         </TextField>
-                        <Button mnemonicParsing="false" onAction="#listaaPelit" prefHeight="28.0" prefWidth="43.0" text="Hae">
-                           <HBox.margin>
-                              <Insets top="20.0" />
-                           </HBox.margin>
-                        </Button>
-                        <ComboBox fx:id="hakurajaus" prefWidth="150.0">
+                        <ComboBox fx:id="hakurajaus" prefHeight="25.0" prefWidth="131.0">
                            <HBox.margin>
                               <Insets top="20.0" />
                            </HBox.margin>
                         </ComboBox>
+                        <Button mnemonicParsing="false" onAction="#avaaRajaus" text="Rajaa haku">
+                           <HBox.margin>
+                              <Insets top="20.0" />
+                           </HBox.margin></Button>
                      </children>
                   </HBox>
                   <HBox prefHeight="39.0" prefWidth="258.0">
                      <children>
-                        <CheckBox mnemonicParsing="false" prefHeight="18.0" prefWidth="99.0" text="Myydään">
-                           <padding>
-                              <Insets left="20.0" right="2.0" />
-                           </padding>
-                        </CheckBox>
-                        <CheckBox mnemonicParsing="false" prefHeight="18.0" prefWidth="90.0" text="Vuokrataan">
-                           <HBox.margin>
-                              <Insets right="5.0" />
-                           </HBox.margin>
-                        </CheckBox>
-                        <CheckBox mnemonicParsing="false" prefHeight="18.0" prefWidth="94.0" text="Lahjoitetaan" />
-                        <Button mnemonicParsing="false" onAction="#avaaRajaus" text="Rajaa haku" />
+                        <RadioButton fx:id="kaikki" mnemonicParsing="false" text="Kaikki">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="hakutyyppi" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="myynti" mnemonicParsing="false" text="Myydään" toggleGroup="$hakutyyppi" />
+                        <RadioButton fx:id="vuokraus" mnemonicParsing="false" text="Vuokrataan" toggleGroup="$hakutyyppi" />
+                        <RadioButton fx:id="lahjoitus" mnemonicParsing="false" text="Lahjoitetaan" toggleGroup="$hakutyyppi" />
                      </children>
                   </HBox>
                   <ListView fx:id="lista" prefHeight="274.0" prefWidth="336.0" style="-fx-border-color: #0589ff; -fx-background-color: F0F0F0;" />
