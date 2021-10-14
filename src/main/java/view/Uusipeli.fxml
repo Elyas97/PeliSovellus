@@ -140,7 +140,7 @@
                               <Text fx:id="pelaajamaaravaroitus" fill="RED" layoutX="89.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                            </children>
                         </Pane>
-                        <Button layoutX="10.0" layoutY="496.0" mnemonicParsing="false" onAction="#uusiPeli" text="Tallenna" />
+                        <Button layoutX="8.0" layoutY="513.0" mnemonicParsing="false" onAction="#uusiPeli" text="Tallenna" />
                         <Pane layoutX="-3.0" layoutY="237.0" prefHeight="118.0" prefWidth="455.0">
                            <children>
                               <Label layoutX="14.0" layoutY="6.0" text="Kuvaus" />
@@ -163,6 +163,7 @@
                         </Pane>
                         <Label fx:id="kirjaimet" layoutX="14.0" layoutY="403.0" />
                         <TextArea fx:id="tekstikenttä" layoutX="10.0" layoutY="389.0" prefHeight="90.0" prefWidth="319.0" />
+                        <Label fx:id="kirjaimet" layoutX="10.0" layoutY="479.0" text="Max kirjainmäärä 200" />
                      </children>
                   </AnchorPane>
               </items>

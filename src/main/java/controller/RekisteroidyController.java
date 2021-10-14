@@ -24,19 +24,14 @@ public class RekisteroidyController {
 
 	@FXML
 	private TextField etu;
-
 	@FXML
 	private TextField suku;
-
 	@FXML
 	private TextField email;
-
 	@FXML
 	private TextField puhelinnumero;
-
 	@FXML
 	private PasswordField salasana;
-
 	@FXML
 	private PasswordField csalasana;
 	@FXML
@@ -46,7 +41,6 @@ public class RekisteroidyController {
 
 	@FXML
 	void initialize() {
-
 		Tooltip toolpwd = new Tooltip();
 		toolpwd.setText("Salasanan pituus vähintään 6");
 		salasana.setTooltip(toolpwd);
@@ -56,15 +50,12 @@ public class RekisteroidyController {
 		Tooltip toolemail = new Tooltip();
 		toolemail.setText("Syötä Sähköposti esimerkiksi JohnDoe@Hotmail.com");
 		email.setTooltip(toolemail);
-
 	}
 
 	@FXML
 	void Rekistyröidy(ActionEvent event) {
 		boolean test = validointi();
-
 		if (test == true) {
-
 			try {
 				Kayttaja käyttäjä = new Kayttaja();
 				käyttäjä.setEtunimi(etu.getText());
@@ -75,23 +66,17 @@ public class RekisteroidyController {
 				RegisterSystem register = new RegisterSystem();
 				boolean tulos = register.register(käyttäjä);
 				if (tulos == true) {
-
-					// ilmoitetaan
+					//Ilmoitetaan rekisteröitymisen onnistumisesta
 					Alert alert = new Alert(Alert.AlertType.INFORMATION);
-					// Setting the title
 					alert.setTitle("Imoitus");
-
-					// Setting the content of the dialog
 					alert.setContentText("Rekisteröityminen onnistui!");
 					alert.showAndWait();
-					// viedään kirjautumissivulle
+					//Viedään kirjautumissivulle
 					FXMLLoader loader = new FXMLLoader();
-
 					loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
-
 					BorderPane kirjaudu = (BorderPane) loader.load();
 					Scene kirjauduNäkymä = new Scene(kirjaudu);
-					// get stage
+
 					Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 					window.setScene(kirjauduNäkymä);
 					window.show();
@@ -101,29 +86,24 @@ public class RekisteroidyController {
 					alert.setContentText("Sähköpostillasi on jo rekistyröidytty");
 					alert.show();
 					email.setStyle("-fx-border-color:red");
-
 				}
 			} catch (NumberFormatException e) {
 				System.out.println(e);
 				return;
-
 			} catch (Exception e) {
 				System.out.println(e);
 				return;
 			}
-
 		}
 	}
 
 	@FXML
 	void ViewNäkymäLogin(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
-
 		loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
-
 		BorderPane kirjaudu = (BorderPane) loader.load();
 		Scene kirjauduNäkymä = new Scene(kirjaudu);
-		// get stage
+
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(kirjauduNäkymä);
 		window.show();
@@ -132,12 +112,10 @@ public class RekisteroidyController {
 	@FXML
 	void vieVierasNäkymä(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
-
 		loader.setLocation(MainApp.class.getResource("Vieras.fxml"));
-
 		BorderPane register = (BorderPane) loader.load();
 		Scene rekistyröintiNäkymä = new Scene(register);
-		// get stage
+
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(rekistyröintiNäkymä);
 		window.show();
@@ -161,9 +139,7 @@ public class RekisteroidyController {
 		if (suku.getText() == "") {
 			suku.setStyle("-fx-border-color:red");
 			test = false;
-
 		}
-
 		if (email.getText() == "") {
 			email.setStyle("-fx-border-color:red");
 			test = false;
@@ -198,8 +174,6 @@ public class RekisteroidyController {
 			tippi.setText("Salasanan pituus vähintään 6");
 			test = false;
 		}
-
 		return test;
 	}
-
 }

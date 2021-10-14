@@ -7,10 +7,9 @@ public class Peli {
 
 	private int peliId;
 	private String pelinNimi;
-	//private int tietoId;
 	private String tyyppi;
 	private String talletusTyyppi;
-	private int hinta; 
+	private int hinta;
 	private String genre;
 	private int ikaraja;
 	private int pelmaara;
@@ -20,17 +19,14 @@ public class Peli {
 	private String tekstikenttä;
 	private String konsoli;
 	private Date paivamaara;
-	
-	/*public enum Pelingenre {
-		TOIMINTA, JÄNNITYS, RÄISKINTÄ, AJOPELI, SEIKKAILU, STRATEGIA, ROOLIPELI, URHEILUPELI, PULMAPELI, OPPIMISPELI
-	}*/
-	
-	public Peli(String pelinNimi, int peliId, String tyyppi, String talletustyyppi,
-			int hinta, String genre, String konsoli, int ikaraja, int pelmaara, String kuvaus, String kaupunki, String kunto, String tekstikenttä, Date paivamaara) {
+
+	public Peli(String pelinNimi, int peliId, String tyyppi, String talletustyyppi, int hinta, String genre,
+			String konsoli, int ikaraja, int pelmaara, String kuvaus, String kaupunki, String kunto,
+			String tekstikenttä, Date paivamaara) {
 		this.peliId = peliId;
 		this.pelinNimi = pelinNimi;
 		this.tyyppi = tyyppi;
-		this.talletusTyyppi =  talletustyyppi;
+		this.talletusTyyppi = talletustyyppi;
 		this.hinta = hinta;
 		this.genre = genre;
 		this.konsoli = konsoli;
@@ -42,35 +38,33 @@ public class Peli {
 		this.tekstikenttä = tekstikenttä;
 		this.paivamaara = paivamaara;
 	}
-	
+
 	public Peli() {
-		
 	}
-	
+
 	public int getPeliId() {
 		return peliId;
 	}
-	
+
 	public void setPeliId(int peliId) {
 		this.peliId = peliId;
 	}
-	
+
 	public void setPelinNimi(String pelinNimi) {
 		this.pelinNimi = pelinNimi;
 	}
-	
+
 	public String getPelinNimi() {
 		return pelinNimi;
 	}
-	
+
 	public void setPelinTyyppi(String tyyppi) {
 		this.tyyppi = tyyppi;
 	}
-	
+
 	public String getPelintyyppi() {
 		return tyyppi;
 	}
-	
 
 	public String getTalletusTyyppi() {
 		return talletusTyyppi;
@@ -127,7 +121,7 @@ public class Peli {
 	public void setKaupunki(String kaupunki) {
 		this.kaupunki = kaupunki;
 	}
-	
+
 	public String getKunto() {
 		return kunto;
 	}
@@ -135,7 +129,7 @@ public class Peli {
 	public void setKunto(String kunto) {
 		this.kunto = kunto;
 	}
-	
+
 	public String getTekstikenttä() {
 		return tekstikenttä;
 	}
@@ -143,7 +137,7 @@ public class Peli {
 	public void setTekstikenttä(String tekstikenttä) {
 		this.tekstikenttä = tekstikenttä;
 	}
-	
+
 	public String getKonsoli() {
 		return konsoli;
 	}
@@ -151,17 +145,16 @@ public class Peli {
 	public void setKonsoli(String konsoli) {
 		this.konsoli = konsoli;
 	}
-	
-	// turha jos saa fiksusti toimimaan
+
 	public String toString() {
-		//getGenre();
-		return getPelinNimi() +" Tyyppi: "+ talletusTyyppi+"\nHinta: "+hinta+"€ \n"+ kaupunki +  "\n " + paivamaara;
+		return getPelinNimi() + " Tyyppi: " + talletusTyyppi + "\nHinta: " + hinta + "€ \n" + kaupunki + "\n "
+				+ paivamaara;
 	}
-	
+
 	public void setPaivamaara(Date paivamaara) {
 		this.paivamaara = paivamaara;
 	}
-	
+
 	public Date getPaiva() {
 		return paivamaara;
 	}

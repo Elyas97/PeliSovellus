@@ -22,120 +22,104 @@ import view.EtusivuController;
 import view.MainApp;
 
 public class LoginController {
+
+	Kayttaja kirjautunut = null;
+	@FXML
+	private ResourceBundle resources;
+	@FXML
+	private URL location;
+	@FXML
+	private PasswordField pwd23;
+	@FXML
+	private Button buttoni;
+	@FXML
+	private TextField tunnus23;
 	
-Kayttaja kirjautunut=null;
-    @FXML
-    private ResourceBundle resources;
+	@FXML
+	void kirjaudu(ActionEvent event) {
+		boolean test = validointi();
+		if (test == true) {
+			LoginSystem login = new LoginSystem();
+			kirjautunut = login.login(tunnus23.getText(), pwd23.getText());
+			System.out.println("testing" + kirjautunut);
+			if (kirjautunut != null) {
 
-    @FXML
-    private URL location;
+				Alert alert = new Alert(Alert.AlertType.INFORMATION);
+				// Otsikon asetus
+				alert.setTitle("Ilmoitus");
 
-    @FXML
-    private PasswordField pwd23;
+				// Sisällön asetus
+				alert.setContentText("Kirjautuminen onnistui!");
+				alert.showAndWait();
+				// siirretään etusivulle ja tallenetaan käyttäjä controlleriin
+				try {
+					// Annetaan kirjautuneen käyttäjän tiedot
+					TiedostoKasittely.kirjoitaTiedosto(kirjautunut);
+					// Ladataan etusivu
+					FXMLLoader loader = new FXMLLoader();
+					loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
+					BorderPane etusivuOverview = (BorderPane) loader.load();
+					Scene etusivulle = new Scene(etusivuOverview);
+					Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+					window.setScene(etusivulle);
+					window.show();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} else {
+				Alert alert = new Alert(Alert.AlertType.INFORMATION);
+				alert.setTitle("Ilmoitus");
+				alert.setContentText("Salasana tai Sähköposti väärä");
+				alert.showAndWait();
+			}
+		}
+	}
 
-    @FXML
-    private Button buttoni;
+	@FXML
+	void vieRekistyröintiNäkymään(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader();
 
-    @FXML
-    private TextField tunnus23;
+		loader.setLocation(MainApp.class.getResource("Rekisterointi.fxml"));
+		
+		BorderPane register = (BorderPane) loader.load();
+		Scene rekistyröintiNäkymä = new Scene(register);
+		
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(rekistyröintiNäkymä);
+		window.show();
+	}
 
-    @FXML
-    void kirjaudu(ActionEvent event) {
-    	boolean test=validointi();
-    	if(test==true) {
-    		LoginSystem login=new LoginSystem();
-    		 kirjautunut=login.login(tunnus23.getText(), pwd23.getText());
-    		System.out.println("testing"+ kirjautunut);
-    		if(kirjautunut!=null) {
-    			
-    			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    		      //Setting the title
-    		      alert.setTitle("Ilmoitus");
-    		      
-    		      //Setting the content of the dialog
-    		      alert.setContentText("Kirjautuminen onnistui!");
-    		      alert.showAndWait();
-    		      //siirretään etusivulle ja tallenetaan käyttäjä controlleriin
-    		      try {
-    		    	  //annetaan kirjautuneen käyttäjän tiedot 
-    		    	  	TiedostoKasittely.kirjoitaTiedosto(kirjautunut);
-    		            // Load person overview.
-    		            FXMLLoader loader = new FXMLLoader();
-    		            loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
-    		            BorderPane etusivuOverview = (BorderPane) loader.load();
-    		            Scene etusivulle = new Scene(etusivuOverview);
-    		            //stage
-    		            Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
-        		    	window.setScene(etusivulle);
-        		    	window.show();
-    		        } catch (IOException e) {
-    		            e.printStackTrace();
-    		        }
-    		      
-    		      
-    			
-    		}else {
-    			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-  		      //Setting the title
-  		      alert.setTitle("Ilmoitus");
-  		      
-  		      //Setting the content of the dialog
-  		      alert.setContentText("Salasana tai Sähköposti väärä");
-  		      alert.showAndWait();
-    			
-    		}
-    	}
+	@FXML
+	void vieVierasNäkymä(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader();
 
-    }
+		loader.setLocation(MainApp.class.getResource("Vieras.fxml"));
 
-    @FXML
-    void vieRekistyröintiNäkymään(ActionEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader();
-        
-        loader.setLocation(MainApp.class.getResource("Rekisterointi.fxml"));
-       
-        BorderPane register = (BorderPane) loader.load();
-    	Scene rekistyröintiNäkymä = new Scene(register);
-    	//get stage
-    	Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
-    	window.setScene(rekistyröintiNäkymä);
-    	window.show();
-    }
-    
-    @FXML
-    void vieVierasNäkymä(ActionEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader();
-        
-        loader.setLocation(MainApp.class.getResource("Vieras.fxml"));
-       
-        BorderPane register = (BorderPane) loader.load();
-    	Scene rekistyröintiNäkymä = new Scene(register);
-    	//get stage
-    	Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
-    	window.setScene(rekistyröintiNäkymä);
-    	window.show();
-    }
+		BorderPane register = (BorderPane) loader.load();
+		Scene rekistyröintiNäkymä = new Scene(register);
+		
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(rekistyröintiNäkymä);
+		window.show();
+	}
 
-    @FXML
-    void initialize() {
-        assert pwd23 != null : "fx:id=\"pwd23\" was not injected: check your FXML file 'Kirjautuminen.fxml'.";
-        assert buttoni != null : "fx:id=\"buttoni\" was not injected: check your FXML file 'Kirjautuminen.fxml'.";
-        assert tunnus23 != null : "fx:id=\"tunnus23\" was not injected: check your FXML file 'Kirjautuminen.fxml'.";
+	@FXML
+	void initialize() {
+		assert pwd23 != null : "fx:id=\"pwd23\" was not injected: check your FXML file 'Kirjautuminen.fxml'.";
+		assert buttoni != null : "fx:id=\"buttoni\" was not injected: check your FXML file 'Kirjautuminen.fxml'.";
+		assert tunnus23 != null : "fx:id=\"tunnus23\" was not injected: check your FXML file 'Kirjautuminen.fxml'.";
+	}
 
-    }
-    boolean validointi() {
-   	 boolean test=true;
-   	 if(tunnus23.getText()=="") {
-   		 tunnus23.setStyle("-fx-border-color:red");
-   		 test=false;
-   	 }
-   	 if(pwd23.getText()=="") {
-   		 pwd23.setStyle("-fx-border-color:red");
-   		 test=false;
-   		 
-   	 }
-   	 
-   	return test;
-   }
-  
+	boolean validointi() {
+		boolean test = true;
+		if (tunnus23.getText() == "") {
+			tunnus23.setStyle("-fx-border-color:red");
+			test = false;
+		}
+		if (pwd23.getText() == "") {
+			pwd23.setStyle("-fx-border-color:red");
+			test = false;
+		}
+		return test;
+	}
 }

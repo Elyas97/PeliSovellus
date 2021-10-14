@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import view.TapahtumatController;
 
 public class PeliSovellusDAO {
-	Connection conn;
 
+	Connection conn;
 	final String URL = "jdbc:mariadb://10.114.32.16/PELIKESKUS";
 	final String USERNAME = "ryhma";
 	final String PWD = "ryhma";
@@ -29,6 +29,9 @@ public class PeliSovellusDAO {
 		}
 	}
 
+	/*
+	 * Luodaan uusi käyttäjä
+	 */
 	public boolean createKäyttäjä(Kayttaja käyttäjä) {
 		boolean temp = false;
 		try (PreparedStatement luoKäyttäjä = conn.prepareStatement(
@@ -50,15 +53,12 @@ public class PeliSovellusDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return temp;
 	}
 
-	public Kayttaja readKäyttäjä(String KäyttäjäID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	/*
+	 * Käyttäjien lukeminen tietokannasta
+	 */
 	public Kayttaja[] readKäyttäjät() {
 		ArrayList<Kayttaja> lista = new ArrayList();
 		Statement stmt = null;
@@ -104,6 +104,9 @@ public class PeliSovellusDAO {
 		return users;
 	}
 
+	/*
+	 * Käyttäjän päivitys
+	 */
 	public boolean updateKäyttäjä(Kayttaja käyttäjä) {
 		boolean temp = false;
 		String query = "UPDATE Käyttäjä SET Salasana=?,Sähköposti=?,Sukunimi=?,Etunimi=?,Puhelinnumero=? WHERE KäyttäjäID=?";
@@ -127,8 +130,7 @@ public class PeliSovellusDAO {
 	}
 
 	/*
-	 * Lisää pelin tietokantaan
-	 * 
+	 * Pelin lisääminen tietokantaan
 	 */
 	public boolean lisaaPeli(Peli peli, int kayttajaID) {
 		boolean temp = false;
@@ -163,14 +165,11 @@ public class PeliSovellusDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return temp;
 	}
 
 	/*
-	 * Hakee kaikki pelit tietokannasta
-	 * 
-	 * 
+	 * Haetaan kaikki pelit tietokannasta
 	 */
 	public Peli[] haePelit() {
 		ArrayList<Peli> peliLista = new ArrayList();
@@ -191,24 +190,19 @@ public class PeliSovellusDAO {
 				int lukumaara = rs.getInt("Pelaajamäärä");
 				String kuvaus = rs.getString("Kuvaus");
 				String kaupunki = rs.getString("Kaupunki");
-				String teksti = rs.getString("Tekstikenttä");
-				int kayttajaid = rs.getInt("KäyttäjäID");
 				String konsoli = rs.getString("Konsoli");
 				String tekstikenttä = rs.getString("Tekstikenttä");
 				String kunto = rs.getString("Kunto");
-
 				Date paivamaara = rs.getDate("Päivämäärä");
 
 				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, konsoli, ika,
 						lukumaara, kuvaus, kaupunki, kunto, tekstikenttä, paivamaara));
 			}
-
 		} catch (SQLException e) {
 			do {
 				System.out.println("Viesti: " + e.getMessage());
 				System.out.println("Virhekoodi: " + e.getErrorCode());
 				System.out.println("Viesti: " + e.getSQLState());
-
 			} while (e.getNextException() != null);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -232,28 +226,24 @@ public class PeliSovellusDAO {
 	}
 
 	/*
-	 * Poistaa annetun parametrin mukaisen pelin tietokannasta
-	 * 
-	 * 
+	 * Poistetaan peli tietokannasta
 	 */
 	public void poistaPeli(int peliID) {
 		System.out.println("poista peli metodi pelisovellus daossa ja peli id on: " + peliID);
-		Statement stmt = null;
-		ResultSet rs = null;
 		try {
 			String query = "Delete from Peli where PeliID = ?";
 			PreparedStatement preparedStmt = conn.prepareStatement(query);
 			preparedStmt.setInt(1, peliID);
-
 			preparedStmt.execute();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
+	/*
+	 * Haetaan tietyn käyttäjän lisäämät pelit tietokannasta
+	 */
 	public Peli[] haeOmatPelit(int kayttajaID) {
-		// System.out.println("haeOmatPelit metodi");
 		ArrayList<Peli> peliLista = new ArrayList();
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -275,8 +265,6 @@ public class PeliSovellusDAO {
 				int lukumaara = rs.getInt("Pelaajamäärä");
 				String kuvaus = rs.getString("Kuvaus");
 				String kaupunki = rs.getString("Kaupunki");
-				String teksti = rs.getString("Tekstikenttä");
-				int kayttajaid = rs.getInt("KäyttäjäID");
 				String konsoli = rs.getString("Konsoli");
 				String tekstikenttä = rs.getString("Tekstikenttä");
 				String kunto = rs.getString("Kunto");
@@ -285,13 +273,11 @@ public class PeliSovellusDAO {
 				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, konsoli, ika,
 						lukumaara, kuvaus, kaupunki, kunto, tekstikenttä, paivamaara));
 			}
-
 		} catch (SQLException e) {
 			do {
 				System.out.println("Viesti: " + e.getMessage());
 				System.out.println("Virhekoodi: " + e.getErrorCode());
 				System.out.println("Viesti: " + e.getSQLState());
-
 			} while (e.getNextException() != null);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -311,11 +297,12 @@ public class PeliSovellusDAO {
 		for (int i = 0; i < pelit.length; i++) {
 			pelit[i] = peliLista.get(i);
 		}
-		// System.out.println(pelit[1].toString());
 		return pelit;
 	}
 
-	// UUTTA
+	/*
+	 * Päivitetään pelin tiedot tietokataan
+	 */
 	public boolean paivitaPeli(Peli peli) {
 		boolean temp = false;
 		System.out
@@ -342,16 +329,17 @@ public class PeliSovellusDAO {
 					+ peli.getPaiva());
 			stmt.executeUpdate();
 			temp = true;
-
 		} catch (SQLException e) {
 			System.out.println(e);
-
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 		return temp;
 	}
 
+	/*
+	 * Poistetaan käyttäjä tietokannasta
+	 */
 	public boolean poistaKayttaja(Kayttaja käyttäjä) {
 		boolean test = false;
 		try (PreparedStatement poista = conn.prepareStatement("DELETE FROM Käyttäjä WHERE KäyttäjäID=?")) {
@@ -366,7 +354,6 @@ public class PeliSovellusDAO {
 			test = false;
 		}
 		return test;
-
 	}
 
 }
