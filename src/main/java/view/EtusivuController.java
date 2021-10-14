@@ -112,6 +112,7 @@ public class EtusivuController {
 		hakutyyppi();
 		hakurajaus.setPromptText("Rajaa hakua");
 		listaaPelit();
+		// Kuuntelee pelihaku kenttää ja päivittää listaa kirjoitetun tekstin mukaan
 		pelihaku.textProperty().addListener((obs, oldValue, newValue) -> {
 			if (hakurajaus.getValue() != null) {
 				switch (hakurajaus.getValue()) {
@@ -129,7 +130,7 @@ public class EtusivuController {
 				}
 			}
 		});
-
+		//Kuuntelee listauksessa olevia kenttiä ja välittää tiedot pelinTiedot metodiin
 		lista.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> pelinTiedot(newValue));
 
@@ -138,7 +139,9 @@ public class EtusivuController {
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
 	}
-
+	/*
+	 * Hakee pelit tietokannasta ja asettaa ne listaan
+	 */
 	@FXML
 	public void listaaPelit() {
 		pelidata.clear();
@@ -147,7 +150,9 @@ public class EtusivuController {
 			pelidata.add(pelit[i]);
 		}
 	}
-
+	/*
+	 * Asettaa valitun pelin tiedot GridPanen labeleihin
+	 */
 	private void pelinTiedot(Peli peli) {
 		if (peli != null) {
 			pelinNimi.setText(peli.getPelinNimi());
@@ -200,6 +205,10 @@ public class EtusivuController {
 			maxnum.setVisible(true);
 		}
 	}
+	/*
+	 * Kuuntelee radiobuttoneita etusivulla ja rajaa listan valikoimaa niiden mukaan
+	 * Kutsutaan initializessa
+	 */
 
 	public void hakutyyppi() {
 		kaikki.setSelected(true);
