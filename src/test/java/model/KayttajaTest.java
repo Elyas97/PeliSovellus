@@ -6,14 +6,6 @@ import org.junit.jupiter.api.Test;
 
 class KayttajaTest {
 
-	/*
-	 * @Test void testKäyttäjäIntStringStringStringIntString() { }
-	 * 
-	 * @Test void testKäyttäjä() { Käyttäjä käyttäjä = new Käyttäjä(1, "salasana",
-	 * "Niko", "Nieminen", 408322313, "moivaan@gmail.com"); assertEquals(1,
-	 * käyttäjä.getKayttajaID(), "Käyttäjän id on väärin."); }
-	 */
-
 	@Test
 	void testGetKayttajaID() {
 		Kayttaja käyttäjä = new Kayttaja(1, "salasana", "Niko", "Nieminen", "0408322313", "moivaan@gmail.com");
