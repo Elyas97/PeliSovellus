@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fi"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>PeliSovellusDAO.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Pelienvuokraussovellus (15.10.2021 8.22.46)</a> &gt; <a href="../../index.html" class="el_group">Pelienvuokraussovellus</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">model</a> &gt; <span class="el_source">PeliSovellusDAO.java</span></div><h1>PeliSovellusDAO.java</h1><pre class="source lang-java linenums">package model;
+
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
+import view.TapahtumatController;
+
+public class PeliSovellusDAO {
+
+	Connection conn;
+<span class="nc" id="L14">	final String URL = &quot;jdbc:mariadb://10.114.32.16/PELIKESKUS&quot;;</span>
+<span class="nc" id="L15">	final String USERNAME = &quot;ryhma&quot;;</span>
+<span class="nc" id="L16">	final String PWD = &quot;ryhma&quot;;</span>
+
+<span class="nc" id="L18">	public PeliSovellusDAO() {</span>
+		try {
+<span class="nc" id="L20">			conn = DriverManager.getConnection(URL + &quot;?user=&quot; + USERNAME + &quot;&amp;password=&quot; + PWD);</span>
+<span class="nc" id="L21">			System.out.println(&quot;Yhdistetty tietokantaan&quot;);</span>
+<span class="nc" id="L22">		} catch (SQLException e) {</span>
+			do {
+<span class="nc" id="L24">				System.out.println(&quot;Viesti: &quot; + e.getMessage());</span>
+<span class="nc" id="L25">				System.out.println(&quot;Virhekoodi: &quot; + e.getErrorCode());</span>
+<span class="nc" id="L26">				System.out.println(&quot;Viesti: &quot; + e.getSQLState());</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">			} while (e.getNextException() != null);</span>
+<span class="nc" id="L28">			System.exit(-1);</span>
+		}
+<span class="nc" id="L30">	}</span>
+
+	/*
+	 * Luodaan uusi käyttäjä
+	 */
+	public boolean createKäyttäjä(Kayttaja käyttäjä) {
+<span class="nc" id="L36">		boolean temp = false;</span>
+<span class="nc" id="L37">		try (PreparedStatement luoKäyttäjä = conn.prepareStatement(</span>
+<span class="nc" id="L38">				&quot;INSERT INTO Käyttäjä (Salasana, Sähköposti, Sukunimi, Etunimi, Puhelinnumero) VALUES (?,?,?,?,?)&quot;)) {</span>
+<span class="nc" id="L39">			luoKäyttäjä.setString(1, käyttäjä.getSalasana());</span>
+<span class="nc" id="L40">			luoKäyttäjä.setString(2, käyttäjä.getSähköposti());</span>
+<span class="nc" id="L41">			luoKäyttäjä.setString(3, käyttäjä.getSukunimi());</span>
+<span class="nc" id="L42">			luoKäyttäjä.setString(4, käyttäjä.getEtunimi());</span>
+<span class="nc" id="L43">			luoKäyttäjä.setString(5, käyttäjä.getPuhelinumero());</span>
+<span class="nc" id="L44">			int count = luoKäyttäjä.executeUpdate();</span>
+<span class="nc" id="L45">			temp = true;</span>
+<span class="nc" id="L46">			System.out.println(count);</span>
+<span class="nc" id="L47">		} catch (SQLException e) {</span>
+			do {
+<span class="nc" id="L49">				System.out.println(&quot;Viesti: &quot; + e.getMessage());</span>
+<span class="nc" id="L50">				System.out.println(&quot;Virhekoodi: &quot; + e.getErrorCode());</span>
+<span class="nc" id="L51">				System.out.println(&quot;Viesti: &quot; + e.getSQLState());</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">			} while (e.getNextException() != null);</span>
+<span class="nc" id="L53">		} catch (Exception e) {</span>
+<span class="nc" id="L54">			e.printStackTrace();</span>
+		}
+<span class="nc" id="L56">		return temp;</span>
+	}
+
+	/*
+	 * Käyttäjien lukeminen tietokannasta
+	 */
+	public Kayttaja[] readKäyttäjät() {
+<span class="nc" id="L63">		ArrayList&lt;Kayttaja&gt; lista = new ArrayList();</span>
+<span class="nc" id="L64">		Statement stmt = null;</span>
+<span class="nc" id="L65">		ResultSet rs = null;</span>
+		try {
+<span class="nc" id="L67">			stmt = conn.createStatement();</span>
+<span class="nc" id="L68">			String query = &quot;SELECT * FROM Käyttäjä&quot;;</span>
+<span class="nc" id="L69">			rs = stmt.executeQuery(query);</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">			while (rs.next()) {</span>
+<span class="nc" id="L71">				int kayttajaID = rs.getInt(&quot;KäyttäjäID&quot;);</span>
+<span class="nc" id="L72">				String salasana = rs.getString(&quot;Salasana&quot;);</span>
+<span class="nc" id="L73">				String etunimi = rs.getString(&quot;Etunimi&quot;);</span>
+<span class="nc" id="L74">				String sukunimi = rs.getString(&quot;Sukunimi&quot;);</span>
+<span class="nc" id="L75">				String puhelinumero = rs.getString(&quot;Puhelinnumero&quot;);</span>
+<span class="nc" id="L76">				String sähköposti = rs.getString(&quot;Sähköposti&quot;);</span>
+<span class="nc" id="L77">				lista.add(new Kayttaja(kayttajaID, salasana, etunimi, sukunimi, puhelinumero, sähköposti));</span>
+			}
+<span class="nc" id="L79">		} catch (SQLException e) {</span>
+			do {
+<span class="nc" id="L81">				System.out.println(&quot;Viesti: &quot; + e.getMessage());</span>
+<span class="nc" id="L82">				System.out.println(&quot;Virhekoodi: &quot; + e.getErrorCode());</span>
+<span class="nc" id="L83">				System.out.println(&quot;Viesti: &quot; + e.getSQLState());</span>
+
+<span class="nc bnc" id="L85" title="All 2 branches missed.">			} while (e.getNextException() != null);</span>
+<span class="nc" id="L86">		} catch (Exception e) {</span>
+<span class="nc" id="L87">			e.printStackTrace();</span>
+		} finally {
+			try {
+<span class="nc bnc" id="L90" title="All 2 branches missed.">				if (rs != null) {</span>
+<span class="nc" id="L91">					rs.close();</span>
+				}
+<span class="nc bnc" id="L93" title="All 2 branches missed.">				if (stmt != null) {</span>
+<span class="nc" id="L94">					stmt.close();</span>
+				}
+<span class="nc" id="L96">			} catch (Exception e) {</span>
+<span class="nc" id="L97">				System.out.println(&quot;Resurssien vapautuksessa virhe&quot;);</span>
+			}
+		}
+<span class="nc" id="L100">		Kayttaja[] users = new Kayttaja[lista.size()];</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">		for (int i = 0; i &lt; users.length; i++) {</span>
+<span class="nc" id="L102">			users[i] = lista.get(i);</span>
+		}
+<span class="nc" id="L104">		return users;</span>
+	}
+
+	/*
+	 * Käyttäjän päivitys
+	 */
+	public boolean updateKäyttäjä(Kayttaja käyttäjä) {
+<span class="nc" id="L111">		boolean temp = false;</span>
+<span class="nc" id="L112">		String query = &quot;UPDATE Käyttäjä SET Salasana=?,Sähköposti=?,Sukunimi=?,Etunimi=?,Puhelinnumero=? WHERE KäyttäjäID=?&quot;;</span>
+<span class="nc" id="L113">		try (PreparedStatement stmt = conn.prepareStatement(query)) {</span>
+<span class="nc" id="L114">			stmt.setInt(6, käyttäjä.getKayttajaID());</span>
+<span class="nc" id="L115">			stmt.setString(1, käyttäjä.getSalasana());</span>
+<span class="nc" id="L116">			stmt.setString(2, käyttäjä.getSähköposti());</span>
+<span class="nc" id="L117">			stmt.setString(3, käyttäjä.getSukunimi());</span>
+<span class="nc" id="L118">			stmt.setString(4, käyttäjä.getEtunimi());</span>
+<span class="nc" id="L119">			stmt.setString(5, käyttäjä.getPuhelinumero());</span>
+<span class="nc" id="L120">			stmt.executeUpdate();</span>
+<span class="nc" id="L121">			temp = true;</span>
+
+<span class="nc" id="L123">		} catch (SQLException e) {</span>
+<span class="nc" id="L124">			System.out.println(e);</span>
+
+<span class="nc" id="L126">		} catch (Exception e) {</span>
+<span class="nc" id="L127">			System.out.println(e);</span>
+		}
+<span class="nc" id="L129">		return temp;</span>
+	}
+
+	/*
+	 * Pelin lisääminen tietokantaan
+	 */
+	public boolean lisaaPeli(Peli peli, int kayttajaID) {
+<span class="nc" id="L136">		boolean temp = false;</span>
+<span class="nc" id="L137">		System.out.println(peli.getPelinNimi() + &quot; &quot; + kayttajaID);</span>
+<span class="nc" id="L138">		try (PreparedStatement lisaaPeli = conn.prepareStatement(</span>
+<span class="nc" id="L139">				&quot;INSERT INTO Peli (Pelinimi, Pelintyyppi, Talletustyyppi, Hinta, Genre, Konsoli, Ikäraja, Pelaajamäärä, Kuvaus, Kaupunki, Kunto, Tekstikenttä, KäyttäjäID, Päivämäärä) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)&quot;)) {</span>
+<span class="nc" id="L140">			lisaaPeli.setString(1, peli.getPelinNimi());</span>
+<span class="nc" id="L141">			lisaaPeli.setString(2, peli.getPelintyyppi());</span>
+<span class="nc" id="L142">			lisaaPeli.setString(3, peli.getTalletusTyyppi());</span>
+<span class="nc" id="L143">			lisaaPeli.setInt(4, peli.getHinta());</span>
+<span class="nc" id="L144">			lisaaPeli.setString(5, peli.getGenre());</span>
+<span class="nc" id="L145">			lisaaPeli.setString(6, peli.getKonsoli());</span>
+<span class="nc" id="L146">			lisaaPeli.setInt(7, peli.getIkaraja());</span>
+<span class="nc" id="L147">			lisaaPeli.setInt(8, peli.getPelmaara());</span>
+<span class="nc" id="L148">			lisaaPeli.setString(9, peli.getKuvaus());</span>
+<span class="nc" id="L149">			lisaaPeli.setString(10, peli.getKaupunki());</span>
+<span class="nc" id="L150">			lisaaPeli.setString(11, peli.getKunto());</span>
+<span class="nc" id="L151">			lisaaPeli.setString(12, peli.getTekstikenttä());</span>
+<span class="nc" id="L152">			lisaaPeli.setInt(13, kayttajaID);</span>
+<span class="nc" id="L153">			lisaaPeli.setDate(14, peli.getPaiva());</span>
+
+<span class="nc" id="L155">			int count = lisaaPeli.executeUpdate();</span>
+<span class="nc" id="L156">			temp = true;</span>
+<span class="nc" id="L157">			System.out.println(count);</span>
+<span class="nc" id="L158">		} catch (SQLException e) {</span>
+			do {
+<span class="nc" id="L160">				System.out.println(&quot;Viesti: &quot; + e.getMessage());</span>
+<span class="nc" id="L161">				System.out.println(&quot;Virhekoodi: &quot; + e.getErrorCode());</span>
+<span class="nc" id="L162">				System.out.println(&quot;Viesti: &quot; + e.getSQLState());</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">			} while (e.getNextException() != null);</span>
+
+<span class="nc" id="L165">		} catch (Exception e) {</span>
+<span class="nc" id="L166">			e.printStackTrace();</span>
+		}
+<span class="nc" id="L168">		return temp;</span>
+	}
+
+	/*
+	 * Haetaan kaikki pelit tietokannasta
+	 */
+	public Peli[] haePelit() {
+<span class="nc" id="L175">		ArrayList&lt;Peli&gt; peliLista = new ArrayList();</span>
+<span class="nc" id="L176">		Statement stmt = null;</span>
+<span class="nc" id="L177">		ResultSet rs = null;</span>
+		try {
+<span class="nc" id="L179">			stmt = conn.createStatement();</span>
+<span class="nc" id="L180">			String query = &quot;Select * from Peli&quot;;</span>
+<span class="nc" id="L181">			rs = stmt.executeQuery(query);</span>
+<span class="nc bnc" id="L182" title="All 2 branches missed.">			while (rs.next()) {</span>
+<span class="nc" id="L183">				String pelinimi = rs.getString(&quot;Pelinimi&quot;);</span>
+<span class="nc" id="L184">				int PeliID = rs.getInt(&quot;PeliID&quot;);</span>
+<span class="nc" id="L185">				String pelityyppi = rs.getString(&quot;Pelintyyppi&quot;);</span>
+<span class="nc" id="L186">				String talletustyyppi = rs.getString(&quot;Talletustyyppi&quot;);</span>
+<span class="nc" id="L187">				int hinta = rs.getInt(&quot;Hinta&quot;);</span>
+<span class="nc" id="L188">				String genre = rs.getString(&quot;Genre&quot;);</span>
+<span class="nc" id="L189">				int ika = rs.getInt(&quot;Ikäraja&quot;);</span>
+<span class="nc" id="L190">				int lukumaara = rs.getInt(&quot;Pelaajamäärä&quot;);</span>
+<span class="nc" id="L191">				String kuvaus = rs.getString(&quot;Kuvaus&quot;);</span>
+<span class="nc" id="L192">				String kaupunki = rs.getString(&quot;Kaupunki&quot;);</span>
+<span class="nc" id="L193">				String konsoli = rs.getString(&quot;Konsoli&quot;);</span>
+<span class="nc" id="L194">				String tekstikenttä = rs.getString(&quot;Tekstikenttä&quot;);</span>
+<span class="nc" id="L195">				String kunto = rs.getString(&quot;Kunto&quot;);</span>
+<span class="nc" id="L196">				Date paivamaara = rs.getDate(&quot;Päivämäärä&quot;);</span>
+
+<span class="nc" id="L198">				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, konsoli, ika,</span>
+<span class="nc" id="L199">						lukumaara, kuvaus, kaupunki, kunto, tekstikenttä, paivamaara));</span>
+			}
+<span class="nc" id="L201">		} catch (SQLException e) {</span>
+			do {
+<span class="nc" id="L203">				System.out.println(&quot;Viesti: &quot; + e.getMessage());</span>
+<span class="nc" id="L204">				System.out.println(&quot;Virhekoodi: &quot; + e.getErrorCode());</span>
+<span class="nc" id="L205">				System.out.println(&quot;Viesti: &quot; + e.getSQLState());</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">			} while (e.getNextException() != null);</span>
+<span class="nc" id="L207">		} catch (Exception e) {</span>
+<span class="nc" id="L208">			e.printStackTrace();</span>
+		} finally {
+			try {
+<span class="nc bnc" id="L211" title="All 2 branches missed.">				if (rs != null) {</span>
+<span class="nc" id="L212">					rs.close();</span>
+				}
+<span class="nc bnc" id="L214" title="All 2 branches missed.">				if (stmt != null) {</span>
+<span class="nc" id="L215">					stmt.close();</span>
+				}
+<span class="nc" id="L217">			} catch (Exception e) {</span>
+<span class="nc" id="L218">				System.out.println(&quot;Resurssien vapautuksessa virhe&quot;);</span>
+			}
+		}
+<span class="nc" id="L221">		Peli[] pelit = new Peli[peliLista.size()];</span>
+<span class="nc bnc" id="L222" title="All 2 branches missed.">		for (int i = 0; i &lt; pelit.length; i++) {</span>
+<span class="nc" id="L223">			pelit[i] = peliLista.get(i);</span>
+		}
+<span class="nc" id="L225">		return pelit;</span>
+	}
+
+	/*
+	 * Poistetaan peli tietokannasta
+	 */
+	public void poistaPeli(int peliID) {
+<span class="nc" id="L232">		System.out.println(&quot;poista peli metodi pelisovellus daossa ja peli id on: &quot; + peliID);</span>
+		try {
+<span class="nc" id="L234">			String query = &quot;Delete from Peli where PeliID = ?&quot;;</span>
+<span class="nc" id="L235">			PreparedStatement preparedStmt = conn.prepareStatement(query);</span>
+<span class="nc" id="L236">			preparedStmt.setInt(1, peliID);</span>
+<span class="nc" id="L237">			preparedStmt.execute();</span>
+<span class="nc" id="L238">		} catch (SQLException e) {</span>
+<span class="nc" id="L239">			e.printStackTrace();</span>
+		}
+<span class="nc" id="L241">	}</span>
+
+	/*
+	 * Haetaan tietyn käyttäjän lisäämät pelit tietokannasta
+	 */
+	public Peli[] haeOmatPelit(int kayttajaID) {
+<span class="nc" id="L247">		ArrayList&lt;Peli&gt; peliLista = new ArrayList();</span>
+<span class="nc" id="L248">		Statement stmt = null;</span>
+<span class="nc" id="L249">		ResultSet rs = null;</span>
+		try {
+<span class="nc" id="L251">			stmt = conn.createStatement();</span>
+			// Käyttäjä id:ksi kirjautuneen käyttäjän id
+<span class="nc" id="L253">			String query = &quot;Select * from Peli where KäyttäjäID = ?&quot;;</span>
+<span class="nc" id="L254">			PreparedStatement preppi = conn.prepareStatement(query);</span>
+<span class="nc" id="L255">			preppi.setInt(1, kayttajaID);</span>
+<span class="nc" id="L256">			rs = preppi.executeQuery();</span>
+<span class="nc bnc" id="L257" title="All 2 branches missed.">			while (rs.next()) {</span>
+<span class="nc" id="L258">				String pelinimi = rs.getString(&quot;Pelinimi&quot;);</span>
+<span class="nc" id="L259">				int PeliID = rs.getInt(&quot;PeliID&quot;);</span>
+<span class="nc" id="L260">				String pelityyppi = rs.getString(&quot;Pelintyyppi&quot;);</span>
+<span class="nc" id="L261">				String talletustyyppi = rs.getString(&quot;Talletustyyppi&quot;);</span>
+<span class="nc" id="L262">				int hinta = rs.getInt(&quot;Hinta&quot;);</span>
+<span class="nc" id="L263">				String genre = rs.getString(&quot;Genre&quot;);</span>
+<span class="nc" id="L264">				int ika = rs.getInt(&quot;Ikäraja&quot;);</span>
+<span class="nc" id="L265">				int lukumaara = rs.getInt(&quot;Pelaajamäärä&quot;);</span>
+<span class="nc" id="L266">				String kuvaus = rs.getString(&quot;Kuvaus&quot;);</span>
+<span class="nc" id="L267">				String kaupunki = rs.getString(&quot;Kaupunki&quot;);</span>
+<span class="nc" id="L268">				String konsoli = rs.getString(&quot;Konsoli&quot;);</span>
+<span class="nc" id="L269">				String tekstikenttä = rs.getString(&quot;Tekstikenttä&quot;);</span>
+<span class="nc" id="L270">				String kunto = rs.getString(&quot;Kunto&quot;);</span>
+<span class="nc" id="L271">				Date paivamaara = rs.getDate(&quot;Päivämäärä&quot;);</span>
+
+<span class="nc" id="L273">				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, konsoli, ika,</span>
+<span class="nc" id="L274">						lukumaara, kuvaus, kaupunki, kunto, tekstikenttä, paivamaara));</span>
+			}
+<span class="nc" id="L276">		} catch (SQLException e) {</span>
+			do {
+<span class="nc" id="L278">				System.out.println(&quot;Viesti: &quot; + e.getMessage());</span>
+<span class="nc" id="L279">				System.out.println(&quot;Virhekoodi: &quot; + e.getErrorCode());</span>
+<span class="nc" id="L280">				System.out.println(&quot;Viesti: &quot; + e.getSQLState());</span>
+<span class="nc bnc" id="L281" title="All 2 branches missed.">			} while (e.getNextException() != null);</span>
+<span class="nc" id="L282">		} catch (Exception e) {</span>
+<span class="nc" id="L283">			e.printStackTrace();</span>
+		} finally {
+			try {
+<span class="nc bnc" id="L286" title="All 2 branches missed.">				if (rs != null) {</span>
+<span class="nc" id="L287">					rs.close();</span>
+				}
+<span class="nc bnc" id="L289" title="All 2 branches missed.">				if (stmt != null) {</span>
+<span class="nc" id="L290">					stmt.close();</span>
+				}
+<span class="nc" id="L292">			} catch (Exception e) {</span>
+<span class="nc" id="L293">				System.out.println(&quot;Resurssien vapautuksessa virhe&quot;);</span>
+			}
+		}
+<span class="nc" id="L296">		Peli[] pelit = new Peli[peliLista.size()];</span>
+<span class="nc bnc" id="L297" title="All 2 branches missed.">		for (int i = 0; i &lt; pelit.length; i++) {</span>
+<span class="nc" id="L298">			pelit[i] = peliLista.get(i);</span>
+		}
+<span class="nc" id="L300">		return pelit;</span>
+	}
+
+	/*
+	 * Päivitetään pelin tiedot tietokataan
+	 */
+	public boolean paivitaPeli(Peli peli) {
+<span class="nc" id="L307">		boolean temp = false;</span>
+<span class="nc" id="L308">		System.out</span>
+<span class="nc" id="L309">				.println(&quot;Nimi &quot; + peli.getPelinNimi() + &quot; Id &quot; + peli.getPeliId() + &quot; Kaupunki &quot; + peli.getKaupunki());</span>
+<span class="nc" id="L310">		String query = &quot;UPDATE Peli SET Pelinimi=?,Pelintyyppi=?,Talletustyyppi=?,Hinta=?,Genre=?, Konsoli=?, Ikäraja=?,Pelaajamäärä=?,Kuvaus=?,Kaupunki=?, Kunto=?, Tekstikenttä=? WHERE PeliID=?&quot;;</span>
+<span class="nc" id="L311">		try (PreparedStatement stmt = conn.prepareStatement(query)) {</span>
+<span class="nc" id="L312">			stmt.setString(1, peli.getPelinNimi());</span>
+<span class="nc" id="L313">			stmt.setString(2, peli.getPelintyyppi());</span>
+<span class="nc" id="L314">			stmt.setString(3, peli.getTalletusTyyppi());</span>
+<span class="nc" id="L315">			stmt.setInt(4, peli.getHinta());</span>
+<span class="nc" id="L316">			stmt.setString(5, peli.getGenre());</span>
+<span class="nc" id="L317">			stmt.setString(6, peli.getKonsoli());</span>
+<span class="nc" id="L318">			stmt.setInt(7, peli.getIkaraja());</span>
+<span class="nc" id="L319">			stmt.setInt(8, peli.getPelmaara());</span>
+<span class="nc" id="L320">			stmt.setString(9, peli.getKuvaus());</span>
+<span class="nc" id="L321">			stmt.setString(10, peli.getKaupunki());</span>
+<span class="nc" id="L322">			stmt.setString(11, peli.getKunto());</span>
+<span class="nc" id="L323">			stmt.setString(12, peli.getTekstikenttä());</span>
+<span class="nc" id="L324">			stmt.setInt(13, peli.getPeliId());</span>
+<span class="nc" id="L325">			System.out.println(peli.getPeliId() + &quot;, &quot; + peli.getPelinNimi() + &quot; ,&quot; + peli.getPelintyyppi() + &quot;, &quot;</span>
+<span class="nc" id="L326">					+ peli.getTalletusTyyppi() + &quot;, &quot; + peli.getHinta() + &quot;, &quot; + peli.getGenre() + &quot;, &quot;</span>
+<span class="nc" id="L327">					+ peli.getKonsoli() + &quot;, &quot; + peli.getIkaraja() + &quot;, &quot; + peli.getPelmaara() + &quot;, &quot; + peli.getKuvaus()</span>
+<span class="nc" id="L328">					+ &quot;, &quot; + peli.getKaupunki() + &quot;, &quot; + peli.getKunto() + &quot;, &quot; + peli.getTekstikenttä() + &quot;, &quot;</span>
+<span class="nc" id="L329">					+ peli.getPaiva());</span>
+<span class="nc" id="L330">			stmt.executeUpdate();</span>
+<span class="nc" id="L331">			temp = true;</span>
+<span class="nc" id="L332">		} catch (SQLException e) {</span>
+<span class="nc" id="L333">			System.out.println(e);</span>
+<span class="nc" id="L334">		} catch (Exception e) {</span>
+<span class="nc" id="L335">			System.out.println(e);</span>
+		}
+<span class="nc" id="L337">		return temp;</span>
+	}
+
+	/*
+	 * Poistetaan käyttäjä tietokannasta
+	 */
+	public boolean poistaKayttaja(Kayttaja käyttäjä) {
+<span class="nc" id="L344">		boolean test = false;</span>
+<span class="nc" id="L345">		try (PreparedStatement poista = conn.prepareStatement(&quot;DELETE FROM Käyttäjä WHERE KäyttäjäID=?&quot;)) {</span>
+<span class="nc" id="L346">			poista.setInt(1, käyttäjä.getKayttajaID());</span>
+<span class="nc" id="L347">			poista.executeUpdate();</span>
+<span class="nc" id="L348">			test = true;</span>
+<span class="nc" id="L349">		} catch (SQLException E) {</span>
+<span class="nc" id="L350">			System.out.println(E);</span>
+<span class="nc" id="L351">			test = false;</span>
+<span class="nc" id="L352">		} catch (Exception e) {</span>
+<span class="nc" id="L353">			System.out.println(e);</span>
+<span class="nc" id="L354">			test = false;</span>
+		}
+<span class="nc" id="L356">		return test;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>Pelienvuokraussovellus (15.10.2021 8.22.46)</div></body></html>

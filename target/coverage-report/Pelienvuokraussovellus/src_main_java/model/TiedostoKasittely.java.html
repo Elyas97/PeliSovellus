@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fi"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>TiedostoKasittely.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Pelienvuokraussovellus (15.10.2021 8.22.46)</a> &gt; <a href="../../index.html" class="el_group">Pelienvuokraussovellus</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">model</a> &gt; <span class="el_source">TiedostoKasittely.java</span></div><h1>TiedostoKasittely.java</h1><pre class="source lang-java linenums">package model;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+<span class="nc" id="L11">public class TiedostoKasittely {</span>
+	private final static String tiedostonimi = &quot;asiakaat.data&quot;;
+
+	public static void kirjoitaTiedosto(Kayttaja käyttäjä) {
+<span class="nc" id="L15">		try (FileOutputStream virta = new FileOutputStream(tiedostonimi);</span>
+<span class="nc" id="L16">				ObjectOutputStream käyttäjät = new ObjectOutputStream(virta);) {</span>
+<span class="nc" id="L17">			käyttäjät.writeObject(käyttäjä);</span>
+<span class="nc" id="L18">			System.out.println(&quot;Tallennus onnistui&quot;);</span>
+<span class="nc" id="L19">		} catch (IOException e) {</span>
+<span class="nc" id="L20">			System.out.println(tiedostonimi + &quot; Ei voinut tallentaa&quot;);</span>
+		}
+<span class="nc" id="L22">	}</span>
+
+	public static Kayttaja lueKäyttäjä() {
+<span class="nc" id="L25">		Kayttaja käyttäjä = null;</span>
+<span class="nc" id="L26">		try (FileInputStream virta = new FileInputStream(tiedostonimi);</span>
+<span class="nc" id="L27">				ObjectInputStream käyttäjät = new ObjectInputStream(virta);) {</span>
+<span class="nc" id="L28">			käyttäjä = (Kayttaja) käyttäjät.readObject();</span>
+<span class="nc" id="L29">			System.out.println(käyttäjä.getEtunimi());</span>
+<span class="nc" id="L30">		} catch (IOException | ClassNotFoundException e) {</span>
+<span class="nc" id="L31">			System.out.println(tiedostonimi + &quot; Ei voinut lukea&quot;);</span>
+		}
+<span class="nc" id="L33">		return käyttäjä;</span>
+	}
+
+	public static boolean poistaTiedosto() {
+<span class="nc" id="L37">		boolean test = false;</span>
+		try {
+<span class="nc" id="L39">			new FileOutputStream(tiedostonimi).close();</span>
+<span class="nc" id="L40">			File f = new File(tiedostonimi);</span>
+<span class="nc" id="L41">			f.delete();</span>
+<span class="nc" id="L42">			test = true;</span>
+<span class="nc" id="L43">		} catch (FileNotFoundException e) {</span>
+<span class="nc" id="L44">			test = false;</span>
+<span class="nc" id="L45">			e.printStackTrace();</span>
+<span class="nc" id="L46">		} catch (IOException e) {</span>
+<span class="nc" id="L47">			e.printStackTrace();</span>
+<span class="nc" id="L48">			test = false;</span>
+		}
+<span class="nc" id="L50">		return test;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>Pelienvuokraussovellus (15.10.2021 8.22.46)</div></body></html>

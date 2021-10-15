@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fi"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Kayttaja.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Pelienvuokraussovellus (15.10.2021 8.22.46)</a> &gt; <a href="../../index.html" class="el_group">Pelienvuokraussovellus</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">model</a> &gt; <span class="el_source">Kayttaja.java</span></div><h1>Kayttaja.java</h1><pre class="source lang-java linenums">package model;
+
+import java.io.Serializable;
+
+public class Kayttaja implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private int kayttajaID;
+	private String salasana;
+	private String etunimi;
+	private String sukunimi;
+	private String puhelinumero;
+	private String sähköposti;
+
+	public Kayttaja(int kayttajaID, String salasana, String etunimi, String sukunimi, String puhelinumero,
+			String sähköposti) {
+<span class="fc" id="L16">		super();</span>
+<span class="fc" id="L17">		this.kayttajaID = kayttajaID;</span>
+<span class="fc" id="L18">		this.salasana = salasana;</span>
+<span class="fc" id="L19">		this.etunimi = etunimi;</span>
+<span class="fc" id="L20">		this.sukunimi = sukunimi;</span>
+<span class="fc" id="L21">		this.puhelinumero = puhelinumero;</span>
+<span class="fc" id="L22">		this.sähköposti = sähköposti;</span>
+<span class="fc" id="L23">	}</span>
+
+<span class="fc" id="L25">	public Kayttaja() {</span>
+<span class="fc" id="L26">	};</span>
+
+	public int getKayttajaID() {
+<span class="fc" id="L29">		return kayttajaID;</span>
+	}
+
+	public void setKayttajaID(int kayttajaID) {
+<span class="fc" id="L33">		this.kayttajaID = kayttajaID;</span>
+<span class="fc" id="L34">	}</span>
+
+	public String getSalasana() {
+<span class="fc" id="L37">		return salasana;</span>
+	}
+
+	public void setSalasana(String salasana) {
+<span class="fc" id="L41">		this.salasana = salasana;</span>
+<span class="fc" id="L42">	}</span>
+
+	public String getEtunimi() {
+<span class="fc" id="L45">		return etunimi;</span>
+	}
+
+	public void setEtunimi(String etunimi) {
+<span class="fc" id="L49">		this.etunimi = etunimi;</span>
+<span class="fc" id="L50">	}</span>
+
+	public String getSukunimi() {
+<span class="fc" id="L53">		return sukunimi;</span>
+	}
+
+	public void setSukunimi(String sukunimi) {
+<span class="fc" id="L57">		this.sukunimi = sukunimi;</span>
+<span class="fc" id="L58">	}</span>
+
+	public String getPuhelinumero() {
+<span class="fc" id="L61">		return puhelinumero;</span>
+	}
+
+	public void setPuhelinumero(String puhelinumero) {
+<span class="fc" id="L65">		this.puhelinumero = puhelinumero;</span>
+<span class="fc" id="L66">	}</span>
+
+	public String getSähköposti() {
+<span class="fc" id="L69">		return sähköposti;</span>
+	}
+
+	public void setSähköposti(String sähköposti) {
+<span class="fc" id="L73">		this.sähköposti = sähköposti;</span>
+<span class="fc" id="L74">	};</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>Pelienvuokraussovellus (15.10.2021 8.22.46)</div></body></html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fi"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Hello.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Pelienvuokraussovellus (15.10.2021 8.22.46)</a> &gt; <a href="../../index.html" class="el_group">Pelienvuokraussovellus</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">Test</a> &gt; <span class="el_source">Hello.java</span></div><h1>Hello.java</h1><pre class="source lang-java linenums">package Test;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.Iterator;
+
+
+import model.Kayttaja;
+import model.LoginSystem;
+import model.Peli;
+import model.PeliSovellusDAO;
+import model.Pelingenre;
+import model.RegisterSystem;
+import model.TiedostoKasittely;
+
+<span class="nc" id="L16">public class Hello {</span>
+	public static void main(String[] args) {
+<span class="nc" id="L18">		System.out.println(&quot;hello world!!!!&quot;);</span>
+<span class="nc bnc" id="L19" title="All 2 branches missed.">		for (int i = 0; i &lt; 10; i++) {</span>
+<span class="nc" id="L20">			System.out.println(&quot;Testi&quot; + &quot; x&quot; +i);</span>
+		}
+<span class="nc" id="L22">		PeliSovellusDAO pelisovellusdao=new PeliSovellusDAO();</span>
+<span class="nc" id="L23">Kayttaja[] testi=pelisovellusdao.readKäyttäjät();</span>
+		
+<span class="nc bnc" id="L25" title="All 2 branches missed.">for(int i=0;i&lt;testi.length;i++) {</span>
+<span class="nc" id="L26">System.out.println(testi[i].getEtunimi()+testi[i].getSähköposti());</span>
+}
+
+
+//Pelingenre peli = null;
+//System.out.println(Arrays.toString(Pelingenre.values()));
+//Peli[] pelit = pelisovellusdao.haePelit();
+
+//for (int i = 0; i &lt; pelit.length; i++) {
+	//System.out.println(pelit[i].getPelinNimi());
+	//System.out.println(pelit[i].getPelinNimi()+&quot;, &quot;+pelit[i].getHinta());
+//}
+/*
+ * 
+ * TESTAILUA
+ * 
+ */
+//pelisovellusdao.poistaPeli(5);
+
+//Peli uusiPeli = new Peli(&quot;Nhl&quot;, 5, &quot;Video&quot;, &quot;Myynti&quot;, 32, &quot;Urheilu&quot;, 7, 2, &quot;kuvaus&quot;, &quot;Helsinki&quot;);
+//pelisovellusdao.lisaaPeli(uusiPeli, testi[0].getKayttajaID());
+
+
+
+	
+<span class="nc" id="L51">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>Pelienvuokraussovellus (15.10.2021 8.22.46)</div></body></html>

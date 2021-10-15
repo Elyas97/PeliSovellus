@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fi"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>KayttajaTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Pelienvuokraussovellus (15.10.2021 8.22.46)</a> &gt; <a href="../../index.html" class="el_group">Pelienvuokraussovellus</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">model</a> &gt; <span class="el_source">KayttajaTest.java</span></div><h1>KayttajaTest.java</h1><pre class="source lang-java linenums">package model;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+<span class="fc" id="L7">class KayttajaTest {</span>
+
+	@Test
+	void testGetKayttajaID() {
+<span class="fc" id="L11">		Kayttaja käyttäjä = new Kayttaja(1, &quot;salasana&quot;, &quot;Niko&quot;, &quot;Nieminen&quot;, &quot;0408322313&quot;, &quot;moivaan@gmail.com&quot;);</span>
+<span class="fc" id="L12">		assertEquals(1, käyttäjä.getKayttajaID(), &quot;Käyttäjän id väärin.&quot;);</span>
+<span class="fc" id="L13">	}</span>
+
+	@Test
+	void testSetKayttajaID() {
+<span class="fc" id="L17">		Kayttaja käyttäjä = new Kayttaja();</span>
+<span class="fc" id="L18">		käyttäjä.setKayttajaID(1);</span>
+<span class="pc bpc" id="L19" title="1 of 2 branches missed.">		assertTrue(käyttäjä.getKayttajaID() == 1);</span>
+<span class="fc" id="L20">	}</span>
+
+	@Test
+	void testGetSalasana() {
+<span class="fc" id="L24">		Kayttaja käyttäjä = new Kayttaja(1, &quot;salasana&quot;, &quot;Niko&quot;, &quot;Nieminen&quot;, &quot;0408322313&quot;, &quot;moivaan@gmail.com&quot;);</span>
+<span class="fc" id="L25">		assertEquals(&quot;salasana&quot;, käyttäjä.getSalasana(), &quot;Käyttäjän salasana väärin.&quot;);</span>
+<span class="fc" id="L26">	}</span>
+
+	@Test
+	void testSetSalasana() {
+<span class="fc" id="L30">		Kayttaja käyttäjä = new Kayttaja();</span>
+<span class="fc" id="L31">		käyttäjä.setSalasana(&quot;1234&quot;);</span>
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">		assertTrue(käyttäjä.getSalasana() == &quot;1234&quot;);</span>
+<span class="fc" id="L33">	}</span>
+
+	@Test
+	void testGetEtunimi() {
+<span class="fc" id="L37">		Kayttaja käyttäjä = new Kayttaja(1, &quot;salasana&quot;, &quot;Niko&quot;, &quot;Nieminen&quot;, &quot;0408322313&quot;, &quot;moivaan@gmail.com&quot;);</span>
+<span class="fc" id="L38">		assertEquals(&quot;Niko&quot;, käyttäjä.getEtunimi(), &quot;Käyttäjän etunimi väärin.&quot;);</span>
+<span class="fc" id="L39">	}</span>
+
+	@Test
+	void testSetEtunimi() {
+<span class="fc" id="L43">		Kayttaja käyttäjä = new Kayttaja();</span>
+<span class="fc" id="L44">		käyttäjä.setEtunimi(&quot;Niko&quot;);</span>
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">		assertTrue(käyttäjä.getEtunimi() == &quot;Niko&quot;);</span>
+<span class="fc" id="L46">	}</span>
+
+	@Test
+	void testGetSukunimi() {
+<span class="fc" id="L50">		Kayttaja käyttäjä = new Kayttaja(1, &quot;salasana&quot;, &quot;Niko&quot;, &quot;Nieminen&quot;, &quot;0408322313&quot;, &quot;moivaan@gmail.com&quot;);</span>
+<span class="fc" id="L51">		assertEquals(&quot;Nieminen&quot;, käyttäjä.getSukunimi(), &quot;Käyttäjän sukunimi väärin.&quot;);</span>
+<span class="fc" id="L52">	}</span>
+
+	@Test
+	void testSetSukunimi() {
+<span class="fc" id="L56">		Kayttaja käyttäjä = new Kayttaja();</span>
+<span class="fc" id="L57">		käyttäjä.setSukunimi(&quot;Nieminen&quot;);</span>
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">		assertTrue(käyttäjä.getSukunimi() == &quot;Nieminen&quot;);</span>
+<span class="fc" id="L59">	}</span>
+
+	@Test
+	void testGetPuhelinumero() {
+<span class="fc" id="L63">		Kayttaja käyttäjä = new Kayttaja(1, &quot;salasana&quot;, &quot;Niko&quot;, &quot;Nieminen&quot;, &quot;0408322313&quot;, &quot;moivaan@gmail.com&quot;);</span>
+<span class="fc" id="L64">		assertEquals(&quot;0408322313&quot;, käyttäjä.getPuhelinumero(), &quot;Käyttäjän puhelinnumero väärin.&quot;);</span>
+<span class="fc" id="L65">	}</span>
+
+	@Test
+	void testSetPuhelinumero() {
+<span class="fc" id="L69">		Kayttaja käyttäjä = new Kayttaja();</span>
+<span class="fc" id="L70">		käyttäjä.setPuhelinumero(&quot;045321454&quot;);</span>
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">		assertTrue(käyttäjä.getPuhelinumero() == &quot;045321454&quot;);</span>
+<span class="fc" id="L72">	}</span>
+
+	@Test
+	void testGetSähköposti() {
+<span class="fc" id="L76">		Kayttaja käyttäjä = new Kayttaja(1, &quot;salasana&quot;, &quot;Niko&quot;, &quot;Nieminen&quot;, &quot;0408322313&quot;, &quot;moivaan@gmail.com&quot;);</span>
+<span class="fc" id="L77">		assertEquals(&quot;moivaan@gmail.com&quot;, käyttäjä.getSähköposti(), &quot;Käyttäjän sähköposti väärin.&quot;);</span>
+<span class="fc" id="L78">	}</span>
+
+	@Test
+	void testSetSähköposti() {
+<span class="fc" id="L82">		Kayttaja käyttäjä = new Kayttaja();</span>
+<span class="fc" id="L83">		käyttäjä.setSähköposti(&quot;nikke@hotmail.com&quot;);</span>
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">		assertTrue(käyttäjä.getSähköposti() == &quot;nikke@hotmail.com&quot;);</span>
+<span class="fc" id="L85">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>Pelienvuokraussovellus (15.10.2021 8.22.46)</div></body></html>

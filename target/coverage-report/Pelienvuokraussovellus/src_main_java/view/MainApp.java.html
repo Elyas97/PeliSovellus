@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fi"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>MainApp.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Pelienvuokraussovellus (15.10.2021 8.22.46)</a> &gt; <a href="../../index.html" class="el_group">Pelienvuokraussovellus</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">view</a> &gt; <span class="el_source">MainApp.java</span></div><h1>MainApp.java</h1><pre class="source lang-java linenums">package view;
+
+import java.io.IOException;
+
+import controller.LoginController;
+import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import model.Kayttaja;
+import model.Peli;
+import model.PeliSovellusDAO;
+import model.TiedostoKasittely;
+
+<span class="nc" id="L20">public class MainApp extends Application {</span>
+
+	private Stage primaryStage;
+	private BorderPane rootLayout;
+
+	@FXML
+	private ListView&lt;String&gt; lista;
+
+<span class="nc" id="L28">	PeliSovellusDAO pelitdao = new PeliSovellusDAO();</span>
+
+	@Override
+	public void start(Stage primaryStage) {
+<span class="nc" id="L32">		this.primaryStage = primaryStage;</span>
+<span class="nc" id="L33">		this.primaryStage.setTitle(&quot;Pelienvuokraussovellus&quot;);</span>
+
+<span class="nc" id="L35">		initRootLayout();</span>
+		// Käyttäjän ei aina tarvitse kirjautua sisään
+<span class="nc" id="L37">		Kayttaja alku = TiedostoKasittely.lueKäyttäjä();</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">		if (alku != null) {</span>
+<span class="nc" id="L39">			showEtusivu();</span>
+<span class="nc" id="L40">		} else {</span>
+<span class="nc" id="L41">			showVieras();</span>
+		}
+<span class="nc" id="L43">	}</span>
+
+	/*
+	 * Alustaa root layoutin
+	 */
+	public void initRootLayout() {
+		try {
+<span class="nc" id="L50">			FXMLLoader loader = new FXMLLoader();</span>
+<span class="nc" id="L51">			loader.setLocation(MainApp.class.getResource(&quot;root.fxml&quot;));</span>
+<span class="nc" id="L52">			rootLayout = (BorderPane) loader.load();</span>
+<span class="nc" id="L53">			Scene scene = new Scene(rootLayout);</span>
+<span class="nc" id="L54">			primaryStage.setScene(scene);</span>
+<span class="nc" id="L55">			primaryStage.show();</span>
+<span class="nc" id="L56">		} catch (IOException e) {</span>
+<span class="nc" id="L57">			e.printStackTrace();</span>
+		}
+<span class="nc" id="L59">	}</span>
+
+	public void showEtusivu() {
+		try {
+<span class="nc" id="L63">			FXMLLoader loader = new FXMLLoader();</span>
+<span class="nc" id="L64">			loader.setLocation(MainApp.class.getResource(&quot;Etusivu.fxml&quot;));</span>
+<span class="nc" id="L65">			BorderPane etusivu = (BorderPane) loader.load();</span>
+			
+<span class="nc" id="L67">			Scene scene = new Scene(etusivu);</span>
+<span class="nc" id="L68">			primaryStage.setScene(scene);</span>
+
+<span class="nc" id="L70">			EtusivuController uuscont = loader.getController();</span>
+<span class="nc" id="L71">			uuscont.setDialogStage(primaryStage);</span>
+<span class="nc" id="L72">			uuscont.setMainApp(this);</span>
+<span class="nc" id="L73">		} catch (IOException e) {</span>
+<span class="nc" id="L74">			e.printStackTrace();</span>
+		}
+<span class="nc" id="L76">	}</span>
+
+	public boolean lisaaPeliOverview() {
+		try {
+<span class="nc" id="L80">			System.out.println(&quot;moi&quot;);</span>
+<span class="nc" id="L81">			FXMLLoader loader = new FXMLLoader();</span>
+<span class="nc" id="L82">			loader.setLocation(MainApp.class.getResource(&quot;Uusipeli.fxml&quot;));</span>
+<span class="nc" id="L83">			BorderPane uusipeli = (BorderPane) loader.load();</span>
+			
+<span class="nc" id="L85">			Scene scene = new Scene(uusipeli);</span>
+<span class="nc" id="L86">			primaryStage.setScene(scene);</span>
+
+<span class="nc" id="L88">			LisaaPeliController controller = loader.getController();</span>
+<span class="nc" id="L89">			controller.setDialogStage(primaryStage);</span>
+<span class="nc" id="L90">			controller.setMainApp(this);</span>
+
+<span class="nc" id="L92">			return controller.tallennaClicked();</span>
+<span class="nc" id="L93">		} catch (IOException e) {</span>
+<span class="nc" id="L94">			e.printStackTrace();</span>
+<span class="nc" id="L95">			return false;</span>
+		}
+	}
+
+	public void tapahtumatSivuOverview() {
+		try {
+<span class="nc" id="L101">			System.out.println(&quot;Tapahtumat sivu&quot;);</span>
+<span class="nc" id="L102">			FXMLLoader loader = new FXMLLoader();</span>
+<span class="nc" id="L103">			loader.setLocation(MainApp.class.getResource(&quot;Tapahtumat.fxml&quot;));</span>
+<span class="nc" id="L104">			BorderPane tapahtumat = (BorderPane) loader.load();</span>
+
+<span class="nc" id="L106">			Scene scene = new Scene(tapahtumat);</span>
+<span class="nc" id="L107">			primaryStage.setScene(scene);</span>
+
+<span class="nc" id="L109">			TapahtumatController controller = loader.getController();</span>
+<span class="nc" id="L110">			controller.setDialogStage(primaryStage);</span>
+<span class="nc" id="L111">			controller.setMainApp(this);</span>
+<span class="nc" id="L112">		} catch (IOException e) {</span>
+<span class="nc" id="L113">			e.printStackTrace();</span>
+		}
+<span class="nc" id="L115">	}</span>
+
+	public void showLogin() {
+		try {
+<span class="nc" id="L119">			FXMLLoader loader = new FXMLLoader();</span>
+<span class="nc" id="L120">			loader.setLocation(MainApp.class.getResource(&quot;Kirjautuminen.fxml&quot;));</span>
+<span class="nc" id="L121">			BorderPane kirjaudu = (BorderPane) loader.load();</span>
+<span class="nc" id="L122">			rootLayout.setCenter(kirjaudu);</span>
+<span class="nc" id="L123">		} catch (IOException e) {</span>
+<span class="nc" id="L124">			e.printStackTrace();</span>
+		}
+<span class="nc" id="L126">	}</span>
+
+	public void showRegister() {
+		try {
+<span class="nc" id="L130">			FXMLLoader loader = new FXMLLoader();</span>
+<span class="nc" id="L131">			loader.setLocation(MainApp.class.getResource(&quot;Rekistyröinti.fxml&quot;));</span>
+<span class="nc" id="L132">			BorderPane register = (BorderPane) loader.load();</span>
+<span class="nc" id="L133">			rootLayout.setCenter(register);</span>
+<span class="nc" id="L134">		} catch (IOException e) {</span>
+<span class="nc" id="L135">			e.printStackTrace();</span>
+		}
+<span class="nc" id="L137">	}</span>
+
+	public void showProfile() {
+		try {
+<span class="nc" id="L141">			FXMLLoader loader = new FXMLLoader();</span>
+<span class="nc" id="L142">			loader.setLocation(MainApp.class.getResource(&quot;Profiili.fxml&quot;));</span>
+<span class="nc" id="L143">			BorderPane profile = (BorderPane) loader.load();</span>
+<span class="nc" id="L144">			rootLayout.setCenter(profile);</span>
+<span class="nc" id="L145">		} catch (IOException e) {</span>
+<span class="nc" id="L146">			e.printStackTrace();</span>
+		}
+<span class="nc" id="L148">	}</span>
+
+	public void showVieras() {
+		try {
+<span class="nc" id="L152">			FXMLLoader loader = new FXMLLoader();</span>
+<span class="nc" id="L153">			loader.setLocation(MainApp.class.getResource(&quot;Vieras.fxml&quot;));</span>
+<span class="nc" id="L154">			BorderPane kirjaudu = (BorderPane) loader.load();</span>
+<span class="nc" id="L155">			rootLayout.setCenter(kirjaudu);</span>
+<span class="nc" id="L156">		} catch (IOException e) {</span>
+<span class="nc" id="L157">			e.printStackTrace();</span>
+		}
+<span class="nc" id="L159">	}</span>
+
+	public Stage getPrimaryStage() {
+<span class="nc" id="L162">		return primaryStage;</span>
+	}
+
+	public static void main(String[] args) {
+<span class="nc" id="L166">		launch(args);</span>
+<span class="nc" id="L167">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>Pelienvuokraussovellus (15.10.2021 8.22.46)</div></body></html>

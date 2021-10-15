@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fi"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>TapahtumatController.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Pelienvuokraussovellus (15.10.2021 8.22.46)</a> &gt; <a href="../../index.html" class="el_group">Pelienvuokraussovellus</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">view</a> &gt; <span class="el_source">TapahtumatController.java</span></div><h1>TapahtumatController.java</h1><pre class="source lang-java linenums">package view;
+
+import java.io.IOException;
+import java.util.Optional;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
+import javafx.stage.Stage;
+import model.Kayttaja;
+import model.Peli;
+import model.PeliSovellusDAO;
+import model.TiedostoKasittely;
+
+public class TapahtumatController {
+
+	@FXML
+	private ListView&lt;Peli&gt; omatPelit;
+	@FXML
+	private RadioButton myynti;
+	@FXML
+	private ToggleGroup tyyppi;
+	@FXML
+	private RadioButton vuokraus;
+	@FXML
+	private RadioButton lahjoitus;
+	@FXML
+	private TextField hinta;
+	@FXML
+	private TextField pelinnimi;
+	@FXML
+	private ToggleGroup pelintyyppi;
+	@FXML
+	private RadioButton video;
+	@FXML
+	private RadioButton lauta;
+	@FXML
+	private TextField kaupunki;
+	@FXML
+	private TextField ikaraja;
+	@FXML
+	private TextField pelaajamaara;
+	@FXML
+	private TextArea kuvaus;
+	@FXML
+	private TextArea tekstikenttä;
+	@FXML
+	private Text nimivaroitus;
+	@FXML
+	private Text hintavaroitus;
+	@FXML
+	private Text tyyppivaroitus;
+	@FXML
+	private Text paikkakuntavaroitus;
+	@FXML
+	private Text pelintyyppivaroitus;
+	@FXML
+	private Text konsolivaroitus;
+	@FXML
+	private Text genrevaroitus;
+	@FXML
+	private Text ikärajavaroitus;
+	@FXML
+	private Text pelaajamäärävaroitus;
+	@FXML
+	private Text kuntovaroitus;
+	@FXML
+	private Text kuvausvaroitus;
+	@FXML
+	private Text tekstikenttävaroitus;
+	@FXML
+	private ChoiceBox&lt;String&gt; genre;
+	@FXML
+	private ChoiceBox&lt;String&gt; kunto;
+	@FXML
+	private ChoiceBox&lt;String&gt; konsoli;
+	@FXML
+	private Pane konsoliPane;
+	@FXML
+	private Label kirjaimet;
+
+	private Kayttaja käyttäjä;
+	private Stage dialogStage;
+	private MainApp main;
+<span class="nc" id="L101">	PeliSovellusDAO pelitdao = new PeliSovellusDAO();</span>
+	private Peli[] pelit;
+
+<span class="nc" id="L104">	public TapahtumatController() {</span>
+<span class="nc" id="L105">	}</span>
+
+	@FXML
+	public void initialize() {
+		// Kirjautuneen käyttäjän haku
+<span class="nc" id="L110">		this.käyttäjä = TiedostoKasittely.lueKäyttäjä();</span>
+
+<span class="nc" id="L112">		ObservableList&lt;String&gt; options = FXCollections.observableArrayList(&quot;Urheilu&quot;, &quot;Räiskintä&quot;, &quot;Toiminta&quot;,</span>
+<span class="nc" id="L113">				&quot;Ajopeli&quot;, &quot;Jännitys&quot;, &quot;Seikkailu&quot;, &quot;Strategia&quot;, &quot;Roolipeli&quot;, &quot;Pulma&quot;, &quot;Lautapeli&quot;, &quot;Juomapeli&quot;,</span>
+<span class="nc" id="L114">				&quot;Tappelupeli&quot;, &quot;Tasohyppeli&quot;);</span>
+<span class="nc" id="L115">		genre.setItems(options);</span>
+
+<span class="nc" id="L117">		ObservableList&lt;String&gt; kuntoOptions = FXCollections.observableArrayList(&quot;Erinomainen&quot;, &quot;Kiitettävä&quot;, &quot;Hyvä&quot;,</span>
+<span class="nc" id="L118">				&quot;Kohtalainen&quot;, &quot;Välttävä&quot;);</span>
+<span class="nc" id="L119">		kunto.setItems(kuntoOptions);</span>
+
+<span class="nc" id="L121">		ObservableList&lt;String&gt; konsoliOptions = FXCollections.observableArrayList(&quot;Xbox&quot;, &quot;Playstation&quot;, &quot;Wii&quot;);</span>
+<span class="nc" id="L122">		konsoli.setItems(konsoliOptions);</span>
+
+<span class="nc" id="L124">		listaaOmatPelit();</span>
+<span class="nc" id="L125">		omatPelit.getSelectionModel().selectedItemProperty()</span>
+<span class="nc" id="L126">				.addListener((observable, oldValue, newValue) -&gt; pelinTiedot(newValue));</span>
+
+<span class="nc" id="L128">		kirjaimet();</span>
+<span class="nc" id="L129">		tekstikenttä.textProperty().addListener((observable, oldValue, newValue) -&gt; {</span>
+<span class="nc" id="L130">			kirjaimet();</span>
+<span class="nc" id="L131">		});</span>
+<span class="nc" id="L132">	}</span>
+
+	@FXML
+	public String tyyppiAction(ActionEvent Action) {
+<span class="nc" id="L136">		String text = ((RadioButton) tyyppi.getSelectedToggle()).getText();</span>
+<span class="nc" id="L137">		System.out.println(text);</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">		if (text.equals(&quot;Lahjoitus&quot;)) {</span>
+<span class="nc" id="L139">			hinta.setText(Integer.toString(0));</span>
+<span class="nc" id="L140">			hinta.setEditable(false);</span>
+<span class="nc" id="L141">		} else {</span>
+<span class="nc" id="L142">			hinta.setText(&quot;&quot;);</span>
+<span class="nc" id="L143">			hinta.setEditable(true);</span>
+		}
+<span class="nc" id="L145">		return text;</span>
+	}
+
+	@FXML
+	public String tyyppi(ActionEvent Action) {
+<span class="nc" id="L150">		String text = ((RadioButton) pelintyyppi.getSelectedToggle()).getText();</span>
+
+		// Konsolivalinta ilmestyy vain jos valitaan videopeli
+<span class="nc bnc" id="L153" title="All 2 branches missed.">		if (text.equals(&quot;lauta&quot;)) {</span>
+<span class="nc" id="L154">			konsoliPane.setVisible(false);</span>
+<span class="nc" id="L155">		} else {</span>
+<span class="nc" id="L156">			konsoliPane.setVisible(true);</span>
+		}
+<span class="nc" id="L158">		return text;</span>
+	}
+
+	public void setMainApp(MainApp main) {
+<span class="nc" id="L162">		this.main = main;</span>
+<span class="nc" id="L163">	}</span>
+
+	public void setDialogStage(Stage dialogStage) {
+<span class="nc" id="L166">		this.dialogStage = dialogStage;</span>
+<span class="nc" id="L167">	}</span>
+
+	/*
+	 * Käyttäjän omien lisättyjen pelien listaaminen
+	 */
+	public void listaaOmatPelit() {
+<span class="nc" id="L173">		käyttäjä = TiedostoKasittely.lueKäyttäjä();</span>
+<span class="nc" id="L174">		pelit = pelitdao.haeOmatPelit(käyttäjä.getKayttajaID());</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">		for (int i = 0; i &lt; pelit.length; i++) {</span>
+<span class="nc" id="L176">			System.out.println(pelit[i]);</span>
+<span class="nc" id="L177">			omatPelit.getItems().add(pelit[i]);</span>
+		}
+<span class="nc" id="L179">	}</span>
+
+	/*
+	 * Pelin poistaminen
+	 */
+	@FXML
+	public void poistaPeli() {
+
+<span class="nc" id="L187">		ButtonType ok = new ButtonType(&quot;Ok&quot;, ButtonData.OK_DONE);</span>
+<span class="nc" id="L188">		ButtonType peruuta = new ButtonType(&quot;Peruuta&quot;, ButtonData.CANCEL_CLOSE);</span>
+
+<span class="nc" id="L190">		Alert varmistus = new Alert(Alert.AlertType.CONFIRMATION,</span>
+<span class="nc" id="L191">				&quot;Haluatko varmasti poistaa pelin? Poistamista ei voi peruuttaa.&quot;, ok, peruuta);</span>
+<span class="nc" id="L192">		varmistus.setTitle(&quot;Alert&quot;);</span>
+<span class="nc" id="L193">		Optional&lt;ButtonType&gt; vastaus = varmistus.showAndWait();</span>
+
+<span class="nc bnc" id="L195" title="All 2 branches missed.">		if (vastaus.get() == ok) {</span>
+<span class="nc" id="L196">			Peli peli = omatPelit.getSelectionModel().getSelectedItem();</span>
+<span class="nc" id="L197">			poistaPeliTietokannasta(peli);</span>
+
+<span class="nc" id="L199">			Alert alert = new Alert(Alert.AlertType.INFORMATION);</span>
+<span class="nc" id="L200">			alert.setTitle(&quot;Alert&quot;);</span>
+<span class="nc" id="L201">			alert.setContentText(&quot;Pelin poistaminen onnistui!&quot;);</span>
+<span class="nc" id="L202">			alert.showAndWait();</span>
+		}
+<span class="nc" id="L204">	}</span>
+
+	/*
+	 * Pelin poistaminen tietokannasta
+	 */
+	public void poistaPeliTietokannasta(Peli peli) {
+<span class="nc" id="L210">		int id = peli.getPeliId();</span>
+<span class="nc" id="L211">		pelitdao.poistaPeli(id);</span>
+
+		// Peli poistuu listasta heti
+<span class="nc" id="L214">		omatPelit.getItems().clear();</span>
+<span class="nc" id="L215">		listaaOmatPelit();</span>
+<span class="nc" id="L216">	}</span>
+
+	/*
+	 * Varoitukset piiloon kun klikataan toista peliä
+	 */
+	private void varoituksetPiiloon() {
+<span class="nc" id="L222">		nimivaroitus.setText(&quot;&quot;);</span>
+<span class="nc" id="L223">		hintavaroitus.setText(&quot;&quot;);</span>
+<span class="nc" id="L224">		tyyppivaroitus.setText(&quot;&quot;);</span>
+<span class="nc" id="L225">		pelintyyppivaroitus.setText(&quot;&quot;);</span>
+<span class="nc" id="L226">		genrevaroitus.setText(&quot;&quot;);</span>
+<span class="nc" id="L227">		konsolivaroitus.setText(&quot;&quot;);</span>
+<span class="nc" id="L228">		paikkakuntavaroitus.setText(&quot;&quot;);</span>
+<span class="nc" id="L229">		ikärajavaroitus.setText(&quot;&quot;);</span>
+<span class="nc" id="L230">		kuvausvaroitus.setText(&quot;&quot;);</span>
+<span class="nc" id="L231">		tekstikenttävaroitus.setText(&quot;&quot;);</span>
+<span class="nc" id="L232">		pelaajamäärävaroitus.setText(&quot;&quot;);</span>
+<span class="nc" id="L233">		kuntovaroitus.setText(&quot;&quot;);</span>
+
+		// Punainen väri reunoille
+<span class="nc" id="L236">		pelinnimi.setStyle(&quot;-fx-border-color:none&quot;);</span>
+<span class="nc" id="L237">		hinta.setStyle(&quot;-fx-border-color:none&quot;);</span>
+<span class="nc" id="L238">		kaupunki.setStyle(&quot;-fx-border-color:none&quot;);</span>
+<span class="nc" id="L239">		kunto.setStyle(&quot;-fx-border-color:none&quot;);</span>
+<span class="nc" id="L240">		genre.setStyle(&quot;-fx-border-color:none&quot;);</span>
+<span class="nc" id="L241">		pelaajamaara.setStyle(&quot;-fx-border-color:none&quot;);</span>
+<span class="nc" id="L242">		ikaraja.setStyle(&quot;-fx-border-color:none&quot;);</span>
+<span class="nc" id="L243">		kuvaus.setStyle(&quot;-fx-border-color:none&quot;);</span>
+<span class="nc" id="L244">		tekstikenttä.setStyle(&quot;-fx-border-color:none&quot;);</span>
+<span class="nc" id="L245">		konsolivaroitus.setStyle(&quot;-fx-border-color:none&quot;);</span>
+<span class="nc" id="L246">	}</span>
+
+	/*
+	 * Pelin tietojen näyttäminen
+	 */
+	private void pelinTiedot(Peli peli) {
+
+<span class="nc" id="L253">		varoituksetPiiloon();</span>
+<span class="nc bnc" id="L254" title="All 2 branches missed.">		if (peli != null) {</span>
+<span class="nc" id="L255">			pelinnimi.setText(peli.getPelinNimi());</span>
+<span class="nc" id="L256">			hinta.setText(Integer.toString(peli.getHinta()));</span>
+<span class="nc" id="L257">			String pelintalletusstring = peli.getTalletusTyyppi();</span>
+
+<span class="nc bnc" id="L259" title="All 2 branches missed.">			if (pelintalletusstring.equals(&quot;Myynti&quot;)) {</span>
+<span class="nc" id="L260">				tyyppi.selectToggle(myynti);</span>
+<span class="nc bnc" id="L261" title="All 2 branches missed.">			} else if (pelintalletusstring.equals(&quot;Lahjoitus&quot;)) {</span>
+<span class="nc" id="L262">				tyyppi.selectToggle(lahjoitus);</span>
+				// Hinta aina nolla kun kyseessä lahjoitus
+<span class="nc" id="L264">				hinta.setEditable(false);</span>
+<span class="nc" id="L265">			} else {</span>
+<span class="nc" id="L266">				tyyppi.selectToggle(vuokraus);</span>
+			}
+
+<span class="nc" id="L269">			String pelintyyppistring = peli.getPelintyyppi();</span>
+<span class="nc bnc" id="L270" title="All 2 branches missed.">			if (pelintyyppistring.equals(&quot;lauta&quot;)) {</span>
+<span class="nc" id="L271">				pelintyyppi.selectToggle(lauta);</span>
+<span class="nc" id="L272">				konsoliPane.setVisible(false);</span>
+<span class="nc" id="L273">			} else {</span>
+<span class="nc" id="L274">				pelintyyppi.selectToggle(video);</span>
+<span class="nc" id="L275">				konsoliPane.setVisible(true);</span>
+			}
+
+<span class="nc" id="L278">			kaupunki.setText(peli.getKaupunki());</span>
+<span class="nc" id="L279">			genre.setValue(peli.getGenre());</span>
+<span class="nc" id="L280">			kunto.setValue(peli.getKunto());</span>
+<span class="nc" id="L281">			ikaraja.setText(Integer.toString(peli.getIkaraja()));</span>
+<span class="nc" id="L282">			pelaajamaara.setText(Integer.toString(peli.getPelmaara()));</span>
+<span class="nc" id="L283">			kuvaus.setText(peli.getKuvaus());</span>
+<span class="nc" id="L284">			tekstikenttä.setText(peli.getTekstikenttä());</span>
+<span class="nc" id="L285">			konsoli.setValue(peli.getKonsoli());</span>
+<span class="nc" id="L286">		} else {</span>
+<span class="nc" id="L287">			pelinnimi.setText(&quot;&quot;);</span>
+<span class="nc" id="L288">			hinta.setText(&quot;&quot;);</span>
+<span class="nc" id="L289">			kaupunki.setText(&quot;&quot;);</span>
+<span class="nc" id="L290">			genre.setValue(&quot;&quot;);</span>
+<span class="nc" id="L291">			ikaraja.setText(&quot;&quot;);</span>
+<span class="nc" id="L292">			pelaajamaara.setText(&quot;&quot;);</span>
+<span class="nc" id="L293">			kuvaus.setText(&quot;&quot;);</span>
+<span class="nc" id="L294">			tekstikenttä.setText(&quot;&quot;);</span>
+<span class="nc" id="L295">			konsoli.setValue(&quot;&quot;);</span>
+		}
+<span class="nc" id="L297">	}</span>
+
+	/*
+	 * Pelin tietojen muutosten tallennus
+	 */
+	@FXML
+	public void tallennaMuutokset() {
+<span class="nc bnc" id="L304" title="All 2 branches missed.">		if (taytaTyhjatKentat() == true) {</span>
+<span class="nc" id="L305">			Peli peli = new Peli();</span>
+<span class="nc" id="L306">			Peli peliId = omatPelit.getSelectionModel().getSelectedItem();</span>
+<span class="nc" id="L307">			peli.setPeliId(peliId.getPeliId());</span>
+<span class="nc" id="L308">			peli.setPelinNimi(pelinnimi.getText());</span>
+<span class="nc" id="L309">			int price = Integer.parseInt(hinta.getText());</span>
+<span class="nc" id="L310">			peli.setHinta(price);</span>
+<span class="nc" id="L311">			int age = Integer.parseInt(ikaraja.getText());</span>
+<span class="nc" id="L312">			peli.setIkaraja(age);</span>
+<span class="nc" id="L313">			peli.setKaupunki(kaupunki.getText());</span>
+<span class="nc" id="L314">			String tyyppiText = ((RadioButton) tyyppi.getSelectedToggle()).getText();</span>
+<span class="nc" id="L315">			System.out.println(&quot;TALLETUKSEN TYYPPI:&quot; + tyyppiText);</span>
+<span class="nc" id="L316">			peli.setTalletusTyyppi(tyyppiText);</span>
+<span class="nc" id="L317">			peli.setKuvaus(kuvaus.getText());</span>
+<span class="nc" id="L318">			int players = Integer.parseInt(pelaajamaara.getText());</span>
+<span class="nc" id="L319">			peli.setPelmaara(players);</span>
+<span class="nc" id="L320">			String pelintyyppiText = ((RadioButton) pelintyyppi.getSelectedToggle()).getText();</span>
+<span class="nc" id="L321">			peli.setPelinTyyppi(pelintyyppiText);</span>
+<span class="nc" id="L322">			peli.setGenre(genre.getValue().toString());</span>
+<span class="nc" id="L323">			System.out.println(genre.getValue().toString());</span>
+<span class="nc" id="L324">			peli.setKunto(kunto.getValue().toString());</span>
+<span class="nc" id="L325">			System.out.println(peli.getPelinNimi() + &quot; &quot; + peli.getHinta() + &quot; &quot; + peli.getIkaraja());</span>
+<span class="nc" id="L326">			peli.setTekstikenttä(tekstikenttä.getText());</span>
+
+<span class="nc bnc" id="L328" title="All 2 branches missed.">			if (peli.getKonsoli() == null) {</span>
+<span class="nc" id="L329">				peli.setKonsoli(konsoli.getValue().toString());</span>
+<span class="nc" id="L330">			} else {</span>
+<span class="nc" id="L331">				peli.setKonsoli(&quot;&quot;);</span>
+			}
+<span class="nc" id="L333">			pelitdao.paivitaPeli(peli);</span>
+
+			// Ilmoitus onnistuneesta tallennuksesta
+<span class="nc" id="L336">			Alert alert = new Alert(Alert.AlertType.INFORMATION);</span>
+<span class="nc" id="L337">			alert.setTitle(&quot;Alert&quot;);</span>
+<span class="nc" id="L338">			alert.setContentText(&quot;Muutokset tallennettu onnistuneesti!&quot;);</span>
+<span class="nc" id="L339">			alert.showAndWait();</span>
+
+<span class="nc" id="L341">			omatPelit.getItems().clear();</span>
+<span class="nc" id="L342">			listaaOmatPelit();</span>
+		}
+<span class="nc" id="L344">	}</span>
+
+	/*
+	 * Muutoslomakkeen validointi Tyhjistä kentistä huomautetaan alertilla ja
+	 * punaisella värillä
+	 */
+	public boolean taytaTyhjatKentat() {
+
+<span class="nc" id="L352">		boolean kehotus = false;</span>
+
+<span class="nc bnc" id="L354" title="All 2 branches missed.">		if (pelinnimi.getText().trim().isEmpty()) {</span>
+<span class="nc" id="L355">			pelinnimi.setStyle(&quot;-fx-border-color:red&quot;);</span>
+<span class="nc" id="L356">			nimivaroitus.setText(&quot;Pakollinen kenttä&quot;);</span>
+<span class="nc" id="L357">			kehotus = true;</span>
+		}
+<span class="nc bnc" id="L359" title="All 2 branches missed.">		if (hinta.getText().trim().isEmpty()) {</span>
+<span class="nc" id="L360">			hinta.setStyle(&quot;-fx-border-color:red&quot;);</span>
+<span class="nc" id="L361">			hintavaroitus.setText(&quot;Pakollinen kenttä&quot;);</span>
+<span class="nc" id="L362">			kehotus = true;</span>
+		}
+<span class="nc bnc" id="L364" title="All 2 branches missed.">		if (kaupunki.getText().trim().isEmpty()) {</span>
+<span class="nc" id="L365">			kaupunki.setStyle(&quot;-fx-border-color:red&quot;);</span>
+<span class="nc" id="L366">			kaupunki.setPromptText(&quot;Pakollinen kenttä!&quot;);</span>
+<span class="nc" id="L367">			paikkakuntavaroitus.setText(&quot;Pakollinen kenttä&quot;);</span>
+<span class="nc" id="L368">			kehotus = true;</span>
+		}
+<span class="nc bnc" id="L370" title="All 2 branches missed.">		if (ikaraja.getText().trim().isEmpty()) {</span>
+<span class="nc" id="L371">			ikaraja.setStyle(&quot;-fx-border-color:red&quot;);</span>
+<span class="nc" id="L372">			ikaraja.setPromptText(&quot;Pakollinen kenttä!&quot;);</span>
+<span class="nc" id="L373">			ikaraja.setText(&quot;Pakollinen kenttä&quot;);</span>
+<span class="nc" id="L374">			kehotus = true;</span>
+		}
+<span class="nc bnc" id="L376" title="All 2 branches missed.">		if (kuvaus.getText().trim().isEmpty()) {</span>
+<span class="nc" id="L377">			kuvaus.setStyle(&quot;-fx-border-color:red&quot;);</span>
+<span class="nc" id="L378">			kuvausvaroitus.setText(&quot;Pakollinen kenttä&quot;);</span>
+<span class="nc" id="L379">			kehotus = true;</span>
+		}
+<span class="nc bnc" id="L381" title="All 2 branches missed.">		if (tekstikenttä.getText().trim().isEmpty()) {</span>
+<span class="nc" id="L382">			tekstikenttä.setStyle(&quot;-fx-border-color:red&quot;);</span>
+<span class="nc" id="L383">			tekstikenttävaroitus.setText(&quot;Pakollinen kenttä&quot;);</span>
+<span class="nc" id="L384">			kehotus = true;</span>
+		}
+<span class="nc bnc" id="L386" title="All 2 branches missed.">		if (kunto.getValue() == null) {</span>
+<span class="nc" id="L387">			kunto.setStyle(&quot;-fx-border-color:red&quot;);</span>
+<span class="nc" id="L388">			kuntovaroitus.setText(&quot;Pakollinen kenttä&quot;);</span>
+<span class="nc" id="L389">			kehotus = true;</span>
+		}
+<span class="nc bnc" id="L391" title="All 2 branches missed.">		if (genre.getValue() == null) {</span>
+<span class="nc" id="L392">			genre.setStyle(&quot;-fx-border-color:red&quot;);</span>
+<span class="nc" id="L393">			genrevaroitus.setText(&quot;Pakollinen kenttä&quot;);</span>
+<span class="nc" id="L394">			kehotus = true;</span>
+		}
+<span class="nc bnc" id="L396" title="All 2 branches missed.">		if (tyyppi.getSelectedToggle() == null) {</span>
+<span class="nc" id="L397">			tyyppivaroitus.setText(&quot;Pakollinen kenttä&quot;);</span>
+<span class="nc" id="L398">			kehotus = true;</span>
+		}
+<span class="nc bnc" id="L400" title="All 2 branches missed.">		if (pelintyyppi.getSelectedToggle() == null) {</span>
+<span class="nc" id="L401">			pelintyyppivaroitus.setText(&quot;Pakollinen kenttä&quot;);</span>
+<span class="nc" id="L402">			kehotus = true;</span>
+		}
+<span class="nc bnc" id="L404" title="All 2 branches missed.">		if (kehotus == true) {</span>
+<span class="nc" id="L405">			Alert alert = new Alert(Alert.AlertType.INFORMATION);</span>
+<span class="nc" id="L406">			alert.setTitle(&quot;Alert&quot;);</span>
+<span class="nc" id="L407">			alert.setContentText(&quot;Täytä pakolliset kentät!&quot;);</span>
+<span class="nc" id="L408">			alert.showAndWait();</span>
+<span class="nc" id="L409">			return false;</span>
+		}
+<span class="nc" id="L411">		return true;</span>
+	}
+
+	/*
+	 * Tekstikentän kirjainmäärälaskuri
+	 */
+	@FXML
+	public void kirjaimet() {
+<span class="nc" id="L419">		String kirjaimetstring = tekstikenttä.getText();</span>
+<span class="nc" id="L420">		int maxpituus = 200;</span>
+<span class="nc" id="L421">		int pituus = 0;</span>
+<span class="nc" id="L422">		pituus = kirjaimetstring.length();</span>
+<span class="nc" id="L423">		int jaljella = maxpituus - pituus;</span>
+
+<span class="nc bnc" id="L425" title="All 2 branches missed.">		if (jaljella &lt;= 0) {</span>
+<span class="nc" id="L426">			kirjaimet.setText(&quot;Kirjaimia jäljellä: &quot; + 0);</span>
+
+			// Tekstikenttään ei voi kirjoittaa
+<span class="nc" id="L429">			tekstikenttä.setEditable(false);</span>
+
+			// Ilmoitus kun tekstikenttä täynnä jolloin kirjoitus ei enää onnistu
+<span class="nc" id="L432">			Alert alert = new Alert(Alert.AlertType.INFORMATION);</span>
+<span class="nc" id="L433">			alert.setTitle(&quot;Alert&quot;);</span>
+<span class="nc" id="L434">			alert.setContentText(&quot;Tekstikenttä täynnä!&quot;);</span>
+<span class="nc" id="L435">			alert.showAndWait();</span>
+
+			// Tekstikenttään voi taas kirjoittaa
+<span class="nc" id="L438">			tekstikenttä.setEditable(true);</span>
+<span class="nc" id="L439">		} else {</span>
+<span class="nc" id="L440">			kirjaimet.setText(&quot;Kirjaimia jäljellä: &quot; + jaljella);</span>
+		}
+<span class="nc" id="L442">	}</span>
+
+	@FXML
+	void vieEtusivulle(ActionEvent event) throws IOException {
+		// Vaihdetaan näkymää samalla viedään käyttäjän tiedot
+<span class="nc" id="L447">		FXMLLoader loader = new FXMLLoader();</span>
+<span class="nc" id="L448">		loader.setLocation(MainApp.class.getResource(&quot;Etusivu.fxml&quot;));</span>
+<span class="nc" id="L449">		BorderPane personOverview = (BorderPane) loader.load();</span>
+<span class="nc" id="L450">		Scene etusivulle = new Scene(personOverview);</span>
+
+<span class="nc" id="L452">		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();</span>
+<span class="nc" id="L453">		window.setScene(etusivulle);</span>
+<span class="nc" id="L454">		window.show();</span>
+<span class="nc" id="L455">	}</span>
+
+	@FXML
+	void lisaaUusiPeliNäkymä(ActionEvent event) throws IOException {
+		// Vaihdetaan näkymää samalla viedään käyttäjän tiedot
+<span class="nc" id="L460">		FXMLLoader loader = new FXMLLoader();</span>
+<span class="nc" id="L461">		loader.setLocation(MainApp.class.getResource(&quot;Uusipeli.fxml&quot;));</span>
+<span class="nc" id="L462">		BorderPane personOverview = (BorderPane) loader.load();</span>
+<span class="nc" id="L463">		Scene etusivulle = new Scene(personOverview);</span>
+
+<span class="nc" id="L465">		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();</span>
+<span class="nc" id="L466">		window.setScene(etusivulle);</span>
+<span class="nc" id="L467">		window.show();</span>
+<span class="nc" id="L468">	}</span>
+
+	@FXML
+	void vieProfiiliNäkymään(ActionEvent event) throws IOException {
+		// Vaihdetaan näkymää samalla viedään käyttäjän tiedot
+<span class="nc" id="L473">		FXMLLoader loader = new FXMLLoader();</span>
+<span class="nc" id="L474">		loader.setLocation(MainApp.class.getResource(&quot;Profiili.fxml&quot;));</span>
+<span class="nc" id="L475">		BorderPane personOverview = (BorderPane) loader.load();</span>
+<span class="nc" id="L476">		Scene etusivulle = new Scene(personOverview);</span>
+
+<span class="nc" id="L478">		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();</span>
+<span class="nc" id="L479">		window.setScene(etusivulle);</span>
+<span class="nc" id="L480">		window.show();</span>
+<span class="nc" id="L481">	}</span>
+
+	@FXML
+	void LogOut(ActionEvent event) throws IOException {
+<span class="nc" id="L485">		boolean test = TiedostoKasittely.poistaTiedosto();</span>
+<span class="nc bnc" id="L486" title="All 2 branches missed.">		if (test == true) {</span>
+			// Viedään kirjautumissivulle
+<span class="nc" id="L488">			FXMLLoader loader = new FXMLLoader();</span>
+<span class="nc" id="L489">			loader.setLocation(MainApp.class.getResource(&quot;Kirjautuminen.fxml&quot;));</span>
+
+<span class="nc" id="L491">			BorderPane etusivu = (BorderPane) loader.load();</span>
+<span class="nc" id="L492">			Scene kirjautumisNäkymä = new Scene(etusivu);</span>
+
+<span class="nc" id="L494">			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();</span>
+<span class="nc" id="L495">			window.setScene(kirjautumisNäkymä);</span>
+<span class="nc" id="L496">			window.show();</span>
+		}
+<span class="nc" id="L498">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>Pelienvuokraussovellus (15.10.2021 8.22.46)</div></body></html>

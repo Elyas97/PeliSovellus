@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fi"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>PeliTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Pelienvuokraussovellus (15.10.2021 8.22.46)</a> &gt; <a href="../../index.html" class="el_group">Pelienvuokraussovellus</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">model</a> &gt; <span class="el_source">PeliTest.java</span></div><h1>PeliTest.java</h1><pre class="source lang-java linenums">package model;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+<span class="fc" id="L7">class PeliTest {</span>
+
+<span class="fc" id="L9">	long millis = System.currentTimeMillis();</span>
+<span class="fc" id="L10">	java.sql.Date paiva = new java.sql.Date(millis);</span>
+
+	@Test
+	void testGetPeliId() {
+<span class="fc" id="L14">		Peli peli = new Peli(&quot;Mario Kart&quot;, 2, &quot;Videopeli&quot;, &quot;Vuokraus&quot;, 2, &quot;Jännitys&quot;, &quot;Playstation&quot;, 8, 2, &quot;Kelpo peli&quot;,</span>
+<span class="fc" id="L15">				&quot;Helsinki&quot;, &quot;Hyvä&quot;, &quot;Puh: 040 123456&quot;, paiva);</span>
+<span class="fc" id="L16">		assertEquals(2, peli.getPeliId(), &quot;Pelin id väärin.&quot;);</span>
+<span class="fc" id="L17">	}</span>
+
+	@Test
+	void testSetPeliId() {
+<span class="fc" id="L21">		Peli peli = new Peli();</span>
+<span class="fc" id="L22">		peli.setPeliId(1);</span>
+<span class="pc bpc" id="L23" title="1 of 2 branches missed.">		assertTrue(peli.getPeliId() == 1);</span>
+<span class="fc" id="L24">	}</span>
+
+	@Test
+	void testSetPelinNimi() {
+<span class="fc" id="L28">		Peli peli = new Peli();</span>
+<span class="fc" id="L29">		peli.setPelinNimi(&quot;Uno&quot;);</span>
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">		assertTrue(peli.getPelinNimi() == &quot;Uno&quot;);</span>
+<span class="fc" id="L31">	}</span>
+
+	@Test
+	void testGetPelinNimi() {
+<span class="fc" id="L35">		Peli peli = new Peli(&quot;Mario Kart&quot;, 2, &quot;Videopeli&quot;, &quot;Vuokraus&quot;, 2, &quot;Jännitys&quot;, &quot;Playstation&quot;, 8, 2, &quot;Kelpo peli&quot;,</span>
+<span class="fc" id="L36">				&quot;Helsinki&quot;, &quot;Hyvä&quot;, &quot;Puh: 040 123456&quot;, paiva);</span>
+<span class="fc" id="L37">		assertEquals(&quot;Mario Kart&quot;, peli.getPelinNimi(), &quot;Pelin nimi väärin.&quot;);</span>
+<span class="fc" id="L38">	}</span>
+
+	@Test
+	void testSetPelinTyyppi() {
+<span class="fc" id="L42">		Peli peli = new Peli();</span>
+<span class="fc" id="L43">		peli.setPelinTyyppi(&quot;Lautapeli&quot;);</span>
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">		assertTrue(peli.getPelintyyppi() == &quot;Lautapeli&quot;);</span>
+<span class="fc" id="L45">	}</span>
+
+	@Test
+	void testGetPelintyyppi() {
+<span class="fc" id="L49">		Peli peli = new Peli(&quot;Mario Kart&quot;, 2, &quot;Videopeli&quot;, &quot;Vuokraus&quot;, 2, &quot;Jännitys&quot;, &quot;Playstation&quot;, 8, 2, &quot;Kelpo peli&quot;,</span>
+<span class="fc" id="L50">				&quot;Helsinki&quot;, &quot;Hyvä&quot;, &quot;Puh: 040 123456&quot;, paiva);</span>
+<span class="fc" id="L51">		assertEquals(&quot;Videopeli&quot;, peli.getPelintyyppi(), &quot;Pelin tyyppi väärin.&quot;);</span>
+<span class="fc" id="L52">	}</span>
+
+	void testGetKunto() {
+<span class="nc" id="L55">		Peli peli = new Peli(&quot;Mario Kart&quot;, 2, &quot;Videopeli&quot;, &quot;Vuokraus&quot;, 2, &quot;Jännitys&quot;, &quot;Playstation&quot;, 8, 2, &quot;Kelpo peli&quot;,</span>
+<span class="nc" id="L56">				&quot;Helsinki&quot;, &quot;Hyvä&quot;, &quot;Puh: 040 123456&quot;, paiva);</span>
+<span class="nc" id="L57">		assertEquals(&quot;Hyvä&quot;, peli.getKunto(), &quot;Pelin kunto väärin.&quot;);</span>
+<span class="nc" id="L58">	}</span>
+
+	@Test
+	void testSetKunto() {
+<span class="fc" id="L62">		Peli peli = new Peli();</span>
+<span class="fc" id="L63">		peli.setKunto(&quot;Erinomainen&quot;);</span>
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">		assertTrue(peli.getKunto() == &quot;Erinomainen&quot;);</span>
+<span class="fc" id="L65">	}</span>
+
+	@Test
+	void testGetGenre() {
+<span class="fc" id="L69">		Peli peli = new Peli(&quot;Mario Kart&quot;, 2, &quot;Videopeli&quot;, &quot;Vuokraus&quot;, 2, &quot;Jännitys&quot;, &quot;Playstation&quot;, 8, 2, &quot;Kelpo peli&quot;,</span>
+<span class="fc" id="L70">				&quot;Helsinki&quot;, &quot;Hyvä&quot;, &quot;Puh: 040 123456&quot;, paiva);</span>
+<span class="fc" id="L71">		assertEquals(&quot;Jännitys&quot;, peli.getGenre(), &quot;Pelin genre väärin.&quot;);</span>
+<span class="fc" id="L72">	}</span>
+
+	@Test
+	void testSetGenre() {
+<span class="fc" id="L76">		Peli peli = new Peli();</span>
+<span class="fc" id="L77">		peli.setGenre(&quot;Kauhu&quot;);</span>
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">		assertTrue(peli.getGenre() == &quot;Kauhu&quot;);</span>
+<span class="fc" id="L79">	}</span>
+
+	@Test
+	void testGetIkäraja() {
+<span class="fc" id="L83">		Peli peli = new Peli(&quot;Mario Kart&quot;, 2, &quot;Videopeli&quot;, &quot;Vuokraus&quot;, 2, &quot;Jännitys&quot;, &quot;Playstation&quot;, 8, 2, &quot;Kelpo peli&quot;,</span>
+<span class="fc" id="L84">				&quot;Helsinki&quot;, &quot;Hyvä&quot;, &quot;Puh: 040 123456&quot;, paiva);</span>
+<span class="fc" id="L85">		assertEquals(8, peli.getIkaraja(), &quot;Pelin ikäraja väärin.&quot;);</span>
+<span class="fc" id="L86">	}</span>
+
+	@Test
+	void testSetIkäraja() {
+<span class="fc" id="L90">		Peli peli = new Peli();</span>
+<span class="fc" id="L91">		peli.setIkaraja(18);</span>
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">		assertTrue(peli.getIkaraja() == 18);</span>
+<span class="fc" id="L93">	}</span>
+
+	@Test
+	void testGetKuvaus() {
+<span class="fc" id="L97">		Peli peli = new Peli(&quot;Mario Kart&quot;, 2, &quot;Videopeli&quot;, &quot;Vuokraus&quot;, 2, &quot;Jännitys&quot;, &quot;Playstation&quot;, 8, 2, &quot;Kelpo peli&quot;,</span>
+<span class="fc" id="L98">				&quot;Helsinki&quot;, &quot;Hyvä&quot;, &quot;Puh: 040 123456&quot;, paiva);</span>
+<span class="fc" id="L99">		assertEquals(&quot;Kelpo peli&quot;, peli.getKuvaus(), &quot;Pelin kuvaus väärin.&quot;);</span>
+<span class="fc" id="L100">	}</span>
+
+	@Test
+	void testSetKuvaus() {
+<span class="fc" id="L104">		Peli peli = new Peli();</span>
+<span class="fc" id="L105">		peli.setKuvaus(&quot;Hauska nelinpeli&quot;);</span>
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">		assertTrue(peli.getKuvaus() == &quot;Hauska nelinpeli&quot;);</span>
+<span class="fc" id="L107">	}</span>
+
+	@Test
+	void testSetTekstikenttä() {
+<span class="fc" id="L111">		Peli peli = new Peli();</span>
+<span class="fc" id="L112">		peli.setTekstikenttä(&quot;Puhelin: 040 1234567&quot;);</span>
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">		assertTrue(peli.getTekstikenttä() == &quot;Puhelin: 040 1234567&quot;);</span>
+<span class="fc" id="L114">	}</span>
+
+	@Test
+	void testGetTekstikenttä() {
+<span class="fc" id="L118">		Peli peli = new Peli(&quot;Mario Kart&quot;, 2, &quot;Videopeli&quot;, &quot;Vuokraus&quot;, 2, &quot;Jännitys&quot;, &quot;Playstation&quot;, 8, 2, &quot;Kelpo peli&quot;,</span>
+<span class="fc" id="L119">				&quot;Helsinki&quot;, &quot;Hyvä&quot;, &quot;Puh: 040 123456&quot;, paiva);</span>
+<span class="fc" id="L120">		assertEquals(&quot;Puh: 040 123456&quot;, peli.getTekstikenttä(), &quot;Pelin tekstikenttä väärin.&quot;);</span>
+<span class="fc" id="L121">	}</span>
+
+	@Test
+	void testGetKonsoli() {
+<span class="fc" id="L125">		Peli peli = new Peli(&quot;Mario Kart&quot;, 2, &quot;Videopeli&quot;, &quot;Vuokraus&quot;, 2, &quot;Jännitys&quot;, &quot;Playstation&quot;, 8, 2, &quot;Kelpo peli&quot;,</span>
+<span class="fc" id="L126">				&quot;Helsinki&quot;, &quot;Hyvä&quot;, &quot;Puh: 040 123456&quot;, paiva);</span>
+<span class="fc" id="L127">		assertEquals(&quot;Playstation&quot;, peli.getKonsoli(), &quot;Pelin konsoli väärin.&quot;);</span>
+<span class="fc" id="L128">	}</span>
+
+	@Test
+	void testSetKonsoli() {
+<span class="fc" id="L132">		Peli peli = new Peli();</span>
+<span class="fc" id="L133">		peli.setKonsoli(&quot;Playstation&quot;);</span>
+<span class="pc bpc" id="L134" title="1 of 2 branches missed.">		assertTrue(peli.getKonsoli() == &quot;Playstation&quot;);</span>
+<span class="fc" id="L135">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>Pelienvuokraussovellus (15.10.2021 8.22.46)</div></body></html>
