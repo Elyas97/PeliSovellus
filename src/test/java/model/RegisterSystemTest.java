@@ -11,7 +11,7 @@ class RegisterSystemTest {
 	@Test
 	void testRegister() {
 		Kayttaja kayttaja = new Kayttaja();
-		kayttaja.setSähköposti("user@mailcom");
-		assertEquals("user@mailcom", kayttaja.getSähköposti(), "Väärä sähköposti.");
+		kayttaja.setSähköposti("user@mail.com");
+		assertEquals("user@mail.com", kayttaja.getSähköposti(), "Väärä sähköposti.");
 	}
 }
