@@ -1,4 +1,4 @@
-package view;
+package controller;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -27,6 +27,7 @@ import model.Kayttaja;
 import model.Peli;
 import model.PeliSovellusDAO;
 import model.TiedostoKasittely;
+import view.MainApp;
 
 public class TapahtumatController {
 

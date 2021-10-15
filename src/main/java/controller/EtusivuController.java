@@ -1,4 +1,4 @@
-package view;
+package controller;
 
 import java.io.IOException;
 import javafx.beans.value.ChangeListener;
@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 import model.Peli;
 import model.PeliSovellusDAO;
 import model.TiedostoKasittely;
+import view.MainApp;
 
 public class EtusivuController {
 

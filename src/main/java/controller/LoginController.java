@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 import model.Kayttaja;
 import model.LoginSystem;
 import model.TiedostoKasittely;
-import view.EtusivuController;
 import view.MainApp;
 
 public class LoginController {

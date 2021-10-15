@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import view.TapahtumatController;
+import controller.TapahtumatController;
 
 public class PeliSovellusDAO {
 

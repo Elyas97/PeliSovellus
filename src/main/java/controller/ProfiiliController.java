@@ -23,7 +23,6 @@ import javafx.stage.Stage;
 import model.Kayttaja;
 import model.PeliSovellusDAO;
 import model.TiedostoKasittely;
-import view.EtusivuController;
 import view.MainApp;
 
 public class ProfiiliController {

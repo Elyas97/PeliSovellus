@@ -2,7 +2,10 @@ package view;
 
 import java.io.IOException;
 
+import controller.EtusivuController;
+import controller.LisaaPeliController;
 import controller.LoginController;
+import controller.TapahtumatController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
