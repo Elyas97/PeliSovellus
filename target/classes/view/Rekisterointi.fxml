@@ -26,7 +26,7 @@
    <right>
       <AnchorPane prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
-            <Text fill="#0598ff" layoutX="79.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rekistyröidy">
+            <Text fill="#0598ff" layoutX="79.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rekisteröidy">
                <font>
                   <Font size="23.0" />
                </font>
@@ -37,7 +37,7 @@
             <TextField fx:id="puhelinnumero" layoutX="65.0" layoutY="187.0" promptText="Puhelinnumero" style="-fx-background-color: transparent; -fx-border-color: #0589ff;" />
             <PasswordField fx:id="salasana" layoutX="65.0" layoutY="228.0" promptText="Salasana" style="-fx-background-color: transparent; -fx-border-color: #0589ff;" />
             <PasswordField fx:id="csalasana" layoutX="65.0" layoutY="268.0" promptText="Vahvista Salasana" style="-fx-background-color: transparent; -fx-border-color: #0589ff;" />
-            <Button layoutX="153.0" layoutY="327.0" mnemonicParsing="false" onAction="#Rekistyröidy" prefHeight="32.0" prefWidth="127.0" style="-fx-background-color: #0589ff;" text="Rekistyröidy" textFill="WHITE" />
+            <Button layoutX="153.0" layoutY="327.0" mnemonicParsing="false" onAction="#Rekistyröidy" prefHeight="32.0" prefWidth="127.0" style="-fx-background-color: #0589ff;" text="Rekisteröidy" textFill="WHITE" />
             <Hyperlink layoutX="82.0" layoutY="359.0" onAction="#ViewNäkymäLogin" prefHeight="42.0" prefWidth="142.0" text="Onko sinulla jo tili?&#10;   Kirjaudu sisään&#10;&#10;" />
             <FontAwesomeIconView fill="#0589ff" glyphName="ENVELOPE" layoutX="29.0" layoutY="169.0" size="20" />
             <FontAwesomeIconView fill="#0589ff" glyphName="PHONE" layoutX="31.0" layoutY="207.0" size="20" />

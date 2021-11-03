@@ -94,7 +94,21 @@
                            </toggleGroup></RadioButton>
                         <RadioButton fx:id="myynti" mnemonicParsing="false" prefHeight="18.0" prefWidth="86.0" text="Myydään" toggleGroup="$hakutyyppi" />
                         <RadioButton fx:id="vuokraus" mnemonicParsing="false" prefHeight="18.0" prefWidth="94.0" text="Vuokrataan" toggleGroup="$hakutyyppi" />
-                        <RadioButton fx:id="lahjoitus" mnemonicParsing="false" text="Lahjoitetaan" toggleGroup="$hakutyyppi" />
+                        <RadioButton fx:id="lahjoitus" mnemonicParsing="false" prefHeight="18.0" prefWidth="102.0" text="Lahjoitetaan" toggleGroup="$hakutyyppi" />
+                        <VBox prefHeight="39.0" prefWidth="126.0">
+                           <children>
+                              <RadioButton fx:id="korkeinhinta" mnemonicParsing="false" onAction="#KorkeinHinta" prefHeight="18.0" prefWidth="132.0" text="Hinta korkein">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="hakutyyppi11" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="alhaisinhinta" mnemonicParsing="false" onAction="#AlhaisinHinta" prefHeight="18.0" prefWidth="102.0" text="Hinta alhaisin">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="hakutyyppi1" />
+                                 </toggleGroup>
+                              </RadioButton>
+                           </children>
+                        </VBox>
 
                      </children>
                   </HBox>

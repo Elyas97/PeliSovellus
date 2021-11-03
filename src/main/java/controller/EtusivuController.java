@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -96,6 +97,10 @@ public class EtusivuController {
 	private Label hintaOtsikko;
 	@FXML
 	private Text hintaLabel;
+	@FXML
+	private RadioButton alhaisinhinta;
+	@FXML
+	private RadioButton korkeinhinta;
 
 	private Stage dialogStage;
 	PeliSovellusDAO pelitdao = new PeliSovellusDAO();
@@ -134,6 +139,9 @@ public class EtusivuController {
 		//Kuuntelee listauksessa olevia kenttiä ja välittää tiedot pelinTiedot metodiin
 		lista.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> pelinTiedot(newValue));
+		
+		//ObservableList<String> hinnanmukaan = FXCollections.observableArrayList("Alhaisimmasta korkeimpaan", "Korkeimmasta alhaisimpaan");
+		
 
 	}
 
@@ -331,6 +339,59 @@ public class EtusivuController {
 
 		// sulje ikkuna
 		rajaahakuNäkymä.setVisible(false);
+	}
+	
+	//Listan järjestys hinnan mukaan 
+	@FXML
+	public void AlhaisinHinta() {
+		korkeinhinta.setSelected(false);
+		pelit = pelitdao.haePelit();
+		int i, j, pienin;
+		Peli apu;
+		
+		for (i = 0; i < pelit.length; i++) {
+			pienin = i;
+			for (j = i + 1; j < pelit.length; j++) {
+				if (pelit[j].getHinta() < pelit[pienin].getHinta()) {
+					pienin = j;
+				}
+			}
+			if (pienin != i) {
+				apu = pelit[pienin];
+				pelit[pienin] = pelit[i];
+				pelit[i] = apu;
+			}
+		}
+		pelidata.clear();
+		for (int a = 0; a < pelit.length; a++) {
+			pelidata.add(pelit[a]);
+		}
+	}
+	
+	@FXML
+	public void KorkeinHinta() {
+		alhaisinhinta.setSelected(false);
+		pelit = pelitdao.haePelit();
+		int i, j, suurin;
+		Peli apu;
+		
+		for (i = 0; i < pelit.length; i++) {
+			suurin = i;
+			for (j = i + 1; j < pelit.length; j++) {
+				if (pelit[j].getHinta() > pelit[suurin].getHinta()) {
+					suurin = j;
+				}
+			}
+			if (suurin != i) {
+				apu = pelit[suurin];
+				pelit[suurin] = pelit[i];
+				pelit[i] = apu;
+			}
+		}
+		pelidata.clear();
+		for (int a = 0; a < pelit.length; a++) {
+			pelidata.add(pelit[a]);
+		}
 	}
 
 	// Jää toteutukseen OTP2
