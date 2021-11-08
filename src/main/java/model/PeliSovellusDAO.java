@@ -224,6 +224,64 @@ public class PeliSovellusDAO {
 		}
 		return pelit;
 	}
+	
+	//Ikärajan mukaan
+	public Peli[] haePelitIkaraja(int ikaraja) {
+		System.out.println("ikäraja on " + ikaraja);
+		ArrayList<Peli> peliLista = new ArrayList();
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			String query = "Select * from Peli where ikäraja='"+ikaraja+"'";
+			stmt = conn.createStatement();
+			System.out.println("Haetaan tietokannasta pelejä ikärajalla: " + ikaraja);
+			
+			rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				String pelinimi = rs.getString("Pelinimi");
+				int PeliID = rs.getInt("PeliID");
+				String pelityyppi = rs.getString("Pelintyyppi");
+				String talletustyyppi = rs.getString("Talletustyyppi");
+				int hinta = rs.getInt("Hinta");
+				String genre = rs.getString("Genre");
+				int ika = rs.getInt("Ikäraja");
+				int lukumaara = rs.getInt("Pelaajamäärä");
+				String kuvaus = rs.getString("Kuvaus");
+				String kaupunki = rs.getString("Kaupunki");
+				String konsoli = rs.getString("Konsoli");
+				String tekstikenttä = rs.getString("Tekstikenttä");
+				String kunto = rs.getString("Kunto");
+				Date paivamaara = rs.getDate("Päivämäärä");
+
+				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, konsoli, ika,
+						lukumaara, kuvaus, kaupunki, kunto, tekstikenttä, paivamaara));
+			}
+		} catch (SQLException e) {
+			do {
+				System.out.println("Viesti: " + e.getMessage());
+				System.out.println("Virhekoodi: " + e.getErrorCode());
+				System.out.println("Viesti: " + e.getSQLState());
+			} while (e.getNextException() != null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+			} catch (Exception e) {
+				System.out.println("Resurssien vapautuksessa virhe");
+			}
+		}
+		Peli[] pelit = new Peli[peliLista.size()];
+		for (int i = 0; i < pelit.length; i++) {
+			pelit[i] = peliLista.get(i);
+		}
+		return pelit;
+	}
 
 	/*
 	 * Poistetaan peli tietokannasta

@@ -136,18 +136,20 @@ public class EtusivuController {
 				}
 			}
 		});
-		//Kuuntelee listauksessa olevia kenttiä ja välittää tiedot pelinTiedot metodiin
+		// Kuuntelee listauksessa olevia kenttiä ja välittää tiedot pelinTiedot metodiin
 		lista.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> pelinTiedot(newValue));
-		
-		//ObservableList<String> hinnanmukaan = FXCollections.observableArrayList("Alhaisimmasta korkeimpaan", "Korkeimmasta alhaisimpaan");
-		
+
+		// ObservableList<String> hinnanmukaan =
+		// FXCollections.observableArrayList("Alhaisimmasta korkeimpaan", "Korkeimmasta
+		// alhaisimpaan");
 
 	}
 
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
 	}
+
 	/*
 	 * Hakee pelit tietokannasta ja asettaa ne listaan
 	 */
@@ -159,6 +161,7 @@ public class EtusivuController {
 			pelidata.add(pelit[i]);
 		}
 	}
+
 	/*
 	 * Asettaa valitun pelin tiedot GridPanen labeleihin
 	 */
@@ -337,18 +340,40 @@ public class EtusivuController {
 		// System.out.println(test +" rent"+test1+" ilmainen"+test2+" uus"+ uus+" vanha
 		// "+vanhat +" "+ikä);
 
+		pelidata.clear();
+
+		int ikaraja = 0;
+		for (int i = 0; i < pelit.length; i++) {
+			if (valinnat.getValue().toString() == "3") {
+				ikaraja = 3;
+				pelit = pelitdao.haePelitIkaraja(ikaraja);
+			} else if (valinnat.getValue().toString() == "7") {
+				ikaraja = 7;
+				pelit = pelitdao.haePelitIkaraja(ikaraja);
+			} else if (valinnat.getValue().toString() == "12") {
+				ikaraja = 12;
+				pelit = pelitdao.haePelitIkaraja(ikaraja);	
+			}
+			//jne
+		}
+		
+		for (int i = 0; i < pelit.length; i++) {
+			pelidata.add(pelit[i]);
+		}
+		
 		// sulje ikkuna
 		rajaahakuNäkymä.setVisible(false);
+
 	}
-	
-	//Listan järjestys hinnan mukaan 
+
+	// Listan järjestys hinnan mukaan
 	@FXML
 	public void AlhaisinHinta() {
 		korkeinhinta.setSelected(false);
 		pelit = pelitdao.haePelit();
 		int i, j, pienin;
 		Peli apu;
-		
+
 		for (i = 0; i < pelit.length; i++) {
 			pienin = i;
 			for (j = i + 1; j < pelit.length; j++) {
@@ -367,14 +392,14 @@ public class EtusivuController {
 			pelidata.add(pelit[a]);
 		}
 	}
-	
+
 	@FXML
 	public void KorkeinHinta() {
 		alhaisinhinta.setSelected(false);
 		pelit = pelitdao.haePelit();
 		int i, j, suurin;
 		Peli apu;
-		
+
 		for (i = 0; i < pelit.length; i++) {
 			suurin = i;
 			for (j = i + 1; j < pelit.length; j++) {
