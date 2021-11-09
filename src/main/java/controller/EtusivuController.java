@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Iterator;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -341,7 +343,7 @@ public class EtusivuController {
 		// "+vanhat +" "+ikä);
 
 		pelidata.clear();
-
+		if(valinnat.getValue() != null ) {
 		int ikaraja = 0;
 		for (int i = 0; i < pelit.length; i++) {
 			if (valinnat.getValue().toString() == "3") {
@@ -357,6 +359,17 @@ public class EtusivuController {
 			//jne
 		}
 		
+		}
+		/*
+		 * ei toimi täysin. 
+		 * 
+		 
+		if(!maara.getText().trim().isEmpty()) {
+			int pelmaara = Integer.parseInt(maara.getText());
+			pelit = pelitdao.pelaajaMaara(pelmaara);
+			}
+		
+		*/
 		for (int i = 0; i < pelit.length; i++) {
 			pelidata.add(pelit[i]);
 		}
