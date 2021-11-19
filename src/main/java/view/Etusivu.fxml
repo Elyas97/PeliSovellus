@@ -80,7 +80,7 @@
                               <Insets right="2.0" top="20.0" />
                            </HBox.margin>
                         </ComboBox>
-                        <Button mnemonicParsing="false" onAction="#avaaRajaus" prefHeight="28.0" prefWidth="90.0" text="Rajaa hakua">
+                        <Button mnemonicParsing="false" onAction="#avaaRajaus" prefHeight="28.0" prefWidth="90.0" text="%buttonhaku">
                            <HBox.margin>
                               <Insets top="20.0" />
                            </HBox.margin></Button>
