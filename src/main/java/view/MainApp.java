@@ -1,6 +1,8 @@
 package view;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import controller.EtusivuController;
 import controller.LisaaPeliController;
@@ -50,12 +52,29 @@ public class MainApp extends Application {
 	 */
 	public void initRootLayout() {
 		try {
+			
+			//LOKALISOINTI (ei toimi vielä)
+			//Ladataan ResourceBundle
 			FXMLLoader loader = new FXMLLoader();
+			Locale locale = new Locale("en", "FI");
+			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+			
+			//Ladataan layout FXML-tiedostosta ja asetetaan käytettävä bundle
+			//FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("root.fxml"));
+			loader.setResources(bundle);
+			rootLayout = (BorderPane)loader.load();
+			Scene scene = new Scene(rootLayout);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+			
+			//ILMAN LOKALISOINTIA
+			/*FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("root.fxml"));
 			rootLayout = (BorderPane) loader.load();
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
-			primaryStage.show();
+			primaryStage.show();*/
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

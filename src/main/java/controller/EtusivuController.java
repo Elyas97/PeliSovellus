@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
