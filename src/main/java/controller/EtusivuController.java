@@ -122,7 +122,35 @@ public class EtusivuController {
 		hakutyyppi();
 		hakurajaus.setPromptText("Rajaa hakua");
 		listaaPelit();
+		hakuTesti();
 		// Kuuntelee pelihaku kenttää ja päivittää listaa kirjoitetun tekstin mukaan
+		/*pelihaku.textProperty().addListener((obs, oldValue, newValue) -> {
+			if (hakurajaus.getValue() != null) {
+				switch (hakurajaus.getValue()) {
+				case "Nimi":
+					filteredData.setPredicate(pelit -> pelit.getPelinNimi().toLowerCase().contains(newValue));
+					break;
+				case "Kaupunki":
+					filteredData.setPredicate(pelit -> pelit.getKaupunki().toLowerCase().contains(newValue));
+					break;
+				case "Genre":
+					filteredData.setPredicate(pelit -> pelit.getGenre().toLowerCase().contains(newValue));
+					break;
+				default:
+					filteredData.setPredicate(pelit -> true);
+				}
+			}
+		});*/
+		// Kuuntelee listauksessa olevia kenttiä ja välittää tiedot pelinTiedot metodiin
+		lista.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> pelinTiedot(newValue));
+
+		// ObservableList<String> hinnanmukaan =
+		// FXCollections.observableArrayList("Alhaisimmasta korkeimpaan", "Korkeimmasta
+		// alhaisimpaan");
+
+	}
+	public void hakuTesti() {
 		pelihaku.textProperty().addListener((obs, oldValue, newValue) -> {
 			if (hakurajaus.getValue() != null) {
 				switch (hakurajaus.getValue()) {
@@ -140,14 +168,6 @@ public class EtusivuController {
 				}
 			}
 		});
-		// Kuuntelee listauksessa olevia kenttiä ja välittää tiedot pelinTiedot metodiin
-		lista.getSelectionModel().selectedItemProperty()
-				.addListener((observable, oldValue, newValue) -> pelinTiedot(newValue));
-
-		// ObservableList<String> hinnanmukaan =
-		// FXCollections.observableArrayList("Alhaisimmasta korkeimpaan", "Korkeimmasta
-		// alhaisimpaan");
-
 	}
 
 	public void setDialogStage(Stage dialogStage) {
@@ -231,11 +251,15 @@ public class EtusivuController {
 		hakutyyppi.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 			public void changed(ObservableValue<? extends Toggle> obs, Toggle oldT, Toggle newT) {
 				switch (((RadioButton) hakutyyppi.getSelectedToggle()).getText()) {
-				case "Myydään":
+				case "Myynti":
+				case "For sale":
 					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Myynti"));
+					//hakuTesti();
 					break;
 				case "Vuokrataan":
+				case "Rent":
 					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Vuokraus"));
+					//hakuTesti();
 					break;
 				case "Lahjoitetaan":
 					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Lahjoitus"));

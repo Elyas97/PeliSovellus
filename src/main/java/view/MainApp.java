@@ -83,7 +83,11 @@ public class MainApp extends Application {
 	public void showEtusivu() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
+			
+			Locale locale = new Locale("en", "FI");
+			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
 			loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
+			loader.setResources(bundle);
 			BorderPane etusivu = (BorderPane) loader.load();
 			
 			Scene scene = new Scene(etusivu);
