@@ -253,8 +253,9 @@ public class EtusivuController {
 				switch (((RadioButton) hakutyyppi.getSelectedToggle()).getText()) {
 				case "Myynti":
 				case "For sale":
+					hakuTesti();
 					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Myynti"));
-					//hakuTesti();
+					
 					break;
 				case "Vuokrataan":
 				case "Rent":
@@ -262,9 +263,11 @@ public class EtusivuController {
 					//hakuTesti();
 					break;
 				case "Lahjoitetaan":
+				case "Giveaway":
 					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Lahjoitus"));
 					break;
 				case "Kaikki":
+				case "All":
 					filteredData.setPredicate(pelit -> true);
 					break;
 				}
