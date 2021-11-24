@@ -191,7 +191,7 @@
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin></Label>
-                  <Label prefHeight="68.0" prefWidth="306.0" style="-fx-background-color: F0F0F0;" text="   Pelin tiedot:" textFill="#0589ff" GridPane.columnIndex="1">
+                  <Label prefHeight="68.0" prefWidth="306.0" style="-fx-background-color: F0F0F0;" text="%gameDetailsText" textFill="#0589ff" GridPane.columnIndex="1">
                      <font>
                         <Font size="30.0" />
                      </font></Label>
@@ -207,7 +207,7 @@
                   </Label>
                </children>
             </GridPane>
-            <Text fill="#0589ff" layoutX="20.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selaa Pelejä">
+            <Text fill="#0589ff" layoutX="20.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%searchGamesText">
                <font>
                   <Font size="28.0" />
                </font>
