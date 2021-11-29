@@ -253,12 +253,13 @@ public class EtusivuController {
 				switch (((RadioButton) hakutyyppi.getSelectedToggle()).getText()) {
 				case "Myynti":
 				case "For sale":
-					hakuTesti();
-					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Myynti"));
 					
+					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Myynti"));
+					hakuTesti();
 					break;
 				case "Vuokrataan":
 				case "Rent":
+					hakuTesti();
 					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Vuokraus"));
 					//hakuTesti();
 					break;
@@ -348,30 +349,58 @@ public class EtusivuController {
 	// Jää toteutukseen OTP2
 	@FXML
 	void Rajaa(ActionEvent event) {
-		// ei valmis
-		// String sql="SELECT * FROM PELI WHERE ";
-		// rajaustoiminto
-		// boolean test=sell.isSelected();
-		// boolean test1=rent.isSelected();
-		// boolean test2=free.isSelected();
-		// boolean uus=uusin.isSelected();
-		// boolean vanhat=vanhin.isSelected();
-		// String ikä=valinnat.getSelectionModel().getSelectedItem();
-		// if(test==true) {
-		// sql=sql + "Talletustyyppi = " +"\"" + sell.getText() + "\"";
-		// System.out.println(sql);
-		// }
-		// if(test1==true) {
-		// sql=sql +" Talletustyyppi =" +"\"" + rent.getText() + "\"";
-		// }
-		// if(test2==true) {
-		// sql=sql +" Talletustyyppi =" +"\"" + free.getText() + "\"";
-		// }
-		// System.out.println(sql);
-		// System.out.println(test +" rent"+test1+" ilmainen"+test2+" uus"+ uus+" vanha
-		// "+vanhat +" "+ikä);
 
-		pelidata.clear();
+
+		pelidata.clear(); 
+		if(!minimi.getText().isEmpty() && !maxnum.getText().isEmpty() && valinnat.getValue() != null && !maara.getText().isEmpty() ) {
+			filteredData.setPredicate(pelit -> Integer.toString(pelit.getIkaraja()).contains(valinnat.getValue()) && Integer.toString(pelit.getPelmaara()).contains(maara.getText()) &&
+					pelit.getHinta() >= Integer.parseInt(minimi.getText()) && pelit.getHinta() <= Integer.parseInt(maxnum.getText()));
+		}
+		else if(valinnat.getValue() != null) {
+			filteredData.setPredicate(pelit -> Integer.toString(pelit.getIkaraja()).contains(valinnat.getValue()));
+		}
+		else if(!maara.getText().isEmpty()) {
+			filteredData.setPredicate(pelit -> Integer.toString(pelit.getPelmaara()).contains(maara.getText()));
+		}
+
+		else if(valinnat.getValue() != null && !maara.getText().isEmpty()) {
+			System.out.println("Toimii");
+			filteredData.setPredicate(pelit -> Integer.toString(pelit.getIkaraja()).contains(valinnat.getValue()) && Integer.toString(pelit.getPelmaara()).contains(maara.getText()));
+		}
+		
+		else if(!minimi.getText().isEmpty() && !maxnum.getText().isEmpty()) {
+		filteredData.setPredicate(pelit -> pelit.getHinta() >= Integer.parseInt(minimi.getText()) && pelit.getHinta() <= Integer.parseInt(maxnum.getText()));
+		//filteredData.setPredicate(pelit -> pelit.getHinta() < Integer.parseInt(maxnum.getText()));
+		}
+		
+		
+		
+		
+	
+
+
+		for (int i = 0; i < pelit.length; i++) {
+			pelidata.add(pelit[i]);
+		}
+		
+		// sulje ikkuna
+		rajaahakuNäkymä.setVisible(false);
+
+	}
+	
+	
+	/*
+	 * Testailua 
+	 * Alla aikasemmin rajaa funktiossa olleet toiminnot
+	 * 
+	 */
+	public void pelaajaMaara() {
+		if(!maara.getText().trim().isEmpty()) {
+			int pelmaara = Integer.parseInt(maara.getText());
+			pelit = pelitdao.pelaajaMaara(pelmaara);
+			}
+	}
+	public void ikaraja() {
 		if(valinnat.getValue() != null ) {
 		int ikaraja = 0;
 		for (int i = 0; i < pelit.length; i++) {
@@ -389,23 +418,6 @@ public class EtusivuController {
 		}
 		
 		}
-		/*
-		 * ei toimi täysin. 
-		 * 
-		 
-		if(!maara.getText().trim().isEmpty()) {
-			int pelmaara = Integer.parseInt(maara.getText());
-			pelit = pelitdao.pelaajaMaara(pelmaara);
-			}
-		
-		*/
-		for (int i = 0; i < pelit.length; i++) {
-			pelidata.add(pelit[i]);
-		}
-		
-		// sulje ikkuna
-		rajaahakuNäkymä.setVisible(false);
-
 	}
 
 	// Listan järjestys hinnan mukaan
