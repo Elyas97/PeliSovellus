@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,6 +58,11 @@ public class LoginController {
 					// Ladataan etusivu
 					FXMLLoader loader = new FXMLLoader();
 					loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
+					
+					Locale locale = new Locale("en", "FI");
+					ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+					loader.setResources(bundle);
+					
 					BorderPane etusivuOverview = (BorderPane) loader.load();
 					Scene etusivulle = new Scene(etusivuOverview);
 					Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

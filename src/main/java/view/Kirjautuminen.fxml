@@ -1,44 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
-   <left>
-      <AnchorPane prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #0598ff;" BorderPane.alignment="CENTER">
+   <center>
+      <AnchorPane prefHeight="400.0" prefWidth="601.0" BorderPane.alignment="CENTER">
          <children>
-            <Text fill="WHITE" layoutX="34.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pelienvuokraussovellus">
-               <font>
-                  <Font size="23.0" />
-               </font>
-            </Text>
-            <FontAwesomeIconView fill="WHITE" glyphName="GAMEPAD" layoutX="110.0" layoutY="171.0" size="75" />
-         </children></AnchorPane>
-   </left>
-   <right>
-      <AnchorPane prefHeight="400.0" prefWidth="300.0" BorderPane.alignment="CENTER">
-         <children>
-            <PasswordField fx:id="pwd23" layoutX="82.0" layoutY="226.0" promptText="Salasana" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-            <FontAwesomeIconView fill="#0598ff" glyphName="USER" layoutX="50.0" layoutY="196.0" size="20" />
-            <FontAwesomeIconView fill="#0598ff" glyphName="KEY" layoutX="47.0" layoutY="247.0" size="20" />
-            <Text fill="#0598ff" layoutX="72.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kirjaudu Sisään">
-               <font>
-                  <Font size="21.0" />
-               </font>
-            </Text>
-            <FontAwesomeIconView fill="#0598ff" glyphName="USERS" layoutX="126.0" layoutY="105.0" size="30" />
-            <Button fx:id="buttoni" layoutX="155.0" layoutY="285.0" mnemonicParsing="false" onAction="#kirjaudu" prefHeight="32.0" prefWidth="115.0" style="-fx-background-color: #0589ff;" text="KIRJAUDU" textFill="WHITE" />
-            <Hyperlink layoutX="103.0" layoutY="347.0" onAction="#vieRekistyröintiNäkymään" text="Luo uusi tili" />
-            <TextField fx:id="tunnus23" layoutX="82.0" layoutY="175.0" promptText="Sähköposti" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-            <Button layoutX="14.0" layoutY="285.0" mnemonicParsing="false" onAction="#vieVierasNäkymä" prefHeight="32.0" prefWidth="115.0" style="-fx-background-color: #DED5D1; -fx-text-fill: black;" text="Peruuta" textFill="#bfbfbf" />
+            <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #0598ff;" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox alignment="CENTER" layoutX="34.0" layoutY="76.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="124.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="33.19999999999999" AnchorPane.topAnchor="76.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pelienvuokraussovellus" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font size="23.0" />
+                                 </font>
+                              </Text>
+                              <FontAwesomeIconView fill="WHITE" glyphName="GAMEPAD" size="75" wrappingWidth="85.95710754394531" VBox.vgrow="ALWAYS" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox prefHeight="334.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <VBox alignment="CENTER" layoutX="5.0" layoutY="87.0" prefHeight="74.0" prefWidth="300.0" style="-fx-background-color: LIGHT;" AnchorPane.bottomAnchor="238.6" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="87.0">
+                                       <children>
+                                          <FontAwesomeIconView fill="#0598ff" glyphName="USERS" size="30" VBox.vgrow="ALWAYS" />
+                                          <Text fill="#0598ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Kirjaudu Sisään" VBox.vgrow="ALWAYS">
+                                             <font>
+                                                <Font size="21.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </VBox>
+                                    <HBox alignment="CENTER" layoutX="42.0" layoutY="162.0" prefHeight="63.0" prefWidth="206.0" spacing="30.0" AnchorPane.bottomAnchor="174.8" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="51.599999999999994" AnchorPane.topAnchor="162.0">
+                                       <children>
+                                          <FontAwesomeIconView fill="#0598ff" glyphName="USER" size="20" HBox.hgrow="ALWAYS" />
+                                          <TextField fx:id="tunnus23" promptText="Sähköposti" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="217.0" prefHeight="50.0" prefWidth="216.0" spacing="20.0" AnchorPane.bottomAnchor="132.6" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="217.0">
+                                       <children>
+                                          <FontAwesomeIconView fill="#0598ff" glyphName="KEY" size="20" />
+                                          <PasswordField fx:id="pwd23" promptText="Salasana" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </HBox>
+                                    <HBox alignment="CENTER" layoutX="4.0" layoutY="276.0" prefHeight="54.0" prefWidth="289.0" spacing="40.0" AnchorPane.bottomAnchor="69.6" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="276.0">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#vieVierasNäkymä" prefHeight="32.0" prefWidth="115.0" style="-fx-background-color: #DED5D1; -fx-text-fill: black;" text="Peruuta" textFill="#bfbfbf" />
+                                          <Button fx:id="buttoni" mnemonicParsing="false" onAction="#kirjaudu" prefHeight="32.0" prefWidth="115.0" style="-fx-background-color: #0589ff;" text="KIRJAUDU" textFill="WHITE" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" layoutX="42.0" layoutY="345.0" prefHeight="52.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="348.0">
+                                       <children>
+                                          <Hyperlink onAction="#vieRekistyröintiNäkymään" text="Luo uusi tili" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
-   </right>
+   </center>
 </BorderPane>

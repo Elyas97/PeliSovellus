@@ -1,7 +1,10 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -447,6 +450,11 @@ public class TapahtumatController {
 		// Vaihdetaan näkymää samalla viedään käyttäjän tiedot
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
+		
+		Locale locale = new Locale("en", "FI");
+		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+		loader.setResources(bundle);
+		
 		BorderPane personOverview = (BorderPane) loader.load();
 		Scene etusivulle = new Scene(personOverview);
 

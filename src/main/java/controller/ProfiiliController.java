@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
@@ -136,6 +137,11 @@ public class ProfiiliController {
 	void VieEtusivunNäkymä(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
+		
+		Locale locale = new Locale("en", "FI");
+		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+		loader.setResources(bundle); 
+		
 		BorderPane etusivu = (BorderPane) loader.load();
 		Scene etusivuNäkymä = new Scene(etusivu);
 
