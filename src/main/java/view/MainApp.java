@@ -103,9 +103,12 @@ public class MainApp extends Application {
 
 	public boolean lisaaPeliOverview() {
 		try {
-			System.out.println("moi");
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("Uusipeli.fxml"));
+			
+			Locale locale = new Locale("en", "FI");
+			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+			loader.setResources(bundle);
 			BorderPane uusipeli = (BorderPane) loader.load();
 			
 			Scene scene = new Scene(uusipeli);
@@ -124,11 +127,14 @@ public class MainApp extends Application {
 
 	public void tapahtumatSivuOverview() {
 		try {
-			System.out.println("Tapahtumat sivu");
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("Tapahtumat.fxml"));
+			
+			Locale locale = new Locale("en", "FI");
+			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+			loader.setResources(bundle);
+			
 			BorderPane tapahtumat = (BorderPane) loader.load();
-
 			Scene scene = new Scene(tapahtumat);
 			primaryStage.setScene(scene);
 
@@ -144,6 +150,11 @@ public class MainApp extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
+			
+			Locale locale = new Locale("en", "FI");
+			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+			loader.setResources(bundle);
+			
 			BorderPane kirjaudu = (BorderPane) loader.load();
 			rootLayout.setCenter(kirjaudu);
 		} catch (IOException e) {
@@ -155,6 +166,9 @@ public class MainApp extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("Rekistyröinti.fxml"));
+			Locale locale = new Locale("en", "FI");
+			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+			loader.setResources(bundle);
 			BorderPane register = (BorderPane) loader.load();
 			rootLayout.setCenter(register);
 		} catch (IOException e) {
@@ -166,6 +180,9 @@ public class MainApp extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("Profiili.fxml"));
+			Locale locale = new Locale("en", "FI");
+			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+			loader.setResources(bundle);
 			BorderPane profile = (BorderPane) loader.load();
 			rootLayout.setCenter(profile);
 		} catch (IOException e) {
@@ -177,6 +194,9 @@ public class MainApp extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("Vieras.fxml"));
+			Locale locale = new Locale("en", "FI");
+			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+			loader.setResources(bundle);
 			BorderPane kirjaudu = (BorderPane) loader.load();
 			rootLayout.setCenter(kirjaudu);
 		} catch (IOException e) {

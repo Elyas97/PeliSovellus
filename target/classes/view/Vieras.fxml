@@ -38,12 +38,12 @@
                                     <Insets bottom="15.0" top="15.0" />
                                  </padding>
                               </Button>
-                              <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: white;" text="Selaa Pelejä" textFill="#0589ff">
+                              <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: white;" text="%selaaPelejaMenu" textFill="#0589ff">
                                  <padding>
                                     <Insets bottom="15.0" top="15.0" />
                                  </padding>
                               </Button>
-                              <Button layoutX="10.0" layoutY="49.0" mnemonicParsing="false" onAction="#accessDenied" prefHeight="32.0" prefWidth="209.0" style="-fx-background-color: #0589ff;" text="Lisää Peli" textFill="#fafafa">
+                              <Button layoutX="10.0" layoutY="49.0" mnemonicParsing="false" onAction="#accessDenied" prefHeight="32.0" prefWidth="209.0" style="-fx-background-color: #0589ff;" text="%lisaaPeliMenu" textFill="#fafafa">
                                  <graphic>
                                     <FontAwesomeIconView fill="#ff0707" glyphName="BAN" size="22.0" />
                                  </graphic>
@@ -53,7 +53,7 @@
                               </Button>
                            </children>
                         </VBox>
-                        <Button layoutY="361.0" mnemonicParsing="false" onAction="#vieKirjautumisNäkymään" prefHeight="47.0" prefWidth="155.0" style="-fx-background-color: #1A85B2;" text="Kirjaudu Sisään" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <Button layoutY="361.0" mnemonicParsing="false" onAction="#vieKirjautumisNäkymään" prefHeight="47.0" prefWidth="155.0" style="-fx-background-color: #1A85B2;" text="%kirjauduSisaanButton" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="USER" size="22" />
                            </graphic>
@@ -76,7 +76,7 @@
                                           <Insets right="2.0" top="20.0" />
                                        </HBox.margin>
                                     </ComboBox>
-                                    <Button mnemonicParsing="false" onAction="#avaaRajaus" prefHeight="28.0" prefWidth="90.0" text="Rajaa hakua">
+                                    <Button mnemonicParsing="false" onAction="#avaaRajaus" prefHeight="28.0" prefWidth="90.0" text="%buttonhaku">
                                        <HBox.margin>
                                           <Insets top="20.0" />
                                        </HBox.margin>
@@ -85,14 +85,14 @@
                               </HBox>
                               <HBox prefHeight="39.0" prefWidth="300.0">
                                  <children>
-                                    <RadioButton fx:id="kaikki" mnemonicParsing="false" prefHeight="18.0" prefWidth="70.0" text="Kaikki">
+                                    <RadioButton fx:id="kaikki" mnemonicParsing="false" prefHeight="18.0" prefWidth="70.0" text="%kaikki">
                                        <toggleGroup>
                                           <ToggleGroup fx:id="hakutyyppi" />
                                        </toggleGroup>
                                     </RadioButton>
-                                    <RadioButton fx:id="myynti" mnemonicParsing="false" prefHeight="18.0" prefWidth="90.0" text="Myydään" toggleGroup="$hakutyyppi" />
-                                    <RadioButton fx:id="vuokraus" mnemonicParsing="false" prefHeight="18.0" prefWidth="94.0" text="Vuokrataan" toggleGroup="$hakutyyppi" />
-                                    <RadioButton fx:id="lahjoitus" mnemonicParsing="false" prefHeight="18.0" prefWidth="102.0" text="Lahjoitetaan" toggleGroup="$hakutyyppi" />
+                                    <RadioButton fx:id="myynti" mnemonicParsing="false" prefHeight="18.0" prefWidth="90.0" text="%myydaan" toggleGroup="$hakutyyppi" />
+                                    <RadioButton fx:id="vuokraus" mnemonicParsing="false" prefHeight="18.0" prefWidth="94.0" text="%vuokrataan" toggleGroup="$hakutyyppi" />
+                                    <RadioButton fx:id="lahjoitus" mnemonicParsing="false" prefHeight="18.0" prefWidth="102.0" text="%lahjoitetaan" toggleGroup="$hakutyyppi" />
                                  </children>
                                  <padding>
                                     <Insets right="1.0" />
@@ -101,7 +101,7 @@
                               <ListView fx:id="lista" prefHeight="290.0" prefWidth="311.0" style="-fx-border-color: black; -fx-background-color: F0F0F0;" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
-                        <Text fill="#0589ff" layoutX="14.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selaa Pelejä">
+                        <Text fill="#0589ff" layoutX="14.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%selaaPelejaText">
                            <font>
                               <Font size="28.0" />
                            </font>
@@ -165,37 +165,37 @@
                            </rowConstraints>
                            <children>
                               <Label contentDisplay="CENTER" text="Nimi" GridPane.rowIndex="1" />
-                              <Label layoutX="11.0" layoutY="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: F0F0F0; -fx-font-weight: bold;" text="Hinta" GridPane.rowIndex="2">
+                              <Label layoutX="11.0" layoutY="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: F0F0F0; -fx-font-weight: bold;" text="%hintaLabel" GridPane.rowIndex="2">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="11.0" layoutY="72.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-background-color: F0F0F0;" text="Ikäraja" GridPane.rowIndex="6">
+                              <Label layoutX="11.0" layoutY="72.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-background-color: F0F0F0;" text="%ikarajaLabel" GridPane.rowIndex="6">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="11.0" layoutY="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: F0F0F0; -fx-font-weight: bold;" text="Genre" GridPane.rowIndex="4">
+                              <Label layoutX="11.0" layoutY="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: F0F0F0; -fx-font-weight: bold;" text="%genreLabel" GridPane.rowIndex="4">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="11.0" layoutY="72.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: F0F0F0; -fx-font-weight: bold;" text="Paikkakunta" GridPane.rowIndex="3">
+                              <Label layoutX="11.0" layoutY="72.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: F0F0F0; -fx-font-weight: bold;" text="%paikkakuntaLabel" GridPane.rowIndex="3">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="11.0" layoutY="211.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-background-color: F0F0F0;" text="Pelaajamäärä" GridPane.rowIndex="7">
+                              <Label layoutX="11.0" layoutY="211.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-background-color: F0F0F0;" text="%pelaajamaaraLabel" GridPane.rowIndex="7">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="11.0" layoutY="211.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-background-color: F0F0F0;" text="Kuvaus" GridPane.rowIndex="8">
+                              <Label layoutX="11.0" layoutY="211.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-background-color: F0F0F0;" text="%kuvausLabel" GridPane.rowIndex="8">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
                               </Label>
-                              <Label contentDisplay="CENTER" layoutX="11.0" layoutY="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: F0F0F0; -fx-font-weight: bold;" text="Nimi" GridPane.rowIndex="1">
+                              <Label contentDisplay="CENTER" layoutX="11.0" layoutY="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: F0F0F0; -fx-font-weight: bold;" text="%nimiLabel" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
@@ -207,19 +207,19 @@
                               <Label fx:id="ikäraja" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                               <Label fx:id="pelaajamäärä" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                               <Label fx:id="kuvaus" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-background-color: F0F0F0;" text="Tekstikenttä" GridPane.rowIndex="9">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-background-color: F0F0F0;" text="%tekstikenttaLabel" GridPane.rowIndex="9">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
                               </Label>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: F0F0F0; -fx-font-weight: bold;" text="Konsoli" GridPane.rowIndex="5">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: F0F0F0; -fx-font-weight: bold;" text="%konsoliLabel" GridPane.rowIndex="5">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
                               </Label>
                               <Label fx:id="konsoli" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                               <Label fx:id="tekstikenttä" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: F0F0F0;" text="Pelin tiedot:" textFill="#0589ff" GridPane.columnIndex="1">
+                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: F0F0F0;" text="%pelinTiedotText" textFill="#0589ff" GridPane.columnIndex="1">
                                  <font>
                                     <Font size="10.0" />
                                  </font>

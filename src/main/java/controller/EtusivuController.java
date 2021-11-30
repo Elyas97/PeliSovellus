@@ -281,6 +281,11 @@ public class EtusivuController {
 		// Vaihdetaan näkymää samalla viedään käyttäjän tiedot
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("Uusipeli.fxml"));
+		
+		Locale locale = new Locale("en", "FI");
+		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+		loader.setResources(bundle);
+		
 		BorderPane personOverview = (BorderPane) loader.load();
 		Scene etusivulle = new Scene(personOverview);
 
@@ -294,6 +299,11 @@ public class EtusivuController {
 		// Vaihdetaan näkymää samalla viedään käyttäjän tiedot
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("Tapahtumat.fxml"));
+		
+		Locale locale = new Locale("en", "FI");
+		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+		loader.setResources(bundle);
+		
 		BorderPane personOverview = (BorderPane) loader.load();
 		Scene etusivulle = new Scene(personOverview);
 
@@ -307,6 +317,11 @@ public class EtusivuController {
 		// Vaihdetaan näkymää samalla viedään käyttäjän tiedot
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("Profiili.fxml"));
+		
+		Locale locale = new Locale("en", "FI");
+		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+		loader.setResources(bundle);
+		
 		BorderPane personOverview = (BorderPane) loader.load();
 		Scene etusivulle = new Scene(personOverview);
 
@@ -322,6 +337,11 @@ public class EtusivuController {
 			// Viedään kirjautumissivulle
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
+			
+			Locale locale = new Locale("en", "FI");
+			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+			loader.setResources(bundle);
+			
 			BorderPane etusivu = (BorderPane) loader.load();
 			Scene kirjautumisNäkymä = new Scene(etusivu);
 

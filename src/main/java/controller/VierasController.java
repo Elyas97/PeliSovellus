@@ -1,8 +1,9 @@
 package controller;
 
 import java.io.IOException;
-
+import java.util.Locale;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -185,6 +186,9 @@ public class VierasController {
 			// Viedään kirjautumissivulle
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
+			Locale locale = new Locale("en", "FI");
+			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+			loader.setResources(bundle);
 			BorderPane etusivu = (BorderPane) loader.load();
 			Scene kirjautumisNäkymä = new Scene(etusivu);
 
@@ -253,6 +257,9 @@ public class VierasController {
 		//Viedään kirjautumissivulle
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
+		Locale locale = new Locale("en", "FI");
+		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+		loader.setResources(bundle);
 		BorderPane etusivu = (BorderPane) loader.load();
 		Scene kirjautumisNäkymä = new Scene(etusivu);
 

@@ -85,6 +85,9 @@ public class LoginController {
 		FXMLLoader loader = new FXMLLoader();
 
 		loader.setLocation(MainApp.class.getResource("Rekisterointi.fxml"));
+		Locale locale = new Locale("en", "FI");
+		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+		loader.setResources(bundle);
 		
 		BorderPane register = (BorderPane) loader.load();
 		Scene rekistyröintiNäkymä = new Scene(register);
@@ -99,6 +102,9 @@ public class LoginController {
 		FXMLLoader loader = new FXMLLoader();
 
 		loader.setLocation(MainApp.class.getResource("Vieras.fxml"));
+		Locale locale = new Locale("en", "FI");
+		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+		loader.setResources(bundle);
 
 		BorderPane register = (BorderPane) loader.load();
 		Scene rekistyröintiNäkymä = new Scene(register);

@@ -35,29 +35,29 @@
                               <Insets bottom="15.0" top="15.0" />
                            </padding>
                         </Button>
-                        <Button layoutX="10.0" layoutY="49.0" mnemonicParsing="false" onAction="#vieEtusivulle" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #0589ff;" text="Selaa Pelejä" textFill="#fafafa">
+                        <Button layoutX="10.0" layoutY="49.0" mnemonicParsing="false" onAction="#vieEtusivulle" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #0589ff;" text="%selaaPelejaMenu" textFill="#fafafa">
                            <padding>
                               <Insets bottom="15.0" top="15.0" />
                            </padding>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" style="-fx-background-color: white;" text="Lisätyt Pelit" textFill="#0589ff">
+                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="194.0" style="-fx-background-color: white;" text="%lisatytPelitMenu" textFill="#0589ff">
                            <padding>
                               <Insets bottom="15.0" top="15.0" />
                            </padding>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#lisaaUusiPeliNäkymä" prefHeight="26.0" prefWidth="174.0" style="-fx-background-color: #0589ff;" text="Lisää Peli" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#lisaaUusiPeliNäkymä" prefHeight="26.0" prefWidth="174.0" style="-fx-background-color: #0589ff;" text="%lisaaPeliMenu" textFill="WHITE">
                            <padding>
                               <Insets bottom="15.0" top="15.0" />
                            </padding>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#vieProfiiliNäkymään" prefHeight="39.0" prefWidth="158.0" style="-fx-background-color: #0589ff;" text="Profiili" textFill="#fafafa">
+                        <Button mnemonicParsing="false" onAction="#vieProfiiliNäkymään" prefHeight="39.0" prefWidth="158.0" style="-fx-background-color: #0589ff;" text="%profiiliMenu" textFill="#fafafa">
                            <padding>
                               <Insets bottom="15.0" top="15.0" />
                            </padding>
                         </Button>
                      </children>
                   </VBox>
-                  <Button layoutX="14.0" layoutY="352.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="47.0" prefWidth="124.0" style="-fx-background-color: #1A85B2;" text="Kirjaudu ulos" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <Button layoutX="14.0" layoutY="352.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="47.0" prefWidth="124.0" style="-fx-background-color: #1A85B2;" text="%kirjauduUlosButton" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="USER" size="22" />
                      </graphic>
@@ -71,7 +71,7 @@
                         <ListView fx:id="omatPelit" prefHeight="308.0" prefWidth="262.0" style="-fx-border-color: black;" VBox.vgrow="ALWAYS" />
                         <HBox prefHeight="59.0" prefWidth="286.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#poistaPeli" text="Poista">
+                              <Button mnemonicParsing="false" onAction="#poistaPeli" text="%poistaButton">
                                  <HBox.margin>
                                     <Insets right="10.0" top="10.0" />
                                  </HBox.margin>
@@ -83,7 +83,7 @@
                         <Insets left="20.0" right="20.0" />
                      </padding>
                   </VBox>
-                  <Text fill="#0589ff" layoutX="22.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lisätyt Pelit" wrappingWidth="178.90902709960938">
+                  <Text fill="#0589ff" layoutX="22.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%lisatytPelitText" wrappingWidth="178.90902709960938">
                      <font>
                         <Font size="28.0" />
                      </font>
@@ -98,43 +98,43 @@
                            <children>
                               <Pane prefHeight="84.0" prefWidth="158.0">
                                  <children>
-                                    <Label layoutX="6.0" layoutY="6.0" prefHeight="25.0" prefWidth="96.0" text="Tyyppi" />
-                                    <RadioButton fx:id="myynti" layoutX="4.0" layoutY="33.0" mnemonicParsing="false" onAction="#tyyppiAction" prefHeight="17.0" prefWidth="66.0" text="Myynti">
+                                    <Label layoutX="6.0" layoutY="6.0" prefHeight="25.0" prefWidth="96.0" text="%tyyppiLabel" />
+                                    <RadioButton fx:id="myynti" layoutX="4.0" layoutY="33.0" mnemonicParsing="false" onAction="#tyyppiAction" prefHeight="17.0" prefWidth="66.0" text="%myydaan">
                                        <toggleGroup>
                                           <ToggleGroup fx:id="tyyppi" />
                                        </toggleGroup>
                                     </RadioButton>
-                                    <RadioButton fx:id="vuokraus" layoutX="79.0" layoutY="33.0" mnemonicParsing="false" onAction="#tyyppiAction" prefHeight="17.0" prefWidth="75.0" text="Vuokraus" toggleGroup="$tyyppi" />
-                                    <RadioButton fx:id="lahjoitus" layoutX="4.0" layoutY="61.0" mnemonicParsing="false" onAction="#tyyppiAction" prefHeight="17.0" prefWidth="80.0" text="Lahjoitus" toggleGroup="$tyyppi" />
+                                    <RadioButton fx:id="vuokraus" layoutX="79.0" layoutY="33.0" mnemonicParsing="false" onAction="#tyyppiAction" prefHeight="17.0" prefWidth="75.0" text="%vuokrataan" toggleGroup="$tyyppi" />
+                                    <RadioButton fx:id="lahjoitus" layoutX="4.0" layoutY="61.0" mnemonicParsing="false" onAction="#tyyppiAction" prefHeight="17.0" prefWidth="80.0" text="%lahjoitetaan" toggleGroup="$tyyppi" />
                                     <Text fx:id="tyyppivaroitus" fill="#f50202" layoutX="54.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                                  </children>
                               </Pane>
                               <Pane layoutY="74.0" prefHeight="56.0" prefWidth="225.0">
                                  <children>
-                                    <Label layoutX="8.0" layoutY="14.0" prefHeight="17.0" prefWidth="52.0" text="Hinta" />
+                                    <Label layoutX="8.0" layoutY="14.0" prefHeight="17.0" prefWidth="52.0" text="%hintaLabel" />
                                     <TextField fx:id="hinta" layoutX="8.0" layoutY="30.0" />
                                     <Text fx:id="hintavaroitus" fill="#f50202" layoutX="49.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                                  </children>
                               </Pane>
                               <Pane layoutX="1.0" layoutY="130.0" prefHeight="54.0" prefWidth="223.0">
                                  <children>
-                                    <Label layoutX="6.0" layoutY="6.0" text="Pelinnimi" />
+                                    <Label layoutX="6.0" layoutY="6.0" text="%nimiLabel" />
                                     <TextField fx:id="pelinnimi" layoutX="6.0" layoutY="28.0" />
                                     <Text fx:id="nimivaroitus" fill="#f50202" layoutX="69.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                                  </children>
                               </Pane>
                               <Pane layoutY="242.0" prefHeight="60.0" prefWidth="225.0">
                                  <children>
-                                    <Label layoutX="6.0" layoutY="6.0" text="Pelintyyppi" />
-                                    <RadioButton fx:id="video" layoutX="10.0" layoutY="30.0" mnemonicParsing="false" onAction="#tyyppi" text="video">
+                                    <Label layoutX="6.0" layoutY="6.0" text="%pelinTyyppiLabel" />
+                                    <RadioButton fx:id="video" layoutX="10.0" layoutY="30.0" mnemonicParsing="false" onAction="#tyyppi" text="%video">
                                        <toggleGroup>
                                           <ToggleGroup fx:id="pelintyyppi" />
                                        </toggleGroup>
                                     </RadioButton>
-                                    <RadioButton fx:id="lauta" layoutX="101.0" layoutY="30.0" mnemonicParsing="false" onAction="#tyyppi" text="lauta" toggleGroup="$pelintyyppi" />
+                                    <RadioButton fx:id="lauta" layoutX="101.0" layoutY="30.0" mnemonicParsing="false" onAction="#tyyppi" text="%lauta" toggleGroup="$pelintyyppi" />
                                     <Pane layoutX="1.0" layoutY="-53.0" prefHeight="44.0" prefWidth="232.0">
                                        <children>
-                                          <Label layoutX="7.0" text="Paikkakunta" />
+                                          <Label layoutX="7.0" text="%paikkakuntaLabel" />
                                           <TextField fx:id="kaupunki" layoutX="7.0" layoutY="18.0" />
                                           <Text fx:id="paikkakuntavaroitus" fill="#f50202" layoutX="82.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                                        </children>
@@ -158,54 +158,54 @@
                            <children>
                               <Pane prefHeight="50.0" prefWidth="144.0">
                                  <children>
-                                    <Label layoutY="6.0" text="Genre" />
+                                    <Label layoutY="6.0" text="%genreLabel" />
                                     <ChoiceBox fx:id="genre" layoutX="3.0" layoutY="22.0" prefHeight="25.0" prefWidth="117.0" />
                                     <Text fx:id="genrevaroitus" fill="#f50202" layoutX="41.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                                  </children>
                               </Pane>
                               <Pane layoutX="2.0" layoutY="43.0" prefHeight="55.0" prefWidth="140.0">
                                  <children>
-                                    <Label layoutY="6.0" text="Ikäraja" />
+                                    <Label layoutY="6.0" text="%ikarajaLabel" />
                                     <TextField fx:id="ikaraja" layoutX="1.0" layoutY="24.0" prefHeight="25.0" prefWidth="119.0" />
                                     <Text fx:id="ikärajavaroitus" fill="#f50202" layoutX="44.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                                  </children>
                               </Pane>
                               <Pane layoutX="-5.0" layoutY="91.0" prefHeight="58.0" prefWidth="132.0">
                                  <children>
-                                    <Label layoutX="6.0" layoutY="6.0" text="Pelaajamäärä" />
+                                    <Label layoutX="6.0" layoutY="6.0" text="%pelaajamaaraLabel" />
                                     <TextField fx:id="pelaajamaara" layoutX="7.0" layoutY="29.0" prefHeight="25.0" prefWidth="119.0" />
                                     <Text fx:id="pelaajamäärävaroitus" fill="#f50202" layoutX="87.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                                  </children>
                               </Pane>
-                              <Button layoutX="61.0" layoutY="352.0" mnemonicParsing="false" onAction="#tallennaMuutokset" prefHeight="0.0" prefWidth="61.0" text="Tallenna" />
-                              <Button layoutY="352.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="58.0" text="Peruuta" />
+                              <Button layoutX="61.0" layoutY="352.0" mnemonicParsing="false" onAction="#tallennaMuutokset" prefHeight="0.0" prefWidth="61.0" text="%tallennaButton" />
+                              <Button layoutY="352.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="58.0" text="%peruutaButton" />
                               <Pane layoutX="-4.0" layoutY="149.0" prefHeight="44.0" prefWidth="130.0">
                                  <children>
-                                    <Label layoutX="7.0" text="Kunto" />
+                                    <Label layoutX="7.0" text="%kuntoLabel" />
                                     <ChoiceBox fx:id="kunto" layoutX="6.0" layoutY="17.0" prefHeight="25.0" prefWidth="120.0" />
                                     <Text fx:id="kuntovaroitus" fill="#f50202" layoutX="46.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                                  </children>
                               </Pane>
                               <AnchorPane layoutY="248.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                  <children>
-                                    <Label layoutY="-1.0" text="Yhteystiedot" />
+                                    <Label layoutY="-1.0" text="%yhteystiedotLabel" />
                                     <Text fx:id="tekstikenttävaroitus" fill="#f50202" layoutX="82.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                                     <TextArea fx:id="tekstikenttä" layoutX="3.0" layoutY="16.0" prefHeight="65.0" prefWidth="120.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane layoutX="1.0" layoutY="191.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                  <children>
-                                    <Label text="Kuvaus" />
+                                    <Label text="%kuvausLabel" />
                                     <Text fx:id="kuvausvaroitus" fill="#f50202" layoutX="45.0" layoutY="8.05078125" strokeType="OUTSIDE" strokeWidth="0.0" />
                                     <TextArea fx:id="kuvaus" layoutY="16.0" prefHeight="42.0" prefWidth="123.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" />
                                  </children>
                               </AnchorPane>
-                              <Label fx:id="kirjaimet" layoutX="4.0" layoutY="330.0" text="Max kirjainmäärä 200" />
+                              <Label fx:id="kirjaimet" layoutX="4.0" layoutY="330.0" text="%kirjainmaaraText" />
                            </children>
                         </AnchorPane>
                      </items>
                   </SplitPane>
-                  <Label layoutX="14.0" layoutY="5.0" prefHeight="18.0" prefWidth="125.0" text="Muokkaa ilmoitusta:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Label layoutX="14.0" layoutY="5.0" prefHeight="18.0" prefWidth="125.0" text="%muokkaaIlmoitustaText" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
                <opaqueInsets>
                   <Insets />

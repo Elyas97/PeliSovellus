@@ -124,6 +124,9 @@ public class ProfiiliController {
 			//Viedään kirjautumissivulle
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
+			Locale locale = new Locale("en", "FI");
+			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+			loader.setResources(bundle);
 			BorderPane etusivu = (BorderPane) loader.load();
 			Scene kirjautumisNäkymä = new Scene(etusivu);
 
@@ -154,6 +157,9 @@ public class ProfiiliController {
 	void vieTapahtumaNäkymä(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("Tapahtumat.fxml"));
+		Locale locale = new Locale("en", "FI");
+		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+		loader.setResources(bundle);
 		BorderPane tapahtuma = (BorderPane) loader.load();
 		Scene tapahtumaNäkymä = new Scene(tapahtuma);
 
@@ -166,6 +172,9 @@ public class ProfiiliController {
 	void vieUuspeliNäkymä(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("Uusipeli.fxml"));
+		Locale locale = new Locale("en", "FI");
+		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+		loader.setResources(bundle);
 		BorderPane uuspeli = (BorderPane) loader.load();
 		Scene uuspeliNäkymä = new Scene(uuspeli);
 

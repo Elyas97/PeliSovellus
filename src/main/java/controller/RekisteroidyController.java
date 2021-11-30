@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -101,6 +103,9 @@ public class RekisteroidyController {
 	void ViewNäkymäLogin(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
+		Locale locale = new Locale("en", "FI");
+		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+		loader.setResources(bundle);
 		BorderPane kirjaudu = (BorderPane) loader.load();
 		Scene kirjauduNäkymä = new Scene(kirjaudu);
 
@@ -113,6 +118,9 @@ public class RekisteroidyController {
 	void vieVierasNäkymä(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("Vieras.fxml"));
+		Locale locale = new Locale("en", "FI");
+		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+		loader.setResources(bundle);
 		BorderPane register = (BorderPane) loader.load();
 		Scene rekistyröintiNäkymä = new Scene(register);
 

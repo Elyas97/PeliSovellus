@@ -19,13 +19,13 @@
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="488.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="426.0" layoutY="337.0" mnemonicParsing="false" onAction="#tallennaMuutokset" prefHeight="32.0" prefWidth="133.6" style="-fx-background-color: #0589ff;" text="Tallenna muutokset" textFill="WHITE" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="40.400000000000006" />
+            <Button layoutX="426.0" layoutY="337.0" mnemonicParsing="false" onAction="#tallennaMuutokset" prefHeight="32.0" prefWidth="133.6" style="-fx-background-color: #0589ff;" text="%tallennaMuutoksetButton" textFill="WHITE" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="40.400000000000006" />
             <Text fx:id="tippi" fill="RED" layoutX="298.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font size="10.0" />
                </font>
             </Text>
-            <Button layoutX="272.0" layoutY="337.0" mnemonicParsing="false" onAction="#PoistaTili" prefHeight="32.0" prefWidth="133.6" style="-fx-background-color: #d11a2a;" text="Poista Tili" textFill="WHITE" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="210.0" />
+            <Button layoutX="272.0" layoutY="337.0" mnemonicParsing="false" onAction="#PoistaTili" prefHeight="32.0" prefWidth="133.6" style="-fx-background-color: #d11a2a;" text="%poistaTiliButton" textFill="WHITE" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="210.0" />
             <VBox layoutX="-2.0" prefHeight="362.0" prefWidth="155.0" style="-fx-background-color: #0589ff;" AnchorPane.bottomAnchor="37.60000000000002" AnchorPane.topAnchor="0.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#VieEtusivunNäkymä" prefHeight="32.0" prefWidth="171.0" style="-fx-background-color: #0589ff;">
@@ -33,13 +33,13 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="GAMEPAD" size="30" />
                      </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#VieEtusivunNäkymä" prefHeight="32.0" prefWidth="182.0" style="-fx-background-color: #0589ff;" text="Selaa Pelejä" textFill="WHITE" />
-                  <Button mnemonicParsing="false" onAction="#vieTapahtumaNäkymä" prefHeight="32.0" prefWidth="188.0" style="-fx-background-color: #0589ff;" text="Lisätyt Pelit" textFill="WHITE" />
-                  <Button mnemonicParsing="false" onAction="#vieUuspeliNäkymä" prefHeight="32.0" prefWidth="209.0" style="-fx-background-color: #0589ff;" text="Lisää Peli" textFill="WHITE" />
-                  <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="155.0" style="-fx-background-color: white; -fx-text-fill: #0589ff;" text="Profiili" />
+                  <Button mnemonicParsing="false" onAction="#VieEtusivunNäkymä" prefHeight="32.0" prefWidth="182.0" style="-fx-background-color: #0589ff;" text="%selaaPelejaMenu" textFill="WHITE" />
+                  <Button mnemonicParsing="false" onAction="#vieTapahtumaNäkymä" prefHeight="32.0" prefWidth="188.0" style="-fx-background-color: #0589ff;" text="%lisatytPelitMenu" textFill="WHITE" />
+                  <Button mnemonicParsing="false" onAction="#vieUuspeliNäkymä" prefHeight="32.0" prefWidth="209.0" style="-fx-background-color: #0589ff;" text="%lisaaPeliMenu" textFill="WHITE" />
+                  <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="155.0" style="-fx-background-color: white; -fx-text-fill: #0589ff;" text="%profiiliMenu" />
                </children>
             </VBox>
-            <Button layoutX="-2.0" layoutY="353.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="38.0" prefWidth="153.0" style="-fx-background-color: #1A85B2;" text="Kirjaudu ulos" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+            <Button layoutX="-2.0" layoutY="353.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="38.0" prefWidth="153.0" style="-fx-background-color: #1A85B2;" text="%kirjauduUlosButton" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="USER" size="22" />
                </graphic>
@@ -61,33 +61,33 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label prefHeight="58.0" prefWidth="191.0" text="Etunumi:" GridPane.rowIndex="2" />
+                  <Label prefHeight="58.0" prefWidth="191.0" text="%etunimi" GridPane.rowIndex="2" />
                   <TextField fx:id="etu" prefHeight="19.0" prefWidth="210.0" style="-fx-border-color: #0589ff; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets bottom="9.0" />
                      </GridPane.margin></TextField>
-                  <Label prefHeight="58.0" prefWidth="260.0" text="Sukunumi:" GridPane.rowIndex="3" />
+                  <Label prefHeight="58.0" prefWidth="260.0" text="%sukunimi" GridPane.rowIndex="3" />
                   <TextField fx:id="suku" prefHeight="43.0" prefWidth="210.0" style="-fx-border-color: #0589ff; -fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets bottom="9.0" />
                      </GridPane.margin></TextField>
-                  <Text fill="#0589ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Profiili tiedot" wrappingWidth="160.93792724609375" GridPane.rowIndex="1">
+                  <Text fill="#0589ff" strokeType="OUTSIDE" strokeWidth="0.0" text="%profiiliTiedotText" wrappingWidth="160.93792724609375" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fill="#0589ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Profiili asetukset" wrappingWidth="207.0140380859375">
+                  <Text fill="#0589ff" strokeType="OUTSIDE" strokeWidth="0.0" text="%profiiliAsetuksetText" wrappingWidth="207.0140380859375">
                      <font>
                         <Font size="28.0" />
                      </font>
                   </Text>
-                  <Text fill="#0589ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Yhteystiedot" wrappingWidth="159.48890686035156" GridPane.rowIndex="5">
+                  <Text fill="#0589ff" strokeType="OUTSIDE" strokeWidth="0.0" text="%yhteystiedotText" wrappingWidth="159.48890686035156" GridPane.rowIndex="5">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Label prefHeight="38.0" prefWidth="189.0" text="Sähköposti:" GridPane.rowIndex="6" />
-                  <Label text="Puhelinnumero:" GridPane.rowIndex="7" />
+                  <Label prefHeight="38.0" prefWidth="189.0" text="%sahkoposti" GridPane.rowIndex="6" />
+                  <Label text="%puhelinnumero" GridPane.rowIndex="7" />
                   <TextField fx:id="email" alignment="TOP_LEFT" style="-fx-border-color: #0589ff; -fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets bottom="9.0" />

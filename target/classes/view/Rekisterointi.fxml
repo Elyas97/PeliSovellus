@@ -24,7 +24,7 @@
                         <VBox alignment="CENTER" layoutX="21.0" layoutY="70.0" prefHeight="202.0" prefWidth="264.0" AnchorPane.bottomAnchor="129.20000000000002" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0">
                            <children>
                               <FontAwesomeIconView fill="WHITE" glyphName="GAMEPAD" size="72" />
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pelienvuokraussovellus">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%pelienvuokraussovellusText">
                                  <font>
                                     <Font size="23.0" />
                                  </font>
@@ -37,7 +37,7 @@
                      <children>
                         <HBox alignment="CENTER" layoutX="79.0" layoutY="26.1806640625" AnchorPane.bottomAnchor="344.21933593750003" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="26.1806640625">
                            <children>
-                              <Text fill="#0598ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Rekisteröidy">
+                              <Text fill="#0598ff" strokeType="OUTSIDE" strokeWidth="0.0" text="%rekisteroidyButton">
                                  <font>
                                     <Font size="23.0" />
                                  </font>
@@ -50,7 +50,7 @@
                         <HBox alignment="CENTER" layoutX="46.0" layoutY="56.0" prefHeight="46.0" prefWidth="200.0" spacing="20.0" AnchorPane.bottomAnchor="299.20000000000005" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
                            <children>
                               <FontAwesomeIconView fill="#0589ff" glyphName="USER" size="20" text="" />
-                              <TextField fx:id="etu" promptText="Etunimi" style="-fx-background-color: transparent; -fx-border-color: #0589ff;" />
+                              <TextField fx:id="etu" promptText="%etunimi" style="-fx-background-color: transparent; -fx-border-color: #0589ff;" />
                            </children>
                            <opaqueInsets>
                               <Insets />
@@ -59,31 +59,31 @@
                         <HBox alignment="CENTER" layoutX="50.0" layoutY="99.0" prefHeight="46.0" prefWidth="300.0" spacing="20.0" AnchorPane.bottomAnchor="255.20000000000002" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
                            <children>
                               <FontAwesomeIconView fill="#0589ff" glyphName="USER" size="20" />
-                              <TextField fx:id="suku" promptText="Sukunimi" style="-fx-background-color: transparent; -fx-border-color: #0589ff;" />
+                              <TextField fx:id="suku" promptText="%sukunimi" style="-fx-background-color: transparent; -fx-border-color: #0589ff;" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" layoutY="158.0" prefHeight="45.0" prefWidth="200.0" spacing="20.0" AnchorPane.bottomAnchor="240.20000000000002" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="158.0">
                            <children>
                               <FontAwesomeIconView fill="#0589ff" glyphName="PHONE" size="20" />
-                              <TextField fx:id="puhelinnumero" promptText="Puhelinnumero" style="-fx-background-color: transparent; -fx-border-color: #0589ff;" />
+                              <TextField fx:id="puhelinnumero" promptText="%puhelinnumero" style="-fx-background-color: transparent; -fx-border-color: #0589ff;" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" layoutY="193.0" prefHeight="40.0" prefWidth="223.0" spacing="14.0" AnchorPane.bottomAnchor="192.60000000000002" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="193.0">
                            <children>
                               <FontAwesomeIconView fill="#0589ff" glyphName="ENVELOPE" size="20" />
-                              <TextField fx:id="email" promptText="Sähköposti" style="-fx-background-color: transparent; -fx-border-color: #0589ff;" />
+                              <TextField fx:id="email" promptText="%sahkoposti" style="-fx-background-color: transparent; -fx-border-color: #0589ff;" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" layoutX="25.0" layoutY="237.0" prefHeight="37.0" prefWidth="300.0" spacing="20.0" AnchorPane.bottomAnchor="152.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="237.0">
                            <children>
                               <FontAwesomeIconView fill="#0589ff" glyphName="KEY" size="20" text="" />
-                              <PasswordField fx:id="salasana" promptText="Salasana" style="-fx-background-color: transparent; -fx-border-color: #0589ff;" />
+                              <PasswordField fx:id="salasana" promptText="%salasana" style="-fx-background-color: transparent; -fx-border-color: #0589ff;" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" layoutX="13.0" layoutY="261.0" prefHeight="44.0" prefWidth="240.0" spacing="20.0" AnchorPane.bottomAnchor="96.60000000000002" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="261.0">
                            <children>
                               <FontAwesomeIconView fill="#0589ff" glyphName="KEY" size="20" />
-                              <PasswordField fx:id="csalasana" promptText="Vahvista Salasana" style="-fx-background-color: transparent; -fx-border-color: #0589ff;" />
+                              <PasswordField fx:id="csalasana" promptText="%vahvistaSalasana" style="-fx-background-color: transparent; -fx-border-color: #0589ff;" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" layoutX="60.0" layoutY="302.0" prefHeight="18.0" prefWidth="200.0" AnchorPane.bottomAnchor="81.20000000000002" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="302.0">
@@ -93,13 +93,13 @@
                         </HBox>
                         <HBox alignment="CENTER" layoutX="46.0" layoutY="317.0" prefHeight="59.0" prefWidth="300.0" spacing="20.0" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="317.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#vieVierasNäkymä" prefHeight="32.0" prefWidth="127.0" style="-fx-background-color: #DED5D1; -fx-text-fill: black;" text="Peruuta" textFill="#240808" />
-                              <Button mnemonicParsing="false" onAction="#Rekistyröidy" prefHeight="32.0" prefWidth="127.0" style="-fx-background-color: #0589ff;" text="Rekisteröidy" textFill="WHITE" />
+                              <Button mnemonicParsing="false" onAction="#vieVierasNäkymä" prefHeight="32.0" prefWidth="127.0" style="-fx-background-color: #DED5D1; -fx-text-fill: black;" text="%peruutaButton" textFill="#240808" />
+                              <Button mnemonicParsing="false" onAction="#Rekistyröidy" prefHeight="32.0" prefWidth="127.0" style="-fx-background-color: #0589ff;" text="%rekisteroidyButton" textFill="WHITE" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" layoutX="6.0" layoutY="368.0" prefHeight="38.0" prefWidth="200.0" AnchorPane.bottomAnchor="21.600000000000023" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="-6.0" AnchorPane.topAnchor="368.0">
                            <children>
-                              <Hyperlink onAction="#ViewNäkymäLogin" prefHeight="42.0" prefWidth="142.0" text="Onko sinulla jo tili?&#10;   Kirjaudu sisään&#10;&#10;" />
+                              <Hyperlink onAction="#ViewNäkymäLogin" prefHeight="42.0" prefWidth="142.0" text="%onkoJoTiliText" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" layoutY="227.0" prefHeight="14.0" prefWidth="300.0" AnchorPane.bottomAnchor="187.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="227.0">
