@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -370,12 +371,22 @@ public class EtusivuController {
 	@FXML
 	void Rajaa(ActionEvent event) {
 
-
-		pelidata.clear(); 
+		
+		if(vanhin.isSelected()) {
+			System.out.println("Vanhin");
+			Collections.sort(filteredData.getSource(), (a, b) -> a.getPaiva().compareTo(b.getPaiva()));
+		}
+	
+		if(uusin.isSelected()) {
+			System.out.println("Uusin");
+			Collections.sort(filteredData.getSource(), (a, b) -> b.getPaiva().compareTo(a.getPaiva()));
+		}
+		
 		if(!minimi.getText().isEmpty() && !maxnum.getText().isEmpty() && valinnat.getValue() != null && !maara.getText().isEmpty() ) {
 			filteredData.setPredicate(pelit -> Integer.toString(pelit.getIkaraja()).contains(valinnat.getValue()) && Integer.toString(pelit.getPelmaara()).contains(maara.getText()) &&
 					pelit.getHinta() >= Integer.parseInt(minimi.getText()) && pelit.getHinta() <= Integer.parseInt(maxnum.getText()));
-		}
+		}	
+	
 		else if(valinnat.getValue() != null) {
 			filteredData.setPredicate(pelit -> Integer.toString(pelit.getIkaraja()).contains(valinnat.getValue()));
 		}
@@ -392,6 +403,9 @@ public class EtusivuController {
 		filteredData.setPredicate(pelit -> pelit.getHinta() >= Integer.parseInt(minimi.getText()) && pelit.getHinta() <= Integer.parseInt(maxnum.getText()));
 		//filteredData.setPredicate(pelit -> pelit.getHinta() < Integer.parseInt(maxnum.getText()));
 		}
+	
+		
+		//Collections.sort(filteredData.getSource(), (a, b) -> a.getPaiva().compareTo(b.getPaiva()));
 		
 		
 		
@@ -414,6 +428,7 @@ public class EtusivuController {
 	 * Alla aikasemmin rajaa funktiossa olleet toiminnot
 	 * 
 	 */
+
 	public void pelaajaMaara() {
 		if(!maara.getText().trim().isEmpty()) {
 			int pelmaara = Integer.parseInt(maara.getText());
