@@ -1,13 +1,19 @@
 package view;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import controller.EtusivuController;
 import controller.LisaaPeliController;
 import controller.LoginController;
+import controller.ProfiiliController;
+import controller.RekisteroidyController;
 import controller.TapahtumatController;
+import controller.VierasController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,7 +42,24 @@ public class MainApp extends Application {
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Pelienvuokraussovellus");
-
+		//annetaan kaikille¨main app
+		
+				//haetaan tiedostosa default kieli
+				String appConfigPath="resources/TextResources_Default.properties";
+				Properties properties=new Properties();
+				try {
+					properties.load(new FileInputStream(appConfigPath));
+					String language=properties.getProperty("language");
+					String country=properties.getProperty("country");
+					Locale l =new Locale(language,country);
+					System.out.println(country+"test");
+					Locale.setDefault(l);
+				} catch (FileNotFoundException e) {
+					System.out.println("Tiedostoa ei löytynyt");
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 		initRootLayout();
 		// Käyttäjän ei aina tarvitse kirjautua sisään
 		Kayttaja alku = TiedostoKasittely.lueKäyttäjä();
@@ -56,8 +79,8 @@ public class MainApp extends Application {
 			//LOKALISOINTI (ei toimi vielä)
 			//Ladataan ResourceBundle
 			FXMLLoader loader = new FXMLLoader();
-			Locale locale = new Locale("en", "FI");
-			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+
+			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 			
 			//Ladataan layout FXML-tiedostosta ja asetetaan käytettävä bundle
 			//FXMLLoader loader = new FXMLLoader();
@@ -85,7 +108,7 @@ public class MainApp extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			
 			Locale locale = new Locale("en", "FI");
-			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 			loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
 			loader.setResources(bundle);
 			BorderPane etusivu = (BorderPane) loader.load();
@@ -107,7 +130,7 @@ public class MainApp extends Application {
 			loader.setLocation(MainApp.class.getResource("Uusipeli.fxml"));
 			
 			Locale locale = new Locale("en", "FI");
-			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 			loader.setResources(bundle);
 			BorderPane uusipeli = (BorderPane) loader.load();
 			
@@ -131,7 +154,7 @@ public class MainApp extends Application {
 			loader.setLocation(MainApp.class.getResource("Tapahtumat.fxml"));
 			
 			Locale locale = new Locale("en", "FI");
-			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 			loader.setResources(bundle);
 			
 			BorderPane tapahtumat = (BorderPane) loader.load();
@@ -152,11 +175,13 @@ public class MainApp extends Application {
 			loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
 			
 			Locale locale = new Locale("en", "FI");
-			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 			loader.setResources(bundle);
-			
 			BorderPane kirjaudu = (BorderPane) loader.load();
-			rootLayout.setCenter(kirjaudu);
+			Scene scene = new Scene(kirjaudu);
+			primaryStage.setScene(scene);
+			LoginController uuscont = loader.getController();
+			uuscont.setMainApp(this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -167,9 +192,11 @@ public class MainApp extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("Rekistyröinti.fxml"));
 			Locale locale = new Locale("en", "FI");
-			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 			loader.setResources(bundle);
 			BorderPane register = (BorderPane) loader.load();
+			RekisteroidyController uuscont = loader.getController();
+			uuscont.setMainApp(this);
 			rootLayout.setCenter(register);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -178,13 +205,17 @@ public class MainApp extends Application {
 
 	public void showProfile() {
 		try {
+			System.out.println("tuuli oikea");
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("Profiili.fxml"));
 			Locale locale = new Locale("en", "FI");
-			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 			loader.setResources(bundle);
 			BorderPane profile = (BorderPane) loader.load();
-			rootLayout.setCenter(profile);
+			ProfiiliController uuscont = loader.getController();
+			uuscont.setMainApp(this);
+			Scene scene = new Scene(profile);
+			primaryStage.setScene(scene);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -195,10 +226,13 @@ public class MainApp extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("Vieras.fxml"));
 			Locale locale = new Locale("en", "FI");
-			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 			loader.setResources(bundle);
 			BorderPane kirjaudu = (BorderPane) loader.load();
-			rootLayout.setCenter(kirjaudu);
+			VierasController uuscont = loader.getController();
+			uuscont.setMainApp(this);
+			Scene scene = new Scene(kirjaudu);
+			primaryStage.setScene(scene);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

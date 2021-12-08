@@ -27,7 +27,7 @@ import model.TiedostoKasittely;
 import view.MainApp;
 
 public class ProfiiliController {
-
+	private MainApp app;
 	@FXML
 	private ResourceBundle resources;
 	@FXML
@@ -105,14 +105,7 @@ public class ProfiiliController {
 				alert2.setHeaderText("Tiedoksi");
 				alert2.showAndWait();
 				
-				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(MainApp.class.getResource("Vieras.fxml"));
-				BorderPane tapahtuma = (BorderPane) loader.load();
-				Scene tapahtumaNäkymä = new Scene(tapahtuma);
-
-				Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				window.setScene(tapahtumaNäkymä);
-				window.show();
+				app.showVieras();
 			}
 		}
 	}
@@ -122,65 +115,23 @@ public class ProfiiliController {
 		boolean test = TiedostoKasittely.poistaTiedosto();
 		if (test == true) {
 			//Viedään kirjautumissivulle
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
-			Locale locale = new Locale("en", "FI");
-			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
-			loader.setResources(bundle);
-			BorderPane etusivu = (BorderPane) loader.load();
-			Scene kirjautumisNäkymä = new Scene(etusivu);
-
-			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			window.setScene(kirjautumisNäkymä);
-			window.show();
+			app.showLogin();
 		}
 	}
 
 	@FXML
 	void VieEtusivunNäkymä(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
-		
-		Locale locale = new Locale("en", "FI");
-		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
-		loader.setResources(bundle); 
-		
-		BorderPane etusivu = (BorderPane) loader.load();
-		Scene etusivuNäkymä = new Scene(etusivu);
-
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window.setScene(etusivuNäkymä);
-		window.show();
+	app.showEtusivu();
 	}
 
 	@FXML
 	void vieTapahtumaNäkymä(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("Tapahtumat.fxml"));
-		Locale locale = new Locale("en", "FI");
-		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
-		loader.setResources(bundle);
-		BorderPane tapahtuma = (BorderPane) loader.load();
-		Scene tapahtumaNäkymä = new Scene(tapahtuma);
-
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window.setScene(tapahtumaNäkymä);
-		window.show();
+	app.tapahtumatSivuOverview();
 	}
 
 	@FXML
 	void vieUuspeliNäkymä(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("Uusipeli.fxml"));
-		Locale locale = new Locale("en", "FI");
-		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
-		loader.setResources(bundle);
-		BorderPane uuspeli = (BorderPane) loader.load();
-		Scene uuspeliNäkymä = new Scene(uuspeli);
-
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window.setScene(uuspeliNäkymä);
-		window.show();
+	app.lisaaPeliOverview();
 	}
 
 	@FXML
@@ -243,5 +194,9 @@ public class ProfiiliController {
 			}
 		}
 		return test;
+	}
+
+	public void setMainApp(MainApp mainApp) {
+		this.app=mainApp;
 	}
 }

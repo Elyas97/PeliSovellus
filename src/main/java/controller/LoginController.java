@@ -22,7 +22,7 @@ import model.TiedostoKasittely;
 import view.MainApp;
 
 public class LoginController {
-
+	private MainApp app;
 	Kayttaja kirjautunut = null;
 	@FXML
 	private ResourceBundle resources;
@@ -52,25 +52,13 @@ public class LoginController {
 				alert.setContentText("Kirjautuminen onnistui!");
 				alert.showAndWait();
 				// siirretään etusivulle ja tallenetaan käyttäjä controlleriin
-				try {
+				
 					// Annetaan kirjautuneen käyttäjän tiedot
 					TiedostoKasittely.kirjoitaTiedosto(kirjautunut);
 					// Ladataan etusivu
-					FXMLLoader loader = new FXMLLoader();
-					loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
-					
-					Locale locale = new Locale("en", "FI");
-					ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
-					loader.setResources(bundle);
-					
-					BorderPane etusivuOverview = (BorderPane) loader.load();
-					Scene etusivulle = new Scene(etusivuOverview);
-					Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-					window.setScene(etusivulle);
-					window.show();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+					System.out.println(TiedostoKasittely.lueKäyttäjä().getEtunimi());
+					app.showEtusivu();
+				
 			} else {
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);
 				alert.setTitle("Ilmoitus");
@@ -82,36 +70,12 @@ public class LoginController {
 
 	@FXML
 	void vieRekistyröintiNäkymään(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-
-		loader.setLocation(MainApp.class.getResource("Rekisterointi.fxml"));
-		Locale locale = new Locale("en", "FI");
-		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
-		loader.setResources(bundle);
-		
-		BorderPane register = (BorderPane) loader.load();
-		Scene rekistyröintiNäkymä = new Scene(register);
-		
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window.setScene(rekistyröintiNäkymä);
-		window.show();
+	app.showRegister();
 	}
 
 	@FXML
 	void vieVierasNäkymä(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-
-		loader.setLocation(MainApp.class.getResource("Vieras.fxml"));
-		Locale locale = new Locale("en", "FI");
-		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
-		loader.setResources(bundle);
-
-		BorderPane register = (BorderPane) loader.load();
-		Scene rekistyröintiNäkymä = new Scene(register);
-		
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window.setScene(rekistyröintiNäkymä);
-		window.show();
+		app.showVieras();
 	}
 
 	@FXML
@@ -132,5 +96,9 @@ public class LoginController {
 			test = false;
 		}
 		return test;
+	}
+
+	public void setMainApp(MainApp mainApp) {
+		this.app=mainApp;
 	}
 }

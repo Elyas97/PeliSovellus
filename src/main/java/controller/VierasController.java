@@ -1,8 +1,11 @@
 package controller;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -23,6 +26,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Peli;
 import model.PeliSovellusDAO;
+import model.TiedostoKasittely;
 import view.MainApp;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
@@ -35,7 +39,8 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 
 public class VierasController {
-
+	@FXML
+    private ComboBox<String> maat;
 	@FXML
 	private TextField pelihaku;
 	@FXML
@@ -108,6 +113,59 @@ public class VierasController {
 	FilteredList<Peli> filteredData = new FilteredList<>(pelidata, pelit -> true);
 
 	public void initialize() {
+		String fi = "FI";
+		String eng = "EN";
+		String name=Locale.getDefault().getLanguage();
+		System.out.println(name);
+		ObservableList<String> options = FXCollections.observableArrayList();
+		options.addAll(eng,fi);
+		maat.setItems(options);
+		maat.setValue(name.toUpperCase());
+		//maat.getSelectionModel().select(0);
+		maat.valueProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if(oldValue.equalsIgnoreCase(newValue)) {
+					return;
+				}else {
+					System.out.println("it shooudd "+newValue);
+					//muutetaan kieliasetus
+					String appConfigPath="resources/TextResources_Default.properties";
+					Properties properties=new Properties();
+					try {
+						properties.load(new FileInputStream(appConfigPath));
+						properties.setProperty("language", newValue.toLowerCase());
+						if(newValue.equalsIgnoreCase("EN")) {
+							properties.setProperty("country", "US");
+							Locale.setDefault(new Locale(newValue.toLowerCase(),"US"));
+							
+						}else {
+							System.out.println("TULI OIKEALLE");
+							properties.setProperty("country", "FI");
+							Locale.setDefault(new Locale(newValue.toLowerCase(),"FI"));
+						}
+						
+					} catch (FileNotFoundException e) {
+						System.out.println("Tiedostoa ei löytynyt");
+						e.printStackTrace();
+					} catch (IOException e) {
+					
+						e.printStackTrace();
+					}
+					TiedostoKasittely.tallennaKieli(properties, appConfigPath);
+					try {
+						refreshPage();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				
+			}
+	    });
+		//combobox
 		ObservableList<String> valinta = FXCollections.observableArrayList("3", "7", "12", "16", "18");
 		valinnat.setItems(valinta);
 
@@ -141,6 +199,14 @@ public class VierasController {
 		});
 		lista.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> pelinTiedot(newValue));
+	}
+	private MainApp app;
+	public void setMainApp(MainApp app) {
+		this.app=app;
+	}
+	
+	public void refreshPage() throws IOException {
+		app.showVieras();
 	}
 
 	// Jää toteutukseen OTP2
@@ -184,17 +250,7 @@ public class VierasController {
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK) {
 			// Viedään kirjautumissivulle
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
-			Locale locale = new Locale("en", "FI");
-			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
-			loader.setResources(bundle);
-			BorderPane etusivu = (BorderPane) loader.load();
-			Scene kirjautumisNäkymä = new Scene(etusivu);
-
-			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			window.setScene(kirjautumisNäkymä);
-			window.show();
+			app.showLogin();
 		}
 	}
 
@@ -255,17 +311,7 @@ public class VierasController {
 	@FXML
 	void vieKirjautumisNäkymään(ActionEvent event) throws IOException {
 		//Viedään kirjautumissivulle
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
-		Locale locale = new Locale("en", "FI");
-		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
-		loader.setResources(bundle);
-		BorderPane etusivu = (BorderPane) loader.load();
-		Scene kirjautumisNäkymä = new Scene(etusivu);
-
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window.setScene(kirjautumisNäkymä);
-		window.show();
+		app.showLogin();
 	}
 
 	@FXML

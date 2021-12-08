@@ -23,7 +23,7 @@ import model.RegisterSystem;
 import view.MainApp;
 
 public class RekisteroidyController {
-
+	private MainApp app;
 	@FXML
 	private TextField etu;
 	@FXML
@@ -183,5 +183,9 @@ public class RekisteroidyController {
 			test = false;
 		}
 		return test;
+	}
+
+	public void setMainApp(MainApp mainApp) {
+		this.app=mainApp;
 	}
 }

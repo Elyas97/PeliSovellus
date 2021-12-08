@@ -447,71 +447,24 @@ public class TapahtumatController {
 
 	@FXML
 	void vieEtusivulle(ActionEvent event) throws IOException {
-		// Vaihdetaan näkymää samalla viedään käyttäjän tiedot
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
-		
-		Locale locale = new Locale("en", "FI");
-		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
-		loader.setResources(bundle);
-		
-		BorderPane personOverview = (BorderPane) loader.load();
-		Scene etusivulle = new Scene(personOverview);
-
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window.setScene(etusivulle);
-		window.show();
+		main.showEtusivu();
 	}
 
 	@FXML
 	void lisaaUusiPeliNäkymä(ActionEvent event) throws IOException {
-		// Vaihdetaan näkymää samalla viedään käyttäjän tiedot
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("Uusipeli.fxml"));
-		Locale locale = new Locale("en", "FI");
-		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
-		loader.setResources(bundle);
-		BorderPane personOverview = (BorderPane) loader.load();
-		Scene etusivulle = new Scene(personOverview);
-
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window.setScene(etusivulle);
-		window.show();
+		main.lisaaPeliOverview();
 	}
 
 	@FXML
 	void vieProfiiliNäkymään(ActionEvent event) throws IOException {
-		// Vaihdetaan näkymää samalla viedään käyttäjän tiedot
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("Profiili.fxml"));
-		Locale locale = new Locale("en", "FI");
-		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
-		loader.setResources(bundle);
-		BorderPane personOverview = (BorderPane) loader.load();
-		Scene etusivulle = new Scene(personOverview);
-
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window.setScene(etusivulle);
-		window.show();
+		main.showProfile();
 	}
 
 	@FXML
 	void LogOut(ActionEvent event) throws IOException {
 		boolean test = TiedostoKasittely.poistaTiedosto();
 		if (test == true) {
-			// Viedään kirjautumissivulle
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
-			Locale locale = new Locale("en", "FI");
-			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
-			loader.setResources(bundle);
-
-			BorderPane etusivu = (BorderPane) loader.load();
-			Scene kirjautumisNäkymä = new Scene(etusivu);
-
-			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			window.setScene(kirjautumisNäkymä);
-			window.show();
+			main.showLogin();
 		}
 	}
 
