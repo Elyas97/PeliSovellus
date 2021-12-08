@@ -200,7 +200,8 @@
                                     <TextArea fx:id="kuvaus" layoutY="16.0" prefHeight="42.0" prefWidth="123.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" />
                                  </children>
                               </AnchorPane>
-                              <Label fx:id="kirjaimet" layoutX="4.0" layoutY="330.0" text="%kirjainmaaraText" />
+                              <Label fx:id="kirjaimet" layoutX="92.0" layoutY="329.0" prefHeight="18.0" prefWidth="20.0" />
+                              <Label layoutX="2.0" layoutY="330.0" text="%kirjainmaaraText" />
                            </children>
                         </AnchorPane>
                      </items>

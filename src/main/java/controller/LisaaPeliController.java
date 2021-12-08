@@ -141,7 +141,7 @@ public class LisaaPeliController {
 
 		tekstikenttä.setText(käyttäjä.getSähköposti() + "\n" + käyttäjä.getPuhelinumero() + " ");
 
-		kuvaus.setPromptText("Kuvaile peliä tai kerro kokemuksiasi pelistä");
+		//kuvaus.setPromptText("Kuvaile peliä tai kerro kokemuksiasi pelistä");
 		kirjaimet();
 		tekstikenttä.textProperty().addListener((obs, old, newew) -> {
 			kirjaimet();
@@ -255,7 +255,7 @@ public class LisaaPeliController {
 		int jaljella = maxpituus - pituus;
 
 		if (jaljella <= 0) {
-			kirjaimet.setText("Kirjaimia jäljellä: " + jaljella);
+			kirjaimet.setText("" + jaljella);
 
 			// Tekstikenttään ei voi kirjoittaa
 			tekstikenttä.setEditable(false);
@@ -270,7 +270,7 @@ public class LisaaPeliController {
 			tekstikenttä.setEditable(true);
 		} else {
 			jaljella = maxpituus - pituus;
-			kirjaimet.setText("Kirjaimia jäljellä: " + jaljella);
+			kirjaimet.setText("" + jaljella);
 		}
 	}
 

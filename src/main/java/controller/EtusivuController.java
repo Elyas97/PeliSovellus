@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Locale;
@@ -201,7 +202,14 @@ public class EtusivuController {
 			pelaajamäärä.setText(Integer.toString(peli.getPelmaara()));
 			kuvaus.setText(peli.getKuvaus());
 			tekstikenttä.setText(peli.getTekstikenttä());
-			päivämäärä.setText("Ilmoitus jätetty: " + peli.getPaiva().toString());
+			
+			//Päivämäärän formatointi
+			DateFormat dateFormat;
+			dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.US);
+			String paivamaaraFormat = dateFormat.format(peli.getPaiva()); 
+			päivämäärä.setText("Ilmoitus jätetty: " + paivamaaraFormat);
+			
+			//päivämäärä.setText("Ilmoitus jätetty: " + peli.getPaiva().toString());
 		} else {
 			pelinNimi.setText("");
 			pelinHinta.setText("");

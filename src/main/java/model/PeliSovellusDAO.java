@@ -1,10 +1,12 @@
 package model;
 
 import java.sql.*;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import controller.TapahtumatController;
 
@@ -194,6 +196,12 @@ public class PeliSovellusDAO {
 				String tekstikenttä = rs.getString("Tekstikenttä");
 				String kunto = rs.getString("Kunto");
 				Date paivamaara = rs.getDate("Päivämäärä");
+				
+				// Dollareina
+				Locale usLocale = Locale.US;
+				NumberFormat usNumberFormat = NumberFormat.getInstance(usLocale);
+				hinta = Integer.parseInt(usNumberFormat.format(hinta));
+				hinta = (int) (hinta * 1.13);
 
 				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, konsoli, ika,
 						lukumaara, kuvaus, kaupunki, kunto, tekstikenttä, paivamaara));

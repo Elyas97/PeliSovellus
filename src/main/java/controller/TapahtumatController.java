@@ -427,7 +427,7 @@ public class TapahtumatController {
 		int jaljella = maxpituus - pituus;
 
 		if (jaljella <= 0) {
-			kirjaimet.setText("Kirjaimia jäljellä: " + 0);
+			kirjaimet.setText("" + 0);
 
 			// Tekstikenttään ei voi kirjoittaa
 			tekstikenttä.setEditable(false);
@@ -441,7 +441,7 @@ public class TapahtumatController {
 			// Tekstikenttään voi taas kirjoittaa
 			tekstikenttä.setEditable(true);
 		} else {
-			kirjaimet.setText("Kirjaimia jäljellä: " + jaljella);
+			kirjaimet.setText("" + jaljella);
 		}
 	}
 
