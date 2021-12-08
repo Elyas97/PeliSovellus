@@ -84,7 +84,7 @@ public class MainApp extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			
-			Locale locale = new Locale("en", "FI");
+			Locale locale = new Locale("fi", "FI");
 			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
 			loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
 			loader.setResources(bundle);
