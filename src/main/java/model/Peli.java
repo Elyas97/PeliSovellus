@@ -158,6 +158,9 @@ public class Peli {
 
 		return getPelinNimi() + " Tyyppi: " + talletusTyyppi + "\nHinta: " + hinta + " \n" + kaupunki + "\n "
 				+ paivamaaraFormat;
+	
+		/*return getPelinNimi() + " Type: " + talletusTyyppi + "\nPrice: " + hinta + " \n" + kaupunki + "\n "
+		+ paivamaaraFormat;*/
 	}
 
 	public void setPaivamaara(Date paivamaara) {

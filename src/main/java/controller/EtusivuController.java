@@ -122,7 +122,7 @@ public class EtusivuController {
 		hakurajaus.setItems(rajaus);
 		lista.setItems(filteredData);
 		hakutyyppi();
-		hakurajaus.setPromptText("Rajaa hakua");
+		//hakurajaus.setPromptText("Rajaa hakua");
 		listaaPelit();
 		hakuTesti();
 		// Kuuntelee pelihaku kenttää ja päivittää listaa kirjoitetun tekstin mukaan
@@ -207,7 +207,7 @@ public class EtusivuController {
 			DateFormat dateFormat;
 			dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.US);
 			String paivamaaraFormat = dateFormat.format(peli.getPaiva()); 
-			päivämäärä.setText("Ilmoitus jätetty: " + paivamaaraFormat);
+			päivämäärä.setText("" + paivamaaraFormat);
 			
 			//päivämäärä.setText("Ilmoitus jätetty: " + peli.getPaiva().toString());
 		} else {

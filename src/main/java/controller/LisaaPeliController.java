@@ -128,6 +128,7 @@ public class LisaaPeliController {
 	@FXML
 	private void initialize() {
 		käyttäjä = TiedostoKasittely.lueKäyttäjä();
+		
 		ObservableList<String> options = FXCollections.observableArrayList("Urheilu", "Räiskintä", "Toiminta",
 				"Ajopeli", "Jännitys", "Seikkailu", "Strategia", "Roolipeli", "Pulma", "Seurapeli", "Lautapeli");
 		genre.setItems(options);

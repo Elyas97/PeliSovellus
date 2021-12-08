@@ -144,7 +144,7 @@
                               </Pane>
                               <Pane fx:id="konsoliPane" layoutX="1.0" layoutY="302.0" prefHeight="78.0" prefWidth="242.0" style="visibility: false;">
                                  <children>
-                                    <Label layoutX="8.0" layoutY="6.0" text="Konsoli" />
+                                    <Label layoutX="8.0" layoutY="6.0" text="%konsoliLabel" />
                                     <ChoiceBox fx:id="konsoli" layoutX="8.0" layoutY="27.0" prefWidth="150.0" />
                                  </children>
                               </Pane>
