@@ -232,7 +232,8 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <Label fx:id="päivämäärä" prefHeight="23.0" prefWidth="136.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <Label fx:id="päivämäärä" layoutX="79.0" layoutY="5.0" prefHeight="18.0" prefWidth="57.0" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="0.0" />
+                        <Label layoutX="8.0" layoutY="6.0" prefHeight="18.0" prefWidth="66.0" text="%ilmoitusJatettyText" />
                      </children>
                   </AnchorPane>
                </children>

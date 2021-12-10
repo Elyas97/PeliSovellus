@@ -16,6 +16,8 @@ public class PeliSovellusDAO {
 	final String URL = "jdbc:mariadb://10.114.32.16/PELIKESKUS";
 	final String USERNAME = "ryhma";
 	final String PWD = "ryhma";
+	
+	String locale = Locale.getDefault().getLanguage();
 
 	public PeliSovellusDAO() {
 		try {
@@ -197,11 +199,15 @@ public class PeliSovellusDAO {
 				String kunto = rs.getString("Kunto");
 				Date paivamaara = rs.getDate("Päivämäärä");
 				
-				// Dollareina
-				Locale usLocale = Locale.US;
-				NumberFormat usNumberFormat = NumberFormat.getInstance(usLocale);
-				hinta = Integer.parseInt(usNumberFormat.format(hinta));
-				hinta = (int) (hinta * 1.13);
+				if(locale.equals("en")) {
+					// Dollareina
+					Locale usLocale = Locale.US;
+					NumberFormat usNumberFormat = NumberFormat.getInstance(usLocale);
+					hinta = Integer.parseInt(usNumberFormat.format(hinta));
+					hinta = (int) (hinta * 1.13);
+				}else {
+					hinta = rs.getInt("Hinta");
+				}
 
 				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, konsoli, ika,
 						lukumaara, kuvaus, kaupunki, kunto, tekstikenttä, paivamaara));

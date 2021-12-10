@@ -91,6 +91,7 @@ public class LisaaPeliController {
 	private MainApp main;
 	PeliSovellusDAO pelisovellusdao = new PeliSovellusDAO();
 	EtusivuController etusivu = new EtusivuController();
+	String locale = Locale.getDefault().getLanguage();
 
 	public LisaaPeliController() {
 	}
@@ -199,7 +200,13 @@ public class LisaaPeliController {
 			// Ilmoitus pelin onnistuneesta lisäyksestä
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 			alert.setTitle("Alert");
-			alert.setContentText("Uusi peli lisätty onnistuneesti!");
+			
+			if(locale.equals("en")) { 
+				alert.setContentText("New game added succesfully!");
+			}else {
+				alert.setContentText("Uusi peli lisätty onnistuneesti!");
+			}
+			
 			alert.showAndWait();
 
 			etusivu.listaaPelit();
@@ -264,7 +271,13 @@ public class LisaaPeliController {
 			// Ilmoitus siitä että tekstikenttä on täynnä
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 			alert.setTitle("Alert");
-			alert.setContentText("Tekstikenttä täynnä!");
+			
+			if(locale.equals("en")) { 
+				alert.setContentText("Textfield is full!");
+			}else {
+				alert.setContentText("Tekstikenttä täynnä!");
+			}
+
 			alert.showAndWait();
 
 			// Tekstikenttään voi taas kirjoittaa
@@ -290,55 +303,56 @@ public class LisaaPeliController {
 		StringBuilder virhe = new StringBuilder();
 
 		if (pelinnimi.getText().trim().isEmpty()) {
-			virhe.append("Syötä pelinnimi\n");
+			//Varoitusten kehotuksille omat käännökset myös (ei vielä tehty)
+			virhe.append(nimivaroitus.getText()+ "\n");
 			pelinnimi.setStyle("-fx-border-color:red");
-			nimivaroitus.setText("Pakollinen kenttä");
+			nimivaroitus.setVisible(true);
 		}
 		if (hinta.getText().trim().isEmpty()) {
 			virhe.append("Syötä pelinhinta\n");
 			hinta.setStyle("-fx-border-color:red");
-			hintavaroitus.setText("Pakollinen kenttä");
+			hintavaroitus.setVisible(true);
 		}
 		if (kaupunki.getText().trim().isEmpty()) {
 			virhe.append("Syötä kaupunki\n");
 			kaupunki.setStyle("-fx-border-color:red");
-			paikkakuntavaroitus.setText("Pakollinen kenttä");
+			paikkakuntavaroitus.setVisible(true);
 		}
 		if (((RadioButton) pelintyyppi.getSelectedToggle()) == null) {
 			virhe.append("Syötä pelintyyppi\n");
-			tyyppivaroitus.setText("Pakollinen kenttä");
+			tyyppivaroitus.setVisible(true);
 		}
 		if (((RadioButton) tyyppi.getSelectedToggle()) == null) {
 			virhe.append("Syötä ilmoituksen tyyppi\n");
-			ilmoitustyyppivaroitus.setText("Pakollinen kenttä");
+			ilmoitustyyppivaroitus.setVisible(true);
 		}
 		if (genre.getValue() == null) {
 			virhe.append("Syötä genre\n");
-			genrevaroitus.setText("Pakollinen kenttä");
+			genrevaroitus.setVisible(true);
 		}
 		if (ikaraja.getText().trim().isEmpty()) {
 			virhe.append("Syötä pelin ikäraja\n");
 			ikaraja.setStyle("-fx-border-color:red");
-			ikarajavaroitus.setText("Pakollinen kenttä");
+			ikarajavaroitus.setVisible(true);
 		}
 		if (pelaajamaara.getText().trim().isEmpty()) {
 			virhe.append("Syötä pelin pelaajamäärä \n");
 			pelaajamaara.setStyle("-fx-border-color:red");
-			pelaajamaaravaroitus.setText("Pakollinen kenttä");
+			pelaajamaaravaroitus.setVisible(true);
 		}
 		if (kunto.getValue() == null) {
 			virhe.append("Syötä pelinkunto \n");
-			kuntovaroitus.setText("Pakollinen kenttä");
+			kuntovaroitus.setVisible(true);
 		}
 		if (kuvaus.getText().trim().isEmpty()) {
 			virhe.append("Syötä kuvaus\n");
 			kuvaus.setStyle("-fx-border-color:red");
-			kuvausvaroitus.setText("Pakollinen kenttä");
+			kuvausvaroitus.setVisible(true);
 		}
 		if (tekstikenttä.getText().trim().isEmpty()) {
 			virhe.append("Syötä tekstikenttään asioita \n");
 			tekstikenttä.setStyle("-fx-border-color:red");
-			tekstikenttavaroitus.setText("Pakollinen kenttä");
+			tekstikenttavaroitus.setVisible(true);
 		}
 		if (virhe.length() > 0) {
 			Alert varoitus = new Alert(Alert.AlertType.WARNING);

@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Locale;
@@ -113,6 +114,7 @@ public class EtusivuController {
 	private Peli[] pelit;
 	ObservableList<Peli> pelidata = FXCollections.observableArrayList();
 	FilteredList<Peli> filteredData = new FilteredList<>(pelidata, pelit -> true);
+	String locale = Locale.getDefault().getLanguage();
 
 	public void initialize() {
 		ObservableList<String> valinta = FXCollections.observableArrayList("3", "7", "12", "16", "18");
@@ -203,13 +205,16 @@ public class EtusivuController {
 			kuvaus.setText(peli.getKuvaus());
 			tekstikenttä.setText(peli.getTekstikenttä());
 			
-			//Päivämäärän formatointi
-			DateFormat dateFormat;
-			dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.US);
-			String paivamaaraFormat = dateFormat.format(peli.getPaiva()); 
-			päivämäärä.setText("" + paivamaaraFormat);
+			if(locale.equals("en")) {
+				//Päivämäärän formatointi
+				DateFormat dateFormat;
+				dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.US);
+				String paivamaaraFormat = dateFormat.format(peli.getPaiva()); 
+				päivämäärä.setText("" + paivamaaraFormat);
+			}else {
+				päivämäärä.setText("" + peli.getPaiva().toString());
+			}
 			
-			//päivämäärä.setText("Ilmoitus jätetty: " + peli.getPaiva().toString());
 		} else {
 			pelinNimi.setText("");
 			pelinHinta.setText("");
@@ -262,7 +267,6 @@ public class EtusivuController {
 				switch (((RadioButton) hakutyyppi.getSelectedToggle()).getText()) {
 				case "Myynti":
 				case "For sale":
-					
 					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Myynti"));
 					hakuTesti();
 					break;
@@ -475,7 +479,12 @@ public class EtusivuController {
 			if (min < 0 || min > max) {
 				test = false;
 				minimi.setStyle("-fx-border-color:red");
-				minimi.setPromptText("Ei negativiinen/ei isompi kun max numero");
+				
+				if(locale.equals("en")) { 
+					minimi.setPromptText("Can't be negative number/bigger than max value");
+				}else {
+					minimi.setPromptText("Ei negativiinen/ei isompi kun max numero");
+				}
 			}
 
 		} catch (NumberFormatException e) {
@@ -489,7 +498,12 @@ public class EtusivuController {
 			if (pelaajat < 0) {
 				test = false;
 				maara.setStyle("-fx-border-color:red");
-				maara.setPromptText("Syötä positiivinen");
+				
+				if(locale.equals("en")) { 
+					maara.setPromptText("Insert positive number");
+				}else {
+					maara.setPromptText("Syötä positiivinen");
+				}
 			}
 		} catch (NumberFormatException e) {
 			maara.setText("");

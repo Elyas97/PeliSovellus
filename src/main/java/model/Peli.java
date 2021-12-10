@@ -22,6 +22,8 @@ public class Peli {
 	private String tekstikenttä;
 	private String konsoli;
 	private Date paivamaara;
+	
+	String locale = Locale.getDefault().getLanguage();
 
 	public Peli(String pelinNimi, int peliId, String tyyppi, String talletustyyppi, int hinta, String genre,
 			String konsoli, int ikaraja, int pelmaara, String kuvaus, String kaupunki, String kunto,
@@ -151,16 +153,22 @@ public class Peli {
 
 	public String toString() {
 
-		// Päivämäärän formatointi
-		DateFormat dateFormat;
-		dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.US);
-		String paivamaaraFormat = dateFormat.format(paivamaara);
+		System.out.println(locale.toString());
+		
+		if(locale.equals("fi")) {
+			return getPelinNimi() + " Tyyppi: " + talletusTyyppi + "\nHinta: " + hinta + " \n" + kaupunki + "\n "
+					+ paivamaara;
+		}else {
+			// Päivämäärän formatointi
+			DateFormat dateFormat;
+			dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.US);
+			String paivamaaraFormat = dateFormat.format(paivamaara);
+			
 
-		return getPelinNimi() + " Tyyppi: " + talletusTyyppi + "\nHinta: " + hinta + " \n" + kaupunki + "\n "
-				+ paivamaaraFormat;
-	
-		/*return getPelinNimi() + " Type: " + talletusTyyppi + "\nPrice: " + hinta + " \n" + kaupunki + "\n "
-		+ paivamaaraFormat;*/
+			return getPelinNimi() + " Type: " + talletusTyyppi + "\nPrice: " + hinta + " \n" + kaupunki + "\n "
+					+ paivamaaraFormat;
+		}
+		
 	}
 
 	public void setPaivamaara(Date paivamaara) {

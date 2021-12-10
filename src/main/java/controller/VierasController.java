@@ -3,6 +3,7 @@ package controller;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Properties;
@@ -111,6 +112,7 @@ public class VierasController {
 	private Peli[] pelit;
 	ObservableList<Peli> pelidata = FXCollections.observableArrayList();
 	FilteredList<Peli> filteredData = new FilteredList<>(pelidata, pelit -> true);
+	String locale = Locale.getDefault().getLanguage();
 
 	public void initialize() {
 		String fi = "FI";
@@ -295,7 +297,16 @@ public class VierasController {
 			pelaajamäärä.setText(Integer.toString(peli.getPelmaara()));
 			kuvaus.setText(peli.getKuvaus());
 			tekstikenttä.setText(peli.getTekstikenttä());
-			päivämäärä.setText("Ilmoitus jätetty: " + peli.getPaiva().toString());
+			
+			if(locale.equals("en")) {
+				//Päivämäärän formatointi
+				DateFormat dateFormat;
+				dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.US);
+				String paivamaaraFormat = dateFormat.format(peli.getPaiva()); 
+				päivämäärä.setText("" + paivamaaraFormat);
+			}else {
+				päivämäärä.setText("" + peli.getPaiva().toString());
+			}
 		} else {
 			pelinNimi.setText("");
 			pelinHinta.setText("");
