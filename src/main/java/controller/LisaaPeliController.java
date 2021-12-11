@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -102,12 +103,17 @@ public class LisaaPeliController {
 
 		// Poistaa "pakollinen valinta" tekstikentän
 		ilmoitustyyppivaroitus.setText("");
-		if (text.equals("Lahjoitus")) {
+		
+		switch (text) {
+		case "Lahjoitetaan":
+		case "Giveaway":
 			hinta.setText(Integer.toString(0));
 			hinta.setEditable(false);
-		} else {
+			break;
+		default:
 			hinta.setText("");
 			hinta.setEditable(true);
+			break;
 		}
 		return text;
 	}
@@ -118,7 +124,7 @@ public class LisaaPeliController {
 
 		// Poistaa "pakollinen valinta" tekstikentän jos näkyvissä
 		tyyppivaroitus.setText("");
-		if (text.equals("lauta")) {
+		if (text.equals("Lautapeli") || text.equals("boardgame")) {
 			konsoliPane.setVisible(false);
 		} else {
 			konsoliPane.setVisible(true);
@@ -130,14 +136,25 @@ public class LisaaPeliController {
 	private void initialize() {
 		käyttäjä = TiedostoKasittely.lueKäyttäjä();
 		
-		ObservableList<String> options = FXCollections.observableArrayList("Urheilu", "Räiskintä", "Toiminta",
-				"Ajopeli", "Jännitys", "Seikkailu", "Strategia", "Roolipeli", "Pulma", "Seurapeli", "Lautapeli");
-		genre.setItems(options);
-
-		ObservableList<String> kuntoOptions = FXCollections.observableArrayList("Erinomainen", "Kiitettävä", "Hyvä",
-				"Kohtalainen", "Välttävä");
-		kunto.setItems(kuntoOptions);
-
+		if(locale.equals("en")) {
+			//Tallentuu myös tietokantaan englanniksi, pitäisiköhän kääntää uudelleen suomeksi?
+			ObservableList<String> options = FXCollections.observableArrayList("Sports", "Shooting", "Action",
+					"Racing", "Horros", "Adventure", "Strategy", "Roleplay", "Puzzle", "Party", "Boardgame");
+			genre.setItems(options);
+			
+			ObservableList<String> kuntoOptions = FXCollections.observableArrayList("Excellent", "Great", "Good",
+					"Moderate", "Passable");
+			kunto.setItems(kuntoOptions);
+		}else {
+			ObservableList<String> options = FXCollections.observableArrayList("Urheilu", "Räiskintä", "Toiminta",
+					"Ajopeli", "Jännitys", "Seikkailu", "Strategia", "Roolipeli", "Pulma", "Seurapeli", "Lautapeli");
+			genre.setItems(options);
+			
+			ObservableList<String> kuntoOptions = FXCollections.observableArrayList("Erinomainen", "Kiitettävä", "Hyvä",
+					"Kohtalainen", "Välttävä");
+			kunto.setItems(kuntoOptions);
+		}
+	
 		ObservableList<String> konsoliOptions = FXCollections.observableArrayList("Xbox", "Playstation", "Wii");
 		konsoli.setItems(konsoliOptions);
 
@@ -303,61 +320,110 @@ public class LisaaPeliController {
 		StringBuilder virhe = new StringBuilder();
 
 		if (pelinnimi.getText().trim().isEmpty()) {
-			//Varoitusten kehotuksille omat käännökset myös (ei vielä tehty)
-			virhe.append(nimivaroitus.getText()+ "\n");
+			//Alertteihin myös properties tiedostosta käännökset?
+			if(locale.equals("en")) {
+				virhe.append("Insert name\n");
+			}else {
+				virhe.append("Syötä pelin nimi\n");
+			}
 			pelinnimi.setStyle("-fx-border-color:red");
 			nimivaroitus.setVisible(true);
 		}
 		if (hinta.getText().trim().isEmpty()) {
-			virhe.append("Syötä pelinhinta\n");
+			if(locale.equals("en")) {
+				virhe.append("Insert price\n");
+			}else {
+				virhe.append("Syötä pelin hinta\n");
+			}
 			hinta.setStyle("-fx-border-color:red");
 			hintavaroitus.setVisible(true);
 		}
 		if (kaupunki.getText().trim().isEmpty()) {
-			virhe.append("Syötä kaupunki\n");
+			if(locale.equals("en")) {
+				virhe.append("Insert city\n");
+			}else {
+				virhe.append("Syötä kaupunki\n");
+			}
 			kaupunki.setStyle("-fx-border-color:red");
 			paikkakuntavaroitus.setVisible(true);
 		}
 		if (((RadioButton) pelintyyppi.getSelectedToggle()) == null) {
-			virhe.append("Syötä pelintyyppi\n");
+			if(locale.equals("en")) {
+				virhe.append("Insert game type\n");
+			}else {
+				virhe.append("Syötä pelintyyppi\n");
+			}
 			tyyppivaroitus.setVisible(true);
 		}
 		if (((RadioButton) tyyppi.getSelectedToggle()) == null) {
-			virhe.append("Syötä ilmoituksen tyyppi\n");
+			if(locale.equals("en")) {
+				virhe.append("Insert notice type\n");
+			}else {
+				virhe.append("Syötä ilmoituksen tyyppi\n");
+			}
 			ilmoitustyyppivaroitus.setVisible(true);
 		}
 		if (genre.getValue() == null) {
-			virhe.append("Syötä genre\n");
+			if(locale.equals("en")) {
+				virhe.append("Insert genre\n");
+			}else {
+				virhe.append("Syötä genre\n");
+			}
 			genrevaroitus.setVisible(true);
 		}
 		if (ikaraja.getText().trim().isEmpty()) {
-			virhe.append("Syötä pelin ikäraja\n");
+			if(locale.equals("en")) {
+				virhe.append("Insert agelimit\n");
+			}else {
+				virhe.append("Syötä pelin ikäraja\n");
+			}
 			ikaraja.setStyle("-fx-border-color:red");
 			ikarajavaroitus.setVisible(true);
 		}
 		if (pelaajamaara.getText().trim().isEmpty()) {
-			virhe.append("Syötä pelin pelaajamäärä \n");
+			if(locale.equals("en")) {
+				virhe.append("Insert number of players\n");
+			}else {
+				virhe.append("Syötä pelin pelaajamäärä \n");
+			}
 			pelaajamaara.setStyle("-fx-border-color:red");
 			pelaajamaaravaroitus.setVisible(true);
 		}
 		if (kunto.getValue() == null) {
-			virhe.append("Syötä pelinkunto \n");
+			if(locale.equals("en")) {
+				virhe.append("Insert shape\n");
+			}else {
+				virhe.append("Syötä pelinkunto\n");
+			}
 			kuntovaroitus.setVisible(true);
 		}
 		if (kuvaus.getText().trim().isEmpty()) {
-			virhe.append("Syötä kuvaus\n");
+			if(locale.equals("en")) {
+				virhe.append("Insert description\n");
+			}else {
+				virhe.append("Syötä kuvaus\n");
+			}
 			kuvaus.setStyle("-fx-border-color:red");
 			kuvausvaroitus.setVisible(true);
 		}
 		if (tekstikenttä.getText().trim().isEmpty()) {
-			virhe.append("Syötä tekstikenttään asioita \n");
+			if(locale.equals("en")) {
+				virhe.append("Insert contact information\n");
+			}else {
+				virhe.append("Syötä tekstikenttään asioita \n");
+			}
 			tekstikenttä.setStyle("-fx-border-color:red");
 			tekstikenttavaroitus.setVisible(true);
 		}
 		if (virhe.length() > 0) {
 			Alert varoitus = new Alert(Alert.AlertType.WARNING);
-			varoitus.setTitle("Virhe");
-			varoitus.setHeaderText("Varoitus");
+			if(locale.equals("en")) {
+				varoitus.setTitle("Failure");
+				varoitus.setHeaderText("Warning");
+			}else {
+				varoitus.setTitle("Virhe");
+				varoitus.setHeaderText("Varoitus");
+			}
 			varoitus.setContentText(virhe.toString());
 			varoitus.showAndWait();
 			return false;

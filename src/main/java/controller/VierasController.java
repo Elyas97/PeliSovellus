@@ -245,9 +245,16 @@ public class VierasController {
 	void accessDenied(ActionEvent event) throws IOException {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmation Dialog");
-		alert.setHeaderText("Tiedoksi");
-		alert.setContentText(
-				"Peli ilmoituksen tekeminen vaatii tilin. " + "" + "" + "" + "" + "Haluatko kirjautua sisään?");
+		
+		if(locale.equals("en")) {
+			alert.setHeaderText("Information");
+			alert.setContentText(
+					"An account is required to make a game announcement. " + "" + "" + "" + "" + "Do you want to login?");
+		}else {
+			alert.setHeaderText("Tiedoksi");
+			alert.setContentText(
+					"Peli ilmoituksen tekeminen vaatii tilin. " + "" + "" + "" + "" + "Haluatko kirjautua sisään?");
+		}
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK) {

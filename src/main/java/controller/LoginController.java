@@ -34,6 +34,7 @@ public class LoginController {
 	private Button buttoni;
 	@FXML
 	private TextField tunnus23;
+	String locale = Locale.getDefault().getLanguage();
 	
 	@FXML
 	void kirjaudu(ActionEvent event) {
@@ -45,11 +46,17 @@ public class LoginController {
 			if (kirjautunut != null) {
 
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);
-				// Otsikon asetus
-				alert.setTitle("Ilmoitus");
-
-				// Sisällön asetus
-				alert.setContentText("Kirjautuminen onnistui!");
+				
+				if(locale.equals("en")) {
+					alert.setTitle("Information");
+					alert.setContentText("Login succesfully!");
+				}else {
+					// Otsikon asetus
+					alert.setTitle("Ilmoitus");
+					// Sisällön asetus
+					alert.setContentText("Kirjautuminen onnistui!");
+				}
+				
 				alert.showAndWait();
 				// siirretään etusivulle ja tallenetaan käyttäjä controlleriin
 				
@@ -61,8 +68,15 @@ public class LoginController {
 				
 			} else {
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);
-				alert.setTitle("Ilmoitus");
-				alert.setContentText("Salasana tai Sähköposti väärä");
+				
+				if(locale.equals("en")) {
+					alert.setTitle("Notification");
+					alert.setContentText("Password or username incorrect");
+				}else {
+					alert.setTitle("Ilmoitus");
+					alert.setContentText("Salasana tai Sähköposti väärä");
+				}
+				
 				alert.showAndWait();
 			}
 		}

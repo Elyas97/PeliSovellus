@@ -44,6 +44,7 @@ public class ProfiiliController {
 	private Text tippi;
 	
 	Kayttaja käyttäjä;
+	String locale = Locale.getDefault().getLanguage();
 
 	@FXML
 	void tallennaMuutokset(ActionEvent event) {
@@ -63,8 +64,14 @@ public class ProfiiliController {
 				
 				//Ilmoitetaan onnistumisesta
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);
-				alert.setTitle("Ilmoitus");
-				alert.setContentText("Tietojen tallennus onnistui");
+				
+				if(locale.equals("en")) {
+					alert.setTitle("Notification");
+					alert.setContentText("Changes saved succesfully!");
+				}else {
+					alert.setTitle("Ilmoitus");
+					alert.setContentText("Tietojen tallennus onnistui");
+				}
 				alert.showAndWait();
 				
 				etu.setText(käyttäjä.getEtunimi());
@@ -73,8 +80,14 @@ public class ProfiiliController {
 				numero.setText("" + käyttäjä.getPuhelinumero());
 			} else {
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);
-				alert.setTitle("Ilmoitus");
-				alert.setContentText("Tietojen tallennus epäonnistui palvelin ongelma");
+				
+				if(locale.equals("en")) {
+					alert.setTitle("Notification");
+					alert.setContentText("Failing to save changes, server problem.");
+				}else {
+					alert.setTitle("Ilmoitus");
+					alert.setContentText("Tietojen tallennus epäonnistui, palvelin ongelma.");
+				}
 				alert.showAndWait();
 			}
 		}
@@ -83,12 +96,29 @@ public class ProfiiliController {
 	@FXML
 	void PoistaTili(ActionEvent event) throws IOException {
 		
-		ButtonType kyllä = new ButtonType("Kyllä", ButtonData.OK_DONE);
-		ButtonType ei = new ButtonType("Peruuta", ButtonData.CANCEL_CLOSE);
-		Alert alert = new Alert(AlertType.CONFIRMATION,
-				"Jos poistat tilin menetät kaikki tiedot\n" + "Kuten kaikki lisäämäsi pelit.", kyllä, ei);
-		alert.setTitle("Vahvistus");
-		alert.setHeaderText("Vahvista tilin poisto");
+		ButtonType kyllä;
+		ButtonType ei;
+		if(locale.equals("en")) {
+			kyllä = new ButtonType("Yes", ButtonData.OK_DONE);
+			ei = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+		}else {
+			kyllä = new ButtonType("Kyllä", ButtonData.OK_DONE);
+			ei = new ButtonType("Peruuta", ButtonData.CANCEL_CLOSE);
+		}
+		
+		Alert alert;
+		if(locale.equals("en")) {
+			alert = new Alert(AlertType.CONFIRMATION,
+					"If you delete your account you will lose all saved data\n" + "Like all the games you add.", kyllä, ei);
+			alert.setTitle("Confirmation");
+			alert.setHeaderText("Confirm account deletion");
+		}else {
+			alert = new Alert(AlertType.CONFIRMATION,
+					"Jos poistat tilin menetät kaikki tiedot\n" + "Kuten kaikki lisäämäsi pelit.", kyllä, ei);
+			alert.setTitle("Vahvistus");
+			alert.setHeaderText("Vahvista tilin poisto");
+		}
+		
 		Optional<ButtonType> result = alert.showAndWait();
 		
 		if (result.get() == kyllä) {
@@ -100,11 +130,18 @@ public class ProfiiliController {
 			//Viedään vierasNäkymään
 			if (test = true) {
 				//Ilmoitus tilin poistamisesta
-				Alert alert2 = new Alert(AlertType.INFORMATION, "Tili poistettu");
-				alert2.setTitle("Tili poistettu");
-				alert2.setHeaderText("Tiedoksi");
-				alert2.showAndWait();
+				Alert alert2;
+				if(locale.equals("en")) {
+					alert2 = new Alert(AlertType.INFORMATION, "Account deleted");
+					alert2.setTitle("Account deleted");
+					alert2.setHeaderText("Information");
+				}else {
+					alert2 = new Alert(AlertType.INFORMATION, "Tili poistettu");
+					alert2.setTitle("Tili poistettu");
+					alert2.setHeaderText("Tiedoksi");
+				}
 				
+				alert2.showAndWait();
 				app.showVieras();
 			}
 		}
@@ -176,7 +213,11 @@ public class ProfiiliController {
 		}
 		if (validoiEmail() == false) {
 			email.setStyle("-fx-border-color:red");
-			tippi.setText("Sähköpostilla on jo rekistyröity");
+			if(locale.equals("en")) {
+				tippi.setText("Email is already registered");
+			}else {
+				tippi.setText("Sähköpostilla on jo rekistyröity");
+			}
 			test = false;
 		}
 		return test;

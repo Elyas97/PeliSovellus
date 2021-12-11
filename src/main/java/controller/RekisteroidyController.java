@@ -40,17 +40,24 @@ public class RekisteroidyController {
 	private Text tippi;
 	@FXML
 	private Text emailtip;
+	String locale = Locale.getDefault().getLanguage();
 
 	@FXML
 	void initialize() {
 		Tooltip toolpwd = new Tooltip();
-		toolpwd.setText("Salasanan pituus vähintään 6");
-		salasana.setTooltip(toolpwd);
 		Tooltip toolpwd2 = new Tooltip();
-		toolpwd2.setText("Salasanan pituus vähintään 6");
-		csalasana.setTooltip(toolpwd);
 		Tooltip toolemail = new Tooltip();
-		toolemail.setText("Syötä Sähköposti esimerkiksi JohnDoe@Hotmail.com");
+		if(locale.equals("en")) {
+			toolpwd.setText("Password length at least 6");
+			toolpwd2.setText("Password length at least 6");
+			toolemail.setText("Enter Email for example JohnDoe@Hotmail.com");
+		}else {
+			toolpwd.setText("Salasanan pituus vähintään 6");
+			toolpwd2.setText("Salasanan pituus vähintään 6");
+			toolemail.setText("Syötä Sähköposti esimerkiksi JohnDoe@Hotmail.com");
+		}
+		salasana.setTooltip(toolpwd);
+		csalasana.setTooltip(toolpwd);
 		email.setTooltip(toolemail);
 	}
 
@@ -70,8 +77,14 @@ public class RekisteroidyController {
 				if (tulos == true) {
 					//Ilmoitetaan rekisteröitymisen onnistumisesta
 					Alert alert = new Alert(Alert.AlertType.INFORMATION);
-					alert.setTitle("Imoitus");
-					alert.setContentText("Rekisteröityminen onnistui!");
+					if(locale.equals("en")) {
+						alert.setTitle("Notification");
+						alert.setContentText("Registered succesfully!");
+					}else {
+						alert.setTitle("Imoitus");
+						alert.setContentText("Rekisteröityminen onnistui!");
+					}
+					
 					alert.showAndWait();
 					//Viedään kirjautumissivulle
 					FXMLLoader loader = new FXMLLoader();
@@ -84,8 +97,13 @@ public class RekisteroidyController {
 					window.show();
 				} else {
 					Alert alert = new Alert(Alert.AlertType.INFORMATION);
-					alert.setTitle("Tiedoksi");
-					alert.setContentText("Sähköpostillasi on jo rekistyröidytty");
+					if(locale.equals("en")) {
+						alert.setTitle("Information");
+						alert.setContentText("Your email has already been registered");
+					}else {
+						alert.setTitle("Tiedoksi");
+						alert.setContentText("Sähköpostillasi on jo rekistyröidytty");
+					}
 					alert.show();
 					email.setStyle("-fx-border-color:red");
 				}

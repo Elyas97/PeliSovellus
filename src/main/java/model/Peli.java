@@ -152,11 +152,9 @@ public class Peli {
 	}
 
 	public String toString() {
-
-		System.out.println(locale.toString());
 		
 		if(locale.equals("fi")) {
-			return getPelinNimi() + " Tyyppi: " + talletusTyyppi + "\nHinta: " + hinta + " \n" + kaupunki + "\n "
+			return getPelinNimi() + " Tyyppi: " + talletusTyyppi + "\nHinta: " + hinta + "€\n" + kaupunki + "\n "
 					+ paivamaara;
 		}else {
 			// Päivämäärän formatointi
@@ -165,7 +163,7 @@ public class Peli {
 			String paivamaaraFormat = dateFormat.format(paivamaara);
 			
 
-			return getPelinNimi() + " Type: " + talletusTyyppi + "\nPrice: " + hinta + " \n" + kaupunki + "\n "
+			return getPelinNimi() + " Type: " + talletusTyyppi + "\nPrice: " + hinta + "$\n" + kaupunki + "\n "
 					+ paivamaaraFormat;
 		}
 		

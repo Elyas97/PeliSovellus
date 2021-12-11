@@ -120,8 +120,14 @@ public class EtusivuController {
 		ObservableList<String> valinta = FXCollections.observableArrayList("3", "7", "12", "16", "18");
 		valinnat.setItems(valinta);
 
-		ObservableList<String> rajaus = FXCollections.observableArrayList("Nimi", "Kaupunki", "Genre");
-		hakurajaus.setItems(rajaus);
+		if(locale.equals("en")) {
+			ObservableList<String> rajaus = FXCollections.observableArrayList("Name", "City", "Genre");
+			hakurajaus.setItems(rajaus);
+		}else {
+			ObservableList<String> rajaus = FXCollections.observableArrayList("Nimi", "Kaupunki", "Genre");
+			hakurajaus.setItems(rajaus);
+		}
+		
 		lista.setItems(filteredData);
 		hakutyyppi();
 		//hakurajaus.setPromptText("Rajaa hakua");
@@ -159,9 +165,11 @@ public class EtusivuController {
 			if (hakurajaus.getValue() != null) {
 				switch (hakurajaus.getValue()) {
 				case "Nimi":
+				case "Name":
 					filteredData.setPredicate(pelit -> pelit.getPelinNimi().toLowerCase().contains(newValue));
 					break;
 				case "Kaupunki":
+				case "City":
 					filteredData.setPredicate(pelit -> pelit.getKaupunki().toLowerCase().contains(newValue));
 					break;
 				case "Genre":
@@ -234,8 +242,38 @@ public class EtusivuController {
 	@FXML
 	void tyyppiAction(ActionEvent event) {
 		String text = ((RadioButton) julkaisu.getSelectedToggle()).getText();
+		
+		switch (text) {
+		case "Lahjoitus":
+		case "Giveaway":
+			hintaOtsikko.setVisible(false);
+			hintaOtsikko2.setVisible(false);
+			minimi.setVisible(false);
+			maxnum.setVisible(false);
+			hintaLabel.setVisible(false);
+			break;
+		case "Myynti":
+		case "Sell":
+			hintaOtsikko.setVisible(true);
+			hintaLabel.setVisible(true);
+			hintaOtsikko2.setVisible(true);
+			minimi.setVisible(true);
+			maxnum.setVisible(true);
+			break;
+		case "Vuokraus":
+		case "Rent":
+			hintaOtsikko.setVisible(true);
+			hintaLabel.setVisible(true);
+			hintaOtsikko2.setVisible(true);
+			minimi.setVisible(true);
+			maxnum.setVisible(true);
+			break;
+		default:
+		
+		}
 
-		if (text.equals("Lahjoitus")) {
+		//Vanha (tukee vain suomea)
+		/*if (text.equals("Lahjoitus")) {
 			hintaOtsikko.setVisible(false);
 			hintaOtsikko2.setVisible(false);
 			minimi.setVisible(false);
@@ -253,7 +291,7 @@ public class EtusivuController {
 			hintaOtsikko2.setVisible(true);
 			minimi.setVisible(true);
 			maxnum.setVisible(true);
-		}
+		}*/
 	}
 	/*
 	 * Kuuntelee radiobuttoneita etusivulla ja rajaa listan valikoimaa niiden mukaan

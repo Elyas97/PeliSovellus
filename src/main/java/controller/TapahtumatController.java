@@ -104,6 +104,7 @@ public class TapahtumatController {
 	private MainApp main;
 	PeliSovellusDAO pelitdao = new PeliSovellusDAO();
 	private Peli[] pelit;
+	String locale = Locale.getDefault().getLanguage();
 
 	public TapahtumatController() {
 	}
@@ -113,14 +114,25 @@ public class TapahtumatController {
 		// Kirjautuneen käyttäjän haku
 		this.käyttäjä = TiedostoKasittely.lueKäyttäjä();
 
-		ObservableList<String> options = FXCollections.observableArrayList("Urheilu", "Räiskintä", "Toiminta",
-				"Ajopeli", "Jännitys", "Seikkailu", "Strategia", "Roolipeli", "Pulma", "Lautapeli", "Juomapeli",
-				"Tappelupeli", "Tasohyppeli");
-		genre.setItems(options);
+		if (locale.equals("en")) {
+			// Tallentuu myös tietokantaan englanniksi, pitäisiköhän kääntää uudelleen
+			// suomeksi?
+			ObservableList<String> options = FXCollections.observableArrayList("Sports", "Shooting", "Action", "Racing",
+					"Horros", "Adventure", "Strategy", "Roleplay", "Puzzle", "Party", "Boardgame");
+			genre.setItems(options);
 
-		ObservableList<String> kuntoOptions = FXCollections.observableArrayList("Erinomainen", "Kiitettävä", "Hyvä",
-				"Kohtalainen", "Välttävä");
-		kunto.setItems(kuntoOptions);
+			ObservableList<String> kuntoOptions = FXCollections.observableArrayList("Excellent", "Great", "Good",
+					"Moderate", "Passable");
+			kunto.setItems(kuntoOptions);
+		} else {
+			ObservableList<String> options = FXCollections.observableArrayList("Urheilu", "Räiskintä", "Toiminta",
+					"Ajopeli", "Jännitys", "Seikkailu", "Strategia", "Roolipeli", "Pulma", "Seurapeli", "Lautapeli");
+			genre.setItems(options);
+
+			ObservableList<String> kuntoOptions = FXCollections.observableArrayList("Erinomainen", "Kiitettävä", "Hyvä",
+					"Kohtalainen", "Välttävä");
+			kunto.setItems(kuntoOptions);
+		}
 
 		ObservableList<String> konsoliOptions = FXCollections.observableArrayList("Xbox", "Playstation", "Wii");
 		konsoli.setItems(konsoliOptions);
@@ -134,17 +146,21 @@ public class TapahtumatController {
 			kirjaimet();
 		});
 	}
-
+	
 	@FXML
-	public String tyyppiAction(ActionEvent Action) {
+	public String ilmoituksenTyyppiAction(ActionEvent Action) {
 		String text = ((RadioButton) tyyppi.getSelectedToggle()).getText();
-		System.out.println(text);
-		if (text.equals("Lahjoitus")) {
+		
+		switch (text) {
+		case "Lahjoitetaan":
+		case "Giveaway":
 			hinta.setText(Integer.toString(0));
 			hinta.setEditable(false);
-		} else {
+			break;
+		default:
 			hinta.setText("");
 			hinta.setEditable(true);
+			break;
 		}
 		return text;
 	}
@@ -154,7 +170,7 @@ public class TapahtumatController {
 		String text = ((RadioButton) pelintyyppi.getSelectedToggle()).getText();
 
 		// Konsolivalinta ilmestyy vain jos valitaan videopeli
-		if (text.equals("lauta")) {
+		if (text.equals("lauta") || text.equals("boardgame")) {
 			konsoliPane.setVisible(false);
 		} else {
 			konsoliPane.setVisible(true);
@@ -188,12 +204,24 @@ public class TapahtumatController {
 	@FXML
 	public void poistaPeli() {
 
-		ButtonType ok = new ButtonType("Ok", ButtonData.OK_DONE);
-		ButtonType peruuta = new ButtonType("Peruuta", ButtonData.CANCEL_CLOSE);
-
-		Alert varmistus = new Alert(Alert.AlertType.CONFIRMATION,
-				"Haluatko varmasti poistaa pelin? Poistamista ei voi peruuttaa.", ok, peruuta);
-		varmistus.setTitle("Alert");
+		Alert varmistus;
+		ButtonType ok;
+		ButtonType peruuta;
+		if (locale.equals("en")) {
+			ok = new ButtonType("Ok", ButtonData.OK_DONE);
+			peruuta = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+			
+			varmistus = new Alert(Alert.AlertType.CONFIRMATION,
+					"Are you sure you want to delete the game? Deletion cannot be undone.", ok, peruuta);
+			varmistus.setTitle("Alert");
+		}else {
+			ok = new ButtonType("Ok", ButtonData.OK_DONE);
+			peruuta = new ButtonType("Peruuta", ButtonData.CANCEL_CLOSE);
+			
+			varmistus = new Alert(Alert.AlertType.CONFIRMATION,
+					"Haluatko varmasti poistaa pelin? Poistamista ei voi peruuttaa.", ok, peruuta);
+			varmistus.setTitle("Alert");
+		}
 		Optional<ButtonType> vastaus = varmistus.showAndWait();
 
 		if (vastaus.get() == ok) {
@@ -201,8 +229,13 @@ public class TapahtumatController {
 			poistaPeliTietokannasta(peli);
 
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setTitle("Alert");
-			alert.setContentText("Pelin poistaminen onnistui!");
+			if (locale.equals("en")) {
+				alert.setTitle("Information");
+				alert.setContentText("Game deleted succesfully!");
+			}else {
+				alert.setTitle("Tiedoksi");
+				alert.setContentText("Pelin poistaminen onnistui!");
+			}
 			alert.showAndWait();
 		}
 	}
@@ -338,8 +371,13 @@ public class TapahtumatController {
 
 			// Ilmoitus onnistuneesta tallennuksesta
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setTitle("Alert");
-			alert.setContentText("Muutokset tallennettu onnistuneesti!");
+			if(locale.equals("en")) {
+				alert.setTitle("Information");
+				alert.setContentText("Changes saved succesfully!");
+			}else {
+				alert.setTitle("Information");
+				alert.setContentText("Muutokset tallennettu onnistuneesti!");
+			}
 			alert.showAndWait();
 
 			omatPelit.getItems().clear();
@@ -357,58 +395,61 @@ public class TapahtumatController {
 
 		if (pelinnimi.getText().trim().isEmpty()) {
 			pelinnimi.setStyle("-fx-border-color:red");
-			nimivaroitus.setText("Pakollinen kenttä");
+			nimivaroitus.setVisible(true);
 			kehotus = true;
 		}
 		if (hinta.getText().trim().isEmpty()) {
 			hinta.setStyle("-fx-border-color:red");
-			hintavaroitus.setText("Pakollinen kenttä");
+			hintavaroitus.setVisible(true);
 			kehotus = true;
 		}
 		if (kaupunki.getText().trim().isEmpty()) {
 			kaupunki.setStyle("-fx-border-color:red");
-			kaupunki.setPromptText("Pakollinen kenttä!");
-			paikkakuntavaroitus.setText("Pakollinen kenttä");
+			paikkakuntavaroitus.setVisible(true);
 			kehotus = true;
 		}
 		if (ikaraja.getText().trim().isEmpty()) {
 			ikaraja.setStyle("-fx-border-color:red");
-			ikaraja.setPromptText("Pakollinen kenttä!");
-			ikaraja.setText("Pakollinen kenttä");
+			ikaraja.setVisible(true);
 			kehotus = true;
 		}
 		if (kuvaus.getText().trim().isEmpty()) {
 			kuvaus.setStyle("-fx-border-color:red");
-			kuvausvaroitus.setText("Pakollinen kenttä");
+			kuvausvaroitus.setVisible(true);
 			kehotus = true;
 		}
 		if (tekstikenttä.getText().trim().isEmpty()) {
 			tekstikenttä.setStyle("-fx-border-color:red");
-			tekstikenttävaroitus.setText("Pakollinen kenttä");
+			tekstikenttävaroitus.setVisible(true);
 			kehotus = true;
 		}
 		if (kunto.getValue() == null) {
 			kunto.setStyle("-fx-border-color:red");
-			kuntovaroitus.setText("Pakollinen kenttä");
+			kuntovaroitus.setVisible(true);
 			kehotus = true;
 		}
 		if (genre.getValue() == null) {
 			genre.setStyle("-fx-border-color:red");
-			genrevaroitus.setText("Pakollinen kenttä");
+			genrevaroitus.setVisible(true);
 			kehotus = true;
 		}
 		if (tyyppi.getSelectedToggle() == null) {
-			tyyppivaroitus.setText("Pakollinen kenttä");
+			tyyppivaroitus.setVisible(true);
 			kehotus = true;
 		}
 		if (pelintyyppi.getSelectedToggle() == null) {
-			pelintyyppivaroitus.setText("Pakollinen kenttä");
+			pelintyyppivaroitus.setVisible(true);
 			kehotus = true;
 		}
 		if (kehotus == true) {
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setTitle("Alert");
-			alert.setContentText("Täytä pakolliset kentät!");
+			if(locale.equals("en")) {
+				alert.setTitle("Information");
+				alert.setContentText("Fill in the required fields!");
+			}else {
+				alert.setTitle("Alert");
+				alert.setContentText("Täytä pakolliset kentät!");
+			}
 			alert.showAndWait();
 			return false;
 		}
@@ -434,8 +475,13 @@ public class TapahtumatController {
 
 			// Ilmoitus kun tekstikenttä täynnä jolloin kirjoitus ei enää onnistu
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setTitle("Alert");
-			alert.setContentText("Tekstikenttä täynnä!");
+			if(locale.equals("en")) {
+				alert.setTitle("Information");
+				alert.setContentText("Textfield is full!");
+			}else {
+				alert.setTitle("Alert");
+				alert.setContentText("Tekstikenttä täynnä!");
+			}
 			alert.showAndWait();
 
 			// Tekstikenttään voi taas kirjoittaa
