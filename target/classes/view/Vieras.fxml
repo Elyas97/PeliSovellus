@@ -30,7 +30,7 @@
                      <children>
                         <VBox alignment="TOP_RIGHT" prefHeight="400.0" prefWidth="123.2" style="-fx-background-color: #0589ff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <ComboBox fx:id="maat" prefHeight="26.0" prefWidth="73.0" style="-fx-background-color: #0589ff;" />
+                              <ComboBox fx:id="maat" prefHeight="26.0" prefWidth="137.0" style="-fx-background-color: #0589ff;" />
                               <Button mnemonicParsing="false" prefHeight="61.0" prefWidth="155.0" style="-fx-background-color: #0589FF;">
                                  <graphic>
                                     <FontAwesomeIconView fill="#f8f8f8" glyphName="GAMEPAD" size="30" />
@@ -233,7 +233,7 @@
                            </children>
                         </GridPane>
                         <Label fx:id="päivämäärä" layoutX="79.0" layoutY="5.0" prefHeight="18.0" prefWidth="57.0" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="0.0" />
-                        <Label layoutX="8.0" layoutY="6.0" prefHeight="18.0" prefWidth="66.0" text="%ilmoitusJatettyText" />
+                        <Label layoutY="6.0" prefHeight="18.0" prefWidth="74.0" text="%ilmoitusJatettyText" />
                      </children>
                   </AnchorPane>
                </children>

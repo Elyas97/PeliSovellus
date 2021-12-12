@@ -38,6 +38,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 
 public class VierasController {
 	@FXML
@@ -115,6 +116,8 @@ public class VierasController {
 	String locale = Locale.getDefault().getLanguage();
 
 	public void initialize() {
+		Image img=new Image("file:finland.png");
+		System.out.println(img); 
 		String fi = "FI";
 		String eng = "EN";
 		String name=Locale.getDefault().getLanguage();
@@ -123,7 +126,6 @@ public class VierasController {
 		options.addAll(eng,fi);
 		maat.setItems(options);
 		maat.setValue(name.toUpperCase());
-		//maat.getSelectionModel().select(0);
 		maat.valueProperty().addListener(new ChangeListener<String>() {
 
 			@Override
@@ -167,6 +169,9 @@ public class VierasController {
 				
 			}
 	    });
+		maat.setCellFactory(c ->new StatusListCell());
+		maat.setButtonCell(new StatusListCell());
+		
 		//combobox
 		ObservableList<String> valinta = FXCollections.observableArrayList("3", "7", "12", "16", "18");
 		valinnat.setItems(valinta);

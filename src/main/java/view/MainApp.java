@@ -190,14 +190,15 @@ public class MainApp extends Application {
 	public void showRegister() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("Rekistyröinti.fxml"));
+			loader.setLocation(MainApp.class.getResource("Rekisterointi.fxml"));
 			Locale locale = new Locale("en", "FI");
 			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 			loader.setResources(bundle);
 			BorderPane register = (BorderPane) loader.load();
 			RekisteroidyController uuscont = loader.getController();
 			uuscont.setMainApp(this);
-			rootLayout.setCenter(register);
+			Scene scene=new Scene(register);
+			primaryStage.setScene(scene);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -208,7 +209,6 @@ public class MainApp extends Application {
 			System.out.println("tuuli oikea");
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("Profiili.fxml"));
-			Locale locale = new Locale("en", "FI");
 			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 			loader.setResources(bundle);
 			BorderPane profile = (BorderPane) loader.load();

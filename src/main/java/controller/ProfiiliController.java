@@ -1,13 +1,20 @@
 package controller;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +24,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
@@ -42,6 +50,8 @@ public class ProfiiliController {
 	private TextField numero;
 	@FXML
 	private Text tippi;
+    @FXML
+    private ComboBox<String> maat;
 	
 	Kayttaja käyttäjä;
 	String locale = Locale.getDefault().getLanguage();
@@ -178,6 +188,67 @@ public class ProfiiliController {
 		suku.setText(käyttäjä.getSukunimi());
 		email.setText(käyttäjä.getSähköposti());
 		numero.setText("" + käyttäjä.getPuhelinumero());
+		
+		//kieli
+		String fi = "FI";
+		String eng = "EN";
+		String name=Locale.getDefault().getLanguage();
+		System.out.println(name);
+		ObservableList<String> options = FXCollections.observableArrayList();
+		options.addAll(eng,fi);
+		maat.setItems(options);
+		maat.setValue(name.toUpperCase());
+		//maat.getSelectionModel().select(0);
+		maat.valueProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if(oldValue.equalsIgnoreCase(newValue)) {
+					return;
+				}else {
+					System.out.println("it shooudd "+newValue);
+					//muutetaan kieliasetus
+					String appConfigPath="resources/TextResources_Default.properties";
+					Properties properties=new Properties();
+					try {
+						properties.load(new FileInputStream(appConfigPath));
+						properties.setProperty("language", newValue.toLowerCase());
+						if(newValue.equalsIgnoreCase("EN")) {
+							properties.setProperty("country", "US");
+							Locale.setDefault(new Locale(newValue.toLowerCase(),"US"));
+							
+						}else {
+							System.out.println("TULI OIKEALLE");
+							properties.setProperty("country", "FI");
+							Locale.setDefault(new Locale(newValue.toLowerCase(),"FI"));
+						}
+						
+					} catch (FileNotFoundException e) {
+						System.out.println("Tiedostoa ei löytynyt");
+						e.printStackTrace();
+					} catch (IOException e) {
+					
+						e.printStackTrace();
+					}
+					TiedostoKasittely.tallennaKieli(properties, appConfigPath);
+					try {
+						refreshPage();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				
+			}
+
+			private void refreshPage() throws IOException {
+				app.showProfile();
+				
+			}
+	    });
+		maat.setCellFactory(c ->new StatusListCell());
+		maat.setButtonCell(new StatusListCell());
 	}
 
 	boolean validointi() {

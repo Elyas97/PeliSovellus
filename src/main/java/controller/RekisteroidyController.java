@@ -119,32 +119,12 @@ public class RekisteroidyController {
 
 	@FXML
 	void ViewNäkymäLogin(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
-		Locale locale = new Locale("en", "FI");
-		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
-		loader.setResources(bundle);
-		BorderPane kirjaudu = (BorderPane) loader.load();
-		Scene kirjauduNäkymä = new Scene(kirjaudu);
-
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window.setScene(kirjauduNäkymä);
-		window.show();
+		app.showLogin();
 	}
 
 	@FXML
 	void vieVierasNäkymä(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("Vieras.fxml"));
-		Locale locale = new Locale("en", "FI");
-		ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
-		loader.setResources(bundle);
-		BorderPane register = (BorderPane) loader.load();
-		Scene rekistyröintiNäkymä = new Scene(register);
-
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window.setScene(rekistyröintiNäkymä);
-		window.show();
+		app.showVieras();
 	}
 
 	boolean validointi() {
