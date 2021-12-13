@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -108,6 +109,12 @@ public class EtusivuController {
 	private RadioButton alhaisinhinta;
 	@FXML
 	private RadioButton korkeinhinta;
+	@FXML
+	private RadioButton uusin2;
+	@FXML
+	private RadioButton vanhin2;
+	@FXML
+	private ToggleGroup julkaisuAika;
 
 	private Stage dialogStage;
 	PeliSovellusDAO pelitdao = new PeliSovellusDAO();
@@ -160,6 +167,10 @@ public class EtusivuController {
 		// alhaisimpaan");
 
 	}
+	
+	/**
+	 * Kuuntelee etusivun valikkoa ja rajaa etusivun listaa kirjoitetun mukaan
+	 */
 	public void hakuTesti() {
 		pelihaku.textProperty().addListener((obs, oldValue, newValue) -> {
 			if (hakurajaus.getValue() != null) {
@@ -326,22 +337,39 @@ public class EtusivuController {
 			}
 		});
 	}
-
+	/**
+	 * Vie käyttäjän pelin lisäyssivulle
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void uusiPeli(ActionEvent event) throws IOException {
 	mainApp.lisaaPeliOverview();
 	}
-
+	
+	/**
+	 * Vie omien tapahtumien sivuille
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void handletapahtumatSivu(ActionEvent event) throws IOException {
 		mainApp.tapahtumatSivuOverview();
 	}
-
+	/**
+	 * Vie profiilinäkymään
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void vieProofiliNäkymään(ActionEvent event) throws IOException {
 		mainApp.showProfile();
 	}
-
+	/**
+	 * Kirjaudu ulos painike
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void LogOut(ActionEvent event) throws IOException {
 		boolean test = TiedostoKasittely.poistaTiedosto();
@@ -350,74 +378,67 @@ public class EtusivuController {
 			mainApp.showLogin();
 		}
 	}
+	/**
+	 * Peruuta painikkeen toiminto, sulkee rajausnäkymän
+	 * @param event
+	 */
 
 	@FXML
 	void peruuta(ActionEvent event) {
 		rajaahakuNäkymä.setVisible(false);
 	}
-
+	/**
+	 * Sulkee rajausnäkymän
+	 * @param event
+	 */
 	@FXML
 	void suljeRajaus(ActionEvent event) {
 		rajaahakuNäkymä.setVisible(false);
 	}
-
+	/**
+	 * Avaa rajausnäkymän
+	 * @param event
+	 */
 	@FXML
 	void avaaRajaus(ActionEvent event) {
 		rajaahakuNäkymä.setVisible(true);
 	}
 
 	// Jää toteutukseen OTP2
+	/**
+	 * Rajausvalikon ehtolauseet
+	 * @param event
+	 */
 	@FXML
 	void Rajaa(ActionEvent event) {
-
-		
-		if(vanhin.isSelected()) {
-			System.out.println("Vanhin");
-			Collections.sort(filteredData.getSource(), (a, b) -> a.getPaiva().compareTo(b.getPaiva()));
-		}
-	
-		if(uusin.isSelected()) {
-			System.out.println("Uusin");
-			Collections.sort(filteredData.getSource(), (a, b) -> b.getPaiva().compareTo(a.getPaiva()));
-		}
-		
-		if(!minimi.getText().isEmpty() && !maxnum.getText().isEmpty() && valinnat.getValue() != null && !maara.getText().isEmpty() ) {
-			filteredData.setPredicate(pelit -> Integer.toString(pelit.getIkaraja()).contains(valinnat.getValue()) && Integer.toString(pelit.getPelmaara()).contains(maara.getText()) &&
-					pelit.getHinta() >= Integer.parseInt(minimi.getText()) && pelit.getHinta() <= Integer.parseInt(maxnum.getText()));
-		}	
-	
-		else if(valinnat.getValue() != null) {
-			filteredData.setPredicate(pelit -> Integer.toString(pelit.getIkaraja()).contains(valinnat.getValue()));
-		}
-		else if(!maara.getText().isEmpty()) {
+		pelidata.clear();
+		if(validoiRajaus() == true) {
+		if(valinnat.getValue() == null && minimi.getText().isEmpty() && maxnum.getText().isEmpty()) {
 			filteredData.setPredicate(pelit -> Integer.toString(pelit.getPelmaara()).contains(maara.getText()));
-		}
-
-		else if(valinnat.getValue() != null && !maara.getText().isEmpty()) {
-			System.out.println("Toimii");
+			
+		
+		}else if(minimi.getText().isEmpty() && maxnum.getText().isEmpty()) {
 			filteredData.setPredicate(pelit -> Integer.toString(pelit.getIkaraja()).contains(valinnat.getValue()) && Integer.toString(pelit.getPelmaara()).contains(maara.getText()));
+				
 		}
-		
-		else if(!minimi.getText().isEmpty() && !maxnum.getText().isEmpty()) {
-		filteredData.setPredicate(pelit -> pelit.getHinta() >= Integer.parseInt(minimi.getText()) && pelit.getHinta() <= Integer.parseInt(maxnum.getText()));
-		//filteredData.setPredicate(pelit -> pelit.getHinta() < Integer.parseInt(maxnum.getText()));
+		else if(valinnat.getValue() == null) {
+			filteredData.setPredicate(pelit -> Integer.toString(pelit.getPelmaara()).contains(maara.getText()));
+					
+			
 		}
-	
+		else if(!maara.getText().isEmpty() && valinnat.getValue() != null && !minimi.getText().isEmpty() && !maxnum.getText().isEmpty()) {
+		filteredData.setPredicate(pelit -> Integer.toString(pelit.getIkaraja()).contains(valinnat.getValue()) && Integer.toString(pelit.getPelmaara()).contains(maara.getText()) &&
+				pelit.getHinta() >= Integer.parseInt(minimi.getText()) && pelit.getHinta() <= Integer.parseInt(maxnum.getText()));
 		
-		//Collections.sort(filteredData.getSource(), (a, b) -> a.getPaiva().compareTo(b.getPaiva()));
-		
-		
-		
-		
-	
-
-
+		}
+		rajaahakuNäkymä.setVisible(false);
+		}
 		for (int i = 0; i < pelit.length; i++) {
 			pelidata.add(pelit[i]);
 		}
 		
 		// sulje ikkuna
-		rajaahakuNäkymä.setVisible(false);
+		//rajaahakuNäkymä.setVisible(false);
 
 	}
 	
@@ -452,6 +473,21 @@ public class EtusivuController {
 		}
 		
 		}
+	}
+	/**
+	 * Etusivun Uusin painikkeen sorttaus
+	 */
+	public void uusinPeli() {
+		vanhin2.setSelected(false);
+		Collections.sort(filteredData.getSource(), (a, b) -> b.getPaiva().compareTo(a.getPaiva()));
+		//Collections.sort(filteredData.getSource(), (a, b) -> a.getPaiva().compareTo(b.getPaiva()));
+	}
+	/**
+	 * Etusivun Vanhin painikkeen sorttaus
+	 */
+	public void vanhinPeli() {
+		uusin2.setSelected(false);
+		Collections.sort(filteredData.getSource(), (a, b) -> a.getPaiva().compareTo(b.getPaiva()));
 	}
 
 	// Listan järjestys hinnan mukaan
@@ -509,13 +545,20 @@ public class EtusivuController {
 
 	// Jää toteutukseen OTP2
 	private boolean validoiRajaus() {
-		boolean test = true;
+		Alert varoitus = new Alert(Alert.AlertType.WARNING);
+		if(minimi.getText().isEmpty() && !maxnum.getText().isEmpty()) {
+			varoitus.setContentText("Täytä molemmat kentät, minimi ja maksimi");
+			varoitus.showAndWait();
+		}else if(!minimi.getText().isEmpty() && maxnum.getText().isEmpty()) {
+			varoitus.setContentText("Täytä molemmat kentät, minimi ja maksimi");
+			varoitus.showAndWait();
+		}
 		try {
 			int min = Integer.parseInt(minimi.getText());
 			int max = Integer.parseInt(maxnum.getText());
 
 			if (min < 0 || min > max) {
-				test = false;
+				
 				minimi.setStyle("-fx-border-color:red");
 				
 				if(locale.equals("en")) { 
@@ -524,17 +567,19 @@ public class EtusivuController {
 					minimi.setPromptText("Ei negativiinen/ei isompi kun max numero");
 				}
 			}
+		
 
 		} catch (NumberFormatException e) {
 			System.out.println(e);
+			System.out.println("Täällä");
 			minimi.setStyle("-fx-border-color:red");
 			minimi.setPromptText("numero");
-			test = false;
+			
 		}
 		try {
 			int pelaajat = Integer.parseInt(maara.getText());
 			if (pelaajat < 0) {
-				test = false;
+				
 				maara.setStyle("-fx-border-color:red");
 				
 				if(locale.equals("en")) { 
@@ -547,6 +592,6 @@ public class EtusivuController {
 			maara.setText("");
 			System.out.println(e);
 		}
-		return test;
+		return true;
 	}
 }
