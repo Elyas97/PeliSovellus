@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Locale;
@@ -226,15 +227,17 @@ public class EtusivuController {
             kunto.setText(peli.getKunto());
             kuvaus.setText(peli.getKuvaus());
             tekstikenttä.setText(peli.getTekstikenttä());
-
+            DateFormat dateFormat;
             if(locale.equals("en")) {
                 //Päivämäärän formatointi
-                DateFormat dateFormat;
+                
                 dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.US);
                 String paivamaaraFormat = dateFormat.format(peli.getPaiva()); 
                 päivämäärä.setText("" + paivamaaraFormat);
             }else {
-                päivämäärä.setText("" + peli.getPaiva().toString());
+            	dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            	 String paivamaaraFormat = dateFormat.format(peli.getPaiva()); 
+                päivämäärä.setText(""+paivamaaraFormat);
             }
 
         } else {
