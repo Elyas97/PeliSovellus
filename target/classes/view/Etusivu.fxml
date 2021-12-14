@@ -28,7 +28,7 @@
                <children>
                   <AnchorPane prefHeight="400.0" prefWidth="117.0">
                      <children>
-                        <VBox prefHeight="369.0" prefWidth="125.0" style="-fx-background-color: #0589ff;" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox prefHeight="400.0" prefWidth="123.2" style="-fx-background-color: #0589ff;" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="211.0" style="-fx-background-color: #0589FF;" VBox.vgrow="ALWAYS">
                                  <graphic>
@@ -296,12 +296,13 @@
                                     <Insets left="10.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Label fx:id="kunto" prefHeight="50.0" prefWidth="56.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                              <Label fx:id="kunto" prefHeight="34.0" prefWidth="81.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                               <Label layoutX="13.0" layoutY="244.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: F0F0F0; -fx-font-weight: bold;" text="%kuntoLabel" GridPane.rowIndex="8">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
                               </Label>
+                              <Label fx:id="pelinNimi1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                            </children>
                         </GridPane>
                         <HBox layoutX="2.0" AnchorPane.bottomAnchor="378.6" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="3.0" />

@@ -63,50 +63,66 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="400.0" prefWidth="345.0" style="-fx-background-color: white;" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox layoutX="2.0" layoutY="58.0" prefHeight="342.0" prefWidth="311.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="58.0">
+                        <VBox layoutX="2.0" prefHeight="400.0" prefWidth="323.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <HBox prefHeight="23.0" prefWidth="311.0">
+                              <AnchorPane prefHeight="168.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <TextField fx:id="pelihaku" prefHeight="27.0" prefWidth="161.0" style="-fx-border-color: #0589ff;">
-                                       <HBox.margin>
-                                          <Insets right="2.0" top="20.0" />
-                                       </HBox.margin>
-                                    </TextField>
-                                    <ComboBox fx:id="hakurajaus" prefHeight="27.0" prefWidth="65.0">
-                                       <HBox.margin>
-                                          <Insets right="2.0" top="20.0" />
-                                       </HBox.margin>
-                                    </ComboBox>
-                                    <Button mnemonicParsing="false" onAction="#avaaRajaus" prefHeight="28.0" prefWidth="90.0" text="%buttonhaku">
-                                       <HBox.margin>
-                                          <Insets top="20.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                              <HBox prefHeight="39.0" prefWidth="300.0">
-                                 <children>
-                                    <RadioButton fx:id="kaikki" mnemonicParsing="false" prefHeight="18.0" prefWidth="70.0" text="%kaikki">
+                                    <ListView fx:id="lista" layoutY="202.0" prefHeight="198.0" prefWidth="323.0" style="-fx-border-color: black; -fx-background-color: F0F0F0;" />
+                                    <HBox layoutY="117.0" prefHeight="39.0" prefWidth="300.0">
+                                       <children>
+                                          <RadioButton fx:id="kaikki" mnemonicParsing="false" prefHeight="18.0" prefWidth="70.0" text="%kaikki">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="hakutyyppi" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <RadioButton fx:id="myynti" mnemonicParsing="false" prefHeight="18.0" prefWidth="90.0" text="%myydaan" toggleGroup="$hakutyyppi" />
+                                          <RadioButton fx:id="vuokraus" mnemonicParsing="false" prefHeight="18.0" prefWidth="94.0" text="%vuokrataan" toggleGroup="$hakutyyppi" />
+                                          <RadioButton fx:id="lahjoitus" mnemonicParsing="false" prefHeight="18.0" prefWidth="102.0" text="%lahjoitetaan" toggleGroup="$hakutyyppi" />
+                                       </children>
+                                       <padding>
+                                          <Insets right="1.0" />
+                                       </padding>
+                                    </HBox>
+                                    <HBox layoutY="64.0" prefHeight="34.0" prefWidth="323.0">
+                                       <children>
+                                          <TextField fx:id="pelihaku" prefHeight="27.0" prefWidth="197.0" style="-fx-border-color: #0589ff;">
+                                             <HBox.margin>
+                                                <Insets right="2.0" top="20.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                          <ComboBox fx:id="hakurajaus" prefHeight="27.0" prefWidth="65.0">
+                                             <HBox.margin>
+                                                <Insets right="2.0" top="20.0" />
+                                             </HBox.margin>
+                                          </ComboBox>
+                                          <Button mnemonicParsing="false" onAction="#avaaRajaus" prefHeight="28.0" prefWidth="90.0" text="%buttonhaku">
+                                             <HBox.margin>
+                                                <Insets top="20.0" />
+                                             </HBox.margin>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                    <Text fill="#0589ff" layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%selaaPelejaText">
+                                       <font>
+                                          <Font size="28.0" />
+                                       </font>
+                                    </Text>
+                                    <RadioButton fx:id="korkeinhinta" layoutY="148.0" mnemonicParsing="false" onAction="#KorkeinHinta" text="%hintaKorkein">
                                        <toggleGroup>
-                                          <ToggleGroup fx:id="hakutyyppi" />
+                                          <ToggleGroup fx:id="hintaLajittelu" />
                                        </toggleGroup>
                                     </RadioButton>
-                                    <RadioButton fx:id="myynti" mnemonicParsing="false" prefHeight="18.0" prefWidth="90.0" text="%myydaan" toggleGroup="$hakutyyppi" />
-                                    <RadioButton fx:id="vuokraus" mnemonicParsing="false" prefHeight="18.0" prefWidth="94.0" text="%vuokrataan" toggleGroup="$hakutyyppi" />
-                                    <RadioButton fx:id="lahjoitus" mnemonicParsing="false" prefHeight="18.0" prefWidth="102.0" text="%lahjoitetaan" toggleGroup="$hakutyyppi" />
+                                    <RadioButton fx:id="alhaisinhinta" layoutX="107.0" layoutY="148.0" mnemonicParsing="false" onAction="#AlhaisinHinta" text="%hintaAlhaisin" toggleGroup="$hintaLajittelu" />
+                                    <RadioButton fx:id="uusin2" layoutY="175.0" mnemonicParsing="false" onAction="#uusinPeli" text="%uusin">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="julkaisuAika" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="vanhin2" layoutX="107.0" layoutY="175.0" mnemonicParsing="false" onAction="#vanhinPeli" text="%vanhin" toggleGroup="$julkaisuAika" />
                                  </children>
-                                 <padding>
-                                    <Insets right="1.0" />
-                                 </padding>
-                              </HBox>
-                              <ListView fx:id="lista" prefHeight="290.0" prefWidth="311.0" style="-fx-border-color: black; -fx-background-color: F0F0F0;" VBox.vgrow="ALWAYS" />
+                              </AnchorPane>
                            </children>
                         </VBox>
-                        <Text fill="#0589ff" layoutX="14.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%selaaPelejaText">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Text>
                         <AnchorPane fx:id="rajaahakuNäkymä" prefHeight="400.0" prefWidth="590.0" style="-fx-background-color: white; visibility: false;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-275.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Label layoutX="32.0" layoutY="20.0" text="Rajaa hakua" textFill="#0589ff">

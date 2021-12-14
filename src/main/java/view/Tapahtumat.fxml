@@ -25,7 +25,7 @@
          <children>
             <AnchorPane prefHeight="400.0" prefWidth="155.0" style="-fx-background-color: white;">
                <children>
-                  <VBox prefHeight="354.0" prefWidth="155.0" style="-fx-background-color: #0589ff;" AnchorPane.bottomAnchor="45.60000000000002" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox prefHeight="400.0" prefWidth="123.2" style="-fx-background-color: #0589ff;" AnchorPane.bottomAnchor="45.60000000000002" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="189.0" style="-fx-background-color: #0589ff;">
                            <graphic>

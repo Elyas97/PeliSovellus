@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.util.Collections;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Properties;
@@ -107,6 +108,19 @@ public class VierasController {
 	private RadioButton lahjoitus;
 	@FXML
 	private Label hintaOtsikko;
+	@FXML
+	private RadioButton uusin2;
+	@FXML
+	private RadioButton vanhin2;
+	@FXML
+	private ToggleGroup julkaisuAika;
+	@FXML
+	private RadioButton alhaisinhinta;
+	@FXML
+	private RadioButton korkeinhinta;
+	@FXML
+	private ToggleGroup hintaLajittelu;
+	
 
 	private Stage dialogStage;
 	PeliSovellusDAO pelitdao = new PeliSovellusDAO();
@@ -298,6 +312,73 @@ public class VierasController {
 			}
 		});
 	}
+	/**
+	 * Etusivun Uusin painikkeen sorttaus
+	 */
+	public void uusinPeli() {
+		vanhin2.setSelected(false);
+		Collections.sort(filteredData.getSource(), (a, b) -> b.getPaiva().compareTo(a.getPaiva()));
+		//Collections.sort(filteredData.getSource(), (a, b) -> a.getPaiva().compareTo(b.getPaiva()));
+	}
+	/**
+	 * Etusivun Vanhin painikkeen sorttaus
+	 */
+	public void vanhinPeli() {
+		uusin2.setSelected(false);
+		Collections.sort(filteredData.getSource(), (a, b) -> a.getPaiva().compareTo(b.getPaiva()));
+	}
+	// Listan järjestys hinnan mukaan
+		@FXML
+		public void AlhaisinHinta() {
+			korkeinhinta.setSelected(false);
+			pelit = pelitdao.haePelit();
+			int i, j, pienin;
+			Peli apu;
+
+			for (i = 0; i < pelit.length; i++) {
+				pienin = i;
+				for (j = i + 1; j < pelit.length; j++) {
+					if (pelit[j].getHinta() < pelit[pienin].getHinta()) {
+						pienin = j;
+					}
+				}
+				if (pienin != i) {
+					apu = pelit[pienin];
+					pelit[pienin] = pelit[i];
+					pelit[i] = apu;
+				}
+			}
+			pelidata.clear();
+			for (int a = 0; a < pelit.length; a++) {
+				pelidata.add(pelit[a]);
+			}
+		}
+
+		@FXML
+		public void KorkeinHinta() {
+			alhaisinhinta.setSelected(false);
+			pelit = pelitdao.haePelit();
+			int i, j, suurin;
+			Peli apu;
+
+			for (i = 0; i < pelit.length; i++) {
+				suurin = i;
+				for (j = i + 1; j < pelit.length; j++) {
+					if (pelit[j].getHinta() > pelit[suurin].getHinta()) {
+						suurin = j;
+					}
+				}
+				if (suurin != i) {
+					apu = pelit[suurin];
+					pelit[suurin] = pelit[i];
+					pelit[i] = apu;
+				}
+			}
+			pelidata.clear();
+			for (int a = 0; a < pelit.length; a++) {
+				pelidata.add(pelit[a]);
+			}
+		}
 
 	private void pelinTiedot(Peli peli) {
 		if (peli != null) {
@@ -330,7 +411,9 @@ public class VierasController {
 			päivämäärä.setText("");
 		}
 	}
-
+	
+	
+	
 	@FXML
 	void vieKirjautumisNäkymään(ActionEvent event) throws IOException {
 		//Viedään kirjautumissivulle

@@ -66,8 +66,6 @@ public class EtusivuController {
 	@FXML
 	private Label konsoli;
 	@FXML
-	private Label kunto;
-	@FXML
 	private ComboBox<String> hakurajaus;
 	@FXML
 	private ToggleGroup hakutyyppi;
@@ -223,7 +221,6 @@ public class EtusivuController {
 			ikäraja.setText(Integer.toString(peli.getIkaraja()));
 			konsoli.setText(peli.getKonsoli());
 			pelaajamäärä.setText(Integer.toString(peli.getPelmaara()));
-			kunto.setText(peli.getKunto());
 			kuvaus.setText(peli.getKuvaus());
 			tekstikenttä.setText(peli.getTekstikenttä());
 			
@@ -244,7 +241,6 @@ public class EtusivuController {
 			genre.setText("");
 			ikäraja.setText("");
 			pelaajamäärä.setText("");
-			kunto.setText("");
 			kuvaus.setText("");
 			päivämäärä.setText("");
 		}
