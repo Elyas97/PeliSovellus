@@ -118,7 +118,7 @@ public class TapahtumatController {
 			// Tallentuu myös tietokantaan englanniksi, pitäisiköhän kääntää uudelleen
 			// suomeksi?
 			ObservableList<String> options = FXCollections.observableArrayList("Sports", "Shooting", "Action", "Racing",
-					"Horros", "Adventure", "Strategy", "Roleplay", "Puzzle", "Party", "Boardgame");
+					"Horror", "Adventure", "Strategy", "Roleplay", "Puzzle", "Party", "Boardgame");
 			genre.setItems(options);
 
 			ObservableList<String> kuntoOptions = FXCollections.observableArrayList("Excellent", "Great", "Good",
@@ -145,12 +145,15 @@ public class TapahtumatController {
 		tekstikenttä.textProperty().addListener((observable, oldValue, newValue) -> {
 			kirjaimet();
 		});
+		
+		validointiPiiloon();
 	}
 	
 	@FXML
 	public String ilmoituksenTyyppiAction(ActionEvent Action) {
 		String text = ((RadioButton) tyyppi.getSelectedToggle()).getText();
 		
+		tyyppivaroitus.setText("");
 		switch (text) {
 		case "Lahjoitetaan":
 		case "Giveaway":
@@ -169,6 +172,8 @@ public class TapahtumatController {
 	public String tyyppi(ActionEvent Action) {
 		String text = ((RadioButton) pelintyyppi.getSelectedToggle()).getText();
 
+		
+		pelintyyppivaroitus.setText("");
 		// Konsolivalinta ilmestyy vain jos valitaan videopeli
 		if (text.equals("lauta") || text.equals("boardgame")) {
 			konsoliPane.setVisible(false);
@@ -441,6 +446,11 @@ public class TapahtumatController {
 			pelintyyppivaroitus.setVisible(true);
 			kehotus = true;
 		}
+		if(pelaajamaara.getText().trim().isEmpty()) {
+            pelaajamaara.setStyle("-fx-border-color:red");
+            pelaajamäärävaroitus.setVisible(true);
+            kehotus = true;
+        }
 		if (kehotus == true) {
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 			if(locale.equals("en")) {
@@ -454,6 +464,49 @@ public class TapahtumatController {
 			return false;
 		}
 		return true;
+	}
+	
+	private void validointiPiiloon() {
+		pelinnimi.textProperty().addListener((obs, oldValue, newValue) -> {
+			nimivaroitus.setText("");
+			pelinnimi.setStyle("-fx-border:none");
+		});
+		hinta.textProperty().addListener((obs, oldValue, newValue) -> {
+			hintavaroitus.setText("");
+			hinta.setStyle("-fx-border:none");
+		});
+		kaupunki.textProperty().addListener((obs, oldValue, newValue) -> {
+			paikkakuntavaroitus.setText("");
+			kaupunki.setStyle("-fx-border:none");
+		});
+		ikaraja.textProperty().addListener((obs, oldValue, newValue) -> {
+			ikärajavaroitus.setText("");
+			ikaraja.setStyle("-fx-border:none");
+		});
+		pelaajamaara.textProperty().addListener((obs, oldValue, newValue) -> {
+			pelaajamäärävaroitus.setText("");
+			pelaajamaara.setStyle("-fx-border:none");
+		});
+		kuvaus.textProperty().addListener((obs, oldValue, newValue) -> {
+			kuvausvaroitus.setText("");
+			kuvaus.setStyle("-fx-border:none");
+		});
+		tekstikenttä.textProperty().addListener((obs, oldValue, newValue) -> {
+			tekstikenttävaroitus.setText("");
+			tekstikenttä.setStyle("-fx-border:none");
+		});
+		
+
+		// setOnAction "kuuntelee" valintaa ja kun valittu asettaa varoitustekstin pois
+		genre.setOnAction((event) -> {
+			genrevaroitus.setText("");
+			genre.setStyle("-fx-border:none");
+			
+		});
+		kunto.setOnAction((event) -> {
+			kuntovaroitus.setText("");
+			kunto.setStyle("-fx-border:none");
+		});
 	}
 
 	/*

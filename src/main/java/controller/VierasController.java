@@ -297,15 +297,19 @@ public class VierasController {
 			public void changed(ObservableValue<? extends Toggle> obs, Toggle oldT, Toggle newT) {
 				switch (((RadioButton) hakutyyppi.getSelectedToggle()).getText()) {
 				case "Myydään":
-					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Myynti"));
+				case "For sale":
+					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Myynti") || pelit.getTalletusTyyppi().contains("For sale"));
 					break;
 				case "Vuokrataan":
-					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Vuokraus"));
+				case "Rent":
+					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Vuokraus") || pelit.getTalletusTyyppi().contains("Rent"));
 					break;
 				case "Lahjoitetaan":
-					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Lahjoitus"));
+				case "Giveaway":
+					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Lahjoitus") || pelit.getTalletusTyyppi().contains("Giveaway"));
 					break;
 				case "Kaikki":
+				case "All":
 					filteredData.setPredicate(pelit -> true);
 					break;
 				}

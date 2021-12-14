@@ -153,34 +153,46 @@ public class RekisteroidyController {
 		Pattern pattern = Pattern.compile("^.+@.+\\..+$");
 		Matcher matcher = pattern.matcher(email.getText());
 		boolean validEmail = matcher.matches();
-		if (validEmail == false) {
-			email.setStyle("-fx-border-color:red");
-			emailtip.setText("Muoto väärä");
-			test = false;
-		}
-		if (puhelinnumero.getText() == "") {
-			puhelinnumero.setStyle("-fx-border-color:red");
-			test = false;
-		}
-		if (salasana.getText() == "" || csalasana.getText() == "") {
-			salasana.setStyle("-fx-border-color:red");
-			csalasana.setStyle("-fx-border-color:red");
-			test = false;
-		}
-		boolean compare = salasana.getText().equals(csalasana.getText());
-		if (compare != true) {
-			salasana.setStyle("-fx-border-color:red");
-			csalasana.setStyle("-fx-border-color:red");
-			tippi.setText("Salasanat eivät täsmää");
-			test = false;
-		}
-		if (salasana.getText().length() < 6 || csalasana.getText().length() < 6) {
-			salasana.setStyle("-fx-border-color:red");
-			csalasana.setStyle("-fx-border-color:red");
-			tippi.setText("Salasanan pituus vähintään 6");
-			test = false;
-		}
-		return test;
+		  if (validEmail == false) {
+	            email.setStyle("-fx-border-color:red");
+	            if(locale.equals("en")) {
+	                emailtip.setText("Invalid form");
+	            }else {
+	                emailtip.setText("Muoto väärä");
+	            }
+	            test = false;
+	        }
+	        if (puhelinnumero.getText() == "") {
+	            puhelinnumero.setStyle("-fx-border-color:red");
+	            test = false;
+	        }
+	        if (salasana.getText() == "" || csalasana.getText() == "") {
+	            salasana.setStyle("-fx-border-color:red");
+	            csalasana.setStyle("-fx-border-color:red");
+	            test = false;
+	        }
+	        boolean compare = salasana.getText().equals(csalasana.getText());
+	        if (compare != true) {
+	            salasana.setStyle("-fx-border-color:red");
+	            csalasana.setStyle("-fx-border-color:red");
+	            if(locale.equals("en")) {
+	                tippi.setText("Passwords do not match");
+	            }else {
+	                tippi.setText("Salasana eivät täsmää");
+	            }
+	            test = false;
+	        }
+	        if (salasana.getText().length() <6 || csalasana.getText().length() < 6) {
+	            salasana.setStyle("-fx-border-color:red");
+	            csalasana.setStyle("-fx-border-color:red");
+	            if(locale.equals("en")) {
+	                tippi.setText("Password must be at least 6 characters long");
+	            }else {
+	                tippi.setText("Salasanan pituus vähintään 6");
+	            }
+	            test = false;
+	        }
+	        return test;
 	}
 
 	public void setMainApp(MainApp mainApp) {

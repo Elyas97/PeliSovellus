@@ -139,7 +139,7 @@ public class LisaaPeliController {
 		if(locale.equals("en")) {
 			//Tallentuu myös tietokantaan englanniksi, pitäisiköhän kääntää uudelleen suomeksi?
 			ObservableList<String> options = FXCollections.observableArrayList("Sports", "Shooting", "Action",
-					"Racing", "Horros", "Adventure", "Strategy", "Roleplay", "Puzzle", "Party", "Boardgame");
+					"Racing", "Horror", "Adventure", "Strategy", "Roleplay", "Puzzle", "Party", "Boardgame");
 			genre.setItems(options);
 			
 			ObservableList<String> kuntoOptions = FXCollections.observableArrayList("Excellent", "Great", "Good",

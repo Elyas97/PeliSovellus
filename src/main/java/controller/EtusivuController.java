@@ -62,6 +62,8 @@ public class EtusivuController {
 	@FXML
 	private Label tekstikenttä;
 	@FXML
+    private Label kunto;
+	@FXML
 	private TextField pelihaku;
 	@FXML
 	private Label konsoli;
@@ -213,38 +215,40 @@ public class EtusivuController {
 	 * Asettaa valitun pelin tiedot GridPanen labeleihin
 	 */
 	private void pelinTiedot(Peli peli) {
-		if (peli != null) {
-			pelinNimi.setText(peli.getPelinNimi());
-			pelinHinta.setText(Integer.toString(peli.getHinta()));
-			paikkakunta.setText(peli.getKaupunki());
-			genre.setText(peli.getGenre());
-			ikäraja.setText(Integer.toString(peli.getIkaraja()));
-			konsoli.setText(peli.getKonsoli());
-			pelaajamäärä.setText(Integer.toString(peli.getPelmaara()));
-			kuvaus.setText(peli.getKuvaus());
-			tekstikenttä.setText(peli.getTekstikenttä());
-			
-			if(locale.equals("en")) {
-				//Päivämäärän formatointi
-				DateFormat dateFormat;
-				dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.US);
-				String paivamaaraFormat = dateFormat.format(peli.getPaiva()); 
-				päivämäärä.setText("" + paivamaaraFormat);
-			}else {
-				päivämäärä.setText("" + peli.getPaiva().toString());
-			}
-			
-		} else {
-			pelinNimi.setText("");
-			pelinHinta.setText("");
-			paikkakunta.setText("");
-			genre.setText("");
-			ikäraja.setText("");
-			pelaajamäärä.setText("");
-			kuvaus.setText("");
-			päivämäärä.setText("");
-		}
-	}
+        if (peli != null) {
+            pelinNimi.setText(peli.getPelinNimi());
+            pelinHinta.setText(Integer.toString(peli.getHinta()));
+            paikkakunta.setText(peli.getKaupunki());
+            genre.setText(peli.getGenre());
+            ikäraja.setText(Integer.toString(peli.getIkaraja()));
+            konsoli.setText(peli.getKonsoli());
+            pelaajamäärä.setText(Integer.toString(peli.getPelmaara()));
+            kunto.setText(peli.getKunto());
+            kuvaus.setText(peli.getKuvaus());
+            tekstikenttä.setText(peli.getTekstikenttä());
+
+            if(locale.equals("en")) {
+                //Päivämäärän formatointi
+                DateFormat dateFormat;
+                dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.US);
+                String paivamaaraFormat = dateFormat.format(peli.getPaiva()); 
+                päivämäärä.setText("" + paivamaaraFormat);
+            }else {
+                päivämäärä.setText("" + peli.getPaiva().toString());
+            }
+
+        } else {
+            pelinNimi.setText("");
+            pelinHinta.setText("");
+            paikkakunta.setText("");
+            genre.setText("");
+            ikäraja.setText("");
+            pelaajamäärä.setText("");
+            kunto.setText("");
+            kuvaus.setText("");
+            päivämäärä.setText("");
+        }
+    }
 
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
@@ -316,18 +320,18 @@ public class EtusivuController {
 				switch (((RadioButton) hakutyyppi.getSelectedToggle()).getText()) {
 				case "Myynti":
 				case "For sale":
-					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Myynti"));
+					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Myynti") || pelit.getTalletusTyyppi().contains("For sale"));
 					hakuTesti();
 					break;
 				case "Vuokrataan":
 				case "Rent":
 					hakuTesti();
-					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Vuokraus"));
+					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Vuokraus") || pelit.getTalletusTyyppi().contains("Rent"));
 					//hakuTesti();
 					break;
 				case "Lahjoitetaan":
 				case "Giveaway":
-					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Lahjoitus"));
+					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Lahjoitus") || pelit.getTalletusTyyppi().contains("Giveaway"));
 					break;
 				case "Kaikki":
 				case "All":
