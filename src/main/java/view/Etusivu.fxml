@@ -184,6 +184,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
                               <Label layoutX="11.0" layoutY="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: F0F0F0; -fx-font-weight: bold;" text="%hintaLabel" wrapText="true" GridPane.rowIndex="2">
@@ -211,7 +212,7 @@
                                     <Font size="10.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="11.0" layoutY="211.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: F0F0F0; -fx-font-weight: bold;" text="%kuvausLabel" GridPane.rowIndex="8">
+                              <Label layoutX="11.0" layoutY="211.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: F0F0F0; -fx-font-weight: bold;" text="%kuvausLabel" GridPane.rowIndex="9">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
@@ -246,7 +247,7 @@
                                     <Insets left="10.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Label fx:id="kuvaus" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                              <Label fx:id="kuvaus" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="9">
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>
@@ -265,7 +266,7 @@
                                     <FontAwesomeIconView fill="#f8f8f8" glyphName="GAMEPAD" size="25" wrappingWidth="22.542882919311523" />
                                  </graphic>
                               </Label>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: F0F0F0; -fx-font-weight: bold;" text="%tekstikenttaLabel" GridPane.rowIndex="9">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: F0F0F0; -fx-font-weight: bold;" text="%yhteystiedotLabel" GridPane.rowIndex="10">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
@@ -280,7 +281,7 @@
                                     <Insets left="10.0" />
                                  </padding>
                               </Label>
-                              <Label fx:id="tekstikenttä" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                              <Label fx:id="tekstikenttä" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="10">
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>
@@ -295,11 +296,18 @@
                                     <Insets left="10.0" />
                                  </GridPane.margin>
                               </Label>
+                              <Label fx:id="kunto" prefHeight="34.0" prefWidth="81.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                              <Label layoutX="13.0" layoutY="244.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: F0F0F0; -fx-font-weight: bold;" text="%kuntoLabel" GridPane.rowIndex="8">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="pelinNimi1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                            </children>
                         </GridPane>
                         <HBox layoutX="2.0" AnchorPane.bottomAnchor="378.6" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="3.0" />
-                        <Label fx:id="päivämäärä" layoutX="64.0" layoutY="14.0" prefHeight="18.0" prefWidth="71.0" />
-                        <Label layoutX="3.0" layoutY="15.0" prefHeight="18.0" prefWidth="62.0" text="%ilmoitusJatettyText" />
+                        <Label fx:id="päivämäärä" layoutX="90.0" layoutY="14.0" prefHeight="18.0" prefWidth="45.0" />
+                        <Label layoutX="3.0" layoutY="15.0" text="%ilmoitusJatettyText" />
                      </children>
                   </AnchorPane>
                </children>
