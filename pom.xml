@@ -25,6 +25,18 @@
 					<release>11</release>
 				</configuration>
 			</plugin>
+			<plugin>	
+			<groupId>org.jacoco</groupId>
+    		<artifactId>jacoco-maven-plugin</artifactId>
+    		<version>0.8.7</version>
+    		    <executions>
+        			<execution>
+            			<goals>
+               			 <goal>prepare-agent</goal>
+           				 </goals>
+        		</execution>
+        		</executions></plugin>
+				
 		</plugins>
 	</build>
 
@@ -51,12 +63,7 @@
 			<artifactId>javafx-fxml</artifactId>
 			<version>17</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
-		<dependency>
-    		<groupId>org.jacoco</groupId>
-    		<artifactId>jacoco-maven-plugin</artifactId>
-    		<version>0.8.7</version>
-		</dependency>
+
 
 
 		<dependency>
