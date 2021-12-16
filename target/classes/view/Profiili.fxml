@@ -27,20 +27,20 @@
                </font>
             </Text>
             <Button layoutX="272.0" layoutY="337.0" mnemonicParsing="false" onAction="#PoistaTili" prefHeight="32.0" prefWidth="133.6" style="-fx-background-color: #d11a2a;" text="%poistaTiliButton" textFill="WHITE" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="210.0" />
-            <VBox layoutX="-2.0" prefHeight="400.0" prefWidth="123.2" style="-fx-background-color: #0589ff;" AnchorPane.bottomAnchor="37.60000000000002" AnchorPane.topAnchor="0.0">
+            <VBox layoutX="-2.0" prefHeight="400.0" prefWidth="123.2" style="-fx-background-color: #0589ff;" AnchorPane.bottomAnchor="45.6" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#VieEtusivunNäkymä" prefHeight="32.0" prefWidth="171.0" style="-fx-background-color: #0589ff;">
+                  <Button mnemonicParsing="false" onAction="#VieEtusivunNäkymä" prefHeight="54.0" prefWidth="134.0" style="-fx-background-color: #0589ff;">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="GAMEPAD" size="30" />
                      </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#VieEtusivunNäkymä" prefHeight="32.0" prefWidth="182.0" style="-fx-background-color: #0589ff;" text="%selaaPelejaMenu" textFill="WHITE" />
-                  <Button mnemonicParsing="false" onAction="#vieTapahtumaNäkymä" prefHeight="32.0" prefWidth="188.0" style="-fx-background-color: #0589ff;" text="%lisatytPelitMenu" textFill="WHITE" />
-                  <Button mnemonicParsing="false" onAction="#vieUuspeliNäkymä" prefHeight="32.0" prefWidth="209.0" style="-fx-background-color: #0589ff;" text="%lisaaPeliMenu" textFill="WHITE" />
-                  <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="155.0" style="-fx-background-color: white; -fx-text-fill: #0589ff;" text="%profiiliMenu" />
+                  <Button mnemonicParsing="false" onAction="#VieEtusivunNäkymä" prefHeight="54.0" prefWidth="143.0" style="-fx-background-color: #0589ff;" text="%selaaPelejaMenu" textFill="WHITE" />
+                  <Button mnemonicParsing="false" onAction="#vieTapahtumaNäkymä" prefHeight="53.0" prefWidth="135.0" style="-fx-background-color: #0589ff;" text="%lisatytPelitMenu" textFill="WHITE" />
+                  <Button mnemonicParsing="false" onAction="#vieUuspeliNäkymä" prefHeight="50.0" prefWidth="142.0" style="-fx-background-color: #0589ff;" text="%lisaaPeliMenu" textFill="WHITE" />
+                  <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="134.0" style="-fx-background-color: white; -fx-text-fill: #0589ff;" text="%profiiliMenu" />
                </children>
             </VBox>
-            <Button layoutX="-2.0" layoutY="353.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="38.0" prefWidth="123.0" style="-fx-background-color: #1A85B2;" text="%kirjauduUlosButton" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+            <Button layoutX="-2.0" layoutY="353.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="46.0" prefWidth="123.0" style="-fx-background-color: #1A85B2;" text="%kirjauduUlosButton" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="USER" size="22" />
                </graphic>

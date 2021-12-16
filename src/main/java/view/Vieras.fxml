@@ -67,17 +67,29 @@
                            <children>
                               <AnchorPane prefHeight="168.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <ListView fx:id="lista" layoutY="202.0" prefHeight="198.0" prefWidth="323.0" style="-fx-border-color: black; -fx-background-color: F0F0F0;" />
-                                    <HBox layoutY="117.0" prefHeight="39.0" prefWidth="300.0">
+                                    <ListView fx:id="lista" layoutY="202.0" prefHeight="198.0" prefWidth="323.0" style="-fx-border-color: black; -fx-background-color: F0F0F0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="201.6" />
+                                    <HBox layoutY="117.0" prefHeight="39.0" prefWidth="322.0">
                                        <children>
                                           <RadioButton fx:id="kaikki" mnemonicParsing="false" prefHeight="18.0" prefWidth="70.0" text="%kaikki">
                                              <toggleGroup>
                                                 <ToggleGroup fx:id="hakutyyppi" />
                                              </toggleGroup>
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font>
                                           </RadioButton>
-                                          <RadioButton fx:id="myynti" mnemonicParsing="false" prefHeight="18.0" prefWidth="90.0" text="%myydaan" toggleGroup="$hakutyyppi" />
-                                          <RadioButton fx:id="vuokraus" mnemonicParsing="false" prefHeight="18.0" prefWidth="94.0" text="%vuokrataan" toggleGroup="$hakutyyppi" />
-                                          <RadioButton fx:id="lahjoitus" mnemonicParsing="false" prefHeight="18.0" prefWidth="102.0" text="%lahjoitetaan" toggleGroup="$hakutyyppi" />
+                                          <RadioButton fx:id="myynti" mnemonicParsing="false" prefHeight="18.0" prefWidth="90.0" text="%myydaan" toggleGroup="$hakutyyppi" HBox.hgrow="ALWAYS">
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font></RadioButton>
+                                          <RadioButton fx:id="vuokraus" mnemonicParsing="false" prefHeight="18.0" prefWidth="94.0" text="%vuokrataan" toggleGroup="$hakutyyppi">
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font></RadioButton>
+                                          <RadioButton fx:id="lahjoitus" mnemonicParsing="false" prefHeight="18.0" prefWidth="102.0" text="%lahjoitetaan" toggleGroup="$hakutyyppi">
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font></RadioButton>
                                        </children>
                                        <padding>
                                           <Insets right="1.0" />
@@ -85,7 +97,7 @@
                                     </HBox>
                                     <HBox layoutY="64.0" prefHeight="34.0" prefWidth="323.0">
                                        <children>
-                                          <TextField fx:id="pelihaku" prefHeight="27.0" prefWidth="197.0" style="-fx-border-color: #0589ff;">
+                                          <TextField fx:id="pelihaku" prefHeight="27.0" prefWidth="155.0" style="-fx-border-color: #0589ff;">
                                              <HBox.margin>
                                                 <Insets right="2.0" top="20.0" />
                                              </HBox.margin>
@@ -99,6 +111,9 @@
                                              <HBox.margin>
                                                 <Insets top="20.0" />
                                              </HBox.margin>
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font>
                                           </Button>
                                        </children>
                                     </HBox>
@@ -107,18 +122,31 @@
                                           <Font size="28.0" />
                                        </font>
                                     </Text>
-                                    <RadioButton fx:id="korkeinhinta" layoutY="148.0" mnemonicParsing="false" onAction="#KorkeinHinta" text="%hintaKorkein">
+                                    <RadioButton fx:id="korkeinhinta" layoutY="148.0" mnemonicParsing="false" onAction="#KorkeinHinta" prefHeight="18.0" prefWidth="147.0" text="%hintaKorkein">
                                        <toggleGroup>
                                           <ToggleGroup fx:id="hintaLajittelu" />
                                        </toggleGroup>
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
                                     </RadioButton>
-                                    <RadioButton fx:id="alhaisinhinta" layoutX="107.0" layoutY="148.0" mnemonicParsing="false" onAction="#AlhaisinHinta" text="%hintaAlhaisin" toggleGroup="$hintaLajittelu" />
+                                    <RadioButton fx:id="alhaisinhinta" layoutX="155.0" layoutY="147.0" mnemonicParsing="false" onAction="#AlhaisinHinta" prefHeight="18.0" prefWidth="136.0" text="%hintaAlhaisin" toggleGroup="$hintaLajittelu">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </RadioButton>
                                     <RadioButton fx:id="uusin2" layoutY="175.0" mnemonicParsing="false" onAction="#uusinPeli" text="%uusin">
                                        <toggleGroup>
                                           <ToggleGroup fx:id="julkaisuAika" />
                                        </toggleGroup>
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
                                     </RadioButton>
-                                    <RadioButton fx:id="vanhin2" layoutX="107.0" layoutY="175.0" mnemonicParsing="false" onAction="#vanhinPeli" text="%vanhin" toggleGroup="$julkaisuAika" />
+                                    <RadioButton fx:id="vanhin2" layoutX="107.0" layoutY="175.0" mnemonicParsing="false" onAction="#vanhinPeli" text="%vanhin" toggleGroup="$julkaisuAika">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font></RadioButton>
                                  </children>
                               </AnchorPane>
                            </children>
@@ -247,15 +275,22 @@
                                     <FontAwesomeIconView fill="#f8f8f8" glyphName="GAMEPAD" size="30" wrappingWidth="36.94284658432025" />
                                  </graphic>
                               </Label>
-                              <Label prefHeight="33.0" prefWidth="70.0" style="-fx-font-weight: bold; -fx-background-color: F0F0F0;" text="%kuntoLabel" GridPane.rowIndex="8">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-background-color: F0F0F0;" text="%kuntoLabel" GridPane.rowIndex="8">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
                               </Label>
                            </children>
                         </GridPane>
-                        <Label fx:id="päivämäärä" layoutX="79.0" layoutY="5.0" prefHeight="18.0" prefWidth="57.0" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="0.0" />
-                        <Label layoutY="6.0" prefHeight="18.0" prefWidth="74.0" text="%ilmoitusJatettyText" />
+                        <Label fx:id="päivämäärä" layoutX="79.0" layoutY="-1.0" prefHeight="27.0" prefWidth="57.0" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="0.0">
+                           <font>
+                              <Font size="10.0" />
+                           </font></Label>
+                        <Label layoutY="1.0" prefHeight="26.0" prefWidth="94.0" text="%ilmoitusJatettyText" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="1.0">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </children>

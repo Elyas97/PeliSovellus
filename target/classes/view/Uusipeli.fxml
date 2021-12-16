@@ -24,9 +24,9 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <AnchorPane prefHeight="400.0" prefWidth="117.0" style="-fx-background-color: #0589ff;">
+                  <AnchorPane prefHeight="400.0" prefWidth="123.0" style="-fx-background-color: white;">
                      <children>
-                        <VBox prefHeight="400.0" prefWidth="123.2" style="-fx-background-color: #0589ff;" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox prefHeight="370.0" prefWidth="123.0" style="-fx-background-color: #0589ff;" AnchorPane.bottomAnchor="45.6" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" style="-fx-background-color: #0589FF;">
                                  <graphic>
@@ -58,7 +58,7 @@
                               </Button>
                            </children>
                         </VBox>
-                        <Button layoutX="3.0" layoutY="346.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="47.0" prefWidth="155.0" style="-fx-background-color: #1A85B2;" text="%kirjauduUlosButton" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <Button layoutX="3.0" layoutY="346.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="47.0" prefWidth="124.0" style="-fx-background-color: #1A85B2;" text="%kirjauduUlosButton" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="USER" size="22" />
                            </graphic>

@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Locale;
 import java.util.Optional;
@@ -394,15 +395,17 @@ public class VierasController {
 			pelaajamäärä.setText(Integer.toString(peli.getPelmaara()));
 			kuvaus.setText(peli.getKuvaus());
 			tekstikenttä.setText(peli.getTekstikenttä());
-			
+			  DateFormat dateFormat;
 			if(locale.equals("en")) {
 				//Päivämäärän formatointi
-				DateFormat dateFormat;
+				
 				dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.US);
 				String paivamaaraFormat = dateFormat.format(peli.getPaiva()); 
 				päivämäärä.setText("" + paivamaaraFormat);
 			}else {
-				päivämäärä.setText("" + peli.getPaiva().toString());
+				dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+           	 String paivamaaraFormat = dateFormat.format(peli.getPaiva()); 
+               päivämäärä.setText(""+paivamaaraFormat);
 			}
 		} else {
 			pelinNimi.setText("");
