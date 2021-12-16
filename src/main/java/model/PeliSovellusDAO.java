@@ -2,13 +2,8 @@ package model;
 
 import java.sql.*;
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
-
-import controller.TapahtumatController;
 
 public class PeliSovellusDAO {
 
@@ -16,7 +11,7 @@ public class PeliSovellusDAO {
 	final String URL = "jdbc:mariadb://10.114.32.16/PELIKESKUS";
 	final String USERNAME = "ryhma";
 	final String PWD = "ryhma";
-	
+
 	String locale = Locale.getDefault().getLanguage();
 
 	public PeliSovellusDAO() {
@@ -123,7 +118,6 @@ public class PeliSovellusDAO {
 			stmt.setString(5, käyttäjä.getPuhelinumero());
 			stmt.executeUpdate();
 			temp = true;
-
 		} catch (SQLException e) {
 			System.out.println(e);
 
@@ -198,17 +192,16 @@ public class PeliSovellusDAO {
 				String tekstikenttä = rs.getString("Tekstikenttä");
 				String kunto = rs.getString("Kunto");
 				Date paivamaara = rs.getDate("Päivämäärä");
-				
-				if(locale.equals("en")) {
-					// Dollareina
+
+				// Hinta dollareina
+				if (locale.equals("en")) {
 					Locale usLocale = Locale.US;
 					NumberFormat usNumberFormat = NumberFormat.getInstance(usLocale);
 					hinta = Integer.parseInt(usNumberFormat.format(hinta));
 					hinta = (int) (hinta * 1.13);
-				}else {
+				} else {
 					hinta = rs.getInt("Hinta");
 				}
-
 				peliLista.add(new Peli(pelinimi, PeliID, pelityyppi, talletustyyppi, hinta, genre, konsoli, ika,
 						lukumaara, kuvaus, kaupunki, kunto, tekstikenttä, paivamaara));
 			}
@@ -238,18 +231,18 @@ public class PeliSovellusDAO {
 		}
 		return pelit;
 	}
-	
-	//Ikärajan mukaan
+
+	// Ikärajan mukaan
 	public Peli[] haePelitIkaraja(int ikaraja) {
 		System.out.println("ikäraja on " + ikaraja);
 		ArrayList<Peli> peliLista = new ArrayList();
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
-			String query = "Select * from Peli where ikäraja='"+ikaraja+"'";
+			String query = "Select * from Peli where ikäraja='" + ikaraja + "'";
 			stmt = conn.createStatement();
 			System.out.println("Haetaan tietokannasta pelejä ikärajalla: " + ikaraja);
-			
+
 			rs = stmt.executeQuery(query);
 			while (rs.next()) {
 				String pelinimi = rs.getString("Pelinimi");
@@ -296,16 +289,17 @@ public class PeliSovellusDAO {
 		}
 		return pelit;
 	}
+
 	public Peli[] pelaajaMaara(int maara) {
 		System.out.println("Pelaajienmäärä on " + maara);
 		ArrayList<Peli> peliLista = new ArrayList();
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
-			String query = "Select * from Peli where pelaajamäärä ='"+maara+"'";
+			String query = "Select * from Peli where pelaajamäärä ='" + maara + "'";
 			stmt = conn.createStatement();
 			System.out.println("Haetaan tietokannasta pelejä pelaajamäärällä: " + maara);
-			
+
 			rs = stmt.executeQuery(query);
 			while (rs.next()) {
 				String pelinimi = rs.getString("Pelinimi");

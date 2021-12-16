@@ -32,19 +32,17 @@ public class MainApp extends Application {
 
 	private Stage primaryStage;
 	private BorderPane rootLayout;
-
 	@FXML
 	private ListView<String> lista;
-
 	PeliSovellusDAO pelitdao = new PeliSovellusDAO();
 
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Pelienvuokraussovellus");
-		//annetaan kaikille¨main app
+		//Annetaan kaikille¨main app
 		
-				//haetaan tiedostosa default kieli
+				//Haetaan tiedostosa default kieli
 				String appConfigPath="resources/TextResources_Default.properties";
 				Properties properties=new Properties();
 				try {
@@ -75,29 +73,14 @@ public class MainApp extends Application {
 	 */
 	public void initRootLayout() {
 		try {
-			
-			//LOKALISOINTI (ei toimi vielä)
-			//Ladataan ResourceBundle
 			FXMLLoader loader = new FXMLLoader();
-
 			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
-			
-			//Ladataan layout FXML-tiedostosta ja asetetaan käytettävä bundle
-			//FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("root.fxml"));
 			loader.setResources(bundle);
 			rootLayout = (BorderPane)loader.load();
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			
-			//ILMAN LOKALISOINTIA
-			/*FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("root.fxml"));
-			rootLayout = (BorderPane) loader.load();
-			Scene scene = new Scene(rootLayout);
-			primaryStage.setScene(scene);
-			primaryStage.show();*/
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -106,7 +89,6 @@ public class MainApp extends Application {
 	public void showEtusivu() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			
 			Locale locale = new Locale("en", "FI");
 			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 			loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
@@ -206,7 +188,6 @@ public class MainApp extends Application {
 
 	public void showProfile() {
 		try {
-			System.out.println("tuuli oikea");
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("Profiili.fxml"));
 			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());

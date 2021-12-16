@@ -17,7 +17,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
@@ -25,11 +24,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
@@ -113,21 +109,22 @@ public class TapahtumatController {
 	PeliSovellusDAO pelitdao = new PeliSovellusDAO();
 	private Peli[] pelit;
 	String locale = Locale.getDefault().getLanguage();
+	ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 
 	public TapahtumatController() {
 	}
+
 	/**
 	 * Sivun alustus, täyttää pudotusvalikot tarvittavilla tiedoilla
 	 * 
 	 */
 	@FXML
 	public void initialize() {
+
 		// Kirjautuneen käyttäjän haku
 		this.käyttäjä = TiedostoKasittely.lueKäyttäjä();
 
 		if (locale.equals("en")) {
-			// Tallentuu myös tietokantaan englanniksi, pitäisiköhän kääntää uudelleen
-			// suomeksi?
 			ObservableList<String> options = FXCollections.observableArrayList("Sports", "Shooting", "Action", "Racing",
 					"Horror", "Adventure", "Strategy", "Roleplay", "Puzzle", "Party", "Boardgame");
 			genre.setItems(options);
@@ -156,17 +153,18 @@ public class TapahtumatController {
 		tekstikenttä.textProperty().addListener((observable, oldValue, newValue) -> {
 			kirjaimet();
 		});
-		
+
 		validointiPiiloon();
 	}
+
 	/**
-	 * Kuuntelee ilmoituksen tyyppi radiobuttoneita, jos valitaan lahjoitus asettaa hinnan automaattisesti 0
+	 * Kuuntelee ilmoituksen tyyppi radiobuttoneita, jos valitaan lahjoitus asettaa
+	 * hinnan automaattisesti 0
 	 * 
 	 */
 	@FXML
 	public String ilmoituksenTyyppiAction(ActionEvent Action) {
 		String text = ((RadioButton) tyyppi.getSelectedToggle()).getText();
-		
 		tyyppivaroitus.setText("");
 		switch (text) {
 		case "Lahjoitetaan":
@@ -181,17 +179,17 @@ public class TapahtumatController {
 		}
 		return text;
 	}
+
 	/**
-	 * Kuuntelee Pelin tyyppi valintaa, jos Videopeli on valittuna näyttää konsolivalinnan
+	 * Kuuntelee Pelin tyyppi valintaa, jos Videopeli on valittuna näyttää
+	 * konsolivalinnan
 	 * 
-	 * @param Action 
+	 * @param Action
 	 * @return palauttaa radiobuttonissa olevan tekstin
 	 */
 	@FXML
 	public String tyyppi(ActionEvent Action) {
 		String text = ((RadioButton) pelintyyppi.getSelectedToggle()).getText();
-
-		
 		pelintyyppivaroitus.setText("");
 		// Konsolivalinta ilmestyy vain jos valitaan videopeli
 		if (text.equals("lauta") || text.equals("boardgame")) {
@@ -210,7 +208,7 @@ public class TapahtumatController {
 		this.dialogStage = dialogStage;
 	}
 
-	/*
+	/**
 	 * Käyttäjän omien lisättyjen pelien listaaminen
 	 */
 	public void listaaOmatPelit() {
@@ -223,33 +221,21 @@ public class TapahtumatController {
 	}
 
 	/**
-	 * Pelin poistamisen varmistus, kutsuu poistaPeliTietokannasta -metodia 
-	 * Ennen kuin poisto tapahtuu tulee varoitusikkuna jolla varmistutaan että käyttäjä on varma
-	 * Poiston jälkeen ilmoitetaan poiston onnistumisesta
+	 * Pelin poistamisen varmistus, kutsuu poistaPeliTietokannasta -metodia Ennen
+	 * kuin poisto tapahtuu tulee varoitusikkuna jolla varmistutaan että käyttäjä on
+	 * varma Poiston jälkeen ilmoitetaan poiston onnistumisesta
 	 * 
 	 * 
 	 */
 	@FXML
 	public void poistaPeli() {
 
-		Alert varmistus;
-		ButtonType ok;
-		ButtonType peruuta;
-		if (locale.equals("en")) {
-			ok = new ButtonType("Ok", ButtonData.OK_DONE);
-			peruuta = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-			
-			varmistus = new Alert(Alert.AlertType.CONFIRMATION,
-					"Are you sure you want to delete the game? Deletion cannot be undone.", ok, peruuta);
-			varmistus.setTitle("Alert");
-		}else {
-			ok = new ButtonType("Ok", ButtonData.OK_DONE);
-			peruuta = new ButtonType("Peruuta", ButtonData.CANCEL_CLOSE);
-			
-			varmistus = new Alert(Alert.AlertType.CONFIRMATION,
-					"Haluatko varmasti poistaa pelin? Poistamista ei voi peruuttaa.", ok, peruuta);
-			varmistus.setTitle("Alert");
-		}
+		ButtonType ok = new ButtonType(bundle.getString("okButton"), ButtonData.OK_DONE);
+		ButtonType peruuta = new ButtonType(bundle.getString("peruuta"), ButtonData.CANCEL_CLOSE);
+
+		Alert varmistus = new Alert(Alert.AlertType.CONFIRMATION, "pelinpoistoVarmistusText", ok, peruuta);
+		varmistus.setTitle("Alert");
+
 		Optional<ButtonType> vastaus = varmistus.showAndWait();
 
 		if (vastaus.get() == ok) {
@@ -257,13 +243,8 @@ public class TapahtumatController {
 			poistaPeliTietokannasta(peli);
 
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			if (locale.equals("en")) {
-				alert.setTitle("Information");
-				alert.setContentText("Game deleted succesfully!");
-			}else {
-				alert.setTitle("Tiedoksi");
-				alert.setContentText("Pelin poistaminen onnistui!");
-			}
+			alert.setTitle(bundle.getString("ilmoitus"));
+			alert.setContentText(bundle.getString("pelinPoistoOnnistuiText"));
 			alert.showAndWait();
 		}
 	}
@@ -271,6 +252,7 @@ public class TapahtumatController {
 	/**
 	 * Kutsuu PeliSovellusDaon metodia poistaPeli() saamallaan pelin ID:llä
 	 * Päivittää listan poistamisen jälkeen
+	 * 
 	 * @param peli Peliolion tiedot josta otetaan ID
 	 */
 	public void poistaPeliTietokannasta(Peli peli) {
@@ -367,8 +349,8 @@ public class TapahtumatController {
 	}
 
 	/**
-	 * Päivittää kenttiin tehdyt muutokset tietokantaan
-	 * Ilmoittaa onnistumisesta Alertin avulla
+	 * Päivittää kenttiin tehdyt muutokset tietokantaan Ilmoittaa onnistumisesta
+	 * Alertin avulla
 	 * 
 	 */
 	@FXML
@@ -384,7 +366,6 @@ public class TapahtumatController {
 			peli.setIkaraja(age);
 			peli.setKaupunki(kaupunki.getText());
 			String tyyppiText = ((RadioButton) tyyppi.getSelectedToggle()).getText();
-			System.out.println("TALLETUKSEN TYYPPI:" + tyyppiText);
 			peli.setTalletusTyyppi(tyyppiText);
 			peli.setKuvaus(kuvaus.getText());
 			int players = Integer.parseInt(pelaajamaara.getText());
@@ -406,13 +387,8 @@ public class TapahtumatController {
 
 			// Ilmoitus onnistuneesta tallennuksesta
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			if(locale.equals("en")) {
-				alert.setTitle("Information");
-				alert.setContentText("Changes saved succesfully!");
-			}else {
-				alert.setTitle("Information");
-				alert.setContentText("Muutokset tallennettu onnistuneesti!");
-			}
+			alert.setTitle(bundle.getString("ilmoitus"));
+			alert.setContentText(bundle.getString("tietojenTallennusOnnistuiText"));
 			alert.showAndWait();
 
 			omatPelit.getItems().clear();
@@ -421,16 +397,15 @@ public class TapahtumatController {
 	}
 
 	/**
-	 * Muutoslomakkeen validointi
-	 * Tyhjistä kentistä huomautetaan alertilla ja punaisella värillä
-	 *  
+	 * Muutoslomakkeen validointi Tyhjistä kentistä huomautetaan alertilla ja
+	 * punaisella värillä
+	 * 
 	 * 
 	 * @return palauttaa true jos kaikki kentät täytetty
 	 */
 	public boolean taytaTyhjatKentat() {
 
 		boolean kehotus = false;
-
 		if (pelinnimi.getText().trim().isEmpty()) {
 			pelinnimi.setStyle("-fx-border-color:red");
 			nimivaroitus.setVisible(true);
@@ -479,29 +454,26 @@ public class TapahtumatController {
 			pelintyyppivaroitus.setVisible(true);
 			kehotus = true;
 		}
-		if(pelaajamaara.getText().trim().isEmpty()) {
-            pelaajamaara.setStyle("-fx-border-color:red");
-            pelaajamäärävaroitus.setVisible(true);
-            kehotus = true;
-        }
+		if (pelaajamaara.getText().trim().isEmpty()) {
+			pelaajamaara.setStyle("-fx-border-color:red");
+			pelaajamäärävaroitus.setVisible(true);
+			kehotus = true;
+		}
 		if (kehotus == true) {
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			if(locale.equals("en")) {
-				alert.setTitle("Information");
-				alert.setContentText("Fill in the required fields!");
-			}else {
-				alert.setTitle("Alert");
-				alert.setContentText("Täytä pakolliset kentät!");
-			}
+			alert.setTitle(bundle.getString("ilmoitus"));
+			alert.setContentText(bundle.getString("taytaPakollisetText"));
 			alert.showAndWait();
 			return false;
 		}
 		return true;
 	}
-		/**
-		 * Kuuntelee täytettäviä kenttiä, RadioButtoneita ja pudotusvalikkoja ja piilottaa punaisen reunan ja Pakollinen kenttä tekstin kun ehdot täyttyvät
-		 * 
-		 */
+
+	/**
+	 * Kuuntelee täytettäviä kenttiä, RadioButtoneita ja pudotusvalikkoja ja
+	 * piilottaa punaisen reunan ja Pakollinen kenttä tekstin kun ehdot täyttyvät
+	 * 
+	 */
 	private void validointiPiiloon() {
 		pelinnimi.textProperty().addListener((obs, oldValue, newValue) -> {
 			nimivaroitus.setText("");
@@ -531,13 +503,11 @@ public class TapahtumatController {
 			tekstikenttävaroitus.setText("");
 			tekstikenttä.setStyle("-fx-border:none");
 		});
-		
 
 		// setOnAction "kuuntelee" valintaa ja kun valittu asettaa varoitustekstin pois
 		genre.setOnAction((event) -> {
 			genrevaroitus.setText("");
 			genre.setStyle("-fx-border:none");
-			
 		});
 		kunto.setOnAction((event) -> {
 			kuntovaroitus.setText("");
@@ -546,8 +516,8 @@ public class TapahtumatController {
 	}
 
 	/**
-	 * Laskee jäljellä olevat kirjaimet Yhteystiedot kentälle
-	 * kun kirjaimet on täynnä antaa varoituksen siitä ja ilmoittaa että kenttä on täynnä
+	 * Laskee jäljellä olevat kirjaimet Yhteystiedot kentälle kun kirjaimet on
+	 * täynnä antaa varoituksen siitä ja ilmoittaa että kenttä on täynnä
 	 */
 	@FXML
 	public void kirjaimet() {
@@ -565,13 +535,8 @@ public class TapahtumatController {
 
 			// Ilmoitus kun tekstikenttä täynnä jolloin kirjoitus ei enää onnistu
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			if(locale.equals("en")) {
-				alert.setTitle("Information");
-				alert.setContentText("Textfield is full!");
-			}else {
-				alert.setTitle("Alert");
-				alert.setContentText("Tekstikenttä täynnä!");
-			}
+			alert.setTitle(bundle.getString("ilmoitus"));
+			alert.setContentText(bundle.getString("tekstikenttaTaynnaText"));
 			alert.showAndWait();
 
 			// Tekstikenttään voi taas kirjoittaa

@@ -6,16 +6,10 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 import model.Kayttaja;
 import model.LoginSystem;
 import model.TiedostoKasittely;
@@ -45,16 +39,16 @@ public class LoginController {
 			kirjautunut = login.login(tunnus23.getText(), pwd23.getText());
 			System.out.println("testing" + kirjautunut);
 			if (kirjautunut != null) {
-				
+
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);
 				alert.setTitle(bundle.getString("ilmoitus"));
 				alert.setContentText(bundle.getString("kirjautuminenOnnistui"));
 				alert.showAndWait();
-				
+
 				// Siirretään etusivulle ja tallenetaan käyttäjä controlleriin
 				// Annetaan kirjautuneen käyttäjän tiedot
 				TiedostoKasittely.kirjoitaTiedosto(kirjautunut);
-				
+
 				// Ladataan etusivu
 				System.out.println(TiedostoKasittely.lueKäyttäjä().getEtunimi());
 				app.showEtusivu();

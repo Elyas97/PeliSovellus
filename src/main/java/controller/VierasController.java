@@ -10,7 +10,6 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.ResourceBundle;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -18,13 +17,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Peli;
@@ -44,7 +39,7 @@ import javafx.scene.image.Image;
 
 public class VierasController {
 	@FXML
-    private ComboBox<String> maat;
+	private ComboBox<String> maat;
 	@FXML
 	private TextField pelihaku;
 	@FXML
@@ -121,7 +116,6 @@ public class VierasController {
 	private RadioButton korkeinhinta;
 	@FXML
 	private ToggleGroup hintaLajittelu;
-	
 
 	private Stage dialogStage;
 	PeliSovellusDAO pelitdao = new PeliSovellusDAO();
@@ -129,65 +123,58 @@ public class VierasController {
 	ObservableList<Peli> pelidata = FXCollections.observableArrayList();
 	FilteredList<Peli> filteredData = new FilteredList<>(pelidata, pelit -> true);
 	String locale = Locale.getDefault().getLanguage();
+	ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 
 	public void initialize() {
-		Image img=new Image("file:finland.png");
-		System.out.println(img); 
+		Image img = new Image("file:finland.png");
+		System.out.println(img);
 		String fi = "FI";
 		String eng = "EN";
-		String name=Locale.getDefault().getLanguage();
+		String name = Locale.getDefault().getLanguage();
 		System.out.println(name);
 		ObservableList<String> options = FXCollections.observableArrayList();
-		options.addAll(eng,fi);
+		options.addAll(eng, fi);
 		maat.setItems(options);
 		maat.setValue(name.toUpperCase());
 		maat.valueProperty().addListener(new ChangeListener<String>() {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				if(oldValue.equalsIgnoreCase(newValue)) {
+				if (oldValue.equalsIgnoreCase(newValue)) {
 					return;
-				}else {
-					System.out.println("it shooudd "+newValue);
-					//muutetaan kieliasetus
-					String appConfigPath="resources/TextResources_Default.properties";
-					Properties properties=new Properties();
+				} else {
+
+					// Muutetaan kieliasetus
+					String appConfigPath = "resources/TextResources_Default.properties";
+					Properties properties = new Properties();
 					try {
 						properties.load(new FileInputStream(appConfigPath));
 						properties.setProperty("language", newValue.toLowerCase());
-						if(newValue.equalsIgnoreCase("EN")) {
+						if (newValue.equalsIgnoreCase("EN")) {
 							properties.setProperty("country", "US");
-							Locale.setDefault(new Locale(newValue.toLowerCase(),"US"));
-							
-						}else {
-							System.out.println("TULI OIKEALLE");
+							Locale.setDefault(new Locale(newValue.toLowerCase(), "US"));
+						} else {
 							properties.setProperty("country", "FI");
-							Locale.setDefault(new Locale(newValue.toLowerCase(),"FI"));
+							Locale.setDefault(new Locale(newValue.toLowerCase(), "FI"));
 						}
-						
 					} catch (FileNotFoundException e) {
 						System.out.println("Tiedostoa ei löytynyt");
 						e.printStackTrace();
 					} catch (IOException e) {
-					
 						e.printStackTrace();
 					}
 					TiedostoKasittely.tallennaKieli(properties, appConfigPath);
 					try {
 						refreshPage();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
 				}
-				
 			}
-	    });
-		maat.setCellFactory(c ->new StatusListCell());
+		});
+		maat.setCellFactory(c -> new StatusListCell());
 		maat.setButtonCell(new StatusListCell());
-		
-		//combobox
+
 		ObservableList<String> valinta = FXCollections.observableArrayList("3", "7", "12", "16", "18");
 		valinnat.setItems(valinta);
 
@@ -220,59 +207,27 @@ public class VierasController {
 		lista.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> pelinTiedot(newValue));
 	}
+
 	private MainApp app;
+
 	public void setMainApp(MainApp app) {
-		this.app=app;
+		this.app = app;
 	}
-	
+
 	public void refreshPage() throws IOException {
 		app.showVieras();
 	}
 
-	// Jää toteutukseen OTP2
 	@FXML
 	void Rajaa(ActionEvent event) {
-		// ei valmis
-		// String sql="SELECT * FROM PELI WHERE ";
-		// rajaustoiminto
-		// boolean test=sell.isSelected();
-		// boolean test1=rent.isSelected();
-		// boolean test2=free.isSelected();
-		// boolean uus=uusin.isSelected();
-		// boolean vanhat=vanhin.isSelected();
-		// String ikä=valinnat.getSelectionModel().getSelectedItem();
-		// if(test==true) {
-		// sql=sql + "Talletustyyppi = " +"\"" + sell.getText() + "\"";
-		// System.out.println(sql);
-		// }
-		// if(test1==true) {
-		// sql=sql +" Talletustyyppi =" +"\"" + rent.getText() + "\"";
-		// }
-		// if(test2==true) {
-		// sql=sql +" Talletustyyppi =" +"\"" + free.getText() + "\"";
-		// }
-		// System.out.println(sql);
-		// System.out.println(test +" rent"+test1+" ilmainen"+test2+" uus"+ uus+" vanha
-		// "+vanhat +" "+ikä);
-
-		// sulje ikkuna
-		rajaahakuNäkymä.setVisible(false);
 	}
 
 	@FXML
 	void accessDenied(ActionEvent event) throws IOException {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Confirmation Dialog");
-		
-		if(locale.equals("en")) {
-			alert.setHeaderText("Information");
-			alert.setContentText(
-					"An account is required to make a game announcement. " + "" + "" + "" + "" + "Do you want to login?");
-		}else {
-			alert.setHeaderText("Tiedoksi");
-			alert.setContentText(
-					"Peli ilmoituksen tekeminen vaatii tilin. " + "" + "" + "" + "" + "Haluatko kirjautua sisään?");
-		}
+		alert.setTitle(bundle.getString("varmistus"));
+		alert.setHeaderText(bundle.getString("ilmoitus"));
+		alert.setContentText(bundle.getString("vaaditaanTiliText"));
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK) {
@@ -297,15 +252,18 @@ public class VierasController {
 				switch (((RadioButton) hakutyyppi.getSelectedToggle()).getText()) {
 				case "Myydään":
 				case "For sale":
-					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Myynti") || pelit.getTalletusTyyppi().contains("For sale"));
+					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Myynti")
+							|| pelit.getTalletusTyyppi().contains("For sale"));
 					break;
 				case "Vuokrataan":
 				case "Rent":
-					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Vuokraus") || pelit.getTalletusTyyppi().contains("Rent"));
+					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Vuokraus")
+							|| pelit.getTalletusTyyppi().contains("Rent"));
 					break;
 				case "Lahjoitetaan":
 				case "Giveaway":
-					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Lahjoitus") || pelit.getTalletusTyyppi().contains("Giveaway"));
+					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Lahjoitus")
+							|| pelit.getTalletusTyyppi().contains("Giveaway"));
 					break;
 				case "Kaikki":
 				case "All":
@@ -315,14 +273,17 @@ public class VierasController {
 			}
 		});
 	}
+
 	/**
 	 * Etusivun Uusin painikkeen sorttaus
 	 */
 	public void uusinPeli() {
 		vanhin2.setSelected(false);
 		Collections.sort(filteredData.getSource(), (a, b) -> b.getPaiva().compareTo(a.getPaiva()));
-		//Collections.sort(filteredData.getSource(), (a, b) -> a.getPaiva().compareTo(b.getPaiva()));
+		// Collections.sort(filteredData.getSource(), (a, b) ->
+		// a.getPaiva().compareTo(b.getPaiva()));
 	}
+
 	/**
 	 * Etusivun Vanhin painikkeen sorttaus
 	 */
@@ -330,58 +291,59 @@ public class VierasController {
 		uusin2.setSelected(false);
 		Collections.sort(filteredData.getSource(), (a, b) -> a.getPaiva().compareTo(b.getPaiva()));
 	}
+
 	// Listan järjestys hinnan mukaan
-		@FXML
-		public void AlhaisinHinta() {
-			korkeinhinta.setSelected(false);
-			pelit = pelitdao.haePelit();
-			int i, j, pienin;
-			Peli apu;
+	@FXML
+	public void AlhaisinHinta() {
+		korkeinhinta.setSelected(false);
+		pelit = pelitdao.haePelit();
+		int i, j, pienin;
+		Peli apu;
 
-			for (i = 0; i < pelit.length; i++) {
-				pienin = i;
-				for (j = i + 1; j < pelit.length; j++) {
-					if (pelit[j].getHinta() < pelit[pienin].getHinta()) {
-						pienin = j;
-					}
-				}
-				if (pienin != i) {
-					apu = pelit[pienin];
-					pelit[pienin] = pelit[i];
-					pelit[i] = apu;
+		for (i = 0; i < pelit.length; i++) {
+			pienin = i;
+			for (j = i + 1; j < pelit.length; j++) {
+				if (pelit[j].getHinta() < pelit[pienin].getHinta()) {
+					pienin = j;
 				}
 			}
-			pelidata.clear();
-			for (int a = 0; a < pelit.length; a++) {
-				pelidata.add(pelit[a]);
+			if (pienin != i) {
+				apu = pelit[pienin];
+				pelit[pienin] = pelit[i];
+				pelit[i] = apu;
 			}
 		}
+		pelidata.clear();
+		for (int a = 0; a < pelit.length; a++) {
+			pelidata.add(pelit[a]);
+		}
+	}
 
-		@FXML
-		public void KorkeinHinta() {
-			alhaisinhinta.setSelected(false);
-			pelit = pelitdao.haePelit();
-			int i, j, suurin;
-			Peli apu;
+	@FXML
+	public void KorkeinHinta() {
+		alhaisinhinta.setSelected(false);
+		pelit = pelitdao.haePelit();
+		int i, j, suurin;
+		Peli apu;
 
-			for (i = 0; i < pelit.length; i++) {
-				suurin = i;
-				for (j = i + 1; j < pelit.length; j++) {
-					if (pelit[j].getHinta() > pelit[suurin].getHinta()) {
-						suurin = j;
-					}
-				}
-				if (suurin != i) {
-					apu = pelit[suurin];
-					pelit[suurin] = pelit[i];
-					pelit[i] = apu;
+		for (i = 0; i < pelit.length; i++) {
+			suurin = i;
+			for (j = i + 1; j < pelit.length; j++) {
+				if (pelit[j].getHinta() > pelit[suurin].getHinta()) {
+					suurin = j;
 				}
 			}
-			pelidata.clear();
-			for (int a = 0; a < pelit.length; a++) {
-				pelidata.add(pelit[a]);
+			if (suurin != i) {
+				apu = pelit[suurin];
+				pelit[suurin] = pelit[i];
+				pelit[i] = apu;
 			}
 		}
+		pelidata.clear();
+		for (int a = 0; a < pelit.length; a++) {
+			pelidata.add(pelit[a]);
+		}
+	}
 
 	private void pelinTiedot(Peli peli) {
 		if (peli != null) {
@@ -393,17 +355,17 @@ public class VierasController {
 			pelaajamäärä.setText(Integer.toString(peli.getPelmaara()));
 			kuvaus.setText(peli.getKuvaus());
 			tekstikenttä.setText(peli.getTekstikenttä());
-			  DateFormat dateFormat;
-			if(locale.equals("en")) {
-				//Päivämäärän formatointi
-				
+			
+			// Päivämäärän formatointi
+			DateFormat dateFormat;
+			if (locale.equals("en")) {
 				dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.US);
-				String paivamaaraFormat = dateFormat.format(peli.getPaiva()); 
+				String paivamaaraFormat = dateFormat.format(peli.getPaiva());
 				päivämäärä.setText("" + paivamaaraFormat);
-			}else {
+			} else {
 				dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-           	 String paivamaaraFormat = dateFormat.format(peli.getPaiva()); 
-               päivämäärä.setText(""+paivamaaraFormat);
+				String paivamaaraFormat = dateFormat.format(peli.getPaiva());
+				päivämäärä.setText("" + paivamaaraFormat);
 			}
 		} else {
 			pelinNimi.setText("");
@@ -416,12 +378,9 @@ public class VierasController {
 			päivämäärä.setText("");
 		}
 	}
-	
-	
-	
+
 	@FXML
 	void vieKirjautumisNäkymään(ActionEvent event) throws IOException {
-		//Viedään kirjautumissivulle
 		app.showLogin();
 	}
 

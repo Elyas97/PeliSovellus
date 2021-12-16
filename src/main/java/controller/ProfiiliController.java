@@ -80,7 +80,7 @@ public class ProfiiliController {
 			} else {
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);
 				alert.setTitle(bundle.getString("ilmoitus"));
-				alert.setContentText(bundle.getString("tietojenTallennusEpäonnistuiText"));
+				alert.setContentText(bundle.getString("tietojenTallennusEpaonnistuiText"));
 				alert.showAndWait();
 			}
 		}

@@ -9,7 +9,6 @@
 package controller;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -17,9 +16,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -27,7 +23,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -94,13 +89,13 @@ public class LisaaPeliController {
 	private Text ilmoitustyyppivaroitus;
 
 	Kayttaja käyttäjä;
-
 	private Stage dialogStage;
 	private boolean tallennaClicked = false;
 	private MainApp main;
 	PeliSovellusDAO pelisovellusdao = new PeliSovellusDAO();
 	EtusivuController etusivu = new EtusivuController();
 	String locale = Locale.getDefault().getLanguage();
+	ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 
 	public LisaaPeliController() {
 	}
@@ -111,7 +106,7 @@ public class LisaaPeliController {
 
 		// Poistaa "pakollinen valinta" tekstikentän
 		ilmoitustyyppivaroitus.setText("");
-		
+
 		switch (text) {
 		case "Lahjoitetaan":
 		case "Giveaway":
@@ -125,10 +120,12 @@ public class LisaaPeliController {
 		}
 		return text;
 	}
+
 	/**
-	 * Kuuntelee Pelin tyyppi valintaa, jos Videopeli on valittuna näyttää konsolivalinnan
+	 * Kuuntelee Pelin tyyppi valintaa, jos Videopeli on valittuna näyttää
+	 * konsolivalinnan
 	 * 
-	 * @param Action 
+	 * @param Action
 	 * @return palauttaa radiobuttonissa olevan tekstin
 	 */
 	@FXML
@@ -144,46 +141,44 @@ public class LisaaPeliController {
 		}
 		return text;
 	}
-	
+
 	/**
-	 * Alustaa sivun, täyttää pudotusvalikot tiedoilla 
-	 * kutsuu myös Yhteystieto kentän kirjainmäärä laskuriin tarvittavaa metodia
+	 * Alustaa sivun, täyttää pudotusvalikot tiedoilla kutsuu myös Yhteystieto
+	 * kentän kirjainmäärä laskuriin tarvittavaa metodia
 	 */
 
 	@FXML
 	private void initialize() {
 		käyttäjä = TiedostoKasittely.lueKäyttäjä();
-		
-		if(locale.equals("en")) {
-			//Tallentuu myös tietokantaan englanniksi, pitäisiköhän kääntää uudelleen suomeksi?
-			ObservableList<String> options = FXCollections.observableArrayList("Sports", "Shooting", "Action",
-					"Racing", "Horror", "Adventure", "Strategy", "Roleplay", "Puzzle", "Party", "Boardgame");
+
+		if (locale.equals("en")) {
+			// Tallentuu myös tietokantaan englanniksi, pitäisiköhän kääntää uudelleen
+			// suomeksi?
+			ObservableList<String> options = FXCollections.observableArrayList("Sports", "Shooting", "Action", "Racing",
+					"Horror", "Adventure", "Strategy", "Roleplay", "Puzzle", "Party", "Boardgame");
 			genre.setItems(options);
-			
+
 			ObservableList<String> kuntoOptions = FXCollections.observableArrayList("Excellent", "Great", "Good",
 					"Moderate", "Passable");
 			kunto.setItems(kuntoOptions);
-		}else {
+		} else {
 			ObservableList<String> options = FXCollections.observableArrayList("Urheilu", "Räiskintä", "Toiminta",
 					"Ajopeli", "Jännitys", "Seikkailu", "Strategia", "Roolipeli", "Pulma", "Seurapeli", "Lautapeli");
 			genre.setItems(options);
-			
+
 			ObservableList<String> kuntoOptions = FXCollections.observableArrayList("Erinomainen", "Kiitettävä", "Hyvä",
 					"Kohtalainen", "Välttävä");
 			kunto.setItems(kuntoOptions);
 		}
-	
+
 		ObservableList<String> konsoliOptions = FXCollections.observableArrayList("Xbox", "Playstation", "Wii");
 		konsoli.setItems(konsoliOptions);
 
 		tekstikenttä.setText(käyttäjä.getSähköposti() + "\n" + käyttäjä.getPuhelinumero() + " ");
-
-		//kuvaus.setPromptText("Kuvaile peliä tai kerro kokemuksiasi pelistä");
 		kirjaimet();
 		tekstikenttä.textProperty().addListener((obs, old, newew) -> {
 			kirjaimet();
 		});
-
 		validointiPiiloon();
 	}
 
@@ -195,7 +190,7 @@ public class LisaaPeliController {
 		this.dialogStage = dialogStage;
 	}
 
-	/*
+	/**
 	 * Luo uuden pelin tietokantaan Ennen tietojen lähettämistä tarkastaa onko
 	 * kaikki kentät täytetty.
 	 * 
@@ -228,27 +223,20 @@ public class LisaaPeliController {
 			peli.setPaivamaara(paiva);
 
 			käyttäjä = TiedostoKasittely.lueKäyttäjä();
-
 			pelisovellusdao.lisaaPeli(peli, käyttäjä.getKayttajaID());
 			tallennaClicked = true;
 
 			// Ilmoitus pelin onnistuneesta lisäyksestä
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setTitle("Alert");
-			
-			if(locale.equals("en")) { 
-				alert.setContentText("New game added succesfully!");
-			}else {
-				alert.setContentText("Uusi peli lisätty onnistuneesti!");
-			}
-			
+			alert.setTitle(bundle.getString("ilmoitus"));
+			alert.setContentText(bundle.getString("uusiPeliLisattyText"));
 			alert.showAndWait();
 
 			etusivu.listaaPelit();
 		}
 	}
 
-	/*
+	/**
 	 * Kuuntelee kenttien syöttöä ja asettaa varoitustekstit pois jos kentissä on
 	 * tekstiä
 	 */
@@ -290,9 +278,10 @@ public class LisaaPeliController {
 			kuntovaroitus.setText("");
 		});
 	}
+
 	/**
-	 * Laskee jäljellä olevat kirjaimet Yhteystiedot kentälle
-	 * kun kirjaimet on täynnä antaa varoituksen siitä ja ilmoittaa että kenttä on täynnä
+	 * Laskee jäljellä olevat kirjaimet Yhteystiedot kentälle kun kirjaimet on
+	 * täynnä antaa varoituksen siitä ja ilmoittaa että kenttä on täynnä
 	 */
 	@FXML
 	public void kirjaimet() {
@@ -308,14 +297,8 @@ public class LisaaPeliController {
 
 			// Ilmoitus siitä että tekstikenttä on täynnä
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setTitle("Alert");
-			
-			if(locale.equals("en")) { 
-				alert.setContentText("Textfield is full!");
-			}else {
-				alert.setContentText("Tekstikenttä täynnä!");
-			}
-
+			alert.setTitle(bundle.getString("ilmoitus"));
+			alert.setContentText(bundle.getString("tekstikenttaTaynnaText"));
 			alert.showAndWait();
 
 			// Tekstikenttään voi taas kirjoittaa
@@ -326,7 +309,7 @@ public class LisaaPeliController {
 		}
 	}
 
-	/*
+	/**
 	 * 
 	 * Tarkistaa onko uusipeli.fxml kentät tyhjiä ennen kuin lähettää ne
 	 * tietokantaan Jos kentät ovat tyhjiä niin ilmoittaa siitä "pakollinen kenttä"
@@ -339,112 +322,61 @@ public class LisaaPeliController {
 	private boolean validointi() {
 
 		StringBuilder virhe = new StringBuilder();
-
 		if (pelinnimi.getText().trim().isEmpty()) {
-			//Alertteihin myös properties tiedostosta käännökset?
-			if(locale.equals("en")) {
-				virhe.append("Insert name\n");
-			}else {
-				virhe.append("Syötä pelin nimi\n");
-			}
+			virhe.append(bundle.getString("nimivaroitusText") + "\n");
 			pelinnimi.setStyle("-fx-border-color:red");
 			nimivaroitus.setVisible(true);
 		}
 		if (hinta.getText().trim().isEmpty()) {
-			if(locale.equals("en")) {
-				virhe.append("Insert price\n");
-			}else {
-				virhe.append("Syötä pelin hinta\n");
-			}
+			virhe.append(bundle.getString("hintavaroitusText") + "\n");
 			hinta.setStyle("-fx-border-color:red");
 			hintavaroitus.setVisible(true);
 		}
 		if (kaupunki.getText().trim().isEmpty()) {
-			if(locale.equals("en")) {
-				virhe.append("Insert city\n");
-			}else {
-				virhe.append("Syötä kaupunki\n");
-			}
+			virhe.append(bundle.getString("kaupunkivaroitusText") + "\n");
 			kaupunki.setStyle("-fx-border-color:red");
 			paikkakuntavaroitus.setVisible(true);
 		}
 		if (((RadioButton) pelintyyppi.getSelectedToggle()) == null) {
-			if(locale.equals("en")) {
-				virhe.append("Insert game type\n");
-			}else {
-				virhe.append("Syötä pelintyyppi\n");
-			}
+			virhe.append(bundle.getString("pelintyyppivaroitusText") + "\n");
 			tyyppivaroitus.setVisible(true);
 		}
 		if (((RadioButton) tyyppi.getSelectedToggle()) == null) {
-			if(locale.equals("en")) {
-				virhe.append("Insert notice type\n");
-			}else {
-				virhe.append("Syötä ilmoituksen tyyppi\n");
-			}
+			virhe.append(bundle.getString("ilmoituksentyyppivaroitusText") + "\n");
 			ilmoitustyyppivaroitus.setVisible(true);
 		}
 		if (genre.getValue() == null) {
-			if(locale.equals("en")) {
-				virhe.append("Insert genre\n");
-			}else {
-				virhe.append("Syötä genre\n");
-			}
+			virhe.append(bundle.getString("genrevaroitusText") + "\n");
 			genrevaroitus.setVisible(true);
 		}
 		if (ikaraja.getText().trim().isEmpty()) {
-			if(locale.equals("en")) {
-				virhe.append("Insert agelimit\n");
-			}else {
-				virhe.append("Syötä pelin ikäraja\n");
-			}
+			virhe.append(bundle.getString("ikarajavaroitusText") + "\n");
 			ikaraja.setStyle("-fx-border-color:red");
 			ikarajavaroitus.setVisible(true);
 		}
 		if (pelaajamaara.getText().trim().isEmpty()) {
-			if(locale.equals("en")) {
-				virhe.append("Insert number of players\n");
-			}else {
-				virhe.append("Syötä pelin pelaajamäärä \n");
-			}
+			virhe.append(bundle.getString("pelaajamaaravaroitusText") + "\n");
 			pelaajamaara.setStyle("-fx-border-color:red");
 			pelaajamaaravaroitus.setVisible(true);
 		}
 		if (kunto.getValue() == null) {
-			if(locale.equals("en")) {
-				virhe.append("Insert shape\n");
-			}else {
-				virhe.append("Syötä pelinkunto\n");
-			}
+			virhe.append(bundle.getString("kuntovaroitusText") + "\n");
 			kuntovaroitus.setVisible(true);
 		}
 		if (kuvaus.getText().trim().isEmpty()) {
-			if(locale.equals("en")) {
-				virhe.append("Insert description\n");
-			}else {
-				virhe.append("Syötä kuvaus\n");
-			}
+			virhe.append(bundle.getString("kuvausvaroitusText") + "\n");
 			kuvaus.setStyle("-fx-border-color:red");
 			kuvausvaroitus.setVisible(true);
 		}
 		if (tekstikenttä.getText().trim().isEmpty()) {
-			if(locale.equals("en")) {
-				virhe.append("Insert contact information\n");
-			}else {
-				virhe.append("Syötä tekstikenttään asioita \n");
-			}
+			virhe.append(bundle.getString("tekstikenttavaroitusText") + "\n");
 			tekstikenttä.setStyle("-fx-border-color:red");
 			tekstikenttavaroitus.setVisible(true);
 		}
 		if (virhe.length() > 0) {
 			Alert varoitus = new Alert(Alert.AlertType.WARNING);
-			if(locale.equals("en")) {
-				varoitus.setTitle("Failure");
-				varoitus.setHeaderText("Warning");
-			}else {
-				varoitus.setTitle("Virhe");
-				varoitus.setHeaderText("Varoitus");
-			}
+			varoitus.setTitle(bundle.getString("virhe"));
+			varoitus.setHeaderText(bundle.getString("varoitus"));
 			varoitus.setContentText(virhe.toString());
 			varoitus.showAndWait();
 			return false;
@@ -458,9 +390,7 @@ public class LisaaPeliController {
 
 	@FXML
 	void vieEtusivulle(ActionEvent event) throws IOException {
-		// Vaihdetaan näkymää samalla viedään käyttäjän tiedot
 		main.showEtusivu();
-
 	}
 
 	@FXML
@@ -477,7 +407,6 @@ public class LisaaPeliController {
 	void LogOut(ActionEvent event) throws IOException {
 		boolean test = TiedostoKasittely.poistaTiedosto();
 		if (test == true) {
-			// Viedään kirjautumissivulle
 			main.showLogin();
 		}
 	}
