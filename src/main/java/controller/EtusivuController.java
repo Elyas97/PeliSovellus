@@ -1,3 +1,11 @@
+/**
+ * Määrittelee etusivun controllerin painikkeiden ja muiden komponenttien toiminnallisuuden
+ * 
+ * 
+ * @author jarnopk
+ * @version 1.0
+ * 
+ */
 package controller;
 
 import java.io.IOException;
