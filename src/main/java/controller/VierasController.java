@@ -198,8 +198,6 @@ public class VierasController {
 
 		hakutyyppi();
 
-		hakurajaus.setPromptText("Rajaa hakua");
-
 		listaaPelit();
 
 		pelihaku.textProperty().addListener((obs, oldValue, newValue) -> {

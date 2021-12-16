@@ -102,7 +102,7 @@
                                                 <Insets right="2.0" top="20.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <ComboBox fx:id="hakurajaus" prefHeight="27.0" prefWidth="65.0">
+                                          <ComboBox fx:id="hakurajaus" prefHeight="27.0" prefWidth="110.0" promptText="%rajaaHakuaValikko">
                                              <HBox.margin>
                                                 <Insets right="2.0" top="20.0" />
                                              </HBox.margin>

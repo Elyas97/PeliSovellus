@@ -10,25 +10,19 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import model.Kayttaja;
 import model.PeliSovellusDAO;
 import model.TiedostoKasittely;
@@ -50,15 +44,16 @@ public class ProfiiliController {
 	private TextField numero;
 	@FXML
 	private Text tippi;
-    @FXML
-    private ComboBox<String> maat;
-	
+	@FXML
+	private ComboBox<String> maat;
+
 	Kayttaja käyttäjä;
 	String locale = Locale.getDefault().getLanguage();
+	ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 
 	@FXML
 	void tallennaMuutokset(ActionEvent event) {
-		
+
 		boolean validointi = validointi();
 		if (validointi == true) {
 			käyttäjä.setEtunimi(etu.getText());
@@ -67,37 +62,25 @@ public class ProfiiliController {
 			käyttäjä.setPuhelinumero(numero.getText());
 			PeliSovellusDAO dao2 = new PeliSovellusDAO();
 			boolean test = dao2.updateKäyttäjä(käyttäjä);
-			
+
 			if (test == true) {
-				//Päivitetään tiedosto
+				// Päivitetään tiedosto
 				TiedostoKasittely.kirjoitaTiedosto(käyttäjä);
-				
-				//Ilmoitetaan onnistumisesta
+
+				// Ilmoitetaan onnistumisesta
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);
-				
-				if(locale.equals("en")) {
-					alert.setTitle("Notification");
-					alert.setContentText("Changes saved succesfully!");
-				}else {
-					alert.setTitle("Ilmoitus");
-					alert.setContentText("Tietojen tallennus onnistui");
-				}
+				alert.setTitle(bundle.getString("ilmoitus"));
+				alert.setContentText(bundle.getString("tietojenTallennusOnnistuiText"));
 				alert.showAndWait();
-				
+
 				etu.setText(käyttäjä.getEtunimi());
 				suku.setText(käyttäjä.getSukunimi());
 				email.setText(käyttäjä.getSähköposti());
 				numero.setText("" + käyttäjä.getPuhelinumero());
 			} else {
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);
-				
-				if(locale.equals("en")) {
-					alert.setTitle("Notification");
-					alert.setContentText("Failing to save changes, server problem.");
-				}else {
-					alert.setTitle("Ilmoitus");
-					alert.setContentText("Tietojen tallennus epäonnistui, palvelin ongelma.");
-				}
+				alert.setTitle(bundle.getString("ilmoitus"));
+				alert.setContentText(bundle.getString("tietojenTallennusEpäonnistuiText"));
 				alert.showAndWait();
 			}
 		}
@@ -105,52 +88,27 @@ public class ProfiiliController {
 
 	@FXML
 	void PoistaTili(ActionEvent event) throws IOException {
-		
-		ButtonType kyllä;
-		ButtonType ei;
-		if(locale.equals("en")) {
-			kyllä = new ButtonType("Yes", ButtonData.OK_DONE);
-			ei = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-		}else {
-			kyllä = new ButtonType("Kyllä", ButtonData.OK_DONE);
-			ei = new ButtonType("Peruuta", ButtonData.CANCEL_CLOSE);
-		}
-		
-		Alert alert;
-		if(locale.equals("en")) {
-			alert = new Alert(AlertType.CONFIRMATION,
-					"If you delete your account you will lose all saved data\n" + "Like all the games you add.", kyllä, ei);
-			alert.setTitle("Confirmation");
-			alert.setHeaderText("Confirm account deletion");
-		}else {
-			alert = new Alert(AlertType.CONFIRMATION,
-					"Jos poistat tilin menetät kaikki tiedot\n" + "Kuten kaikki lisäämäsi pelit.", kyllä, ei);
-			alert.setTitle("Vahvistus");
-			alert.setHeaderText("Vahvista tilin poisto");
-		}
-		
+
+		ButtonType kyllä = new ButtonType(bundle.getString("kylläButton"), ButtonData.OK_DONE);
+		ButtonType ei = new ButtonType(bundle.getString("peruutaButton"), ButtonData.CANCEL_CLOSE);
+
+		Alert alert = new Alert(AlertType.CONFIRMATION, bundle.getString("tilinpoistoVaroitusText"), kyllä, ei);
+		alert.setTitle(bundle.getString("varmistus"));
+		alert.setHeaderText(bundle.getString("vahvistaTilinPoistoText"));
 		Optional<ButtonType> result = alert.showAndWait();
-		
+
 		if (result.get() == kyllä) {
-			//Poistetaan tili
+			// Poistetaan tili
 			PeliSovellusDAO poista = new PeliSovellusDAO();
 			boolean test = poista.poistaKayttaja(käyttäjä);
 			TiedostoKasittely.poistaTiedosto();
 			System.out.println(test);
-			//Viedään vierasNäkymään
+			// Viedään vierasNäkymään
 			if (test = true) {
-				//Ilmoitus tilin poistamisesta
-				Alert alert2;
-				if(locale.equals("en")) {
-					alert2 = new Alert(AlertType.INFORMATION, "Account deleted");
-					alert2.setTitle("Account deleted");
-					alert2.setHeaderText("Information");
-				}else {
-					alert2 = new Alert(AlertType.INFORMATION, "Tili poistettu");
-					alert2.setTitle("Tili poistettu");
-					alert2.setHeaderText("Tiedoksi");
-				}
-				
+				// Ilmoitus tilin poistamisesta
+				Alert alert2 = new Alert(AlertType.INFORMATION, bundle.getString("tiliPoistettuText"));
+				alert2.setTitle(bundle.getString("tiliPoistettuText"));
+				alert2.setHeaderText(bundle.getString("ilmoitus"));
 				alert2.showAndWait();
 				app.showVieras();
 			}
@@ -161,24 +119,24 @@ public class ProfiiliController {
 	void LogOut(ActionEvent event) throws IOException {
 		boolean test = TiedostoKasittely.poistaTiedosto();
 		if (test == true) {
-			//Viedään kirjautumissivulle
+			// Viedään kirjautumissivulle
 			app.showLogin();
 		}
 	}
 
 	@FXML
 	void VieEtusivunNäkymä(ActionEvent event) throws IOException {
-	app.showEtusivu();
+		app.showEtusivu();
 	}
 
 	@FXML
 	void vieTapahtumaNäkymä(ActionEvent event) throws IOException {
-	app.tapahtumatSivuOverview();
+		app.tapahtumatSivuOverview();
 	}
 
 	@FXML
 	void vieUuspeliNäkymä(ActionEvent event) throws IOException {
-	app.lisaaPeliOverview();
+		app.lisaaPeliOverview();
 	}
 
 	@FXML
@@ -188,66 +146,61 @@ public class ProfiiliController {
 		suku.setText(käyttäjä.getSukunimi());
 		email.setText(käyttäjä.getSähköposti());
 		numero.setText("" + käyttäjä.getPuhelinumero());
-		
-		//kieli
+
+		// Kieli
 		String fi = "FI";
 		String eng = "EN";
-		String name=Locale.getDefault().getLanguage();
+		String name = Locale.getDefault().getLanguage();
 		System.out.println(name);
 		ObservableList<String> options = FXCollections.observableArrayList();
-		options.addAll(eng,fi);
+		options.addAll(eng, fi);
 		maat.setItems(options);
 		maat.setValue(name.toUpperCase());
-		//maat.getSelectionModel().select(0);
 		maat.valueProperty().addListener(new ChangeListener<String>() {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				if(oldValue.equalsIgnoreCase(newValue)) {
+				if (oldValue.equalsIgnoreCase(newValue)) {
 					return;
-				}else {
-					System.out.println("it shooudd "+newValue);
-					//muutetaan kieliasetus
-					String appConfigPath="resources/TextResources_Default.properties";
-					Properties properties=new Properties();
+				} else {
+					System.out.println("it shooudd " + newValue);
+					// Muutetaan kieliasetus
+					String appConfigPath = "resources/TextResources_Default.properties";
+					Properties properties = new Properties();
 					try {
 						properties.load(new FileInputStream(appConfigPath));
 						properties.setProperty("language", newValue.toLowerCase());
-						if(newValue.equalsIgnoreCase("EN")) {
+						if (newValue.equalsIgnoreCase("EN")) {
 							properties.setProperty("country", "US");
-							Locale.setDefault(new Locale(newValue.toLowerCase(),"US"));
-							
-						}else {
+							Locale.setDefault(new Locale(newValue.toLowerCase(), "US"));
+
+						} else {
 							System.out.println("TULI OIKEALLE");
 							properties.setProperty("country", "FI");
-							Locale.setDefault(new Locale(newValue.toLowerCase(),"FI"));
+							Locale.setDefault(new Locale(newValue.toLowerCase(), "FI"));
 						}
-						
+
 					} catch (FileNotFoundException e) {
 						System.out.println("Tiedostoa ei löytynyt");
 						e.printStackTrace();
 					} catch (IOException e) {
-					
+
 						e.printStackTrace();
 					}
 					TiedostoKasittely.tallennaKieli(properties, appConfigPath);
 					try {
 						refreshPage();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
 				}
-				
 			}
 
 			private void refreshPage() throws IOException {
 				app.showProfile();
-				
 			}
-	    });
-		maat.setCellFactory(c ->new StatusListCell());
+		});
+		maat.setCellFactory(c -> new StatusListCell());
 		maat.setButtonCell(new StatusListCell());
 	}
 
@@ -275,7 +228,7 @@ public class ProfiiliController {
 		boolean validEmail = matcher.matches();
 		if (validEmail == false) {
 			email.setStyle("-fx-border-color:red");
-			tippi.setText("Väärä muoto");
+			tippi.setText(bundle.getString("vaaraMuotoText"));
 			test = false;
 		}
 		if (numero.getText() == "") {
@@ -284,11 +237,7 @@ public class ProfiiliController {
 		}
 		if (validoiEmail() == false) {
 			email.setStyle("-fx-border-color:red");
-			if(locale.equals("en")) {
-				tippi.setText("Email is already registered");
-			}else {
-				tippi.setText("Sähköpostilla on jo rekistyröity");
-			}
+			tippi.setText(bundle.getString("sahkopostiKaytossaText"));
 			test = false;
 		}
 		return test;
@@ -309,6 +258,6 @@ public class ProfiiliController {
 	}
 
 	public void setMainApp(MainApp mainApp) {
-		this.app=mainApp;
+		this.app = mainApp;
 	}
 }

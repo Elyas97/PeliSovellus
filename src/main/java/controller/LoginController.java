@@ -35,7 +35,8 @@ public class LoginController {
 	@FXML
 	private TextField tunnus23;
 	String locale = Locale.getDefault().getLanguage();
-	
+	ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
+
 	@FXML
 	void kirjaudu(ActionEvent event) {
 		boolean test = validointi();
@@ -44,39 +45,24 @@ public class LoginController {
 			kirjautunut = login.login(tunnus23.getText(), pwd23.getText());
 			System.out.println("testing" + kirjautunut);
 			if (kirjautunut != null) {
-
+				
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);
-				
-				if(locale.equals("en")) {
-					alert.setTitle("Information");
-					alert.setContentText("Login succesfully!");
-				}else {
-					// Otsikon asetus
-					alert.setTitle("Ilmoitus");
-					// Sisällön asetus
-					alert.setContentText("Kirjautuminen onnistui!");
-				}
-				
+				alert.setTitle(bundle.getString("ilmoitus"));
+				alert.setContentText(bundle.getString("kirjautuminenOnnistui"));
 				alert.showAndWait();
-				// siirretään etusivulle ja tallenetaan käyttäjä controlleriin
 				
-					// Annetaan kirjautuneen käyttäjän tiedot
-					TiedostoKasittely.kirjoitaTiedosto(kirjautunut);
-					// Ladataan etusivu
-					System.out.println(TiedostoKasittely.lueKäyttäjä().getEtunimi());
-					app.showEtusivu();
+				// Siirretään etusivulle ja tallenetaan käyttäjä controlleriin
+				// Annetaan kirjautuneen käyttäjän tiedot
+				TiedostoKasittely.kirjoitaTiedosto(kirjautunut);
 				
+				// Ladataan etusivu
+				System.out.println(TiedostoKasittely.lueKäyttäjä().getEtunimi());
+				app.showEtusivu();
+
 			} else {
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);
-				
-				if(locale.equals("en")) {
-					alert.setTitle("Notification");
-					alert.setContentText("Password or username incorrect");
-				}else {
-					alert.setTitle("Ilmoitus");
-					alert.setContentText("Salasana tai Sähköposti väärä");
-				}
-				
+				alert.setTitle(bundle.getString("ilmoitus"));
+				alert.setContentText(bundle.getString("salasanaVaaraIlmoitus"));
 				alert.showAndWait();
 			}
 		}
@@ -84,7 +70,7 @@ public class LoginController {
 
 	@FXML
 	void vieRekistyröintiNäkymään(ActionEvent event) throws IOException {
-	app.showRegister();
+		app.showRegister();
 	}
 
 	@FXML
@@ -113,6 +99,6 @@ public class LoginController {
 	}
 
 	public void setMainApp(MainApp mainApp) {
-		this.app=mainApp;
+		this.app = mainApp;
 	}
 }
