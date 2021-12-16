@@ -1,3 +1,11 @@
+/**
+ * Pelin lisäys -sivun toiminnallisuus
+ * 
+ * @author jarnopk, jasminja, elyasa
+ * @version 1.0
+ * 
+ */
+
 package controller;
 
 import java.io.IOException;
@@ -117,7 +125,12 @@ public class LisaaPeliController {
 		}
 		return text;
 	}
-
+	/**
+	 * Kuuntelee Pelin tyyppi valintaa, jos Videopeli on valittuna näyttää konsolivalinnan
+	 * 
+	 * @param Action 
+	 * @return palauttaa radiobuttonissa olevan tekstin
+	 */
 	@FXML
 	public String tyyppi(ActionEvent Action) {
 		String text = ((RadioButton) pelintyyppi.getSelectedToggle()).getText();
@@ -131,6 +144,11 @@ public class LisaaPeliController {
 		}
 		return text;
 	}
+	
+	/**
+	 * Alustaa sivun, täyttää pudotusvalikot tiedoilla 
+	 * kutsuu myös Yhteystieto kentän kirjainmäärä laskuriin tarvittavaa metodia
+	 */
 
 	@FXML
 	private void initialize() {
@@ -272,7 +290,10 @@ public class LisaaPeliController {
 			kuntovaroitus.setText("");
 		});
 	}
-
+	/**
+	 * Laskee jäljellä olevat kirjaimet Yhteystiedot kentälle
+	 * kun kirjaimet on täynnä antaa varoituksen siitä ja ilmoittaa että kenttä on täynnä
+	 */
 	@FXML
 	public void kirjaimet() {
 		int maxpituus = 200;

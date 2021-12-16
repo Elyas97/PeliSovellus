@@ -1,3 +1,11 @@
+/**
+ * Lisätyt pelit sivun toiminnallisuus, sivulla voi muokata omia ilmoituksia
+ * 
+ * @author jarnopk, jasminja, elyasa
+ * 
+ * @version 1.0
+ * 
+ */
 package controller;
 
 import java.io.IOException;
@@ -108,7 +116,10 @@ public class TapahtumatController {
 
 	public TapahtumatController() {
 	}
-
+	/**
+	 * Sivun alustus, täyttää pudotusvalikot tarvittavilla tiedoilla
+	 * 
+	 */
 	@FXML
 	public void initialize() {
 		// Kirjautuneen käyttäjän haku
@@ -148,7 +159,10 @@ public class TapahtumatController {
 		
 		validointiPiiloon();
 	}
-	
+	/**
+	 * Kuuntelee ilmoituksen tyyppi radiobuttoneita, jos valitaan lahjoitus asettaa hinnan automaattisesti 0
+	 * 
+	 */
 	@FXML
 	public String ilmoituksenTyyppiAction(ActionEvent Action) {
 		String text = ((RadioButton) tyyppi.getSelectedToggle()).getText();
@@ -167,7 +181,12 @@ public class TapahtumatController {
 		}
 		return text;
 	}
-
+	/**
+	 * Kuuntelee Pelin tyyppi valintaa, jos Videopeli on valittuna näyttää konsolivalinnan
+	 * 
+	 * @param Action 
+	 * @return palauttaa radiobuttonissa olevan tekstin
+	 */
 	@FXML
 	public String tyyppi(ActionEvent Action) {
 		String text = ((RadioButton) pelintyyppi.getSelectedToggle()).getText();
@@ -203,8 +222,12 @@ public class TapahtumatController {
 		}
 	}
 
-	/*
-	 * Pelin poistaminen
+	/**
+	 * Pelin poistamisen varmistus, kutsuu poistaPeliTietokannasta -metodia 
+	 * Ennen kuin poisto tapahtuu tulee varoitusikkuna jolla varmistutaan että käyttäjä on varma
+	 * Poiston jälkeen ilmoitetaan poiston onnistumisesta
+	 * 
+	 * 
 	 */
 	@FXML
 	public void poistaPeli() {
@@ -245,8 +268,10 @@ public class TapahtumatController {
 		}
 	}
 
-	/*
-	 * Pelin poistaminen tietokannasta
+	/**
+	 * Kutsuu PeliSovellusDaon metodia poistaPeli() saamallaan pelin ID:llä
+	 * Päivittää listan poistamisen jälkeen
+	 * @param peli Peliolion tiedot josta otetaan ID
 	 */
 	public void poistaPeliTietokannasta(Peli peli) {
 		int id = peli.getPeliId();
@@ -257,8 +282,9 @@ public class TapahtumatController {
 		listaaOmatPelit();
 	}
 
-	/*
-	 * Varoitukset piiloon kun klikataan toista peliä
+	/**
+	 * Poistaa punaiset reunat ja Pakollinen -kenttä tekstit
+	 * 
 	 */
 	private void varoituksetPiiloon() {
 		nimivaroitus.setText("");
@@ -287,8 +313,10 @@ public class TapahtumatController {
 		konsolivaroitus.setStyle("-fx-border-color:none");
 	}
 
-	/*
-	 * Pelin tietojen näyttäminen
+	/**
+	 * Täyttää listasta valitun pelin tiedot niille kuuluville kentille
+	 * 
+	 * @param peli Listasta valittu peli
 	 */
 	private void pelinTiedot(Peli peli) {
 
@@ -338,8 +366,10 @@ public class TapahtumatController {
 		}
 	}
 
-	/*
-	 * Pelin tietojen muutosten tallennus
+	/**
+	 * Päivittää kenttiin tehdyt muutokset tietokantaan
+	 * Ilmoittaa onnistumisesta Alertin avulla
+	 * 
 	 */
 	@FXML
 	public void tallennaMuutokset() {
@@ -390,9 +420,12 @@ public class TapahtumatController {
 		}
 	}
 
-	/*
-	 * Muutoslomakkeen validointi Tyhjistä kentistä huomautetaan alertilla ja
-	 * punaisella värillä
+	/**
+	 * Muutoslomakkeen validointi
+	 * Tyhjistä kentistä huomautetaan alertilla ja punaisella värillä
+	 *  
+	 * 
+	 * @return palauttaa true jos kaikki kentät täytetty
 	 */
 	public boolean taytaTyhjatKentat() {
 
@@ -465,7 +498,10 @@ public class TapahtumatController {
 		}
 		return true;
 	}
-	
+		/**
+		 * Kuuntelee täytettäviä kenttiä, RadioButtoneita ja pudotusvalikkoja ja piilottaa punaisen reunan ja Pakollinen kenttä tekstin kun ehdot täyttyvät
+		 * 
+		 */
 	private void validointiPiiloon() {
 		pelinnimi.textProperty().addListener((obs, oldValue, newValue) -> {
 			nimivaroitus.setText("");
@@ -509,8 +545,9 @@ public class TapahtumatController {
 		});
 	}
 
-	/*
-	 * Tekstikentän kirjainmäärälaskuri
+	/**
+	 * Laskee jäljellä olevat kirjaimet Yhteystiedot kentälle
+	 * kun kirjaimet on täynnä antaa varoituksen siitä ja ilmoittaa että kenttä on täynnä
 	 */
 	@FXML
 	public void kirjaimet() {
