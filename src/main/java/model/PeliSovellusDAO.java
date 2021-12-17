@@ -1,3 +1,10 @@
+/**
+ * Muodostaa yhteyden tietokantaan
+ * 
+ * 
+ * @author jarnopk, jasminja, elyasa
+ * 
+ */
 package model;
 
 import java.sql.*;
@@ -28,8 +35,11 @@ public class PeliSovellusDAO {
 		}
 	}
 
-	/*
-	 * Luodaan uusi käyttäjä
+	/**
+	 * Käyttäjän luominen ja tietojen vieminen tietokantaan
+	 * 
+	 * @param käyttäjä saa käyttäjä olion ja vie tiedot tietokantaan
+	 * @return palauttaa true jos onnistui
 	 */
 	public boolean createKäyttäjä(Kayttaja käyttäjä) {
 		boolean temp = false;
@@ -55,8 +65,9 @@ public class PeliSovellusDAO {
 		return temp;
 	}
 
-	/*
-	 * Käyttäjien lukeminen tietokannasta
+	/**
+	 * Lukee käyttäjätiedot tietokannasta
+	 * @return palauttaa käyttäjät taulukkona
 	 */
 	public Kayttaja[] readKäyttäjät() {
 		ArrayList<Kayttaja> lista = new ArrayList();
@@ -103,8 +114,11 @@ public class PeliSovellusDAO {
 		return users;
 	}
 
-	/*
-	 * Käyttäjän päivitys
+	/**
+	 * Käyttäjän tietojen päivittäminen
+	 * 
+	 * @param käyttäjä kirjautuneen käyttäjän tiedot
+	 * @return palauttaa true jos onnistui
 	 */
 	public boolean updateKäyttäjä(Kayttaja käyttäjä) {
 		boolean temp = false;
@@ -127,8 +141,12 @@ public class PeliSovellusDAO {
 		return temp;
 	}
 
-	/*
+	/**
 	 * Pelin lisääminen tietokantaan
+	 * 
+	 * @param peli Peli olio joka sisältää pelin tiedot
+	 * @param kayttajaID ilmoituksen jättäneen käyttäjän uniikki ID numero
+	 * @return palauttaa true jos onnistui
 	 */
 	public boolean lisaaPeli(Peli peli, int kayttajaID) {
 		boolean temp = false;
@@ -166,9 +184,11 @@ public class PeliSovellusDAO {
 		return temp;
 	}
 
-	/*
-	 * Haetaan kaikki pelit tietokannasta
-	 */
+		/**
+		 * Hakee kaikki pelit tietokannasta ja vie ne listaan
+		 * 
+		 * @return palauttaa pelit taulukon
+		 */
 	public Peli[] haePelit() {
 		ArrayList<Peli> peliLista = new ArrayList();
 		Statement stmt = null;
@@ -232,7 +252,12 @@ public class PeliSovellusDAO {
 		return pelit;
 	}
 
-	// Ikärajan mukaan
+	/**
+	 * Hakee pelit tietokannasta parametrina saadun ikärajan mukaan
+	 * 
+	 * @param ikaraja käyttäjän syöttämä ikäraja jonka mukaan halutaan hakea pelit tietokannasta
+	 * @return palauttaa pelit taulukon jos onnistui
+	 */
 	public Peli[] haePelitIkaraja(int ikaraja) {
 		System.out.println("ikäraja on " + ikaraja);
 		ArrayList<Peli> peliLista = new ArrayList();
@@ -289,7 +314,12 @@ public class PeliSovellusDAO {
 		}
 		return pelit;
 	}
-
+	/**
+	 * Hakee tietokannasta pelit pelaaja määrän mukaan
+	 * 
+	 * @param maara käyttäjän syöttämä pelaajamäärä 
+	 * @return	palauttaa pelit taulukon
+	 */
 	public Peli[] pelaajaMaara(int maara) {
 		System.out.println("Pelaajienmäärä on " + maara);
 		ArrayList<Peli> peliLista = new ArrayList();
@@ -347,8 +377,10 @@ public class PeliSovellusDAO {
 		return pelit;
 	}
 
-	/*
-	 * Poistetaan peli tietokannasta
+	/**
+	 * Poistaa parametrina annetun pelin tietokannasta
+	 * 
+	 * @param peliID kokonaisluku joka vastaa pelin uniikkia ID numeroa
 	 */
 	public void poistaPeli(int peliID) {
 		System.out.println("poista peli metodi pelisovellus daossa ja peli id on: " + peliID);
@@ -362,8 +394,11 @@ public class PeliSovellusDAO {
 		}
 	}
 
-	/*
-	 * Haetaan tietyn käyttäjän lisäämät pelit tietokannasta
+	/**
+	 * Hakee kirjautuneen käyttäjän pelit tietokannasta
+	 * 
+	 * @param kayttajaID kirjautuneen käyttäjän uniikki ID numero
+	 * @return palauttaa kirjautuneen käyttäjän pelit taulukkona
 	 */
 	public Peli[] haeOmatPelit(int kayttajaID) {
 		ArrayList<Peli> peliLista = new ArrayList();
@@ -422,9 +457,12 @@ public class PeliSovellusDAO {
 		return pelit;
 	}
 
-	/*
-	 * Päivitetään pelin tiedot tietokataan
-	 */
+		/**
+		 * Pelin tietojen päivittäminen tietokantaan
+		 * 
+		 * @param peli Peli-olio jonka tietoja halutaan päivittää
+		 * @return palauttaa true jos onnnistui
+		 */
 	public boolean paivitaPeli(Peli peli) {
 		boolean temp = false;
 		System.out
@@ -459,9 +497,12 @@ public class PeliSovellusDAO {
 		return temp;
 	}
 
-	/*
-	 * Poistetaan käyttäjä tietokannasta
-	 */
+		/**
+		 * Käyttäjän tietojen poistaminen tietokannasta
+		 * 
+		 * @param käyttäjä Kirjautuneen käyttäjän tiedot käyttäjä oliossa
+		 * @return palauttaa true jos onnnistui
+		 */
 	public boolean poistaKayttaja(Kayttaja käyttäjä) {
 		boolean test = false;
 		try (PreparedStatement poista = conn.prepareStatement("DELETE FROM Käyttäjä WHERE KäyttäjäID=?")) {
