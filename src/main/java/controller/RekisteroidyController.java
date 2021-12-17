@@ -1,3 +1,8 @@
+/**
+ * Kontrolloi rekisteröintisivun toiminnallisuutta
+ * 
+ * @author elyasa
+ */
 package controller;
 
 import java.io.IOException;
@@ -20,11 +25,7 @@ import javafx.stage.Stage;
 import model.Kayttaja;
 import model.RegisterSystem;
 import view.MainApp;
-/**
- * Edustaa rekistyröinti näkymää
- * @author anasb
- *
- */
+
 public class RekisteroidyController {
 	private MainApp app;
 	@FXML
@@ -46,6 +47,11 @@ public class RekisteroidyController {
 	String locale = Locale.getDefault().getLanguage();
 	ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 
+	/**
+	 * Alustaa sivun, asettaa tooltipit
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void initialize() {
 		Tooltip toolpwd = new Tooltip();
@@ -58,10 +64,12 @@ public class RekisteroidyController {
 		csalasana.setTooltip(toolpwd);
 		email.setTooltip(toolemail);
 	}
-/**
- * Rekisteröityy järjestelmään
- * @param event
- */
+
+	/**
+	 * Rekisteröityy järjestelmään
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void Rekistyröidy(ActionEvent event) {
 		boolean test = validointi();
@@ -76,14 +84,14 @@ public class RekisteroidyController {
 				RegisterSystem register = new RegisterSystem();
 				boolean tulos = register.register(käyttäjä);
 				if (tulos == true) {
-					
-					//Ilmoitetaan rekisteröitymisen onnistumisesta
+
+					// Ilmoitetaan rekisteröitymisen onnistumisesta
 					Alert alert = new Alert(Alert.AlertType.INFORMATION);
 					alert.setTitle(bundle.getString("ilmoitus"));
 					alert.setContentText(bundle.getString("rekisteroityminenOnnistuiText"));
 					alert.showAndWait();
-					
-					//Viedään kirjautumissivulle
+
+					// Viedään kirjautumissivulle
 					FXMLLoader loader = new FXMLLoader();
 					loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
 					BorderPane kirjaudu = (BorderPane) loader.load();
@@ -118,9 +126,10 @@ public class RekisteroidyController {
 	void vieVierasNäkymä(ActionEvent event) throws IOException {
 		app.showVieras();
 	}
-	
+
 	/**
 	 * Validoi käyttäjän syötettä
+	 * 
 	 * @return true,false
 	 */
 	boolean validointi() {
@@ -149,37 +158,37 @@ public class RekisteroidyController {
 		Pattern pattern = Pattern.compile("^.+@.+\\..+$");
 		Matcher matcher = pattern.matcher(email.getText());
 		boolean validEmail = matcher.matches();
-		  if (validEmail == false) {
-	            email.setStyle("-fx-border-color:red");
-	            emailtip.setText(bundle.getString("vaaraMuotoText"));
-	            test = false;
-	        }
-	        if (puhelinnumero.getText() == "") {
-	            puhelinnumero.setStyle("-fx-border-color:red");
-	            test = false;
-	        }
-	        if (salasana.getText() == "" || csalasana.getText() == "") {
-	            salasana.setStyle("-fx-border-color:red");
-	            csalasana.setStyle("-fx-border-color:red");
-	            test = false;
-	        }
-	        boolean compare = salasana.getText().equals(csalasana.getText());
-	        if (compare != true) {
-	            salasana.setStyle("-fx-border-color:red");
-	            csalasana.setStyle("-fx-border-color:red");
-	            tippi.setText(bundle.getString("salasanatEivatTasmaaText"));
-	            test = false;
-	        }
-	        if (salasana.getText().length() <6 || csalasana.getText().length() < 6) {
-	            salasana.setStyle("-fx-border-color:red");
-	            csalasana.setStyle("-fx-border-color:red");
-	            tippi.setText(bundle.getString("salasanaVahintaanText"));
-	            test = false;
-	        }
-	        return test;
+		if (validEmail == false) {
+			email.setStyle("-fx-border-color:red");
+			emailtip.setText(bundle.getString("vaaraMuotoText"));
+			test = false;
+		}
+		if (puhelinnumero.getText() == "") {
+			puhelinnumero.setStyle("-fx-border-color:red");
+			test = false;
+		}
+		if (salasana.getText() == "" || csalasana.getText() == "") {
+			salasana.setStyle("-fx-border-color:red");
+			csalasana.setStyle("-fx-border-color:red");
+			test = false;
+		}
+		boolean compare = salasana.getText().equals(csalasana.getText());
+		if (compare != true) {
+			salasana.setStyle("-fx-border-color:red");
+			csalasana.setStyle("-fx-border-color:red");
+			tippi.setText(bundle.getString("salasanatEivatTasmaaText"));
+			test = false;
+		}
+		if (salasana.getText().length() < 6 || csalasana.getText().length() < 6) {
+			salasana.setStyle("-fx-border-color:red");
+			csalasana.setStyle("-fx-border-color:red");
+			tippi.setText(bundle.getString("salasanaVahintaanText"));
+			test = false;
+		}
+		return test;
 	}
 
 	public void setMainApp(MainApp mainApp) {
-		this.app=mainApp;
+		this.app = mainApp;
 	}
 }

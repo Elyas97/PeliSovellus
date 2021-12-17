@@ -1,8 +1,10 @@
-package controller;
 /**
- * Edustaa profiili näkymää.
- * @author Elyas
+ * Kontrolloi profiilisivun toiminnallisuutta
+ * @author elyasa
  */
+
+package controller;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -53,8 +55,10 @@ public class ProfiiliController {
 	Kayttaja käyttäjä;
 	String locale = Locale.getDefault().getLanguage();
 	ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
+
 	/**
 	 * Tallettaa käyttäjän asettamat muutokset
+	 * 
 	 * @param event
 	 */
 	@FXML
@@ -91,8 +95,10 @@ public class ProfiiliController {
 			}
 		}
 	}
+
 	/**
-	 * Poistaa Käyttäjän tilin
+	 * Poistaa käyttäjän tilin
+	 * 
 	 * @param event
 	 * @throws IOException
 	 */
@@ -149,6 +155,13 @@ public class ProfiiliController {
 		app.lisaaPeliOverview();
 	}
 
+	/**
+	 * Alustaa profiilisivun, asettaa käyttäjän tiedot tekstikenttiin
+	 * ja huolehtii kielenvaihdosta
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void initialize() {
 		this.käyttäjä = TiedostoKasittely.lueKäyttäjä();
@@ -213,10 +226,12 @@ public class ProfiiliController {
 		maat.setCellFactory(c -> new StatusListCell());
 		maat.setButtonCell(new StatusListCell());
 	}
-/**
- * Validoi käyttäjän syötteet
- * @return
- */
+
+	/**
+	 * Validoi käyttäjän syötteet
+	 * 
+	 * @return
+	 */
 	boolean validointi() {
 		boolean test = true;
 		etu.setStyle("-fx-border-color:#0589ff");
@@ -255,8 +270,10 @@ public class ProfiiliController {
 		}
 		return test;
 	}
+
 	/**
-	 * Tarkistaa onko sähköpostilla jo rekistyröity järjestelmään.
+	 * Tarkistaa onko sähköpostilla jo rekisteröidytty järjestelmään
+	 * 
 	 * @return true,false
 	 */
 	public boolean validoiEmail() {

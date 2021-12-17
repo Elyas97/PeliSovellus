@@ -1,7 +1,7 @@
 /**
  * Lisätyt pelit sivun toiminnallisuus, sivulla voi muokata omia ilmoituksia
  * 
- * @author jarnopk, jasminja, elyasa
+ * @author jarnopk, jasmija, elyasa
  * 
  * @version 1.0
  * 

@@ -1,7 +1,7 @@
 /**
- * Pelin lisäys -sivun toiminnallisuus
+ * Kontrolloi pelin lisäys -sivun toiminnallisuutta
  * 
- * @author jarnopk, jasminja, elyasa
+ * @author jarnopk, jasmija, elyasa
  * @version 1.0
  * 
  */

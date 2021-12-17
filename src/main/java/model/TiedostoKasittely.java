@@ -9,17 +9,21 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Properties;
+
 /**
  * TiedostoKäsittely
- * @author anasb
+ * 
+ * @author elyasa
  *
  */
 public class TiedostoKasittely {
 	private final static String tiedostonimi = "asiakaat.data";
-/**
- * Tallettaa käyttäjä tiedot
- * @param käyttäjä
- */
+
+	/**
+	 * Tallettaa käyttäjä tiedot
+	 * 
+	 * @param käyttäjä
+	 */
 	public static void kirjoitaTiedosto(Kayttaja käyttäjä) {
 		try (FileOutputStream virta = new FileOutputStream(tiedostonimi);
 				ObjectOutputStream käyttäjät = new ObjectOutputStream(virta);) {
@@ -29,8 +33,10 @@ public class TiedostoKasittely {
 			System.out.println(tiedostonimi + " Ei voinut tallentaa");
 		}
 	}
+
 	/**
-	 * lukee käyttäjä tiedot
+	 * Lukee käyttäjä tiedot
+	 * 
 	 * @param käyttäjä
 	 */
 	public static Kayttaja lueKäyttäjä() {
@@ -44,10 +50,12 @@ public class TiedostoKasittely {
 		}
 		return käyttäjä;
 	}
-/**
- * Poistaa käyttäjän tiedot
- * @return
- */
+
+	/**
+	 * Poistaa käyttäjän tiedot
+	 * 
+	 * @return test
+	 */
 	public static boolean poistaTiedosto() {
 		boolean test = false;
 		try {
@@ -64,17 +72,19 @@ public class TiedostoKasittely {
 		}
 		return test;
 	}
+
 	/**
 	 * Tallettaa kieliasetukset
+	 * 
 	 * @param properties
 	 * @param path
 	 */
 	public static void tallennaKieli(Properties properties, String path) {
-		try(FileWriter output = new FileWriter(path)){
-		    properties.store(output, "These are properties");
+		try (FileWriter output = new FileWriter(path)) {
+			properties.store(output, "These are properties");
 		} catch (IOException e) {
-		    e.printStackTrace();
+			e.printStackTrace();
 		}
-		
+
 	}
 }

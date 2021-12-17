@@ -1,3 +1,8 @@
+/**
+ * Kontrolloi kirjautumisnäkymän toiminnallisuutta
+ * @author elyasa
+ *
+ */
 package controller;
 
 import java.io.IOException;
@@ -14,11 +19,7 @@ import model.Kayttaja;
 import model.LoginSystem;
 import model.TiedostoKasittely;
 import view.MainApp;
-/**
- * Edustaa Kirjautumis näkymää
- * @author elyas
- *
- */
+
 public class LoginController {
 	private MainApp app;
 	Kayttaja kirjautunut = null;
@@ -34,8 +35,10 @@ public class LoginController {
 	private TextField tunnus23;
 	String locale = Locale.getDefault().getLanguage();
 	ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
+
 	/**
 	 * Kirjautuu sisään järjestelmään
+	 * 
 	 * @param event
 	 */
 	@FXML
@@ -85,10 +88,12 @@ public class LoginController {
 		assert buttoni != null : "fx:id=\"buttoni\" was not injected: check your FXML file 'Kirjautuminen.fxml'.";
 		assert tunnus23 != null : "fx:id=\"tunnus23\" was not injected: check your FXML file 'Kirjautuminen.fxml'.";
 	}
-/**
- * Validoi käyttäjän syötettä.
- * @return
- */
+
+	/**
+	 * Validoi käyttäjän syötettä
+	 * 
+	 * @return
+	 */
 	boolean validointi() {
 		boolean test = true;
 		if (tunnus23.getText() == "") {

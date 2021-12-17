@@ -1,7 +1,7 @@
 /**
  * Alustaa jokaisen käyttöliittymän sivun ja näyttää ne
  * 
- * @author jarnopk, jasminja, elyasa
+ * @author jarnopk, jasmija, elyasa
  * @version 1.0
  * 
  */

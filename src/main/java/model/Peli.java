@@ -1,7 +1,7 @@
 /**
  * Sisältää muuttujat kaikille pelin tiedoille ja tarvittavat set- ja get metodit
  * 
- * @author jarnopk, jasminja, elyasa
+ * @author jarnopk, jasmija, elyasa
  * @version 1.0
  * 
  */

@@ -1,28 +1,29 @@
 package model;
+
 /**
  * LoginSystem esittää käyttäjän kirjautumista sovellukseen
- * @author elyas
+ * 
+ * @author elyasa
  */
-public class LoginSystem {	
+public class LoginSystem {
 	private Kayttaja[] rekistyröineet;
 	private PeliSovellusDAO pelisovellus;
-/**
- *  Konstruktorin kutsuessa tiukasti kytketään Projektin DAO luokka
- * Elyas
- * 
- */
+
+	/**
+	 * Konstruktorin kutsuessa tiukasti kytketään Projektin DAO luokka
+	 */
 	public LoginSystem() {
 		this.pelisovellus = new PeliSovellusDAO();
 		this.rekistyröineet = pelisovellus.readKäyttäjät();
 	}
-/**
- * Tarkistaa onko käyttäjä olemassa ja palauttaa käyttäjän
- * @param sähköposti
- * Käyttäjän sähköposti
- * @param salasana
- * Käyttäjän salasana
- * @return Käyttäjän tai null
- */
+
+	/**
+	 * Tarkistaa onko käyttäjä olemassa ja palauttaa käyttäjän
+	 * 
+	 * @param sähköposti Käyttäjän sähköposti
+	 * @param salasana   Käyttäjän salasana
+	 * @return Käyttäjän tai null
+	 */
 	public Kayttaja login(String sähköposti, String salasana) {
 		Kayttaja käyttäjä = null;
 		for (int i = 0; i < rekistyröineet.length; i++) {

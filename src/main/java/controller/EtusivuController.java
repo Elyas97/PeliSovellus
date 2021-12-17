@@ -2,7 +2,7 @@
  * Määrittelee etusivun controllerin painikkeiden ja muiden komponenttien toiminnallisuuden
  * 
  * 
- * @author jarnopk, jasminja, elyasa
+ * @author jarnopk, jasmija, elyasa
  * @version 1.0
  * 
  */
