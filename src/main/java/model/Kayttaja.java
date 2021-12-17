@@ -1,3 +1,11 @@
+/**
+ * Sisältää kaikki käyttäjään liittyvät muuttujat ja niille tarvittavat set- ja get metodit
+ * 
+ * @author jarnopk, jasminja, elyasa
+ * @version 1.0
+ * 
+ */
+
 package model;
 
 import java.io.Serializable;

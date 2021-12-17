@@ -1,9 +1,14 @@
+/**
+ * Sisältää muuttujat kaikille pelin tiedoille ja tarvittavat set- ja get metodit
+ * 
+ * @author jarnopk, jasminja, elyasa
+ * @version 1.0
+ * 
+ */
 package model;
 
 import java.sql.Date;
 import java.text.DateFormat;
-import java.text.NumberFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class Peli {
@@ -152,7 +157,6 @@ public class Peli {
 	}
 
 	public String toString() {
-		
 		if(locale.equals("fi")) {
 			return getPelinNimi() + " Tyyppi: " + talletusTyyppi + "\nHinta: " + hinta + "€\n" + kaupunki + "\n "
 					+ paivamaara;
@@ -162,11 +166,9 @@ public class Peli {
 			dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.US);
 			String paivamaaraFormat = dateFormat.format(paivamaara);
 			
-
 			return getPelinNimi() + " Type: " + talletusTyyppi + "\nPrice: " + hinta + "$\n" + kaupunki + "\n "
 					+ paivamaaraFormat;
 		}
-		
 	}
 
 	public void setPaivamaara(Date paivamaara) {

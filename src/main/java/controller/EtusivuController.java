@@ -129,6 +129,9 @@ public class EtusivuController {
 	String locale = Locale.getDefault().getLanguage();
 	ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 
+	/**
+	 * Alustaa sivun, täyttää pudotusvalikot tiedoilla ja listaa pelit tietokannasta
+	 */
 	public void initialize() {
 		ObservableList<String> valinta = FXCollections.observableArrayList("3", "7", "12", "16", "18");
 		valinnat.setItems(valinta);
@@ -181,7 +184,7 @@ public class EtusivuController {
 		this.dialogStage = dialogStage;
 	}
 
-	/*
+	/**
 	 * Hakee pelit tietokannasta ja asettaa ne listaan
 	 */
 	@FXML
@@ -193,8 +196,9 @@ public class EtusivuController {
 		}
 	}
 
-	/*
+	/**
 	 * Asettaa valitun pelin tiedot GridPanen labeleihin
+	 * @param peli
 	 */
 	private void pelinTiedot(Peli peli) {
 		if (peli != null) {
@@ -237,6 +241,11 @@ public class EtusivuController {
 		this.mainApp = mainApp;
 	}
 
+	/**
+	 * Asettaa hintakentän ja maximi- ja minimihinnan kentän näkyville
+	 * sen mukaan onko kyseessä myynti, vuokraus vai lahjoitus 
+	 * @param event
+	 */
 	@FXML
 	void tyyppiAction(ActionEvent event) {
 		String text = ((RadioButton) julkaisu.getSelectedToggle()).getText();
@@ -269,7 +278,7 @@ public class EtusivuController {
 		}
 	}
 
-	/*
+	/**
 	 * Kuuntelee radiobuttoneita etusivulla ja rajaa listan valikoimaa niiden mukaan
 	 * Kutsutaan initializessa
 	 */
@@ -385,7 +394,6 @@ public class EtusivuController {
 
 	/**
 	 * Rajausvalikon ehtolauseet
-	 * 
 	 * @param event
 	 */
 	@FXML
@@ -458,7 +466,9 @@ public class EtusivuController {
 		Collections.sort(filteredData.getSource(), (a, b) -> a.getPaiva().compareTo(b.getPaiva()));
 	}
 
-	// Listan järjestys hinnan mukaan
+	/**
+	 * Listan järjestys hinnan mukaan, alin hinta ensin
+	 */
 	@FXML
 	public void AlhaisinHinta() {
 		korkeinhinta.setSelected(false);
@@ -484,6 +494,9 @@ public class EtusivuController {
 		}
 	}
 
+	/**
+	 * Listan järjestys hinnan mukaan, korkein hinta ensin
+	 */
 	@FXML
 	public void KorkeinHinta() {
 		alhaisinhinta.setSelected(false);
@@ -510,6 +523,12 @@ public class EtusivuController {
 		}
 	}
 
+	/**
+	 * Rajausikkunan kenttien validointi, huomautetaan jos
+	 * pakollinen kenttä on tyhjä tai väärin täytetty
+	 * 
+	 * @return palauttaa true jos validoinnin kaikki ehdot täyttyy
+	 */
 	private boolean validoiRajaus() {
 		Alert varoitus = new Alert(Alert.AlertType.WARNING);
 		if (minimi.getText().isEmpty() && !maxnum.getText().isEmpty()) {
