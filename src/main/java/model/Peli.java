@@ -1,3 +1,9 @@
+package model;
+
+import java.sql.Date;
+import java.text.DateFormat;
+import java.util.Locale;
+
 /**
  * Sisältää muuttujat kaikille pelin tiedoille ja tarvittavat set- ja get metodit
  * 
@@ -5,12 +11,6 @@
  * @version 1.0
  * 
  */
-package model;
-
-import java.sql.Date;
-import java.text.DateFormat;
-import java.util.Locale;
-
 public class Peli {
 
 	private int peliId;

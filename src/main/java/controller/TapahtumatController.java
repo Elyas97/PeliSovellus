@@ -1,11 +1,3 @@
-/**
- * Lisätyt pelit sivun toiminnallisuus, sivulla voi muokata omia ilmoituksia
- * 
- * @author jarnopk, jasmija, elyasa
- * 
- * @version 1.0
- * 
- */
 package controller;
 
 import java.io.IOException;
@@ -36,6 +28,14 @@ import model.PeliSovellusDAO;
 import model.TiedostoKasittely;
 import view.MainApp;
 
+/**
+ * Lisätyt pelit sivun toiminnallisuus, sivulla voi muokata omia ilmoituksia
+ * 
+ * @author jarnopk, jasmija, elyasa
+ * 
+ * @version 1.0
+ * 
+ */
 public class TapahtumatController {
 
 	@FXML

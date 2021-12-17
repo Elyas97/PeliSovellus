@@ -1,3 +1,8 @@
+package model;
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
 /**
  * Sisältää peli luokan metodeille testit
  * 
@@ -5,11 +10,6 @@
  * @version 1.0
  * 
  */
-package model;
-
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
-
 class PeliTest {
 
 	long millis = System.currentTimeMillis();

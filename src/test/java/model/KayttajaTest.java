@@ -1,3 +1,9 @@
+package model;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
 /**
  * Sisältää käyttäjäluokan metodeille testit
  * 
@@ -5,12 +11,6 @@
  * @version 1.0
  * 
  */
-package model;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
-
 class KayttajaTest {
 
 	@Test

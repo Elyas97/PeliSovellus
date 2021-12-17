@@ -1,11 +1,3 @@
-/**
- * Kontrolloi pelin lisäys -sivun toiminnallisuutta
- * 
- * @author jarnopk, jasmija, elyasa
- * @version 1.0
- * 
- */
-
 package controller;
 
 import java.io.IOException;
@@ -32,6 +24,13 @@ import model.PeliSovellusDAO;
 import model.TiedostoKasittely;
 import view.MainApp;
 
+/**
+ * Kontrolloi pelin lisäys -sivun toiminnallisuutta
+ * 
+ * @author jarnopk, jasmija, elyasa
+ * @version 1.0
+ * 
+ */
 public class LisaaPeliController {
 	@FXML
 	private ToggleGroup tyyppi;

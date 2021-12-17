@@ -1,10 +1,3 @@
-/**
- * Määrittelee vierassivun controllerin painikkeiden ja muiden komponenttien toiminnallisuuden
- * 
- * @author jarnopk, jasmija, elyasa
- * @version 1.0
- *
- */
 package controller;
 
 import java.io.FileInputStream;
@@ -44,6 +37,13 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 
+/**
+ * Määrittelee vierassivun controllerin painikkeiden ja muiden komponenttien toiminnallisuuden
+ * 
+ * @author jarnopk, jasmija, elyasa
+ * @version 1.0
+ *
+ */
 public class VierasController {
 	@FXML
 	private ComboBox<String> maat;

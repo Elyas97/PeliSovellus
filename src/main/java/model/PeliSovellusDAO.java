@@ -1,9 +1,3 @@
-/**
- * Muodostaa yhteyden tietokantaan
- * 
- * @author jarnopk, jasminja, elyasa
- * 
- */
 package model;
 
 import java.sql.*;
@@ -11,6 +5,12 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+/**
+ * Muodostaa yhteyden tietokantaan
+ * 
+ * @author jarnopk, jasmija, elyasa
+ * 
+ */
 public class PeliSovellusDAO {
 
 	Connection conn;

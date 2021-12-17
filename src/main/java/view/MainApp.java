@@ -1,10 +1,3 @@
-/**
- * Alustaa jokaisen käyttöliittymän sivun ja näyttää ne
- * 
- * @author jarnopk, jasmija, elyasa
- * @version 1.0
- * 
- */
 package view;
 
 import java.io.FileInputStream;
@@ -31,6 +24,13 @@ import model.Kayttaja;
 import model.PeliSovellusDAO;
 import model.TiedostoKasittely;
 
+/**
+ * Alustaa jokaisen käyttöliittymän sivun ja näyttää ne
+ * 
+ * @author jarnopk, jasmija, elyasa
+ * @version 1.0
+ * 
+ */
 public class MainApp extends Application {
 
 	private Stage primaryStage;

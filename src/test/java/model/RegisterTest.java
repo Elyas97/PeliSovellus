@@ -1,10 +1,3 @@
-/**
- * Testit rekisteröitymiselle
- * 
- * @author elyasa
- * @version 1.0
- * 
- */
 package model;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,6 +7,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Testit rekisteröitymiselle
+ * 
+ * @author elyasa
+ * @version 1.0
+ * 
+ */
 class RegisterTest {
 	static RegisterSystem regTest = new RegisterSystem();
 	static PeliSovellusDAO dao = new PeliSovellusDAO();

@@ -1,8 +1,3 @@
-/**
- * Kontrolloi rekisteröintisivun toiminnallisuutta
- * 
- * @author elyasa
- */
 package controller;
 
 import java.io.IOException;
@@ -26,6 +21,11 @@ import model.Kayttaja;
 import model.RegisterSystem;
 import view.MainApp;
 
+/**
+ * Kontrolloi rekisteröintisivun toiminnallisuutta
+ * 
+ * @author elyasa
+ */
 public class RekisteroidyController {
 	private MainApp app;
 	@FXML

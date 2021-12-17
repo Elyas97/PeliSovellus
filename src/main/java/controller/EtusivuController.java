@@ -1,12 +1,3 @@
-/**
- * Määrittelee etusivun controllerin painikkeiden ja muiden komponenttien toiminnallisuuden
- * 
- * 
- * @author jarnopk, jasmija, elyasa
- * @version 1.0
- * 
- */
-
 package controller;
 
 import java.io.IOException;
@@ -40,6 +31,14 @@ import model.PeliSovellusDAO;
 import model.TiedostoKasittely;
 import view.MainApp;
 
+/**
+ * Määrittelee etusivun controllerin painikkeiden ja muiden komponenttien toiminnallisuuden
+ * 
+ * 
+ * @author jarnopk, jasmija, elyasa
+ * @version 1.0
+ * 
+ */
 public class EtusivuController {
 
 	@FXML

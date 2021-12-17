@@ -1,8 +1,3 @@
-/**
- * Kontrolloi kirjautumisnäkymän toiminnallisuutta
- * @author elyasa
- *
- */
 package controller;
 
 import java.io.IOException;
@@ -20,6 +15,11 @@ import model.LoginSystem;
 import model.TiedostoKasittely;
 import view.MainApp;
 
+/**
+ * Kontrolloi kirjautumisnäkymän toiminnallisuutta
+ * @author elyasa
+ *
+ */
 public class LoginController {
 	private MainApp app;
 	Kayttaja kirjautunut = null;

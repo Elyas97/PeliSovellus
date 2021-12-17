@@ -1,16 +1,15 @@
-/**
- * Javafx combobox default käyttäytymisen muokkaamiseen
- * 
- * @author elyasa
- *
- */
-
 package controller;
 
 import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * Javafx combobox default käyttäytymisen muokkaamiseen
+ * 
+ * @author elyasa
+ *
+ */
 public class StatusListCell extends ListCell<String> {
 	protected void updateItem(String item, boolean empty) {
 		super.updateItem(item, empty);

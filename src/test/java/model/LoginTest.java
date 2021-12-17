@@ -1,10 +1,3 @@
-/**
- * Testaa sisäänkirjautumista
- * 
- * @author elyasa
- * @version 1.0
- * 
- */
 package model;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,6 +6,13 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Testaa sisäänkirjautumista
+ * 
+ * @author elyasa
+ * @version 1.0
+ * 
+ */
 class LoginTest {
 	static LoginSystem logTest = new LoginSystem();
 	static PeliSovellusDAO dao = new PeliSovellusDAO();

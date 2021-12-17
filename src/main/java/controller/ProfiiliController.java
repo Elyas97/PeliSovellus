@@ -1,8 +1,3 @@
-/**
- * Kontrolloi profiilisivun toiminnallisuutta
- * @author elyasa
- */
-
 package controller;
 
 import java.io.FileInputStream;
@@ -33,6 +28,10 @@ import model.PeliSovellusDAO;
 import model.TiedostoKasittely;
 import view.MainApp;
 
+/**
+ * Kontrolloi profiilisivun toiminnallisuutta
+ * @author elyasa
+ */
 public class ProfiiliController {
 	private MainApp app;
 	@FXML

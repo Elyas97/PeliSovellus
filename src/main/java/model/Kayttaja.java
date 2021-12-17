@@ -1,15 +1,14 @@
-/**
- * Sisältää kaikki käyttäjään liittyvät muuttujat ja niille tarvittavat set- ja get metodit
- * 
- * @author jarnopk, jasminja, elyasa
- * @version 1.0
- * 
- */
-
 package model;
 
 import java.io.Serializable;
 
+/**
+ * Sisältää kaikki käyttäjään liittyvät muuttujat ja niille tarvittavat set- ja get metodit
+ * 
+ * @author jarnopk, jasmija, elyasa
+ * @version 1.0
+ * 
+ */
 public class Kayttaja implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int kayttajaID;
