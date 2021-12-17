@@ -1,11 +1,12 @@
-package model;
-
 /**
  * RegisterSystem edustaa käyttäjän rekisteröitymistä sovellukseen
  * 
  * @author elyas
  *
  */
+
+package model;
+
 public class RegisterSystem {
 	private Kayttaja[] rekistyröineet;
 	private PeliSovellusDAO pelisovellus;

@@ -1,10 +1,11 @@
-package model;
-
 /**
  * LoginSystem esittää käyttäjän kirjautumista sovellukseen
  * 
  * @author elyasa
  */
+
+package model;
+
 public class LoginSystem {
 	private Kayttaja[] rekistyröineet;
 	private PeliSovellusDAO pelisovellus;

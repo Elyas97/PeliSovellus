@@ -1,7 +1,6 @@
 /**
  * Muodostaa yhteyden tietokantaan
  * 
- * 
  * @author jarnopk, jasminja, elyasa
  * 
  */
