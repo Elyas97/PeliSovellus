@@ -1,5 +1,8 @@
 package controller;
-
+/**
+ * Edustaa profiili näkymää.
+ * @author Elyas
+ */
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -50,7 +53,10 @@ public class ProfiiliController {
 	Kayttaja käyttäjä;
 	String locale = Locale.getDefault().getLanguage();
 	ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
-
+	/**
+	 * Tallettaa käyttäjän asettamat muutokset
+	 * @param event
+	 */
 	@FXML
 	void tallennaMuutokset(ActionEvent event) {
 
@@ -85,7 +91,11 @@ public class ProfiiliController {
 			}
 		}
 	}
-
+	/**
+	 * Poistaa Käyttäjän tilin
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void PoistaTili(ActionEvent event) throws IOException {
 
@@ -203,7 +213,10 @@ public class ProfiiliController {
 		maat.setCellFactory(c -> new StatusListCell());
 		maat.setButtonCell(new StatusListCell());
 	}
-
+/**
+ * Validoi käyttäjän syötteet
+ * @return
+ */
 	boolean validointi() {
 		boolean test = true;
 		etu.setStyle("-fx-border-color:#0589ff");
@@ -242,7 +255,10 @@ public class ProfiiliController {
 		}
 		return test;
 	}
-
+	/**
+	 * Tarkistaa onko sähköpostilla jo rekistyröity järjestelmään.
+	 * @return true,false
+	 */
 	public boolean validoiEmail() {
 		boolean test = true;
 		PeliSovellusDAO dao = new PeliSovellusDAO();

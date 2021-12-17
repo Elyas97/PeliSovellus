@@ -20,7 +20,11 @@ import javafx.stage.Stage;
 import model.Kayttaja;
 import model.RegisterSystem;
 import view.MainApp;
-
+/**
+ * Edustaa rekistyröinti näkymää
+ * @author anasb
+ *
+ */
 public class RekisteroidyController {
 	private MainApp app;
 	@FXML
@@ -54,7 +58,10 @@ public class RekisteroidyController {
 		csalasana.setTooltip(toolpwd);
 		email.setTooltip(toolemail);
 	}
-
+/**
+ * Rekistyröityy järjestelmään
+ * @param event
+ */
 	@FXML
 	void Rekistyröidy(ActionEvent event) {
 		boolean test = validointi();
@@ -111,7 +118,10 @@ public class RekisteroidyController {
 	void vieVierasNäkymä(ActionEvent event) throws IOException {
 		app.showVieras();
 	}
-
+	/**
+	 * Validoi käyttäjän syötettä
+	 * @return true,false
+	 */
 	boolean validointi() {
 		boolean test = true;
 		etu.setStyle("-fx-border-color:#0589ff");

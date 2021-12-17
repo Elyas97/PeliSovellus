@@ -9,10 +9,17 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Properties;
-
+/**
+ * TiedostoKäsittely
+ * @author anasb
+ *
+ */
 public class TiedostoKasittely {
 	private final static String tiedostonimi = "asiakaat.data";
-
+/**
+ * Tallettaa käyttäjä tiedot
+ * @param käyttäjä
+ */
 	public static void kirjoitaTiedosto(Kayttaja käyttäjä) {
 		try (FileOutputStream virta = new FileOutputStream(tiedostonimi);
 				ObjectOutputStream käyttäjät = new ObjectOutputStream(virta);) {
@@ -22,7 +29,10 @@ public class TiedostoKasittely {
 			System.out.println(tiedostonimi + " Ei voinut tallentaa");
 		}
 	}
-
+	/**
+	 * lukee käyttäjä tiedot
+	 * @param käyttäjä
+	 */
 	public static Kayttaja lueKäyttäjä() {
 		Kayttaja käyttäjä = null;
 		try (FileInputStream virta = new FileInputStream(tiedostonimi);
@@ -34,7 +44,10 @@ public class TiedostoKasittely {
 		}
 		return käyttäjä;
 	}
-
+/**
+ * Poistaa käyttäjän tiedot
+ * @return
+ */
 	public static boolean poistaTiedosto() {
 		boolean test = false;
 		try {
@@ -51,6 +64,11 @@ public class TiedostoKasittely {
 		}
 		return test;
 	}
+	/**
+	 * Tallettaa kieliasetukset
+	 * @param properties
+	 * @param path
+	 */
 	public static void tallennaKieli(Properties properties, String path) {
 		try(FileWriter output = new FileWriter(path)){
 		    properties.store(output, "These are properties");

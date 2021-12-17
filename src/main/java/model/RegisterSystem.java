@@ -1,14 +1,26 @@
 package model;
-
+/**
+ * RegisterSystem edustaa käyttäjän rekistyröimista sovellukseen.
+ * @author elyas
+ *
+ */
 public class RegisterSystem {
 	private Kayttaja[] rekistyröineet;
 	private PeliSovellusDAO pelisovellus;
-
+/**
+ * Konkstrukorin kutsuessa tiukasti kytkee luokan Projektin DAO luokkaan
+ */
 	public RegisterSystem() {
 		this.pelisovellus = new PeliSovellusDAO();
 		this.rekistyröineet = pelisovellus.readKäyttäjät();
 	}
-
+/**
+ * Rekistyröi uuden käyttäjän sovellukseen
+ * @param käyttäjä
+ * @see Käyttäjä
+ * Käyttäjä olio 
+ * @return false,true
+ */
 	public boolean register(Kayttaja käyttäjä) {
 		System.out.println(käyttäjä.getEtunimi());
 		boolean test = true;

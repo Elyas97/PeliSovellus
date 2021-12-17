@@ -36,7 +36,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
-
+/**
+ * Edustaa vierasNäkymää
+ * @author Elyas
+ *
+ */
 public class VierasController {
 	@FXML
 	private ComboBox<String> maat;
