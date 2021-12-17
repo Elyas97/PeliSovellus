@@ -81,7 +81,7 @@ public class MainApp extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
-			loader.setLocation(MainApp.class.getResource("root.fxml"));
+			loader.setLocation(MainApp.class.getResource("Root.fxml"));
 			loader.setResources(bundle);
 			rootLayout = (BorderPane) loader.load();
 			Scene scene = new Scene(rootLayout);
