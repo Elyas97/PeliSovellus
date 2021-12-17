@@ -298,7 +298,6 @@ public class EtusivuController {
 					hakuTesti();
 					filteredData.setPredicate(pelit -> pelit.getTalletusTyyppi().contains("Vuokraus")
 							|| pelit.getTalletusTyyppi().contains("Rent"));
-					// hakuTesti();
 					break;
 				case "Lahjoitetaan":
 				case "Giveaway":
@@ -366,7 +365,6 @@ public class EtusivuController {
 	 * 
 	 * @param event
 	 */
-
 	@FXML
 	void peruuta(ActionEvent event) {
 		rajaahakuNäkymä.setVisible(false);

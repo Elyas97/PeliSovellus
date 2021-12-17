@@ -1,7 +1,13 @@
+/**
+ * Sisältää peli luokan metodeille testit
+ * 
+ * @author jarnopk, jasmija, elyasa
+ * @version 1.0
+ * 
+ */
 package model;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
 class PeliTest {

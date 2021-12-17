@@ -40,31 +40,30 @@ public class MainApp extends Application {
 	PeliSovellusDAO pelitdao = new PeliSovellusDAO();
 
 	/**
-	 * Käynnistää sovelluksen
-	 * Hakee tiedostosta default kielen ja alustaa root layoutin
+	 * Käynnistää sovelluksen Hakee tiedostosta default kielen ja alustaa root
+	 * layoutin
 	 */
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Pelienvuokraussovellus");
-		//Annetaan kaikille¨main app
-		
-				//Haetaan tiedostosa default kieli
-				String appConfigPath="resources/TextResources_Default.properties";
-				Properties properties=new Properties();
-				try {
-					properties.load(new FileInputStream(appConfigPath));
-					String language=properties.getProperty("language");
-					String country=properties.getProperty("country");
-					Locale l =new Locale(language,country);
-					System.out.println(country+"test");
-					Locale.setDefault(l);
-				} catch (FileNotFoundException e) {
-					System.out.println("Tiedostoa ei löytynyt");
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+
+		// Haetaan tiedostosa default kieli
+		String appConfigPath = "resources/TextResources_Default.properties";
+		Properties properties = new Properties();
+		try {
+			properties.load(new FileInputStream(appConfigPath));
+			String language = properties.getProperty("language");
+			String country = properties.getProperty("country");
+			Locale l = new Locale(language, country);
+			System.out.println(country + "test");
+			Locale.setDefault(l);
+		} catch (FileNotFoundException e) {
+			System.out.println("Tiedostoa ei löytynyt");
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		initRootLayout();
 		// Käyttäjän ei aina tarvitse kirjautua sisään
 		Kayttaja alku = TiedostoKasittely.lueKäyttäjä();
@@ -84,7 +83,7 @@ public class MainApp extends Application {
 			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 			loader.setLocation(MainApp.class.getResource("root.fxml"));
 			loader.setResources(bundle);
-			rootLayout = (BorderPane)loader.load();
+			rootLayout = (BorderPane) loader.load();
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -99,12 +98,12 @@ public class MainApp extends Application {
 	public void showEtusivu() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			Locale locale = new Locale("en", "FI");
-			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 			loader.setLocation(MainApp.class.getResource("Etusivu.fxml"));
+
+			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 			loader.setResources(bundle);
+
 			BorderPane etusivu = (BorderPane) loader.load();
-			
 			Scene scene = new Scene(etusivu);
 			primaryStage.setScene(scene);
 
@@ -123,12 +122,11 @@ public class MainApp extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("Uusipeli.fxml"));
-			
-			Locale locale = new Locale("en", "FI");
+
 			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 			loader.setResources(bundle);
+
 			BorderPane uusipeli = (BorderPane) loader.load();
-			
 			Scene scene = new Scene(uusipeli);
 			primaryStage.setScene(scene);
 
@@ -150,11 +148,10 @@ public class MainApp extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("Tapahtumat.fxml"));
-			
-			Locale locale = new Locale("en", "FI");
+
 			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 			loader.setResources(bundle);
-			
+
 			BorderPane tapahtumat = (BorderPane) loader.load();
 			Scene scene = new Scene(tapahtumat);
 			primaryStage.setScene(scene);
@@ -174,13 +171,14 @@ public class MainApp extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("Kirjautuminen.fxml"));
-			
-			Locale locale = new Locale("en", "FI");
+
 			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 			loader.setResources(bundle);
+
 			BorderPane kirjaudu = (BorderPane) loader.load();
 			Scene scene = new Scene(kirjaudu);
 			primaryStage.setScene(scene);
+
 			LoginController uuscont = loader.getController();
 			uuscont.setMainApp(this);
 		} catch (IOException e) {
@@ -195,13 +193,14 @@ public class MainApp extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("Rekisterointi.fxml"));
-			Locale locale = new Locale("en", "FI");
+
 			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 			loader.setResources(bundle);
+
 			BorderPane register = (BorderPane) loader.load();
 			RekisteroidyController uuscont = loader.getController();
 			uuscont.setMainApp(this);
-			Scene scene=new Scene(register);
+			Scene scene = new Scene(register);
 			primaryStage.setScene(scene);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -215,8 +214,10 @@ public class MainApp extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("Profiili.fxml"));
+
 			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 			loader.setResources(bundle);
+
 			BorderPane profile = (BorderPane) loader.load();
 			ProfiiliController uuscont = loader.getController();
 			uuscont.setMainApp(this);
@@ -234,9 +235,10 @@ public class MainApp extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("Vieras.fxml"));
-			Locale locale = new Locale("en", "FI");
+
 			ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 			loader.setResources(bundle);
+
 			BorderPane kirjaudu = (BorderPane) loader.load();
 			VierasController uuscont = loader.getController();
 			uuscont.setMainApp(this);

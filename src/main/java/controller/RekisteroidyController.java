@@ -59,7 +59,7 @@ public class RekisteroidyController {
 		email.setTooltip(toolemail);
 	}
 /**
- * Rekistyröityy järjestelmään
+ * Rekisteröityy järjestelmään
  * @param event
  */
 	@FXML
@@ -118,6 +118,7 @@ public class RekisteroidyController {
 	void vieVierasNäkymä(ActionEvent event) throws IOException {
 		app.showVieras();
 	}
+	
 	/**
 	 * Validoi käyttäjän syötettä
 	 * @return true,false

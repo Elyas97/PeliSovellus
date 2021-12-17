@@ -1,3 +1,10 @@
+/**
+ * Määrittelee vierassivun controllerin painikkeiden ja muiden komponenttien toiminnallisuuden
+ * 
+ * @author jarnopk, jasmija, elyasa
+ * @version 1.0
+ *
+ */
 package controller;
 
 import java.io.FileInputStream;
@@ -36,11 +43,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
-/**
- * Edustaa vierasNäkymää
- * @author Elyas
- *
- */
+
 public class VierasController {
 	@FXML
 	private ComboBox<String> maat;
@@ -129,6 +132,11 @@ public class VierasController {
 	String locale = Locale.getDefault().getLanguage();
 	ResourceBundle bundle = ResourceBundle.getBundle("TextResources", Locale.getDefault());
 
+	/**
+	 * Alustaa sivun, täyttää pudotusvalikot tiedoilla ja listaa pelit tietokannasta
+	 * Muuttaa kieliasetuksen
+	 * 
+	 */
 	public void initialize() {
 		Image img = new Image("file:finland.png");
 		System.out.println(img);
@@ -179,9 +187,6 @@ public class VierasController {
 		maat.setCellFactory(c -> new StatusListCell());
 		maat.setButtonCell(new StatusListCell());
 
-		ObservableList<String> valinta = FXCollections.observableArrayList("3", "7", "12", "16", "18");
-		valinnat.setItems(valinta);
-
 		ObservableList<String> rajaus = FXCollections.observableArrayList("Nimi", "Kaupunki", "Genre");
 		hakurajaus.setItems(rajaus);
 
@@ -222,10 +227,13 @@ public class VierasController {
 		app.showVieras();
 	}
 
-	@FXML
-	void Rajaa(ActionEvent event) {
-	}
-
+	/**
+	 * Ilmoittaa jos käyttäjä yrittää lisätä peliä ilman että on kirjautunut sisään
+	 * Vie kirjautumissivulle
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void accessDenied(ActionEvent event) throws IOException {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -240,6 +248,9 @@ public class VierasController {
 		}
 	}
 
+	/**
+	 * Hakee pelit tietokannasta ja asettaa ne listaan
+	 */
 	@FXML
 	void listaaPelit() {
 		pelidata.clear();
@@ -249,6 +260,10 @@ public class VierasController {
 		}
 	}
 
+	/**
+	 * Kuuntelee radiobuttoneita vierassivulla ja rajaa listan valikoimaa niiden mukaan
+	 * Kutsutaan initializessa
+	 */
 	public void hakutyyppi() {
 		kaikki.setSelected(true);
 		hakutyyppi.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
@@ -284,8 +299,6 @@ public class VierasController {
 	public void uusinPeli() {
 		vanhin2.setSelected(false);
 		Collections.sort(filteredData.getSource(), (a, b) -> b.getPaiva().compareTo(a.getPaiva()));
-		// Collections.sort(filteredData.getSource(), (a, b) ->
-		// a.getPaiva().compareTo(b.getPaiva()));
 	}
 
 	/**
@@ -296,7 +309,10 @@ public class VierasController {
 		Collections.sort(filteredData.getSource(), (a, b) -> a.getPaiva().compareTo(b.getPaiva()));
 	}
 
-	// Listan järjestys hinnan mukaan
+
+	/**
+	 * Listan järjestys hinnan mukaan, alin hinta ensin
+	 */
 	@FXML
 	public void AlhaisinHinta() {
 		korkeinhinta.setSelected(false);
@@ -323,6 +339,10 @@ public class VierasController {
 		}
 	}
 
+
+	/**
+	 * Listan järjestys hinnan mukaan, korkein hinta ensin
+	 */
 	@FXML
 	public void KorkeinHinta() {
 		alhaisinhinta.setSelected(false);
@@ -349,6 +369,10 @@ public class VierasController {
 		}
 	}
 
+	/**
+	 * Asettaa valitun pelin tiedot GridPanen labeleihin
+	 * @param peli
+	 */
 	private void pelinTiedot(Peli peli) {
 		if (peli != null) {
 			pelinNimi.setText(peli.getPelinNimi());
@@ -388,42 +412,4 @@ public class VierasController {
 		app.showLogin();
 	}
 
-	@FXML
-	void peruuta(ActionEvent event) {
-		rajaahakuNäkymä.setVisible(false);
-	}
-
-	@FXML
-	void suljeRajaus(ActionEvent event) {
-		rajaahakuNäkymä.setVisible(false);
-	}
-
-	@FXML
-	void avaaRajaus(ActionEvent event) {
-		rajaahakuNäkymä.setVisible(true);
-	}
-
-	@FXML
-	void tyyppiAction(ActionEvent event) {
-		String text = ((RadioButton) julkaisu.getSelectedToggle()).getText();
-		if (text.equals("Lahjoitus")) {
-			hintaOtsikko.setVisible(false);
-			hintaOtsikko2.setVisible(false);
-			minimi.setVisible(false);
-			maxnum.setVisible(false);
-			hintaLabel.setVisible(false);
-		} else if (text.equals("Myynti")) {
-			hintaOtsikko.setVisible(true);
-			hintaLabel.setVisible(true);
-			hintaOtsikko2.setVisible(true);
-			minimi.setVisible(true);
-			maxnum.setVisible(true);
-		} else if (text.equals("Vuokraus")) {
-			hintaOtsikko.setVisible(true);
-			hintaLabel.setVisible(true);
-			hintaOtsikko2.setVisible(true);
-			minimi.setVisible(true);
-			maxnum.setVisible(true);
-		}
-	}
 }
