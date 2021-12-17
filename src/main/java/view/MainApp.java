@@ -1,3 +1,10 @@
+/**
+ * Alustaa jokaisen käyttöliittymän sivun ja näyttää ne
+ * 
+ * @author jarnopk, jasminja, elyasa
+ * @version 1.0
+ * 
+ */
 package view;
 
 import java.io.FileInputStream;
@@ -6,7 +13,6 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
-
 import controller.EtusivuController;
 import controller.LisaaPeliController;
 import controller.LoginController;
@@ -19,12 +25,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Kayttaja;
-import model.Peli;
 import model.PeliSovellusDAO;
 import model.TiedostoKasittely;
 
@@ -68,7 +71,7 @@ public class MainApp extends Application {
 		}
 	}
 
-	/*
+	/**
 	 * Alustaa root layoutin
 	 */
 	public void initRootLayout() {

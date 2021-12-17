@@ -100,6 +100,11 @@ public class LisaaPeliController {
 	public LisaaPeliController() {
 	}
 
+	/**
+	 * Jos ilmoituksen tyypiksi valitaan lahjoitus hintakenttää ei voi muuttaa
+	 * ja siihen asetetaan nolla 
+	 * @param Action
+	 */
 	@FXML
 	public String tyyppiAction(ActionEvent Action) {
 		String text = ((RadioButton) tyyppi.getSelectedToggle()).getText();
@@ -146,7 +151,6 @@ public class LisaaPeliController {
 	 * Alustaa sivun, täyttää pudotusvalikot tiedoilla kutsuu myös Yhteystieto
 	 * kentän kirjainmäärä laskuriin tarvittavaa metodia
 	 */
-
 	@FXML
 	private void initialize() {
 		käyttäjä = TiedostoKasittely.lueKäyttäjä();
@@ -191,9 +195,8 @@ public class LisaaPeliController {
 	}
 
 	/**
-	 * Luo uuden pelin tietokantaan Ennen tietojen lähettämistä tarkastaa onko
-	 * kaikki kentät täytetty.
-	 * 
+	 * Luo uuden pelin tietokantaan, ennen tietojen lähettämistä tarkastaa onko
+	 * kaikki kentät täytetty
 	 */
 	@FXML
 	public void uusiPeli() {

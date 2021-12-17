@@ -116,7 +116,7 @@ public class TapahtumatController {
 
 	/**
 	 * Sivun alustus, täyttää pudotusvalikot tarvittavilla tiedoilla
-	 * 
+	 * Listaa käyttäjän omat pelit ja kuuntelee tekstikenttää kirjainmäärän laskemista verten
 	 */
 	@FXML
 	public void initialize() {
@@ -160,7 +160,7 @@ public class TapahtumatController {
 	/**
 	 * Kuuntelee ilmoituksen tyyppi radiobuttoneita, jos valitaan lahjoitus asettaa
 	 * hinnan automaattisesti 0
-	 * 
+	 * @param Action
 	 */
 	@FXML
 	public String ilmoituksenTyyppiAction(ActionEvent Action) {
@@ -224,8 +224,6 @@ public class TapahtumatController {
 	 * Pelin poistamisen varmistus, kutsuu poistaPeliTietokannasta -metodia Ennen
 	 * kuin poisto tapahtuu tulee varoitusikkuna jolla varmistutaan että käyttäjä on
 	 * varma Poiston jälkeen ilmoitetaan poiston onnistumisesta
-	 * 
-	 * 
 	 */
 	@FXML
 	public void poistaPeli() {
@@ -266,7 +264,6 @@ public class TapahtumatController {
 
 	/**
 	 * Poistaa punaiset reunat ja Pakollinen -kenttä tekstit
-	 * 
 	 */
 	private void varoituksetPiiloon() {
 		nimivaroitus.setText("");
@@ -349,9 +346,8 @@ public class TapahtumatController {
 	}
 
 	/**
-	 * Päivittää kenttiin tehdyt muutokset tietokantaan Ilmoittaa onnistumisesta
+	 * Päivittää kenttiin tehdyt muutokset tietokantaan ja ilmoittaa onnistumisesta
 	 * Alertin avulla
-	 * 
 	 */
 	@FXML
 	public void tallennaMuutokset() {
@@ -397,9 +393,8 @@ public class TapahtumatController {
 	}
 
 	/**
-	 * Muutoslomakkeen validointi Tyhjistä kentistä huomautetaan alertilla ja
-	 * punaisella värillä
-	 * 
+	 * Muutoslomakkeen validointi
+	 * Tyhjistä kentistä huomautetaan alertilla ja punaisella värillä
 	 * 
 	 * @return palauttaa true jos kaikki kentät täytetty
 	 */
