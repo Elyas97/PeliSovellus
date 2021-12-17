@@ -39,6 +39,10 @@ public class MainApp extends Application {
 	private ListView<String> lista;
 	PeliSovellusDAO pelitdao = new PeliSovellusDAO();
 
+	/**
+	 * Käynnistää sovelluksen
+	 * Hakee tiedostosta default kielen ja alustaa root layoutin
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -89,6 +93,9 @@ public class MainApp extends Application {
 		}
 	}
 
+	/**
+	 * Alustaa etusivun
+	 */
 	public void showEtusivu() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -109,6 +116,9 @@ public class MainApp extends Application {
 		}
 	}
 
+	/**
+	 * Alustaa lisää peli sivun
+	 */
 	public boolean lisaaPeliOverview() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -133,6 +143,9 @@ public class MainApp extends Application {
 		}
 	}
 
+	/**
+	 * Alustaa lisätyt pelit sivun
+	 */
 	public void tapahtumatSivuOverview() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -154,6 +167,9 @@ public class MainApp extends Application {
 		}
 	}
 
+	/**
+	 * Alustaa kirjautumissivun
+	 */
 	public void showLogin() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -172,6 +188,9 @@ public class MainApp extends Application {
 		}
 	}
 
+	/**
+	 * Alustaa rekisteröitymissivun
+	 */
 	public void showRegister() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -189,6 +208,9 @@ public class MainApp extends Application {
 		}
 	}
 
+	/**
+	 * Alustaa profiilisivun
+	 */
 	public void showProfile() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -205,6 +227,9 @@ public class MainApp extends Application {
 		}
 	}
 
+	/**
+	 * Alustaa vierassivun
+	 */
 	public void showVieras() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
